@@ -1,8 +1,8 @@
 #pragma once
 #include "INDrawable.h"
 #include <SFML/Graphics.hpp>
-#include "Header/Character.h"
-#include "Header/Floor.h"
+#include "Character.h"
+#include "Floor.h"
 
 class Building : public INDrawable
 {
