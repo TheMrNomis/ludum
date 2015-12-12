@@ -22,7 +22,5 @@ int main(int argc, char ** argv)
 			window.display();
 		}
 
-		prout;
-
 		return 0;
 	}
