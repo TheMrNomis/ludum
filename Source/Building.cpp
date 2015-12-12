@@ -97,3 +97,4 @@ void Building::loadToTileSet(std::string const &path)
 	//		buffer.push_back(currentChar);
 	//}
 }
+ 

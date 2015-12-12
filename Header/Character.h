@@ -3,17 +3,18 @@
 #include <cmath>
 #include "INDrawable.h"
 
-enum StateAnimation{
-	EyeCloseLeft,
-	EyeCloseMidle,
-	EyeCloseRight,
-	Left,
-	Midle,
-	Right
-};
+
 
 class Character : public INDrawable
 {
+	enum StateAnimation{
+		EyeCloseLeft,
+		EyeCloseMidle,
+		EyeCloseRight,
+		Left,
+		Midle,
+		Right
+	};
 
 
 	private: 
@@ -55,6 +56,7 @@ class Character : public INDrawable
 		*/
 		void jump();
 
+	
 		/**
 		* @brief draw the character
 		*
