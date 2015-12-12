@@ -1,3 +1,24 @@
+#compiled obj files
 *.o
+*.slo
+*.lo
+*.obj
+
+#precompiled headers
+*.gch
+*.pch
+
+#compiled dynamic libraries
+*.so
+*.dylib
+*.dll
+
+#compiled static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+#executables
 *.out
 *.exe
