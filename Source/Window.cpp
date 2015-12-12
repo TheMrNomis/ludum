@@ -20,9 +20,7 @@ void Window::draw(sf::RenderWindow *window) const
 			if (event.type == sf::Event::Closed)
 				window->close();
 		}
-
-		
-		m_currentWorld->draw(window);
+		currentWorld->draw(window);
 		window->clear();
 		window->display();
 	}
