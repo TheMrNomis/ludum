@@ -1,12 +1,12 @@
 #include "Floor.h"
 
 
-Floor::Floor(std::vector<unsigned char>& background) :m_background(background)
+Floor::Floor(std::vector<unsigned char>& background) :
+Object(),
+m_background(background)
 {
-	TextureLoader loader;
+	
 
-
-	m_textureBuilding = ;
 	m_spriteBuilding = new sf::Sprite();
 	m_spriteBuilding->setTexture(*m_textureBuilding);
 	

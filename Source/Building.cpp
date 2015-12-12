@@ -36,7 +36,7 @@ void Building::loadToTileSet(std::string const &path)
 	int currendFloor = 0;
 	while (myfile >> currentChar)
 	{
-		if (currentChar == '\r')
+		if (currentChar == '\n')
 			std::cout << "ok" << std::endl;
 		if (currentChar == '='){
 			m_floors.push_back(new Floor(m_idTileSet));

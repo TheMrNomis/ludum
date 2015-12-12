@@ -3,6 +3,7 @@
 #include "INDrawable.h"
 #include <SFML/Graphics.hpp>
 #include "TextureLoader.h"
+#include "Object.h"
 
 class Floor : public INDrawable
 {
