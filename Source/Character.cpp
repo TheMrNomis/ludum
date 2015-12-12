@@ -11,9 +11,7 @@ Character::~Character()
 {
 }
 
-void Character::draw(sf::RenderWindow *window)
+void Character::draw(sf::RenderWindow *window) const
 {
-
-
-	return;
+	window->draw(*m_spriteCharater);
 }
