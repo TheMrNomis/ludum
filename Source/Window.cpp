@@ -2,11 +2,19 @@
 #include "Floor.h"
 
 Window::Window():
+    m_clock(),
     m_window(new sf::RenderWindow(sf::VideoMode(800, 800), "IN in Game!!!")),
     m_currentWorld(new World()),
     m_currentStatus(GAME_MAIN_MENU),
-    m_mouseButtonPressed(false)
+    m_mouseButtonPressed(false),
+    m_leftButtonPushed(false),
+    m_timeLeftButtonPressed(),
+    m_rightButtonPushed(false),
+    m_timeRightButtonPressed(),
+    m_bothButtonsEnabled(false)
 {
+    m_buttonDeadZoneDelay = sf::milliseconds(50);
+
     sf::View view(sf::FloatRect(0, 0, m_window->getSize().x , m_window->getSize().y));
     m_window->setView(view);
 }
@@ -26,6 +34,9 @@ int Window::run()
         sf::Event event;
         while(m_window->pollEvent(event))
             this->react(event);
+
+        //update state of the system
+        this->update();
  
         //drawing
         m_window->clear();
@@ -88,6 +99,108 @@ void Window::react(sf::Event const& event)
     }
     else if(event.type == sf::Event::KeyPressed)
     {
-        //TODO
+        if(event.key.code == sf::Keyboard::Left)
+        {
+            if(m_rightButtonPushed)
+            {
+                if((m_clock.getElapsedTime() - m_timeRightButtonPressed) < m_buttonDeadZoneDelay)
+                {
+                    m_bothButtonsEnabled = true;
+                    //one-time action for both buttons
+                    bothButtons();
+                }
+                else
+                {
+                    m_leftButtonPushed = false;
+                    m_rightButtonPushed = false;
+                }
+            }
+            else
+            {
+                m_leftButtonPushed = true;
+                m_timeLeftButtonPressed = m_clock.getElapsedTime();
+            }
+        }
+        else if(event.key.code == sf::Keyboard::Right)
+        {
+            if(m_leftButtonPushed)
+            {
+                if((m_clock.getElapsedTime() - m_timeLeftButtonPressed) < m_buttonDeadZoneDelay)
+                {
+                    m_bothButtonsEnabled = true;
+                    //one-time action for both buttons
+                    bothButtons();
+                }
+                else
+                {
+                    m_rightButtonPushed = false;
+                    m_leftButtonPushed = false;
+                }
+            }
+            else
+            {
+                m_rightButtonPushed = true;
+                m_timeRightButtonPressed = m_clock.getElapsedTime();
+            }
+        }
     }
+    else if(event.type == sf::Event::KeyReleased)
+    {
+        if(event.key.code == sf::Keyboard::Left)
+        {
+            if(m_bothButtonsEnabled)
+            {
+                m_rightButtonPushed = false;
+                m_bothButtonsEnabled = false;
+            }
+            m_leftButtonPushed = false;
+        }
+        else if(event.key.code == sf::Keyboard::Right)
+        {
+            if(m_bothButtonsEnabled)
+            {
+                m_leftButtonPushed = false;
+                m_bothButtonsEnabled = false;
+            }
+            m_rightButtonPushed = false;
+        }
+    }
+}
+
+void Window::update()
+{
+    if(m_bothButtonsEnabled)
+    {
+        //repeated action for both buttons 
+    }
+    else if(m_leftButtonPushed)
+    {
+        if((m_clock.getElapsedTime() - m_timeLeftButtonPressed) >= m_buttonDeadZoneDelay)
+        {
+            //repeated action for left button
+            leftButton();
+        }
+    }
+    else if(m_rightButtonPushed)
+    {
+        if((m_clock.getElapsedTime() - m_timeRightButtonPressed) >= m_buttonDeadZoneDelay)
+        {
+            //repeated action for right button
+            rightButton();
+        }
+    }
+
+    //TODO: update world and others
+}
+
+void Window::leftButton() const
+{
+}
+
+void Window::rightButton() const
+{
+}
+
+void Window::bothButtons() const
+{
 }
