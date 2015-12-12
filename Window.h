@@ -1,8 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "INDrawable.h"
 #include "World.h"
 
-class Window
+class Window : public INDrawable
 {
 private:
 	sf::RenderWindow *m_window;
@@ -12,12 +13,15 @@ public:
 	Window(sf::RenderWindow * window);
 	virtual ~Window();
 
-	//draw the general window which manage the events
-	void drawWindow();
-
+	
 	//Manage the key events 
 	void keyManager();
 
+	//Display the Menu, Called if ESC isPressed
+	void menu();
+
+	//draw the general window which manage the events
+	virtual void draw(sf::RenderWindow *window) ;
 
 
 };

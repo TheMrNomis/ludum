@@ -5,10 +5,11 @@
 int main(int argc, char ** argv)
 {
 
-		sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+		sf::RenderWindow window(sf::VideoMode(600, 800), "IN in Game!!!");
 		
 		Window currentWindow(&window);
-		currentWindow.drawWindow();
+		
+		currentWindow.draw(&window);
 
 		return 0;
 	}
