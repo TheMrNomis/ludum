@@ -22,6 +22,9 @@ void Window::draw(sf::RenderWindow *window) const
 				window->close();
 		}
 		currentWorld->draw(window);
+
+		Character flamme;
+
 		window->clear();
 		window->display();
 	}
