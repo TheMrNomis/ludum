@@ -23,6 +23,6 @@ Floor::~Floor()
 
 void Floor::draw(sf::RenderWindow * window) const
 {
-	//window->draw(*m_spriteBuilding);
+	window->draw(*m_spriteBuilding);
 
 }
