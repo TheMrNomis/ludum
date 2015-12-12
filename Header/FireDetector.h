@@ -1,15 +1,18 @@
 #pragma once
 
 #include "INDrawable.h"
-//#include "Room.h"
+#include "INCollisionable.h"
+
+//#include "Ray.h"
 
 class Room;
 
-class FireDetector : public INDrawable
+class FireDetector : public INDrawable, public INCollisionable
 {
     public:
         FireDetector(double radius, Room * parentRoom);
         virtual void draw();
+        virtual void collision(Ray * ray);
 
     private:
         Room * m_parentRoom;
