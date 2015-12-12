@@ -1,23 +1,25 @@
 #include "Object.h"
 
-Object::Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int width, unsigned int height, sf::Texture const * texture) :
+Object::Object(double flameVelocity=0.0, unsigned int maxBurnedDamage=0, unsigned int width=0, unsigned int height=0, sf::Texture const * texture =NULL) :
 	m_flameVelocity(flameVelocity),
 	m_maxBurnedDamage(maxBurnedDamage),
 	m_currentFlameIntensity(0),
 	m_currentBurnedDamage(0),
 	m_width(width),
 	m_height(height),
-	m_texture(texture)
+	m_texture(texture),
+	m_sprite(new sf::Sprite())
 {
+	m_sprite->setTexture(*m_texture);
 }
 
 Object::~Object(){
-
+	delete m_sprite;
 }
 
-void Object::draw() const
+void Object::draw(sf::RenderWindow * window) const
 {
-	this->draw();
+	window->draw(*m_sprite);
 }
 
 void Object::ignite()

@@ -12,6 +12,7 @@ class Building : public INDrawable
 		const unsigned int m_currentFloor;
 
 		const TextureLoader * m_textureLoader;
+		std::vector<unsigned char> m_idTileSet;
 
 		const unsigned int m_maxBurnedDamage;
 		const unsigned int m_currentBurnedDamage;
@@ -21,6 +22,6 @@ class Building : public INDrawable
 		virtual ~Building();
 	
 		virtual void draw(sf::RenderWindow *window) const ;
-		void loadToTileSet(char * path);
+		void loadToTileSet(std::string const & path);
 };
 

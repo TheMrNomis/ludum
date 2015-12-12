@@ -12,10 +12,6 @@ Window::~Window()
 
 void Window::draw(sf::RenderWindow *window) const
 {
-	TextureLoader text;
-	text.loadTexture();
-
-
 	while (window->isOpen())
 	{
 		sf::Event event;
