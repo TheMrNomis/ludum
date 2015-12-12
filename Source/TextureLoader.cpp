@@ -1,5 +1,6 @@
 #include "TextureLoader.h"
 
+#include <exception>
 
 TextureLoader::TextureLoader(std::string const & url) :
 	m_objectsTexture(new sf::Texture()),
@@ -38,18 +39,18 @@ void TextureLoader::loadTexture(std::string const & url)
 	if(!m_floorTexture->loadFromFile((url + "floor/tileset.png").c_str()))
     {
 		std::cerr << "Error when loading the texture of the floor" << std::endl;
-        throw LoadingErrorException;
+        throw std::exception();
     }
 
 	if(!m_objectsTexture->loadFromFile((url + "mobilier/tileset.png").c_str()))
     {
 		std::cerr << "Error when loading the texture of the objects" << std::endl;
-        throw LoadingErrorException;
+        throw std::exception();
     }
 	
 	if(!m_characterTexture->loadFromFile((url + "spooky/sprite.png").c_str()))
     {
 		std::cerr << "Error when loading the texture of the character" << std::endl;
-        throw LoadingErrorException;
+        throw std::exception();
     }
 }

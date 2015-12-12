@@ -3,8 +3,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-#include "Exceptions.h"
-
 class TextureLoader
 {
 private:
