@@ -10,18 +10,37 @@ private:
 
 
 public:
+	/**
+         * @brief constuctor for Character
+         *
+         */
 	Character();
+
+	/**
+	* @brief destructor for Character
+	*/
 	virtual ~Character();
 
-
-	//Return the direction which facing the character
+	/**
+	* @brief vReturn the direction which facing the character
+	*
+	*/
 	sf::Vector2i getDirection();
 
-	//Set the new direction of the character
+	/**
+	* @brief Set the new direction of the character
+	*
+	* @param direction: give the direction of the character want to go
+	*/
 	void setDirection(sf::Vector2i & direction);
 
+	/**
+	* @brief draw the character
+	*
+	* @param window: 
+	*
+	*/
 	virtual void draw(sf::RenderWindow *window) const;
-
 
 
 };
