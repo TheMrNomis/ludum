@@ -3,14 +3,27 @@
 #include <cmath>
 #include "INDrawable.h"
 
+enum StateAnimation{
+	EyeCloseLeft,
+	EyeCloseMidle,
+	EyeCloseRight,
+	Left,
+	Midle,
+	Right
+};
+
 class Character : public INDrawable
 {
+
+
 	private: 
 		sf::Sprite * m_spriteCharater;
 		sf::Texture * m_textureCharacter;
-
 		int m_angleShot = 90;
 		float m_velocity = 50;
+
+		StateAnimation m_currentAnimation;
+
 
 	public:
 		/**
@@ -25,16 +38,22 @@ class Character : public INDrawable
 		virtual ~Character();
 
 		/**
+		* @brief set the angle before jummping
+		*
+		*/
+		void setAngle(int alpha);
+
+		/**
 		* @brief Return the direction which facing the character
 		*
 		*/
 		sf::Vector2f getDirection();
 
 		/**
-		* @brief set the angle before jummping
+		* @brief Return the direction which facing the character
 		*
 		*/
-		void setAngle(int alpha);
+		void jump();
 
 		/**
 		* @brief draw the character
