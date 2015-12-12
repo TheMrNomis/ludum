@@ -7,8 +7,9 @@ BUILD_DIR = Build/
 
 objects := $(patsubst Source/%.cpp, $(BUILD_DIR)%.o, $(wildcard Source/*.cpp))
 
-all: $(objects)
-	$(CC) -o $(BUILD_DIR)$(PROJECT_NAME) $^ $(LIBS)
+
+all: mkbuilddir $(objects)
+	$(CC) -o $(BUILD_DIR)$(PROJECT_NAME) $(objects) $(LIBS)
 
 %.o: %.cpp
 	$(CC) -o $@ -c $< $(FLAGS) $(INCLUDES)
@@ -19,7 +20,10 @@ $(BUILD_DIR)%.o: Source/%.cpp
 main.o: Source/main.cpp
 	$(CC) -o $@ -c $< $(FLAGS) $(INCLUDES)
 
-.PHONY: clean
+.PHONY: clean mkbuilddir
+
+mkbuilddir:
+	mkdir -p $(BUILD_DIR)
 
 clean:
 	-rm -f $(objects)
