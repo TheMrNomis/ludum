@@ -23,7 +23,6 @@ Building::~Building()
 void Building::draw(sf::RenderWindow *window) const
 {
 	m_floors[m_currentFloor]->draw(window);
-
 }
 
 //oublie pas la taillle de la ligne !!!!!!

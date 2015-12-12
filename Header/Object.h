@@ -16,12 +16,14 @@ class Object : public INDrawable
 		int getHeight();
 
     protected:
+		unsigned int m_width;
+		unsigned int m_height;
+
         const double m_flameVelocity;
         const unsigned int m_maxBurnedDamage;
         double m_currentFlameIntensity;
         unsigned int m_currentBurnedDamage;
+
 		sf::Texture const * m_texture;
 		sf::Sprite * m_sprite;
-		unsigned int m_width;
-		unsigned int m_height;
 };
