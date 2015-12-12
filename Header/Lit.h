@@ -5,7 +5,7 @@
 class Lit : public Object
 {
 	public:
-	Lit();
+	Lit(sf::Texture const * texture);
 	
 	virtual ~Lit();
 
