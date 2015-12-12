@@ -87,15 +87,35 @@ sf::Vector2u Floor::offset(unsigned int i, unsigned int j) const
             offsetX = 3;
             offsetY = 2;
         }
-        else if(W == v || E == v)
+        else if(W == v && E == v)
         {
             offsetX = 2;
             offsetY = 0;
         }
-        else if(N == v || S == v)
+        else if(N == v && S == v)
         {
             offsetX = 3;
             offsetY = 0;
+        }
+        else if(S == v)
+        {
+            offsetX = 0;
+            offsetY = 3;
+        }
+        else if(N == v)
+        {
+            offsetX = 1;
+            offsetY = 3;
+        }
+        else if(W == v)
+        {
+            offsetX = 2;
+            offsetY = 3;
+        }
+        else if(E == v)
+        {
+            offsetX = 3;
+            offsetY = 3;
         }
         else
         {
@@ -118,15 +138,15 @@ void Floor::draw(sf::RenderWindow * window) const
             if(m_background[i][j] == '1')
             {
                 sf::Vector2u ofst = offset(i,j);
-                offsetX = 32*ofst.x;
-                offsetY = 32*ofst.y;
+                offsetX = ofst.x;
+                offsetY = ofst.y;
             }
             else if(m_background[i][j] == '6')
             {
                 offsetX = 0;
-                offsetY = 96;
+                offsetY = 4;
             }
-            sprite.setTextureRect(sf::IntRect(offsetX, offsetY, 32, 32));
+            sprite.setTextureRect(sf::IntRect(32*offsetX, 32*offsetY, 32, 32));
             sprite.setPosition(j*32, i*32);
             window->draw(sprite);
         }

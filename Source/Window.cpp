@@ -46,7 +46,6 @@ void Window::react(sf::Event const& event)
 {
     if(event.type == sf::Event::Closed)
     {
-<<<<<<< HEAD
         m_currentStatus = GAME_STOPPED;
     }
     else if(event.type == sf::Event::Resized)
