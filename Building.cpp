@@ -10,7 +10,7 @@ m_floors(floor), m_maxBurnedDamage(maxBurnedDamage), m__currentBurnedDamage(curr
 Building::~Building()
 {
 }
-void Building::draw(sf::RenderWindow *window)
+void Building::draw(sf::RenderWindow *window) const
 {
 	m_floors->draw(window);
 

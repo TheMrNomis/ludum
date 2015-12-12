@@ -21,6 +21,15 @@ void Window::draw(sf::RenderWindow *window) const
 				window->close();
 		}
 
+		TextureLoader text;
+		text.loadTexture();
+
+		sf::Sprite testSprite;
+
+		testSprite.setTexture(*text.getTexture());
+
+
+		window->draw(testSprite);
 		
 		m_currentWorld->draw(window);
 		window->clear();
