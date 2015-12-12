@@ -41,7 +41,7 @@ void TextureLoader::loadTexture(std::string const & url)
         throw LoadingErrorException;
     }
 
-	if(!m_objectsTexture->loadFromFile((url + "objects/.png").c_str()))
+	if(!m_objectsTexture->loadFromFile((url + "mobilier/tileset.png").c_str()))
     {
 		std::cerr << "Error when loading the texture of the objects" << std::endl;
         throw LoadingErrorException;
