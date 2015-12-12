@@ -8,10 +8,9 @@ m_building(Building(1,1))
 
 
 World::~World()
-{
-}
+{}
 
 void World::draw(sf::RenderWindow *window) const
 {
-	m_building->draw(window);
+	m_building.draw(window);
 }
