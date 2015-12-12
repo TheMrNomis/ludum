@@ -5,7 +5,7 @@ Character::Character():
 	m_spriteCharater(new sf::Sprite()),
 	m_textureCharacter(new sf::Texture())
 {
-	m_textureCharacter->loadFromFile("Build/Ressources/sprites/spooky/sprite.png");
+	m_textureCharacter->loadFromFile("Ressources/sprites/spooky/sprite.png");
 	m_spriteCharater->setTexture(*m_textureCharacter);
 	m_spriteCharater->setTextureRect(sf::IntRect(0, 0, 32, 32));
 
@@ -29,7 +29,7 @@ sf::Vector2f Character::getDirection()
 void Character::jump()
 {	
 	//TO DO
-	while(!obstacles)
+	//while(!obstacles)
 	{
 		this->m_position = m_spriteCharater->getPosition() + this->getDirection()*m_velocity;
 		m_spriteCharater->move(this->getDirection()*m_velocity);
@@ -39,7 +39,8 @@ void Character::jump()
 
 void Character::draw(sf::RenderWindow *window) const
 {
-	if (m_currentAnimation == StateAnimation::Left){
+	if (m_currentAnimation == StateAnimation::Left)
+	{
 		m_spriteCharater->setTextureRect(sf::IntRect(0, 0, 32, 32));
 		//m_currentAnimation = StateAnimation::Midle;
 	}
