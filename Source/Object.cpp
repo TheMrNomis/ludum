@@ -1,6 +1,6 @@
 #include "Object.h"
 
-Object::Object(double flameVelocity=0.0, unsigned int maxBurnedDamage=0, unsigned int width=0, unsigned int height=0, sf::Texture const * texture =NULL) :
+Object::Object(double flameVelocity = 0.0, unsigned int maxBurnedDamage = 0, unsigned int width = 0, unsigned int height = 0, sf::Texture const * texture = NULL) :
 	m_width(width),
 	m_height(height),
 	
