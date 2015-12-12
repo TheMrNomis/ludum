@@ -32,6 +32,7 @@ sf::Texture * TextureLoader::getCharacterTexture() const
 	return m_characterTexture;
 }
 
+//On passe l'url du dossier de Textures
 void TextureLoader::loadTexture(std::string const & url)
 {
 	if(!m_floorTexture->loadFromFile((url + "floor/tileset.png").c_str()))

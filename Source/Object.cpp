@@ -1,14 +1,16 @@
 #include "Object.h"
 
-Object::Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int width, unsigned int height):
-    m_flameVelocity(flameVelocity),
-    m_maxBurnedDamage(maxBurnedDamage),
-    m_currentFlameIntensity(0),
-    m_currentBurnedDamage(0),
-    m_width(width),
-    m_height(height)
+Object::Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int width, unsigned int height, sf::Texture const * texture) :
+	m_flameVelocity(flameVelocity),
+	m_maxBurnedDamage(maxBurnedDamage),
+	m_currentFlameIntensity(0),
+	m_currentBurnedDamage(0),
+	m_width(width),
+	m_height(height),
+	m_texture(texture)
 {
 }
+
 Object::~Object(){
 
 }

@@ -3,7 +3,7 @@
 #include "INDrawable.h"
 #include "INCollisionable.h"
 
-//#include "Ray.h"
+#include "Ray.h"
 
 class Room;
 
