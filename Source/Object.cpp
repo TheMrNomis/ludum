@@ -10,10 +10,11 @@ Object::Object(double flameVelocity, unsigned int maxBurnedDamage):
 
 void Object::draw() const
 {
-    //TODO
+	//TODO
+	//this->draw();
 }
 
-void Object::light()
+void Object::ignite()
 {
 }
 
