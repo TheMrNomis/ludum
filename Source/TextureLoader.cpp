@@ -18,7 +18,7 @@ sf::Texture * TextureLoader::getTexture() const{
 void TextureLoader::loadTexture()
 {
 
-	if (!m_loadedtexture->loadFromFile("Build/Images/tileset.png"))
+	if (!m_loadedtexture->loadFromFile("Images/tileset.png"))
 	{
 		//DEBUG MSG
 		std::cout << "Error when loading the texture of the floor" << std::endl;
