@@ -8,10 +8,5 @@ private:
 	
 public:
 
-
-
-	virtual void draw(sf::RenderWindow *window)  = 0;
-
-
-
+    virtual void draw(sf::RenderWindow *window) const = 0;
 };

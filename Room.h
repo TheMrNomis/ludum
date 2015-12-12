@@ -11,7 +11,7 @@ class Room : public INDrawable
     public:
         Room();
 
-        virtual void draw();
+        virtual void draw() const;
 
         void extinguishFire();
 

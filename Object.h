@@ -7,7 +7,7 @@ class Object : public INDrawable
     public:
         Object(double flameVelocity, unsigned int maxBurnedDamage);
 
-        virtual void draw();
+        virtual void draw() const;
 
         void light();
         void stopFire();

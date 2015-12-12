@@ -3,12 +3,12 @@
 Object::Object(double flameVelocity, unsigned int maxBurnedDamage):
     m_flameVelocity(flameVelocity),
     m_maxBurnedDamage(maxBurnedDamage),
-    m_currentBurnedDamage(0),
-    m_currentFlameIntensity(0)
+    m_currentFlameIntensity(0),
+    m_currentBurnedDamage(0)
 {
 }
 
-void Object::draw()
+void Object::draw() const
 {
     //TODO
 }

@@ -11,7 +11,7 @@ Window::~Window()
 {
 }
 
-void Window::draw(sf::RenderWindow *window) 
+void Window::draw(sf::RenderWindow *window) const
 {
 	while (window->isOpen())
 	{
