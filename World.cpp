@@ -9,3 +9,8 @@ World::World()
 World::~World()
 {
 }
+
+void World::draw(){
+
+	return;
+}

@@ -10,10 +10,7 @@ Window::~Window()
 {
 }
 
-
-
-
-void Window::drawWindow()
+void Window::draw()
 {
 	while (m_window->isOpen())
 	{
