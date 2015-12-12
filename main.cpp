@@ -1,4 +1,5 @@
 #include <iostream>
+#include <SFML>
 
 int main(int argc, char ** argv)
 {
