@@ -36,11 +36,20 @@ sf::Texture * TextureLoader::getCharacterTexture() const
 void TextureLoader::loadTexture(std::string const & url)
 {
 	if(!m_floorTexture->loadFromFile((url + "floor/tileset.png").c_str()))
-		std::cout << "Error when loading the texture of the floor" << std::endl;
+    {
+		std::cerr << "Error when loading the texture of the floor" << std::endl;
+        throw LoadingErrorException;
+    }
 
 	if(!m_objectsTexture->loadFromFile((url + "objects/.png").c_str()))
-		std::cout << "Error when loading the texture of the objects" << std::endl;
+    {
+		std::cerr << "Error when loading the texture of the objects" << std::endl;
+        throw LoadingErrorException;
+    }
 	
 	if(!m_characterTexture->loadFromFile((url + "character/.png").c_str()))
-		std::cout << "Error when loading the texture of the character" << std::endl;
+    {
+		std::cerr << "Error when loading the texture of the character" << std::endl;
+        throw LoadingErrorException;
+    }
 }
