@@ -1,8 +1,9 @@
 #include "Floor.h"
 
 
-Floor::Floor(std::vector<unsigned char>& background) :
+Floor::Floor(std::vector<unsigned char> * background, sf::Texture * textureBuilding):
     m_background(background),
+	m_textureBuilding(textureBuilding),
 	m_spriteBuilding(new sf::Sprite())
 {
 	m_spriteBuilding->setTexture(*m_textureBuilding);
@@ -18,5 +19,4 @@ Floor::~Floor()
 void Floor::draw(sf::RenderWindow * window) const
 {
 	window->draw(*m_spriteBuilding);
-
 }
