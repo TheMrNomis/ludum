@@ -1,9 +1,5 @@
 #include <iostream>
-<<<<<<< HEAD
-#include <SFML\Graphics.hpp>
-=======
-#include <SFML>
->>>>>>> 99500480cc41cca187c0d622c2cdc1e470e0e908
+#include <SFML/Graphics.hpp>
 
 int main(int argc, char ** argv)
 {

@@ -1,5 +1,5 @@
 CC = g++
-LIBS = -lsfml-window -lsfml-system
+LIBS = -lsfml-window -lsfml-system -lsfml-graphics
 FLAGS = -std=c++14 -Wall -pedantic
 INCLUDES = -I./
 PROJECT_NAME = ludum.out
@@ -11,6 +11,9 @@ all: $(objects)
 
 %.o: */%.cpp */%.h
 	$(CC) -c $< $(FLAGS) $(INCLUDES)
+
+main.o: main.cpp
+	$(CC) -c main.cpp $(FLAGS) $(INCLUDES)
 
 .PHONY: clean
 
