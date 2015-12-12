@@ -1,14 +1,14 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "INDrawable.h"
+#include "Window.h"
 
 int main(int argc, char ** argv)
 {
 
 		sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
 		
-		INDrawable drawable (&window);
-		drawable.draw();
+		Window currentWindow(&window);
+		currentWindow.drawWindow();
 
 		return 0;
 	}
