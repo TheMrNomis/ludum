@@ -7,17 +7,16 @@
 
 class Floor : public INDrawable
 {
-private:
-	std::vector<unsigned char> * m_background ;
-	sf::Texture * m_textureBuilding;
-	sf::Sprite * m_spriteBuilding;
-
 public:
-	Floor(std::vector<unsigned char> * background, sf::Texture * textureBuilding);
+	Floor(sf::Texture * textureBuilding);
 	virtual ~Floor();
 
+    void addLine(std::vector<unsigned char> line);
 
 	virtual void draw(sf::RenderWindow *window) const;
 
+private:
+	std::vector<std::vector<unsigned char> > m_background ;
+	sf::Texture * m_textureBuilding;
 };
 

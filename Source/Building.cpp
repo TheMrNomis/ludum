@@ -28,7 +28,33 @@ void Building::draw(sf::RenderWindow *window) const
 //oublie pas la taillle de la ligne !!!!!!
 void Building::loadToTileSet(std::string const &path)
 {
-	std::ifstream myfile(path, std::ios_base::in);
+    std::ifstream levelFile(path, std::ios_base::in);
+
+    Floor * currentFloor = new Floor(m_textureLoader->getFloorTexture());
+
+    while(levelFile.good())
+    {
+        std::string line;
+        getline(levelFile, line);
+
+        if(line.length() > 0)
+        {
+            if(line[0] == '=')
+            {
+                m_floors.push_back(currentFloor);
+                currentFloor = new Floor(m_textureLoader->getFloorTexture());
+            }
+            std::vector<unsigned char> buffer;
+            for(auto it = line.cbegin(); it != line.cend(); ++it)
+                buffer.push_back(*it);
+
+            currentFloor->addLine(buffer);
+        }
+    }
+    m_floors.push_back(currentFloor);
+
+	/*
+    std::ifstream myfile(path, std::ios_base::in);
 	std::vector<unsigned char> buffer;
 
 	char currentChar = ' ';
@@ -44,8 +70,9 @@ void Building::loadToTileSet(std::string const &path)
 			tailleBuffer += myfile.get();
 		break;
 	}
+    */
 
-	this->setLargeurBuilding(std::stoi(tailleBuffer));
+	//this->setLargeurBuilding(std::stoi(tailleBuffer));
 
 	//std::cout << test;
 
