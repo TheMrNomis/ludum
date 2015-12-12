@@ -1,8 +1,8 @@
 #include "Window.h"
 #include "Floor.h"
 
-Window::Window(sf::RenderWindow * window):
-    m_window(window),
+Window::Window():
+    m_window(new sf::RenderWindow(sf::VideoMode(800, 800), "IN in Game!!!")),
     m_currentWorld(new World()),
     m_currentStatus(GAME_MAIN_MENU)
 {
@@ -12,9 +12,10 @@ Window::Window(sf::RenderWindow * window):
 Window::~Window()
 {
     delete m_currentWorld;
+    delete m_window;
 }
 
-void Window::run()
+int Window::run()
 {
     while(m_currentStatus != GAME_STOPPED)
     {
@@ -29,6 +30,8 @@ void Window::run()
         m_window->display();
     }
     m_window->close();
+
+    return EXIT_SUCCESS;
 }
 
 void Window::draw() const

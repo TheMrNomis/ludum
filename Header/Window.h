@@ -6,7 +6,7 @@
 #include "World.h"
 #include "Character.h"
 
-typedef enum {
+typedef enum:int {
     GAME_PLAYING,
     GAME_PAUSED,
     GAME_MAIN_MENU,
@@ -16,13 +16,13 @@ typedef enum {
 class Window : public INEventHandler
 {
 public:
-	Window(sf::RenderWindow * window);
+	Window();
 	virtual ~Window();
 
     /**
      * @brief runs the game
      */
-    virtual void run();
+    virtual int run();
 
     /**
      * @brief draws the general window
@@ -39,7 +39,7 @@ public:
     virtual void react(sf::Event const& event);
 
 private:
-	sf::RenderWindow *m_window;
+	sf::RenderWindow * m_window;
 	World * m_currentWorld;
 
     game_status m_currentStatus;
