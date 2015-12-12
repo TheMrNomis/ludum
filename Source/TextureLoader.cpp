@@ -41,6 +41,6 @@ void TextureLoader::loadTexture(std::string const & url)
 	if(!m_objectsTexture->loadFromFile((url + "objects/.png").c_str()))
 		std::cout << "Error when loading the texture of the objects" << std::endl;
 	
-	if(m_characterTexture->loadFromFile((url + "character/.png").c_str()))
+	if(!m_characterTexture->loadFromFile((url + "character/.png").c_str()))
 		std::cout << "Error when loading the texture of the character" << std::endl;
 }
