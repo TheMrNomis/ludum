@@ -1,3 +1,7 @@
+#auto saves
+*.autosave
+*.swp
+
 #compiled obj files
 *.o
 *.slo
