@@ -8,14 +8,20 @@
 class Building : public INDrawable
 {
 	private:
-		std::vector<Floor const *> m_floors;
+		
+		unsigned int m_largeur;
+		unsigned int m_longueur;
+
+		std::vector<Floor *> m_floors;
 		const unsigned int m_currentFloor;
 
 		const TextureLoader * m_textureLoader;
-		std::vector<unsigned char> m_idTileSet;
-
+		
 		const unsigned int m_maxBurnedDamage;
 		const unsigned int m_currentBurnedDamage;
+
+		
+
 
 	public:
 		 /**
@@ -32,12 +38,15 @@ class Building : public INDrawable
          	*
          	*/
 		virtual ~Building();
-		
+
 		/**
 		*@brief show the building
 		*
 		*@param window: window whitch containt the building
-		*/
+		*/	
+		void setLongueurBuilding(unsigned int longueur);
+		void setLargeurBuilding(unsigned int largeur);
+
 		virtual void draw(sf::RenderWindow *window) const ;
 
 		/**
