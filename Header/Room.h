@@ -11,7 +11,7 @@ class Room : public INDrawable
     public:
         Room();
 
-        virtual void draw() const;
+		virtual void draw(sf::RenderWindow * window) const;
 
         void extinguishFire();
 

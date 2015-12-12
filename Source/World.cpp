@@ -1,11 +1,12 @@
 #include "World.h"
 
 
-World::World():
-m_textures(TextureLoader("Build/Ressources/sprites/")),
-m_building(Building(1,1))
-{}
-
+World::World() :
+	m_building(Building(&m_textures, 1, 1)),
+	m_textures(TextureLoader("Build/Ressources/sprites/"))
+{
+	m_building.loadToTileSet("Build/Levels/0.lvl");
+}
 
 World::~World()
 {}

@@ -3,30 +3,70 @@
 
 
 
-Building::Building(unsigned int maxBurnedDamage, unsigned int currentBurnedDamage ):
-m_maxBurnedDamage(maxBurnedDamage), m_currentBurnedDamage(currentBurnedDamage), m_floors(std::vector<Floor *>()), m_currentFloor(0)
+Building::Building(TextureLoader const * textureLoader, unsigned int maxBurnedDamage, unsigned int currentBurnedDamage):
+	m_floors(std::vector<Floor *>()),
+	m_currentFloor(0),
+
+	m_textureLoader(textureLoader),
+	//m_idTileSet(std::vector<unsigned char>()),
+
+	m_maxBurnedDamage(maxBurnedDamage), 
+	m_currentBurnedDamage(currentBurnedDamage) 
 {
 	
 }
 
-
 Building::~Building()
 {
 }
+
 void Building::draw(sf::RenderWindow *window) const
 {
 	m_floors[m_currentFloor]->draw(window);
-
 }
 
-
-void Building::loadToTileSet(char * path)
+//oublie pas la taillle de la ligne !!!!!!
+void Building::loadToTileSet(std::string const &path)
 {
+	std::ifstream myfile(path, std::ios_base::in);
+	std::vector<unsigned char> buffer;
 
-	std:: ifstream myfile;
-	myfile.open(path);
+	char currentChar = ' ';
+	unsigned int currentId;
+	int currentID = 0;
+	int currendFloor = 0;
+	std::string test;
+
+	std::string tailleBuffer;
+	while(myfile >> currentChar)
+	{
+		while (currentChar != '=')
+			tailleBuffer += myfile.get();
+		break;
+	}
+
+	this->setLargeurBuilding(std::stoi(tailleBuffer));
+
+	//std::cout << test;
 
 
 
-	m_floors.push_back(new Floor());
+	//while(myfile >> currentChar)
+	//{
+	//	
+	//	
+	//	if(currentChar == '=')
+	//	{
+	//		std::cout << "endFloor : " << currendFloor << std::endl;
+	//		currendFloor++;
+
+	//		m_floors.push_back(new Floor(new std::vector<unsigned char>(buffer),m_textureLoader->getFloorTexture()));
+	//		buffer.clear();
+
+	//		currentID = 0;
+	//	}
+
+	//	else
+	//		buffer.push_back(currentChar);
+	//}
 }

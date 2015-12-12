@@ -5,15 +5,7 @@
 
 int main(int argc, char ** argv)
 {
+    Window w;
 
-		sf::RenderWindow window(sf::VideoMode(800, 800), "IN in Game!!!");
-		
-		Window currentWindow(&window);
-		
-
-		currentWindow.draw(&window);
-
-
-
-		return 0;
-	}
+    return w.run();
+}
