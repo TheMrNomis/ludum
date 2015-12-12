@@ -19,8 +19,11 @@ class Character : public INDrawable
 	private: 
 		sf::Sprite * m_spriteCharater;
 		sf::Texture * m_textureCharacter;
+
 		int m_angleShot = 90;
 		float m_velocity = 50;
+
+		sf::Vector2f m_position;
 
 		StateAnimation m_currentAnimation;
 
