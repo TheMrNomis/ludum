@@ -2,7 +2,7 @@
 
 #include "INDrawable.h"
 
-class Object : public INDrawable, public sf::RenderTarget
+class Object : public INDrawable
 {
     public:
 		Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int width, unsigned int height, sf::Texture const * texture);

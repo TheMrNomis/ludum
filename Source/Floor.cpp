@@ -2,7 +2,6 @@
 
 
 Floor::Floor(std::vector<unsigned char>& background) :
-Object(),
 m_background(background)
 {
 	
