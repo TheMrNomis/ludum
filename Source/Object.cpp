@@ -22,3 +22,13 @@ void Object::ignite()
 void Object::stopFire()
 {
 }
+
+int getWidth()
+{
+	return m_width; 
+}
+
+int getHeight()
+{
+	return m_height;
+}
