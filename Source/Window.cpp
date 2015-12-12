@@ -46,6 +46,7 @@ void Window::react(sf::Event const& event)
 {
     if(event.type == sf::Event::Closed)
     {
+<<<<<<< HEAD
         m_currentStatus = GAME_STOPPED;
     }
     else if(event.type == sf::Event::Resized)
@@ -85,5 +86,9 @@ void Window::react(sf::Event const& event)
 
         m_mouseOldX = event.mouseMove.x;
         m_mouseOldY = event.mouseMove.y;
+    }
+    else if(event.type == sf::Event::KeyPressed)
+    {
+        //TODO
     }
 }
