@@ -6,12 +6,18 @@
 class TextureLoader
 {
 private:
-	sf::Texture * m_loadedtexture;
+	sf::Texture * m_objectsTexture;
+	sf::Texture * m_floorTexture;
+	sf::Texture * m_characterTexture;
+
 public:
-	TextureLoader();
+	TextureLoader(std::string const & url);
 	virtual ~TextureLoader();
 
-	sf::Texture * getTexture() const;
-	void loadTexture();
+	sf::Texture * getFloorTexture() const;
+	sf::Texture * getObjectsTexture() const;
+	sf::Texture * getCharacterTexture() const;
+
+	void loadTexture(std::string const & url);
 };
 
