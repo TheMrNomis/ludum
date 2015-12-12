@@ -2,7 +2,6 @@
 #include <SFML/Graphics.hpp>
 
 
-
 int main(int argc, char ** argv)
 {
 
@@ -23,6 +22,8 @@ int main(int argc, char ** argv)
 			window.draw(shape);
 			window.display();
 		}
+
+		prout;
 
 		return 0;
 	}
