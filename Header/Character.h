@@ -25,16 +25,22 @@ class Character : public INDrawable
 		virtual ~Character();
 
 		/**
+		* @brief set the angle before jummping
+		*
+		*/
+		void setAngle(int alpha);
+
+		/**
 		* @brief Return the direction which facing the character
 		*
 		*/
 		sf::Vector2f getDirection();
 
 		/**
-		* @brief set the angle before jummping
+		* @brief Return the direction which facing the character
 		*
 		*/
-		void setAngle(int alpha);
+		void jump();
 
 		/**
 		* @brief draw the character

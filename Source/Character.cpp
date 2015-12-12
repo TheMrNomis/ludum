@@ -21,6 +21,11 @@ sf::Vector2f Character::getDirection()
 	return sf::Vector2f(cos(m_angleShot), sin(m_angleShot));
 }
 
+void Character::jump()
+{
+	return;
+}
+
 void Character::draw(sf::RenderWindow *window) const
 {
 	window->draw(*m_spriteCharater);
