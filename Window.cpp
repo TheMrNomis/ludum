@@ -28,6 +28,7 @@ void Window::draw(sf::RenderWindow *window) const
 
 		testSprite.setTexture(*text.getTexture());
 
+		std::cout << "aé";
 
 		window->draw(testSprite);
 		
