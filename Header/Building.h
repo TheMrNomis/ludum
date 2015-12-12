@@ -18,7 +18,7 @@ private:
 
 
 public:
-	Building(unsigned int maxBurnedDamage=0, unsigned int currentBurnedDamage = 0);
+	Building(unsigned int maxBurnedDamage = 0, unsigned int currentBurnedDamage = 0);
 	virtual ~Building();
 	
 	virtual void draw(sf::RenderWindow *window) const ;

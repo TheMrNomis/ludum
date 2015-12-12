@@ -11,3 +11,8 @@ void FireDetector::draw()
 {
     //TODO
 }
+
+void FireDetector::collision(Ray * ray)
+{
+    //TODO
+}

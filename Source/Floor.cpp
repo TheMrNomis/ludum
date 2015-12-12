@@ -4,10 +4,9 @@
 Floor::Floor(std::vector<unsigned char>& background) :m_background(background)
 {
 	TextureLoader loader;
-	loader.loadTexture();
-	
 
-	m_textureBuilding = loader.getTexture();
+
+	m_textureBuilding = ;
 	m_spriteBuilding = new sf::Sprite();
 	m_spriteBuilding->setTexture(*m_textureBuilding);
 	
@@ -17,6 +16,7 @@ Floor::Floor(std::vector<unsigned char>& background) :m_background(background)
 
 Floor::~Floor()
 {
+	delete m_spriteBuilding;
 }
 
 
