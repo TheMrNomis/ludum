@@ -1,8 +1,10 @@
 #include "Room.h"
 
 
-void Room::draw()
+void Room::draw() const
 {
+    for(auto it = m_objects.cbegin(); it != m_objects.cend(); ++it)
+        it->draw();
 }
 
 void Room::extinguishFire()
