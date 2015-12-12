@@ -18,7 +18,7 @@ sf::Texture * TextureLoader::getTexture() const {
 void TextureLoader::loadTexture()
 {
 
-	if (!m_loadedtexture->loadFromFile("../../Ressources/sprites/floor/tileset.png"))
+	if (!m_loadedtexture->loadFromFile("Build/Ressources/sprites/floor/tileset.png"))
 	{
 		//DEBUG MSG
 

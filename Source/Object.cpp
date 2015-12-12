@@ -9,6 +9,9 @@ Object::Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int 
     m_height(height)
 {
 }
+Object::~Object(){
+
+}
 
 void Object::draw() const
 {
@@ -21,4 +24,14 @@ void Object::ignite()
 
 void Object::stopFire()
 {
+}
+
+int Object::getWidth()
+{
+	return m_width; 
+}
+
+int Object::getHeight()
+{
+	return m_height;
 }
