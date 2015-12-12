@@ -24,6 +24,9 @@ void Object::draw(sf::RenderWindow * window) const
 
 void Object::ignite()
 {
+	//1- gerer le changement d'image de pas en feu à objet en feu
+
+	//2- gerer combien de degat prend l'objet seon le temps passser entre deux appel de fonction update   
 }
 
 void Object::stopFire()
