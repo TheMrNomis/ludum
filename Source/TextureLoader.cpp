@@ -47,7 +47,7 @@ void TextureLoader::loadTexture(std::string const & url)
         throw LoadingErrorException;
     }
 	
-	if(!m_characterTexture->loadFromFile((url + "character/.png").c_str()))
+	if(!m_characterTexture->loadFromFile((url + "spooky/sprite.png").c_str()))
     {
 		std::cerr << "Error when loading the texture of the character" << std::endl;
         throw LoadingErrorException;
