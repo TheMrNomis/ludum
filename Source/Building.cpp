@@ -12,7 +12,7 @@ Building::~Building()
 }
 void Building::draw(sf::RenderWindow *window) const
 {
-	//m_floors->draw(window);
+	m_floors[0]->draw(window);
 
 }
 

@@ -10,7 +10,6 @@ private:
 	unsigned int m_maxBurnedDamage;
 	unsigned int m_currentBurnedDamage;
 	std::vector<Floor*> m_floors;
-	//Floor* m_floors;
 
 	Character * m_character;
 
