@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "Character.h"
 #include "Floor.h"
+#include <fstream>
 
 class Building : public INDrawable
 {
@@ -10,7 +11,7 @@ private:
 	unsigned int m_maxBurnedDamage;
 	unsigned int m_currentBurnedDamage;
 	std::vector<Floor*> m_floors;
-
+	unsigned int m_currentFloor;
 	Character * m_character;
 
 
@@ -21,7 +22,8 @@ public:
 	virtual void draw(sf::RenderWindow *window) const ;
 
 
-	void loadToTileSet();
+	void loadToTileSet(char * path);
+
 
 
 };

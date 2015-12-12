@@ -9,6 +9,9 @@ Object::Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int 
     m_height(height)
 {
 }
+Object::~Object(){
+
+}
 
 void Object::draw() const
 {
