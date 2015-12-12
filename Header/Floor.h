@@ -6,8 +6,8 @@
 
 class Floor : public INDrawable
 {
-public:
-	//unsigned char * m_background ;
+private:
+	unsigned char * m_background ;
 	sf::Texture * m_textureBuilding;
 	sf::Sprite * m_spriteBuilding;
 

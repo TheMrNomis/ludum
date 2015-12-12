@@ -3,7 +3,7 @@
 
 World::World()
 {
-	m_building = new Building(new Floor());
+	m_building = new Building();
 }
 
 

@@ -8,21 +8,21 @@ class Building : public INDrawable
 {
 private:
 	unsigned int m_maxBurnedDamage;
-	unsigned int m__currentBurnedDamage;
-	//sf::Vector2<Floor*> m_floors;
-	Floor* m_floors;
+	unsigned int m_currentBurnedDamage;
+	sf::Vector2<Floor*> m_floors;
+	//Floor* m_floors;
 
 	Character * m_character;
 
 
 public:
-	Building(Floor * floor, unsigned int maxBurnedDamage=0, unsigned int currentBurnedDamage = 0);
+	Building(unsigned int maxBurnedDamage=0, unsigned int currentBurnedDamage = 0);
 	virtual ~Building();
 	
 	virtual void draw(sf::RenderWindow *window) const ;
 
 
-
+	void loadToTileSet();
 
 
 };
