@@ -21,6 +21,7 @@ void TextureLoader::loadTexture()
 	if (!m_loadedtexture->loadFromFile("../../Ressources/sprites/floor/tileset.png"))
 	{
 		//DEBUG MSG
+
 		std::cout << "Error when loading the texture of the floor" << std::endl;
 	}
 
