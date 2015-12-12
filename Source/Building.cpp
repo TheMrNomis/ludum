@@ -2,7 +2,7 @@
 
 
 Building::Building(unsigned int maxBurnedDamage, unsigned int currentBurnedDamage ):
-m_maxBurnedDamage(maxBurnedDamage), m_currentBurnedDamage(currentBurnedDamage), m_floors(sf::Vector2<Floor *>())
+m_maxBurnedDamage(maxBurnedDamage), m_currentBurnedDamage(currentBurnedDamage), m_floors(std::vector<Floor *>())
 {
 }
 

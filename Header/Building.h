@@ -9,7 +9,7 @@ class Building : public INDrawable
 private:
 	unsigned int m_maxBurnedDamage;
 	unsigned int m_currentBurnedDamage;
-	sf::Vector2<Floor*> m_floors;
+	std::vector<Floor*> m_floors;
 	//Floor* m_floors;
 
 	Character * m_character;
