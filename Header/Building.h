@@ -7,24 +7,20 @@
 
 class Building : public INDrawable
 {
-private:
-	unsigned int m_maxBurnedDamage;
-	unsigned int m_currentBurnedDamage;
-	std::vector<Floor*> m_floors;
-	unsigned int m_currentFloor;
-	Character * m_character;
+	private:
+		std::vector<Floor const *> m_floors;
+		const unsigned int m_currentFloor;
 
+		const TextureLoader * m_textureLoader;
 
-public:
-	Building(unsigned int maxBurnedDamage=0, unsigned int currentBurnedDamage = 0);
-	virtual ~Building();
+		const unsigned int m_maxBurnedDamage;
+		const unsigned int m_currentBurnedDamage;
+
+	public:
+		Building(TextureLoader const * textureLoader, unsigned int maxBurnedDamage = 0, unsigned int currentBurnedDamage = 0);
+		virtual ~Building();
 	
-	virtual void draw(sf::RenderWindow *window) const ;
-
-
-	void loadToTileSet(char * path);
-
-
-
+		virtual void draw(sf::RenderWindow *window) const ;
+		void loadToTileSet(char * path);
 };
 
