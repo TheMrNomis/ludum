@@ -3,14 +3,27 @@
 #include <cmath>
 #include "INDrawable.h"
 
+enum StateAnimation{
+	EyeCloseLeft,
+	EyeCloseMidle,
+	EyeCloseRight,
+	Left,
+	Midle,
+	Right
+};
+
 class Character : public INDrawable
 {
+
+
 	private: 
 		sf::Sprite * m_spriteCharater;
 		sf::Texture * m_textureCharacter;
-
 		int m_angleShot = 90;
 		float m_velocity = 50;
+
+		StateAnimation m_currentAnimation;
+
 
 	public:
 		/**
