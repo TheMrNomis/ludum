@@ -11,6 +11,16 @@ Character::~Character()
 {
 }
 
+void Character::setAngle(int alpha)
+{
+	m_angleShot += alpha;
+}
+
+sf::Vector2f Character::getDirection()
+{
+	return sf::Vector2f(cos(m_angleShot), sin(m_angleShot));
+}
+
 void Character::draw(sf::RenderWindow *window) const
 {
 	window->draw(*m_spriteCharater);

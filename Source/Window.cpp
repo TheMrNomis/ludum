@@ -46,6 +46,16 @@ void Window::react(sf::Event const& event)
         case sf::Event::Closed:
             m_currentStatus = GAME_STOPPED;
             break;
+
+		case sf::Event::KeyPressed:
+			if(event.key.code == sf::Keyboard::Right)
+				this->m_currentWorld->getCharacter()->setAngle(10);
+			else if(event.key.code == sf::Keyboard::Left)
+				this->m_currentWorld->getCharacter()->setAngle(-10);
+			else if((event.key.code == sf::Keyboard::Right) && (event.key.code == sf::Keyboard::Left))
+				this->m_currentWorld->getCharacter()->jump();
+			break;
+
         default:
             break;
     }

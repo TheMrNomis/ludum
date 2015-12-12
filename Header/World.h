@@ -5,14 +5,17 @@
 
 class World : public INDrawable
 {
-private:
-	Building m_building;
-	TextureLoader m_textures;
+	private:
+		TextureLoader m_textures;
+		Building m_building;
+		Character m_character;
 
-public:
-	World();
-	virtual ~World();
+	public:
+		World();
+		virtual ~World();
 
-	virtual void draw(sf::RenderWindow *window) const;
+		Character const * getCharacter() const;
+
+		virtual void draw(sf::RenderWindow *window) const;
 };
 
