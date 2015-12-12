@@ -9,7 +9,7 @@ class Object : public INDrawable
 
         virtual void draw() const;
 
-        void light();
+        void ignite();
         void stopFire();
 
     protected:
