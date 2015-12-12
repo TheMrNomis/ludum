@@ -2,10 +2,11 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include "INDrawable.h"
+#include "INUpdatable.h"
 
 
 
-class Character : public INDrawable
+class Character : public INDrawable, public INUpdatable
 {
 	enum StateAnimation{
 		EyeCloseLeft,
@@ -64,6 +65,13 @@ class Character : public INDrawable
 		*
 		*/
 		virtual void draw(sf::RenderWindow *window) const;
+
+		/**
+		* @brief update the character
+		*
+		*
+		*/
+		virtual void update();
 
 
 };
