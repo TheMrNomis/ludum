@@ -3,8 +3,9 @@
 
 Character::Character(): m_spriteCharater(new sf::Sprite()),m_textureCharacter(new sf::Texture())
 {
-	m_textureCharacter->loadFromFile("Images/tileset.png", sf::IntRect(0, 0, 32, 32));
+	m_textureCharacter->loadFromFile("Build/Ressources/sprites/spooky/sprite.png");
 	m_spriteCharater->setTexture(*m_textureCharacter);
+	m_spriteCharater->setPosition(sf::Vector2f(1., 1.));
 }
 
 Character::~Character()
