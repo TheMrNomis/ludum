@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "INDrawable.h"
 #include "World.h"
+#include "Character.h"
 
 class Window : public INDrawable
 {
