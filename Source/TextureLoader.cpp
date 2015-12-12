@@ -10,8 +10,7 @@ TextureLoader::~TextureLoader()
 {
 }
 
-sf::Texture * TextureLoader::getTexture() const 
-{
+sf::Texture * TextureLoader::getTexture() const {
 
 	return m_loadedtexture;
 }
