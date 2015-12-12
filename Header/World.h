@@ -6,7 +6,9 @@
 class World : public INDrawable
 {
 private:
-	Building * m_building;
+	Building m_building;
+	TextureLoader m_textures;
+
 public:
 	World();
 	virtual ~World();
