@@ -43,5 +43,9 @@ private:
 	World * m_currentWorld;
 
     game_status m_currentStatus;
+
+    bool m_mouseButtonPressed;
+    int m_mouseOldX;
+    int m_mouseOldY;
 };
 

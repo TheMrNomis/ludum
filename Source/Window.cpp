@@ -4,8 +4,11 @@
 Window::Window():
     m_window(new sf::RenderWindow(sf::VideoMode(800, 800), "IN in Game!!!")),
     m_currentWorld(new World()),
-    m_currentStatus(GAME_MAIN_MENU)
+    m_currentStatus(GAME_MAIN_MENU),
+    m_mouseButtonPressed(false)
 {
+    sf::View view(sf::FloatRect(0, 0, m_window->getSize().x , m_window->getSize().y));
+    m_window->setView(view);
 }
 
 
@@ -41,12 +44,46 @@ void Window::draw() const
 
 void Window::react(sf::Event const& event)
 {
-    switch(event.type)
+    if(event.type == sf::Event::Closed)
     {
-        case sf::Event::Closed:
-            m_currentStatus = GAME_STOPPED;
-            break;
-        default:
-            break;
+        m_currentStatus = GAME_STOPPED;
+    }
+    else if(event.type == sf::Event::Resized)
+    {
+        m_window->setView(sf::View(sf::FloatRect(0,0, event.size.width, event.size.height)));
+    }
+    else if(event.type == sf::Event::MouseWheelScrolled)
+    {
+        sf::View view = m_window->getView();
+        if(event.mouseWheelScroll.delta < 0)
+            view.zoom(1.2);
+        else
+            view.zoom(0.8);
+        m_window->setView(view);
+    }
+    else if(event.type == sf::Event::MouseButtonPressed)
+    {
+        if(event.mouseButton.button == sf::Mouse::Left)
+            m_mouseButtonPressed = true;
+    }
+    else if(event.type == sf::Event::MouseButtonReleased)
+    {
+        if(event.mouseButton.button == sf::Mouse::Left)
+            m_mouseButtonPressed = false;
+    }
+    else if(event.type == sf::Event::MouseMoved)
+    {
+        if(m_mouseButtonPressed)
+        {
+            int deltaX = m_mouseOldX - event.mouseMove.x;
+            int deltaY = m_mouseOldY - event.mouseMove.y;
+
+            sf::View view = m_window->getView();
+            view.move(deltaX, deltaY);
+            m_window->setView(view);
+        }
+
+        m_mouseOldX = event.mouseMove.x;
+        m_mouseOldY = event.mouseMove.y;
     }
 }
