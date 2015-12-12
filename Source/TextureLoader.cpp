@@ -2,8 +2,8 @@
 
 
 TextureLoader::TextureLoader(std::string const & url) :
-m_floorTexture(new sf::Texture()),
 m_objectsTexture(new sf::Texture()),
+m_floorTexture(new sf::Texture()),
 m_characterTexture(new sf::Texture())
 {
 	loadTexture(url);
