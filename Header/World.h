@@ -13,8 +13,6 @@ public:
 	World();
 	virtual ~World();
 
-
 	virtual void draw(sf::RenderWindow *window) const;
-
 };
 

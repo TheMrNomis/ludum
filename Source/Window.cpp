@@ -12,10 +12,6 @@ Window::~Window()
 
 void Window::draw(sf::RenderWindow *window) const
 {
-	TextureLoader text("Build/Ressources/Images/tileset.png");
-	text.loadTexture("Build/Ressources/Images/tileset.png");
-
-
 	while (window->isOpen())
 	{
 		sf::Event event;

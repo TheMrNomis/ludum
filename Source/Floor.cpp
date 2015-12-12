@@ -2,16 +2,11 @@
 
 
 Floor::Floor(std::vector<unsigned char>& background) :
-    m_background(background)
+    m_background(background),
+	m_spriteBuilding(new sf::Sprite())
 {
-	
-
-	m_spriteBuilding = new sf::Sprite();
 	m_spriteBuilding->setTexture(*m_textureBuilding);
-	
-
 }
-
 
 Floor::~Floor()
 {
