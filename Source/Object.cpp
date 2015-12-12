@@ -23,12 +23,12 @@ void Object::stopFire()
 {
 }
 
-int getWidth()
+int Object::getWidth()
 {
 	return m_width; 
 }
 
-int getHeight()
+int Object::getHeight()
 {
 	return m_height;
 }
