@@ -9,7 +9,7 @@ objects = main.o Window.o Building.o World.o Object.o Room.o FireDetector.o
 all: $(objects)
 	$(CC) -o $(PROJECT_NAME) $^ $(LIBS)
 
-%.o: */%.cpp */%.h
+%.o: %.cpp %.h
 	$(CC) -c $< $(FLAGS) $(INCLUDES)
 
 main.o: main.cpp
