@@ -1,10 +1,10 @@
 #include "Room.h"
 
 
-void Room::draw() const
+void Room::draw(sf::RenderWindow * window) const
 {
     for(auto it = m_objects.cbegin(); it != m_objects.cend(); ++it)
-        it->draw();
+        it->draw(window);
 }
 
 void Room::extinguishFire()
