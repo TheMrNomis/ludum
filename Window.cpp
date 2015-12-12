@@ -1,9 +1,8 @@
 #include "Window.h"
+#include "Floor.h"
 
-
-Window::Window(sf::RenderWindow * window) :m_window(window)
+Window::Window(sf::RenderWindow * window) :m_window(window), m_currentWorld(new World())
 {
-	currentWorld = new World();
 }
 
 
@@ -21,7 +20,9 @@ void Window::draw(sf::RenderWindow *window) const
 			if (event.type == sf::Event::Closed)
 				window->close();
 		}
-		currentWorld->draw(window);
+
+		
+		m_currentWorld->draw(window);
 		window->clear();
 		window->display();
 	}

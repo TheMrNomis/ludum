@@ -7,7 +7,7 @@ class Window : public INDrawable
 {
 private:
 	sf::RenderWindow *m_window;
-	World * currentWorld;
+	World * m_currentWorld;
 
 public:
 	Window(sf::RenderWindow * window);
