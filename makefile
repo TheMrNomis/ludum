@@ -3,9 +3,9 @@ LIBS = -lsfml-window -lsfml-system -lsfml-graphics
 FLAGS = -std=c++14 -Wall -pedantic
 INCLUDES = -I./Header
 PROJECT_NAME = ludum.out
-BUILD_DIR = ./build/
+BUILD_DIR = Build/
 
-objects := $(patsubst %.cpp, %.o, $(wildcard Source/*.cpp))
+objects := $(patsubst Source/%.cpp, $(BUILD_DIR)%.o, $(wildcard Source/*.cpp))
 
 all: $(objects)
 	$(CC) -o $(BUILD_DIR)$(PROJECT_NAME) $^ $(LIBS)
@@ -13,7 +13,7 @@ all: $(objects)
 %.o: %.cpp
 	$(CC) -o $@ -c $< $(FLAGS) $(INCLUDES)
 
-%.o: Source/%.cpp
+$(BUILD_DIR)%.o: Source/%.cpp
 	$(CC) -o $@ -c $< $(FLAGS) $(INCLUDES)
 
 main.o: Source/main.cpp
@@ -21,6 +21,6 @@ main.o: Source/main.cpp
 
 .PHONY: clean
 
-clean: $(objects)
-	-rm -f $^
+clean:
+	-rm -f $(objects)
 	-rm -f $(BUILD_DIR)$(PROJECT_NAME)
