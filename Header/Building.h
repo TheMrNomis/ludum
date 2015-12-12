@@ -13,16 +13,18 @@ private:
 	std::vector<Floor*> m_floors;
 	unsigned int m_currentFloor;
 	Character * m_character;
+	std::vector<unsigned char> m_idTileSet;
+	unsigned int dimension;
 
 
 public:
-	Building(unsigned int maxBurnedDamage=0, unsigned int currentBurnedDamage = 0);
+	Building(unsigned int maxBurnedDamage = 0, unsigned int currentBurnedDamage = 0);
 	virtual ~Building();
 	
 	virtual void draw(sf::RenderWindow *window) const ;
 
 
-	void loadToTileSet(char * path);
+	void loadToTileSet(std::string const & path);
 
 
 
