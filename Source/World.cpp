@@ -4,6 +4,7 @@
 World::World()
 {
 	m_building = new Building();
+	m_building->loadToTileSet("Build/Levels/0.lvl");
 }
 
 

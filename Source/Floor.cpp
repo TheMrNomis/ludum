@@ -1,7 +1,7 @@
 #include "Floor.h"
 
 
-Floor::Floor()
+Floor::Floor(std::vector<unsigned char>& background) :m_background(background)
 {
 	TextureLoader loader;
 	loader.loadTexture();

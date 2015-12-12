@@ -13,6 +13,8 @@ private:
 	std::vector<Floor*> m_floors;
 	unsigned int m_currentFloor;
 	Character * m_character;
+	std::vector<unsigned char> m_idTileSet;
+	unsigned int dimension;
 
 
 public:
@@ -22,7 +24,7 @@ public:
 	virtual void draw(sf::RenderWindow *window) const ;
 
 
-	void loadToTileSet(char * path);
+	void loadToTileSet(std::string const & path);
 
 
 
