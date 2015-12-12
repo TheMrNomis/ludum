@@ -16,7 +16,7 @@ public:
 	virtual ~Floor();
 
 
-	virtual void draw(sf::RenderWindow *window) ;
+	virtual void draw(sf::RenderWindow *window) const;
 
 };
 

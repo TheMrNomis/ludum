@@ -1,13 +1,12 @@
 #pragma once
-
-#include <SFML/Vector2.hpp>
+#include <SFML/System/Vector2.hpp>
 
 class Ray
 {
     public:
-        Ray(sf::Vector2d const& origin, sf::Vector2d const& direction);
+        Ray(sf::Vector2f const& origin, sf::Vector2f const& direction);
 
     private:
-        sf::Vector2d m_origin;
-        sf::Vector2d m_direction;
+        sf::Vector2f m_origin;
+        sf::Vector2f m_direction;
 };

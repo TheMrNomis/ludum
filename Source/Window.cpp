@@ -20,7 +20,19 @@ void Window::draw(sf::RenderWindow *window) const
 			if (event.type == sf::Event::Closed)
 				window->close();
 		}
-		currentWorld->draw(window);
+
+		TextureLoader text;
+		text.loadTexture();
+
+		sf::Sprite testSprite;
+
+		testSprite.setTexture(*text.getTexture());
+
+		std::cout << "aé";
+
+		window->draw(testSprite);
+		
+		m_currentWorld->draw(window);
 		window->clear();
 		window->display();
 	}

@@ -8,7 +8,6 @@ Floor::Floor()
 	
 
 	m_textureBuilding = loader.getTexture();
-	m_textureBuilding->create(200, 200);
 	m_spriteBuilding = new sf::Sprite();
 	m_spriteBuilding->setTexture(*m_textureBuilding);
 	
@@ -22,8 +21,8 @@ Floor::~Floor()
 
 
 
-void Floor::draw(sf::RenderWindow * window)
+void Floor::draw(sf::RenderWindow * window) const
 {
-	window->draw(*m_spriteBuilding);
+	//window->draw(*m_spriteBuilding);
 
 }
