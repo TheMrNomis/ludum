@@ -10,7 +10,8 @@ World::~World()
 {
 }
 
-void World::draw(){
+void World::draw(sf::RenderWindow *window) 
+{
 
-	return;
+	m_building->draw(window);
 }

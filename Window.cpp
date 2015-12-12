@@ -3,6 +3,7 @@
 
 Window::Window(sf::RenderWindow * window) :m_window(window)
 {
+	currentWorld = new World();
 }
 
 
@@ -10,18 +11,18 @@ Window::~Window()
 {
 }
 
-void Window::draw()
+void Window::draw(sf::RenderWindow *window) 
 {
-	while (m_window->isOpen())
+	while (window->isOpen())
 	{
 		sf::Event event;
-		while (m_window->pollEvent(event))
+		while (window->pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
-				m_window->close();
+				window->close();
 		}
-
-		m_window->clear();
-		m_window->display();
+		currentWorld->draw(window);
+		window->clear();
+		window->display();
 	}
 }

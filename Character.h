@@ -20,7 +20,8 @@ public:
 	//Set the new direction of the character
 	void setDirection(sf::Vector2i & direction);
 
-	virtual void draw();
+	virtual void draw(sf::RenderWindow *window) ;
+
 
 
 };

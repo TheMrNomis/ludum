@@ -9,7 +9,7 @@ int main(int argc, char ** argv)
 		
 		Window currentWindow(&window);
 		
-		 currentWindow.draw();
+		currentWindow.draw(&window);
 
 		return 0;
 	}

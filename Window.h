@@ -21,7 +21,7 @@ public:
 	void menu();
 
 	//draw the general window which manage the events
-	virtual void draw();
+	virtual void draw(sf::RenderWindow *window) ;
 
 
 };
