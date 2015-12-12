@@ -5,7 +5,7 @@
 class Canape : public Object
 {
 	public:
-	Canape();
+	Canape(sf::Texture const * texture);
 	
 	virtual ~Canape();
 
