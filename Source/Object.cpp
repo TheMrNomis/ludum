@@ -1,17 +1,18 @@
 #include "Object.h"
 
-Object::Object(double flameVelocity, unsigned int maxBurnedDamage):
+Object::Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int width, unsigned int height):
     m_flameVelocity(flameVelocity),
     m_maxBurnedDamage(maxBurnedDamage),
     m_currentFlameIntensity(0),
-    m_currentBurnedDamage(0)
+    m_currentBurnedDamage(0),
+    m_width(width),
+    m_height(height)
 {
 }
 
 void Object::draw() const
 {
-	//TODO
-	//this->draw();
+	this->draw();
 }
 
 void Object::ignite()
