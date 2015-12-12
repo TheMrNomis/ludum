@@ -12,6 +12,15 @@ Window::~Window()
 
 void Window::draw(sf::RenderWindow *window) const
 {
+	TextureLoader text;
+	text.loadTexture();
+
+	sf::Sprite testSprite;
+
+	testSprite.setTexture(*text.getTexture());
+
+	sf::CircleShape shape(100.f);
+	shape.setFillColor(sf::Color::Green);
 	while (window->isOpen())
 	{
 		sf::Event event;
@@ -20,20 +29,13 @@ void Window::draw(sf::RenderWindow *window) const
 			if (event.type == sf::Event::Closed)
 				window->close();
 		}
-
-		TextureLoader text;
-		text.loadTexture();
-
-		sf::Sprite testSprite;
-
-		testSprite.setTexture(*text.getTexture());
-
-		std::cout << "aé";
-
-		window->draw(testSprite);
-		
-		m_currentWorld->draw(window);
 		window->clear();
+		
+		window->draw(shape);
+		window->draw(testSprite);
+		m_currentWorld->draw(window);
+	
+
 		window->display();
 	}
 }
