@@ -4,7 +4,7 @@ FLAGS = -std=c++14 -Wall -pedantic
 INCLUDES = -I./
 PROJECT_NAME = ludum.out
 
-objects = main.o
+objects = main.o Window.o Building.o World.o Object.o Room.o FireDetector.o
 
 all: $(objects)
 	$(CC) -o $(PROJECT_NAME) $^ $(LIBS)
