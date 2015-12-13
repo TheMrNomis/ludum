@@ -17,7 +17,6 @@ World::~World()
 
 Character * World::getCharacter() const
 {
-		
 	return m_character;
 }
 
