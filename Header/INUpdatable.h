@@ -5,5 +5,5 @@
 class INUpdatable
 {
     public:
-        virtual void update(sf::Clock const & clk) = 0;
+        virtual void update() = 0;
 };

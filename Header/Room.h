@@ -27,7 +27,7 @@ class Room : public INDrawable, public INUpdatable
 		*
 		*
 		*/
-		virtual void update(sf::Clock const & clk);
+		virtual void update();
 
 		/**
 		* @brief Exteguish all the fire in the room

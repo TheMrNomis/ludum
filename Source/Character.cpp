@@ -93,7 +93,7 @@ void Character::draw(sf::RenderWindow *window) const
 }
 
 
-void Character::update(sf::Clock const & clk)
+void Character::update()
 {
     //Animations
 	if (rand()%10 == 0)

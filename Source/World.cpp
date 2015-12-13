@@ -60,10 +60,10 @@ void World::moveCharacter(Character * character)
 	}
 }
 
-void World::update(sf::Clock const & clk)
+void World::update()
 {
-	m_building.update(clk);
-	m_character->update(clk);
+	m_building.update( );
+	m_character->update( );
 	moveCharacter(m_character);
 	
 

@@ -23,7 +23,7 @@ class Floor : public INDrawable, public INUpdatable
 		void addLine(std::vector<unsigned char> line);
 		bool wallCollision(Ray & rayIntersection);
 
-		virtual void update(sf::Clock const & clk);
+		virtual void update();
 		virtual void draw(sf::RenderWindow *window) const;
 
 	private:

@@ -41,9 +41,9 @@ int Window::run()
 
 		if(clk.getElapsedTime().asMilliseconds() > 70)
 		{
-			this->update(clk);
+			this->update( );
 
-        this->update(clk);
+        this->update( );
 
         //drawing
         m_window->clear();
@@ -189,7 +189,7 @@ void Window::react(sf::Event const& event)
     }
 }
 
-void Window::update(sf::Clock const & clk)
+void Window::update()
 {
     if(m_bothButtonsEnabled)
     {
@@ -214,7 +214,7 @@ void Window::update(sf::Clock const & clk)
         }
     }
 
-    m_currentWorld->update(clk);
+    m_currentWorld->update( );
 }
 
 void Window::leftButton() const

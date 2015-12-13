@@ -43,7 +43,7 @@ public:
     /**
      * @brief updates the state of the window
      */
-    virtual void update(sf::Clock const & clk);
+    virtual void update();
 
 private:
     void leftButton() const;
