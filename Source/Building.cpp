@@ -2,7 +2,6 @@
 
 #include <unordered_map>
 
-#include "FireDetector.h"
 
 Building::Building(TextureLoader const * textureLoader, unsigned int maxBurnedDamage, unsigned int currentBurnedDamage):
 	m_maxBurnedDamage(maxBurnedDamage), 
@@ -67,7 +66,7 @@ void Building::loadToTileSet(std::string const &path)
                 if(line.length() >= 5)
                 {
                     unsigned char objectID = line[1];
-                    object_id objectType = (object_id) line[2];
+                    unsigned char objectType = line[2];
                     std::string x_str;
                     std::string y_str;
                     bool first = true;
@@ -81,7 +80,7 @@ void Building::loadToTileSet(std::string const &path)
                     int x = atoi(x_str.c_str());
                     int y = atoi(y_str.c_str());
 
-                    Object * obj = createObject(objectType, x, y);
+                    Object * obj = Object::fromID(objectType, x, y, m_textureLoader->getObjectsTexture());
                     objects.insert(std::pair<unsigned char, Object*>(objectID, obj));
                     objectsSentInRoom.insert(std::pair<unsigned char, bool>(objectID, false));
                 }

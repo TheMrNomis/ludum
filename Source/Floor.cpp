@@ -3,8 +3,8 @@
 
 Floor::Floor(sf::Texture * textureBuilding):
     m_background(),
-	m_textureBuilding(textureBuilding),
-    m_rooms()
+    m_rooms(),
+	m_textureBuilding(textureBuilding)
 {}
 
 Floor::~Floor()
@@ -37,7 +37,7 @@ void Floor::update()
 
 void Floor::draw(sf::RenderWindow * window) const
 {
-    //sf::Clock tic;
+    //background
 	for (unsigned int i = 0; i < m_background.size(); ++i)
 	{
 		for (unsigned int j = 0; j < m_background[i].size(); ++j)
@@ -62,7 +62,10 @@ void Floor::draw(sf::RenderWindow * window) const
 			window->draw(sprite);
 		}
 	}
-    //std::cout << "time: " << tic.getElapsedTime().asMilliseconds() << "ms" << std::endl;
+
+    //objects
+    for(auto it = m_rooms.cbegin(); it != m_rooms.cend(); ++it)
+        (*it)->draw(window);
 }
 
 sf::Vector2u Floor::offset(unsigned int i, unsigned int j) const

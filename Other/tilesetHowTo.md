@@ -26,3 +26,5 @@ utilisation de unsigned char pour faire la carte du background
 'd' - table
 'e' - four
 'f' - frigo
+'g' - element de cuisine
+'h' - baignoire

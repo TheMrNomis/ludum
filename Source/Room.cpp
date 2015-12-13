@@ -36,8 +36,8 @@ void Room::draw(sf::RenderWindow * window) const{
 	for (auto it = m_objects.cbegin(); it != m_objects.cend(); ++it)
 		(*it)->draw(window);
 
-	for (auto it = m_fireDetectors.cbegin(); it != m_fireDetectors.cend(); ++it)
-		(*it)->draw(window);
+	//for (auto it = m_fireDetectors.cbegin(); it != m_fireDetectors.cend(); ++it)
+	//	(*it)->draw(window);
 }
 
 void Room::update()
