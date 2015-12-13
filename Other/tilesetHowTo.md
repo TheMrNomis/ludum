@@ -20,4 +20,8 @@ utilisation de unsigned char pour faire la carte du background
 
 #id d'objets
 'a' - lit
-'b' - 
+'b' - canapé
+'c' - toilette
+'d' - table
+'e' - four
+'f' - frigo
