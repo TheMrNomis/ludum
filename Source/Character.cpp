@@ -9,8 +9,8 @@ Character::Character():
 	m_spriteCharater->setTexture(*m_textureCharacter);
 	m_spriteCharater->setTextureRect(sf::IntRect(0, 0, 32, 32));
 
-	m_position = sf::Vector2f(1, 1.);
-	m_spriteCharater->setPosition(sf::Vector2f(1, 1.));
+	m_position = sf::Vector2f(320, 100.);
+	m_spriteCharater->setPosition(m_position);
 }
 
 Character::~Character()
@@ -56,6 +56,5 @@ void Character::update(){
 	else if (m_currentAnimation == StateAnimation::Right){
 		m_spriteCharater->setTextureRect(sf::IntRect(32, 64, 32, 32));
 		m_currentAnimation = StateAnimation::Left;
-
 	}
 }
