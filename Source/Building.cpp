@@ -63,7 +63,7 @@ void Building::loadToTileSet(std::string const &path)
             {
                 //object
                 bool error = false;
-                if(line.length() >= 5)
+                if(line.length() >= 6)
                 {
                     unsigned char objectID = line[1];
                     unsigned char objectType = line[2];
@@ -93,7 +93,32 @@ void Building::loadToTileSet(std::string const &path)
             else if(line[0] == 'f')
             {
                 //fire detector
-                //TODO
+                bool error = false;
+                if(line.length() >= 5)
+                {
+                    unsigned char fireID = line[1];
+                    std::string x_str;
+                    std::string y_str;
+                    bool first = true;
+                    for(unsigned int i = 2; i < line.length(); ++i)
+                    {
+                        if(line[i] == ':')
+                            first = false;
+                        else
+                            (first? x_str : y_str).push_back(line[i]);
+                    }
+                    int x = atoi(x_str.c_str());
+                    int y = atoi(y_str.c_str());
+
+                    FireDetector * fd = new FireDetector(x,y, 32, m_textureLoader->getFireDetectorTexture());
+                    fireDetectors.insert(std::pair<unsigned char, FireDetector *>(fireID, fd));
+                    fireDetectorsSentInRoom.insert(std::pair<unsigned char, bool>(fireID, false));
+                }
+                else
+                    error = true;
+
+                if(error)
+                    std::cerr << "error while loading level '" << path << "' at line " << lineNumber << " : malformed fire detector declaration" << std::endl;
             }
             else if(line[0] == 'r')
             {
