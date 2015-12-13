@@ -28,7 +28,7 @@ void FireDetector::collision(Ray * ray)
     //TODO
 }
 
-void FireDetector::update()
+void FireDetector::update(sf::Clock const& clk)
 {
     //TODO
 }

@@ -41,13 +41,13 @@ int Window::run()
 
 		if(clk.getElapsedTime().asMilliseconds() > 70)
 		{
-			this->update();
+			this->update(clk );
 
-			//drawing
-			m_window->clear();
-			this->draw();
-			m_window->display();
-			clk.restart();
+        //drawing
+        m_window->clear();
+        this->draw();
+        m_window->display();
+		clk.restart();
 		}
     }
 
@@ -187,7 +187,7 @@ void Window::react(sf::Event const& event)
     }
 }
 
-void Window::update()
+void Window::update(sf::Clock const & clk)
 {
     if(m_bothButtonsEnabled)
     {
@@ -212,15 +212,21 @@ void Window::update()
         }
     }
 
-    m_currentWorld->update();
+    m_currentWorld->update(clk );
 }
 
 void Window::leftButton() const
 {
 	//std::cout << "SetAngle:" << m_currentWorld->getCharacter()-> << std::endl;
 
-	if (!m_currentWorld->getCharacter()->isMoving())
-		m_currentWorld->getCharacter()->setAngle(100);
+	Ray intersectionRay(m_currentWorld->getCharacter()->getPosition(), m_currentWorld->getCharacter()->getDirection());
+	m_currentWorld->getBuilding()->checkCollisions(intersectionRay);
+	std::cout << "distance to intersection: " << intersectionRay.distanceToIntersection() << std::endl;
+
+
+
+	if(!m_currentWorld->getCharacter()->isMoving())
+		m_currentWorld->getCharacter()->setAngle(10);
 	//std::cout << "Angle: " << m_currentWorld->getCharacter()-> << std::endl;
 }
 
@@ -228,8 +234,12 @@ void Window::rightButton() const
 {
 	//std::cout << "Jump" << std::endl;
 	
+	Ray intersectionRay(m_currentWorld->getCharacter()->getPosition(), m_currentWorld->getCharacter()->getDirection());
+	m_currentWorld->getBuilding()->checkCollisions(intersectionRay);
+	std::cout << "distance to intersection: " << intersectionRay.distanceToIntersection() << std::endl;
+
 	if(!m_currentWorld->getCharacter()->isMoving())
-		m_currentWorld->getCharacter()->setAngle(-100);
+		m_currentWorld->getCharacter()->setAngle(-10);
 	//std::cout << "Angle: " << m_currentWorld->getCharacter()->m_angleShot << std::endl;
 }
 

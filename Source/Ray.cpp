@@ -81,6 +81,9 @@ bool Ray::intersectSquare(sf::Vector2f pointMin, sf::Vector2f pointMax, bool sav
     float I = max(minX, minY);
     float M = min(maxX, maxY);
 
+	//sf::Vector2f center(pointMin.x + 16, pointMin.y + 16);
+	//float distanceIntersection = norm(center - m_origin);
+
     bool intersection = I <= M;
 
     if(intersection && saveIntersection)

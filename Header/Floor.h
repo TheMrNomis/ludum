@@ -34,7 +34,7 @@ class Floor : public INDrawable, public INUpdatable
 
 		bool wallCollision(Ray & rayIntersection);
 
-		virtual void update();
+		virtual void update(sf::Clock const & clk);
 		virtual void draw(sf::RenderWindow *window) const;
 
 	private:

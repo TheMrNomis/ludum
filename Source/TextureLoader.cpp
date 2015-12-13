@@ -7,6 +7,7 @@ TextureLoader::TextureLoader(std::string const & url) :
 	m_floorTexture(new sf::Texture()),
 	m_characterTexture(new sf::Texture()),
     m_fireDetectorTexture(new sf::Texture())
+	//m_teleportertexture(new sf::Texture())
 {
 	loadTexture(url);
 }
@@ -18,6 +19,7 @@ TextureLoader::~TextureLoader()
 	delete m_objectsTexture;
 	delete m_characterTexture;
     delete m_fireDetectorTexture;
+	//delete m_teleportertexture;
 }
 
 sf::Texture * TextureLoader::getFloorTexture() const 
@@ -39,6 +41,12 @@ sf::Texture * TextureLoader::getFireDetectorTexture() const
 {
     return m_fireDetectorTexture;
 }
+
+/*sf::Texture * TextureLoader::getTeleporterTexture() const
+{
+	return m_teleportertexture;
+}
+*/
 
 //On passe l'url du dossier de Textures
 void TextureLoader::loadTexture(std::string const & url)

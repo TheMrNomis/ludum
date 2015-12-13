@@ -9,6 +9,7 @@
 
 #include "FireDetector.h"
 #include "Object.h"
+#include "TextureLoader.h"
 #include "Character.h"
 #include "Floor.h"
 #include "Room.h"
@@ -72,6 +73,6 @@ class Building : public INDrawable, public INUpdatable
         /**
          * @brief updates this
          */
-        virtual void update();
+		virtual void update(sf::Clock const & clk);
 };
 

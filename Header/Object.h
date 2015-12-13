@@ -19,7 +19,7 @@ class Object : public INDrawable, public INUpdatable
 
         virtual ~Object();
 
-        virtual void update();
+        virtual void update(sf::Clock const& clk);
         virtual void draw(sf::RenderWindow * window) const;
         virtual void ignite();
         virtual void stopFire();

@@ -34,7 +34,7 @@ class FireDetector : public INUpdatable, public INDrawable, public INCollisionab
          */
         virtual void collision(Ray * ray);
 
-        virtual void update();
+        virtual void update(sf::Clock const& clk);
 
     private:
         Room * m_parentRoom;

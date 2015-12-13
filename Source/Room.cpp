@@ -40,7 +40,8 @@ void Room::draw(sf::RenderWindow * window) const{
 		(*it)->draw(window);
 }
 
-void Room::update()
+
+void Room::update(sf::Clock const & clk)
 {
-	//TODO: si le fireDetector détecte le character -> extinguishFire()
+	//si le fireDetector détecte le character -> extinguishFire()
 }

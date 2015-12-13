@@ -12,7 +12,7 @@ class World : public INDrawable, public INUpdatable
 {
 	private:
 		TextureLoader m_textures;
-		Building m_building;
+		Building  * m_building;
 		Character * m_character;
 
 	public:
@@ -20,11 +20,12 @@ class World : public INDrawable, public INUpdatable
 		virtual ~World();
 
 		Character * getCharacter() const;
+		Building * getBuilding() const;
 
-		void moveCharacter(Character * caracter);
+		void moveCharacter(Character * character);
 
 		virtual void draw(sf::RenderWindow *window) const;
 
-        virtual void update();
+		virtual void update(sf::Clock const & clk);
 };
 
