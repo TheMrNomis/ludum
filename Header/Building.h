@@ -23,7 +23,6 @@ class Building : public INDrawable, public INUpdatable
 		const TextureLoader * m_textureLoader;
 
 		std::vector<Floor *> m_floors;
-		std::vector<Wall *> m_walls;
 		const unsigned int m_currentFloor;
 
 	public:
@@ -41,11 +40,6 @@ class Building : public INDrawable, public INUpdatable
          	*
          	*/
 		virtual ~Building();
-
-
-		void initWalls(std::vector<std::vector<unsigned char> > map);
-		std::vector<Wall *> * getWalls();
-
 
 		std::vector<Floor * > getFloors();
 

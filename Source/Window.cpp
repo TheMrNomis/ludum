@@ -21,6 +21,9 @@ Window::Window():
 
 Window::~Window()
 {
+    if(m_window->isOpen())
+        m_window->close();
+
     delete m_currentWorld;
     delete m_window;
 }
@@ -36,7 +39,7 @@ int Window::run()
 
         //update state of the system
         this->update();
- 
+
         //drawing
         m_window->clear();
         this->draw();
@@ -101,8 +104,8 @@ void Window::react(sf::Event const& event)
         m_mouseOldX = event.mouseMove.x;
         m_mouseOldY = event.mouseMove.y;
     }
-    
-	else if(event.type == sf::Event::KeyPressed)
+
+    else if(event.type == sf::Event::KeyPressed)
     {
         if(event.key.code == sf::Keyboard::Left)
         {
@@ -154,8 +157,8 @@ void Window::react(sf::Event const& event)
             }
         }
     }
-    
-	else if(event.type == sf::Event::KeyReleased)
+
+    else if(event.type == sf::Event::KeyReleased)
     {
         if(event.key.code == sf::Keyboard::Left)
         {
@@ -208,19 +211,19 @@ void Window::update()
 
 void Window::leftButton() const
 {
-	m_currentWorld->getCharacter()->setAngle(100);
-	//std::cout << "Angle: " << m_currentWorld->getCharacter()-> << std::endl;
+    m_currentWorld->getCharacter()->setAngle(100);
+    //std::cout << "Angle: " << m_currentWorld->getCharacter()-> << std::endl;
 }
 
 void Window::rightButton() const
 {
 
-	m_currentWorld->getCharacter()->setAngle(-100);
-	//std::cout << "Angle: " << m_currentWorld->getCharacter()->m_angleShot << std::endl;
+    m_currentWorld->getCharacter()->setAngle(-100);
+    //std::cout << "Angle: " << m_currentWorld->getCharacter()->m_angleShot << std::endl;
 }
 
 void Window::bothButtons() const
 {
-	m_currentWorld->getCharacter()->jump();
-	std::cout << "Jump" << std::endl;
+    m_currentWorld->getCharacter()->jump();
+    std::cout << "Jump" << std::endl;
 }

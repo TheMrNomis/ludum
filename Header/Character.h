@@ -25,8 +25,8 @@ class Character : public INDrawable, public INUpdatable
 		sf::Sprite * m_spriteCharater;
 		sf::Texture * m_textureCharacter;
 
-		float m_velocity = 10;
-		bool m_moving = false;
+		const float m_velocity;
+		bool m_moving;
 		bool m_statusCollision;
 
 		StateAnimation m_currentAnimation;

@@ -13,9 +13,6 @@ class Floor : public INDrawable, public INUpdatable
 		std::vector<std::vector<unsigned char> > m_background;
 		sf::Texture * m_textureBuilding;
 		sf::Vector2u offset(unsigned int i, unsigned int j) const;
-		std::vector<sf::Sprite *> * m_allSpriteFloorWall;
-		std::vector<sf::Sprite *> * m_allSpriteFloorBackground;
-		std::vector<Object * > * m_objectInFloor;
 
 	public:
 		Floor(sf::Texture * textureBuilding);
@@ -23,12 +20,6 @@ class Floor : public INDrawable, public INUpdatable
 
 		void addLine(std::vector<unsigned char> line);
 		std::vector<std::vector<unsigned char> > * getMap();
-
-
-		std::vector<sf::Sprite *> * getAllSpriteFloorWall();
-		std::vector<sf::Sprite *> * getAllSpriteFloorBackground();
-
-		void managerBackground();
 
 		virtual void update();
 		virtual void draw(sf::RenderWindow *window) const;

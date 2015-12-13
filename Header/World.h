@@ -22,7 +22,6 @@ class World : public INDrawable, public INUpdatable
 
 		void managerDeplacement(Character * caracter);
 
-
 		virtual void draw(sf::RenderWindow *window) const;
 
         virtual void update();
