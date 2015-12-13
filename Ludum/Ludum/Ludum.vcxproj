@@ -33,6 +33,7 @@
     <ClInclude Include="..\..\Header\Object.h" />
     <ClInclude Include="..\..\Header\Ray.h" />
     <ClInclude Include="..\..\Header\Room.h" />
+    <ClInclude Include="..\..\Header\Table.h" />
     <ClInclude Include="..\..\Header\TextureLoader.h" />
     <ClInclude Include="..\..\Header\Vector2fOperations.h" />
     <ClInclude Include="..\..\Header\Wall.h" />
@@ -51,6 +52,8 @@
     <ClCompile Include="..\..\Source\Object.cpp" />
     <ClCompile Include="..\..\Source\Ray.cpp" />
     <ClCompile Include="..\..\Source\Room.cpp" />
+    <ClCompile Include="..\..\Source\Table.cpp" />
+    <ClCompile Include="..\..\Source\Teleporter.cpp" />
     <ClCompile Include="..\..\Source\TextureLoader.cpp" />
     <ClCompile Include="..\..\Source\Vector2fOperations.cpp" />
     <ClCompile Include="..\..\Source\Wall.cpp" />
