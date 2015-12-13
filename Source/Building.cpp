@@ -107,8 +107,8 @@ void Building::loadToTileSet(std::string const &path)
                         else
                             (first? x_str : y_str).push_back(line[i]);
                     }
-                    int x = atoi(x_str.c_str());
-                    int y = atoi(y_str.c_str());
+                    unsigned int x = atoi(x_str.c_str());
+                    unsigned int y = atoi(y_str.c_str());
 
                     FireDetector * fd = new FireDetector(x,y, 32, m_textureLoader->getFireDetectorTexture());
                     fireDetectors.insert(std::pair<unsigned char, FireDetector *>(fireID, fd));

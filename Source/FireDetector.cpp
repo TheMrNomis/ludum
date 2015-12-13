@@ -1,7 +1,5 @@
 #include "FireDetector.h"
 
-#include <iostream>
-
 FireDetector::FireDetector(unsigned int x, unsigned int y, double radius, sf::Texture const* texture):
     m_parentRoom(nullptr),
     m_texture(texture),
@@ -10,12 +8,10 @@ FireDetector::FireDetector(unsigned int x, unsigned int y, double radius, sf::Te
     m_radius(radius),
     m_isActivated(false)
 {
-    std::cout << "firedetector at (" << x << "," << y << ")" << std::endl;
 }
 
 FireDetector::~FireDetector()
 {
-    //TODO
 }
 
 void FireDetector::draw(sf::RenderWindow * window) const
@@ -28,6 +24,11 @@ void FireDetector::draw(sf::RenderWindow * window) const
 }
 
 void FireDetector::collision(Ray * ray)
+{
+    //TODO
+}
+
+void FireDetector::update()
 {
     //TODO
 }
