@@ -99,7 +99,23 @@ void Building::loadToTileSet(std::string const &path)
             else if(line[0] == 'r')
             {
                 //room
-                //TODO
+                bool ids_fireDetector = false;
+                for(unsigned int i = 1; i < line.length(); ++i)
+                {
+                    if(line[i] == ':')
+                        ids_fireDetector = true;
+                    else
+                    {
+                        if(!ids_fireDetector)
+                        {
+                            //TODO: ajouter l'objet
+                        }
+                        else
+                        {
+                            //TODO: ajouter le fireDetector
+                        }
+                    }
+                }
             }
             else
             {
