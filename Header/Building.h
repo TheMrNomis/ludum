@@ -1,10 +1,15 @@
 #pragma once
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include <fstream>
+#include <iterator>   
+
 #include "INDrawable.h"
 #include "INUpdatable.h"
-#include <SFML/Graphics.hpp>
+
 #include "Character.h"
 #include "Floor.h"
-#include <fstream>
+#include "Wall.h"
 
 class Building : public INDrawable, public INUpdatable
 {
@@ -12,17 +17,14 @@ class Building : public INDrawable, public INUpdatable
 		
 		unsigned int m_largeur;
 		unsigned int m_longueur;
-
-		std::vector<Floor *> m_floors;
-		const unsigned int m_currentFloor;
-
-		const TextureLoader * m_textureLoader;
-		
 		const unsigned int m_maxBurnedDamage;
 		const unsigned int m_currentBurnedDamage;
 
-		
+		const TextureLoader * m_textureLoader;
 
+		std::vector<Floor *> m_floors;
+		std::vector<Wall *> m_walls;
+		const unsigned int m_currentFloor;
 
 	public:
 		 /**
@@ -40,14 +42,28 @@ class Building : public INDrawable, public INUpdatable
          	*/
 		virtual ~Building();
 
+
+		void initWalls(std::vector<std::vector<unsigned char> > map);
+		std::vector<Wall *> * getWalls();
+
+
+		std::vector<Floor * > getFloors();
+
+		unsigned int getCurrentFloor();
+
+		/**
+		*@brief check if the sprite is intersecting a wall in the floor number idFloor
+		*
+		*@param idFloor : the floor which we want to check if there are any collision
+		*@param sprite : the sprite which collide or not any wall in the floor
+		*/
+		bool checkCollisionWall(unsigned int idFloor, sf::Sprite & sprite);
+
 		/**
 		*@brief show the building
 		*
 		*@param window: window whitch containt the building
 		*/	
-		void setLongueurBuilding(unsigned int longueur);
-		void setLargeurBuilding(unsigned int largeur);
-
 		virtual void draw(sf::RenderWindow *window) const ;
 
 		/**
@@ -60,6 +76,6 @@ class Building : public INDrawable, public INUpdatable
         /**
          * @brief updates this
          */
-        void update();
+        virtual void update();
 };
 

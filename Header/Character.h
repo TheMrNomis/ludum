@@ -5,6 +5,7 @@
 
 #include "INDrawable.h"
 #include "INUpdatable.h"
+#include "Ray.h"
 
 
 
@@ -26,13 +27,11 @@ class Character : public INDrawable, public INUpdatable
 
 		float m_velocity = 10;
 		bool m_moving = false;
-
-		sf::Vector2f m_position;
+		bool m_statusCollision;
 
 		StateAnimation m_currentAnimation;
 
-	public:
-		int m_angleShot = 90;
+		int m_angleShot;
 
 
 	public:
@@ -52,6 +51,18 @@ class Character : public INDrawable, public INUpdatable
 		*
 		*/
 		void setAngle(int alpha);
+		
+		/**
+		* @brief set the angle before jummping
+		*
+		*/
+		int  getAngle() const ;
+
+		/**
+		* @brief Get the velocity of the character
+		*
+		*/
+		float getVelocity();
 
 		/**
 		* @brief Return the direction which facing the character
@@ -60,12 +71,64 @@ class Character : public INDrawable, public INUpdatable
 		sf::Vector2f getDirection();
 
 		/**
+		* @brief Get the current position of the character
+		*
+		*/
+		sf::Vector2f getPosition();
+
+		/**
+		* @brief Get the new position of the character
+		*	if he moves
+		*
+		*/
+		sf::Vector2f newPositon();
+	
+		/**
+		* @brief get if the character is in collision actually
+		*	
+		*
+		*/
+		bool getStatusCollision();
+		
+		/**
+		* @brief set if the character is in collision or not
+		*	
+		*
+		*/
+		void setStatusCollision(bool isInCollision);
+
+
+		/**
+		* @brief Get the srpite of the character
+		*
+		*/
+		sf::Sprite  * getSprite() const;
+		/**
+		* @brief Set the position of the character
+		*
+		* @param position:
+		*
+		*/
+		void setPosition(sf::Vector2f position);
+
+		/**
 		* @brief Return the direction which facing the character
 		*
 		*/
 		void jump();
 
-	
+		/**
+		* @brief Check if the caracter is moving
+		*
+		*/
+		bool isMoving();
+
+		/**
+		* @brief set if the caracter is moving or not
+		*
+		*/
+		void setMoving(bool isMoving);
+
 		/**
 		* @brief draw the character
 		*

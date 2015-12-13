@@ -1,6 +1,8 @@
 #pragma once
 #include "INDrawable.h"
 #include "INUpdatable.h"
+#include "Ray.h"
+
 #include "Building.h"
 #include "Floor.h"
 #include "Character.h"
@@ -17,6 +19,9 @@ class World : public INDrawable, public INUpdatable
 		virtual ~World();
 
 		Character * getCharacter() const;
+
+		void managerDeplacement(Character * caracter);
+
 
 		virtual void draw(sf::RenderWindow *window) const;
 
