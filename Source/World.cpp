@@ -26,3 +26,7 @@ void World::draw(sf::RenderWindow *window) const
 	m_building.draw(window);
 	m_character->draw(window);
 }
+
+void World::update()
+{
+}

@@ -1,10 +1,11 @@
 #pragma once
 #include "INDrawable.h"
+#include "INUpdatable.h"
 #include "Building.h"
 #include "Floor.h"
 #include "Character.h"
 
-class World : public INDrawable
+class World : public INDrawable, public INUpdatable
 {
 	private:
 		TextureLoader m_textures;
@@ -18,5 +19,7 @@ class World : public INDrawable
 		Character * getCharacter() const;
 
 		virtual void draw(sf::RenderWindow *window) const;
+
+        virtual void update();
 };
 
