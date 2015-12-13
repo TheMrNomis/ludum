@@ -5,6 +5,7 @@
 
 #include "INDrawable.h"
 #include "INUpdatable.h"
+#include "Ray.h"
 
 
 
@@ -54,10 +55,30 @@ class Character : public INDrawable, public INUpdatable
 		void setAngle(int alpha);
 
 		/**
+		* @brief Get the velocity of the character
+		*
+		*/
+		float getVelocity();
+
+		/**
 		* @brief Return the direction which facing the character
 		*
 		*/
 		sf::Vector2f getDirection();
+
+		/**
+		* @brief Get the position of the character
+		*
+		*/
+		sf::Vector2f getPosition();
+
+		/**
+		* @brief Set the position of the character
+		*
+		* @param position:
+		*
+		*/
+		void setPosition(sf::Vector2f position);
 
 		/**
 		* @brief Return the direction which facing the character
@@ -65,7 +86,12 @@ class Character : public INDrawable, public INUpdatable
 		*/
 		void jump();
 
-	
+		/**
+		* @brief Check if the caracter is moving
+		*
+		*/
+		bool isMoving();
+
 		/**
 		* @brief draw the character
 		*

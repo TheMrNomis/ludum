@@ -8,6 +8,11 @@
 
 class Floor : public INDrawable
 {
+	private:
+		std::vector<std::vector<unsigned char> > m_background;
+		sf::Texture * m_textureBuilding;
+		sf::Vector2u offset(unsigned int i, unsigned int j) const;
+
 	public:
 		Floor(sf::Texture * textureBuilding);
 		virtual ~Floor();
@@ -15,10 +20,5 @@ class Floor : public INDrawable
 		void addLine(std::vector<unsigned char> line);
 
 		virtual void draw(sf::RenderWindow *window) const;
-
-	private:
-		std::vector<std::vector<unsigned char> > m_background ;
-		sf::Texture * m_textureBuilding;
-	    sf::Vector2u offset(unsigned int i, unsigned int j) const;
 };
 

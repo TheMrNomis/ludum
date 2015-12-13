@@ -1,6 +1,8 @@
 #pragma once
 #include "INDrawable.h"
 #include "INUpdatable.h"
+#include "Ray.h"
+
 #include "Building.h"
 #include "Floor.h"
 #include "Character.h"

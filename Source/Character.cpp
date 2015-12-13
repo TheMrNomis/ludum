@@ -23,14 +23,35 @@ void Character::setAngle(int alpha)
 	m_angleShot += alpha;
 }
 
+float Character::getVelocity()
+{
+	return m_velocity;
+}
+
 sf::Vector2f Character::getDirection()
 {
 	return sf::Vector2f(cos(m_angleShot * M_PI_2/360), sin(m_angleShot * M_PI_2/360));
 }
 
+sf::Vector2f Character::getPosition()
+{
+	return m_position;
+}
+
+void Character::setPosition(sf::Vector2f position)
+{
+	m_position = position;
+}
+
 void Character::jump()
 {	
+	m_position = m_spriteCharater->getPosition();
 	m_moving = true;
+}
+
+bool Character::isMoving()
+{
+	return m_moving;
 }
 
 void Character::draw(sf::RenderWindow *window) const
@@ -42,16 +63,6 @@ void Character::draw(sf::RenderWindow *window) const
 
 void Character::update()
 {
-	std::cout << "test" << std::endl;
-
-	//Deplacement
-	while(m_moving)
-	{
-		this->m_position = m_spriteCharater->getPosition() + this->getDirection()*m_velocity;
-		m_spriteCharater->move(this->getDirection()*m_velocity);
-	}
-
-
 	//Animations
 	if(m_currentAnimation == StateAnimation::Left)
 	{

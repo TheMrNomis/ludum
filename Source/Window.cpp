@@ -58,10 +58,12 @@ void Window::react(sf::Event const& event)
     {
         m_currentStatus = GAME_STOPPED;
     }
+
     else if(event.type == sf::Event::Resized)
     {
         m_window->setView(sf::View(sf::FloatRect(0,0, event.size.width, event.size.height)));
     }
+
     else if(event.type == sf::Event::MouseWheelScrolled)
     {
         sf::View view = m_window->getView();
@@ -71,16 +73,19 @@ void Window::react(sf::Event const& event)
             view.zoom(0.8);
         m_window->setView(view);
     }
+
     else if(event.type == sf::Event::MouseButtonPressed)
     {
         if(event.mouseButton.button == sf::Mouse::Left)
             m_mouseButtonPressed = true;
     }
+
     else if(event.type == sf::Event::MouseButtonReleased)
     {
         if(event.mouseButton.button == sf::Mouse::Left)
             m_mouseButtonPressed = false;
     }
+
     else if(event.type == sf::Event::MouseMoved)
     {
         if(m_mouseButtonPressed)
@@ -96,7 +101,8 @@ void Window::react(sf::Event const& event)
         m_mouseOldX = event.mouseMove.x;
         m_mouseOldY = event.mouseMove.y;
     }
-    else if(event.type == sf::Event::KeyPressed)
+    
+	else if(event.type == sf::Event::KeyPressed)
     {
         if(event.key.code == sf::Keyboard::Left)
         {
@@ -108,18 +114,21 @@ void Window::react(sf::Event const& event)
                     //one-time action for both buttons
                     bothButtons();
                 }
+
                 else
                 {
                     m_leftButtonPushed = false;
                     m_rightButtonPushed = false;
                 }
             }
+
             else
             {
                 m_leftButtonPushed = true;
                 m_timeLeftButtonPressed = m_clock.getElapsedTime();
             }
         }
+
         else if(event.key.code == sf::Keyboard::Right)
         {
             if(m_leftButtonPushed)
@@ -130,12 +139,14 @@ void Window::react(sf::Event const& event)
                     //one-time action for both buttons
                     bothButtons();
                 }
+
                 else
                 {
                     m_rightButtonPushed = false;
                     m_leftButtonPushed = false;
                 }
             }
+
             else
             {
                 m_rightButtonPushed = true;
@@ -143,7 +154,8 @@ void Window::react(sf::Event const& event)
             }
         }
     }
-    else if(event.type == sf::Event::KeyReleased)
+    
+	else if(event.type == sf::Event::KeyReleased)
     {
         if(event.key.code == sf::Keyboard::Left)
         {
@@ -172,6 +184,7 @@ void Window::update()
     {
         //repeated action for both buttons 
     }
+
     else if(m_leftButtonPushed)
     {
         if((m_clock.getElapsedTime() - m_timeLeftButtonPressed) >= m_buttonDeadZoneDelay)
@@ -180,6 +193,7 @@ void Window::update()
             leftButton();
         }
     }
+
     else if(m_rightButtonPushed)
     {
         if((m_clock.getElapsedTime() - m_timeRightButtonPressed) >= m_buttonDeadZoneDelay)

@@ -27,5 +27,17 @@ void World::draw(sf::RenderWindow *window) const
 
 void World::update()
 {
-	m_character->update();
+	//Deplacement
+	while(m_character->isMoving())
+	{
+		//sf::Vector2f position = m_character->getPosition() + 
+		Ray intersectionRay(m_character->getPosition(), m_character->getDirection()*m_character->getVelocity());
+		
+
+
+		//m_character->setPosition();
+
+		//
+		//m_character->move(m_character->getDirection()*m_character->getVelocity);
+	}
 }
