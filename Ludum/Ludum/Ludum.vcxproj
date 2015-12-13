@@ -53,7 +53,6 @@
     <ClCompile Include="..\..\Source\Ray.cpp" />
     <ClCompile Include="..\..\Source\Room.cpp" />
     <ClCompile Include="..\..\Source\Table.cpp" />
-    <ClCompile Include="..\..\Source\Teleporter.cpp" />
     <ClCompile Include="..\..\Source\TextureLoader.cpp" />
     <ClCompile Include="..\..\Source\Vector2fOperations.cpp" />
     <ClCompile Include="..\..\Source\Wall.cpp" />

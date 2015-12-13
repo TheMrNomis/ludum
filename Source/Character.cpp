@@ -10,7 +10,7 @@ Character::Character(TextureLoader * textures):
     m_moving(false),
     m_statusCollision(false),
     m_currentAnimation(StateAnimation::Right),
-    m_angleShot(0)
+    m_angleShot(90)
 {
 	m_spriteCharater->setTexture(*m_textures->getCharacterTexture());
     m_spriteCharater->setPosition(sf::Vector2f(200,200));
@@ -23,7 +23,15 @@ Character::~Character()
 
 void Character::setAngle(int alpha)
 {
-    m_angleShot += alpha;
+	m_angleShot += alpha;
+
+	if(m_angleShot > 360)
+		m_angleShot = 360;
+
+	else if(m_angleShot < 0)
+		m_angleShot = 0;
+
+
 }
 int Character::getAngle() const
 {
@@ -90,6 +98,13 @@ sf::Vector2f Character::nextFramePosition()
 void Character::draw(sf::RenderWindow *window) const
 {
     window->draw(*m_spriteCharater);
+
+	sf::CircleShape triangle(10 ,3);
+
+	triangle.setPosition(m_spriteCharater->getPosition() + sf::Vector2f(16,16));
+	//triangle.move(sf::Vector2f(10,0));
+	triangle.rotate(m_angleShot);
+	window->draw(triangle);
 }
 
 
@@ -100,8 +115,9 @@ void Character::update(sf::Clock const & clk)
 	{
 		m_spriteCharater->setTextureRect(sf::IntRect(64,0, 32, 32));
 	}
-	else{
 
+	else
+	{
 		if (m_currentAnimation == StateAnimation::Left)
 		{
 			m_spriteCharater->setTextureRect(sf::IntRect(0, 32, 32, 32));
@@ -120,6 +136,4 @@ void Character::update(sf::Clock const & clk)
 			m_currentAnimation = StateAnimation::Midle;
 		}
 	}
-
-
 }
