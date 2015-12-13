@@ -262,6 +262,8 @@ void Window::bothButtons() const
 
 	m_currentWorld->getBuilding()->checkCollisions(intersectionRay);
 
+	// Yoooo la frite ?
+
 	//Récupère distance
 	//	//world->getBuilding()->checkCollisions(m_intersectionRay);
 	//{
