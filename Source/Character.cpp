@@ -30,24 +30,29 @@ sf::Vector2f Character::getDirection()
 
 void Character::jump()
 {	
-	//TO DO
-	//while(!obstacles)
-	{
-		this->m_position = m_spriteCharater->getPosition() + this->getDirection()*m_velocity;
-		m_spriteCharater->move(this->getDirection()*m_velocity);
-	}
-	return;
+	m_moving = true;
 }
 
 void Character::draw(sf::RenderWindow *window) const
 {
 	window->draw(*m_spriteCharater);
-	}
+}
 
 
 
 void Character::update()
 {
+	std::cout << "test" << std::endl;
+
+	//Deplacement
+	while(m_moving)
+	{
+		this->m_position = m_spriteCharater->getPosition() + this->getDirection()*m_velocity;
+		m_spriteCharater->move(this->getDirection()*m_velocity);
+	}
+
+
+	//Animations
 	if(m_currentAnimation == StateAnimation::Left)
 	{
 		m_spriteCharater->setTextureRect(sf::IntRect(32, 0, 32, 32));

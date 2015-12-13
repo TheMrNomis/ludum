@@ -12,7 +12,6 @@ World::World():
 World::~World()
 {
 	delete m_character;
-
 }
 
 Character * World::getCharacter() const
@@ -28,4 +27,5 @@ void World::draw(sf::RenderWindow *window) const
 
 void World::update()
 {
+	m_character->update();
 }

@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <cmath>
+#include <iostream>
+
 #include "INDrawable.h"
 #include "INUpdatable.h"
 
@@ -22,7 +24,7 @@ class Character : public INDrawable, public INUpdatable
 		sf::Sprite * m_spriteCharater;
 		sf::Texture * m_textureCharacter;
 
-		float m_velocity = 50;
+		float m_velocity = 10;
 		bool m_moving = false;
 
 		sf::Vector2f m_position;

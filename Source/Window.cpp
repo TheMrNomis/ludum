@@ -1,5 +1,4 @@
 #include "Window.h"
-#include "Floor.h"
 
 Window::Window():
     m_clock(),
@@ -208,4 +207,5 @@ void Window::rightButton() const
 void Window::bothButtons() const
 {
 	m_currentWorld->getCharacter()->jump();
+	std::cout << "Jump" << std::endl;
 }
