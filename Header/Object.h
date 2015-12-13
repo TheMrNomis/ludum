@@ -23,7 +23,7 @@ class Object : public INDrawable, public INUpdatable
 	Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int width, unsigned int height, sf::Texture const * texture);
 	virtual ~Object();
 		
-	virtual void update();
+	virtual void update(sf::Clock const & clk);
 	virtual void draw(sf::RenderWindow * window) const;
    	virtual void ignite();
    	virtual void stopFire();
