@@ -63,7 +63,7 @@ void World::moveCharacter(Character * character)
 void World::update(sf::Clock const & clk)
 {
 	m_building.update(clk);
-	m_character->update(clk);
+	m_character->update( clk);
 	moveCharacter(m_character);
 	
 

@@ -41,9 +41,7 @@ int Window::run()
 
 		if(clk.getElapsedTime().asMilliseconds() > 70)
 		{
-			this->update(clk);
-
-        this->update(clk);
+			this->update(clk );
 
         //drawing
         m_window->clear();
@@ -214,7 +212,7 @@ void Window::update(sf::Clock const & clk)
         }
     }
 
-    m_currentWorld->update(clk);
+    m_currentWorld->update(clk );
 }
 
 void Window::leftButton() const

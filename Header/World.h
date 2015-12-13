@@ -25,6 +25,6 @@ class World : public INDrawable, public INUpdatable
 
 		virtual void draw(sf::RenderWindow *window) const;
 
-        virtual void update(sf::Clock const & clk);
+		virtual void update(sf::Clock const & clk);
 };
 

@@ -96,7 +96,7 @@ void Character::draw(sf::RenderWindow *window) const
 void Character::update(sf::Clock const & clk)
 {
     //Animations
-	if (rand()%10 == 0)
+	if (/*rand()%10 */ 0== -1)
 	{
 		m_spriteCharater->setTextureRect(sf::IntRect(64,0, 32, 32));
 	}

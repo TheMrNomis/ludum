@@ -23,6 +23,7 @@ bool Floor::wallCollision(Ray & rayIntersection)
 	return rayIntersection.validIntersectionFound();
 }
 
+
 void Floor::update(sf::Clock const & clk)
 {}
 
