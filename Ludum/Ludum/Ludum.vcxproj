@@ -22,6 +22,7 @@
     <ClInclude Include="..\..\Header\Building.h" />
     <ClInclude Include="..\..\Header\Canape.h" />
     <ClInclude Include="..\..\Header\Character.h" />
+    <ClInclude Include="..\..\Header\createObject.h" />
     <ClInclude Include="..\..\Header\FireDetector.h" />
     <ClInclude Include="..\..\Header\Floor.h" />
     <ClInclude Include="..\..\Header\INCollisionable.h" />
@@ -34,6 +35,7 @@
     <ClInclude Include="..\..\Header\Room.h" />
     <ClInclude Include="..\..\Header\TextureLoader.h" />
     <ClInclude Include="..\..\Header\Vector2fOperations.h" />
+    <ClInclude Include="..\..\Header\Wall.h" />
     <ClInclude Include="..\..\Header\Window.h" />
     <ClInclude Include="..\..\Header\World.h" />
   </ItemGroup>
@@ -41,6 +43,7 @@
     <ClCompile Include="..\..\Source\Building.cpp" />
     <ClCompile Include="..\..\Source\Canape.cpp" />
     <ClCompile Include="..\..\Source\Character.cpp" />
+    <ClCompile Include="..\..\Source\createObect.cpp" />
     <ClCompile Include="..\..\Source\FireDetector.cpp" />
     <ClCompile Include="..\..\Source\Floor.cpp" />
     <ClCompile Include="..\..\Source\Lit.cpp" />
@@ -50,6 +53,7 @@
     <ClCompile Include="..\..\Source\Room.cpp" />
     <ClCompile Include="..\..\Source\TextureLoader.cpp" />
     <ClCompile Include="..\..\Source\Vector2fOperations.cpp" />
+    <ClCompile Include="..\..\Source\Wall.cpp" />
     <ClCompile Include="..\..\Source\Window.cpp" />
     <ClCompile Include="..\..\Source\World.cpp" />
   </ItemGroup>
