@@ -6,6 +6,8 @@
 class Object : public INDrawable, public INUpdatable
 {
     public:
+        static Object * fromID(unsigned char objectID, unsigned int x, unsigned int y, sf::Texture const* texture);
+
         static Object * Bed(unsigned int x, unsigned int y, sf::Texture const* texture);
         static Object * Sofa(unsigned int x, unsigned int y, sf::Texture const* texture);
         static Object * Toilet(unsigned int x, unsigned int y, sf::Texture const* texture);
@@ -61,27 +63,3 @@ class Object : public INDrawable, public INUpdatable
         sf::Clock m_clock;
         sf::Time m_time;
 };
-
-class Bed: public Object
-{
-    public:
-        Bed(unsigned int x, unsigned int y, sf::Texture const* texture):
-            Object(0.6, 15, 2, 3, 0, 0, x, y, texture){}
-
-class Sofa: public Object
-{
-    public:
-        Sofa(unsigned int x, unsigned int y, sf::Texture const* texture):
-            Object(0.5, 25, 2, 1, 0, 3, x, y, texture){}
-};
-
-class Toilet: public Object
-{
-    public:
-        Toilet(unsigned int x, unsigned int y, sf::Texture const* texture):
-            Object(0, 1, 1, 1, 2, 0, x, y, texture){}
-};
-
-class Table: public Object
-{
-    public

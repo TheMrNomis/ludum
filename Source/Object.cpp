@@ -1,42 +1,76 @@
 #include "Object.h"
 
-#include <iostream>
-static Object * Object::Bed(unsigned int x, unsigned int y, sf::Texture const* texture)
+Object * Object::fromID(unsigned char objectID, unsigned int x, unsigned int y, sf::Texture const* texture)
+{
+    switch(objectID)
+    {
+        case 'a':
+            return Bed(x,y,texture);
+            break;
+        case 'b':
+            return Sofa(x,y,texture);
+            break;
+        case 'c':
+            return Toilet(x,y,texture);
+            break;
+        case 'd':
+            return Table(x,y,texture);
+            break;
+        case 'e':
+            return Oven(x,y,texture);
+            break;
+        case 'f':
+            return Fridge(x,y,texture);
+            break;
+        case 'g':
+            return KitchenTable(x,y,texture);
+            break;
+        case 'h':
+            return Tub(x,y,texture);
+            break;
+        default:
+            return new Object(0,0,0,0,0,0,x,y,texture);
+            break;
+    }
+
+}
+
+Object * Object::Bed(unsigned int x, unsigned int y, sf::Texture const* texture)
 {
     return new Object(0.6,15, 2,3, 0,0, x,y, texture);
 }
 
-static Object * Object::Sofa(unsigned int x, unsigned int y, sf::Texture const* texture)
+Object * Object::Sofa(unsigned int x, unsigned int y, sf::Texture const* texture)
 {
     return new Object(0.5,25, 2,1, 0,3, x,y, texture);
 }
 
-static Object * Object::Toilet(unsigned int x, unsigned int y, sf::Texture const* texture)
+Object * Object::Toilet(unsigned int x, unsigned int y, sf::Texture const* texture)
 {
     return new Object(0.0,10, 1,1, 2,0, x,y, texture);
 }
 
-static Object * Object::Table(unsigned int x, unsigned int y, sf::Texture const* texture)
+Object * Object::Table(unsigned int x, unsigned int y, sf::Texture const* texture)
 {
     return new Object(1.0,20, 1,1, 2,1, x,y, texture);
 }
 
-static Object * Object::Oven(unsigned int x, unsigned int y, sf::Texture const* texture)
+Object * Object::Oven(unsigned int x, unsigned int y, sf::Texture const* texture)
 {
     return new Object(0.5,50, 1,1, 2,2, x,y, texture);
 }
 
-static Object * Object::Fridge(unsigned int x, unsigned int y, sf::Texture const* texture)
+Object * Object::Fridge(unsigned int x, unsigned int y, sf::Texture const* texture)
 {
     return new Object(0.5,50, 1,1, 2,3, x,y, texture);
 }
 
-static Object * Object::KitchenTable(unsigned int x, unsigned int y, sf::Texture const* texture)
+Object * Object::KitchenTable(unsigned int x, unsigned int y, sf::Texture const* texture)
 {
     return new Object(0.5,50, 1,1, 3,0, x,y, texture);
 }
 
-static Object * Object::Tub(unsigned int x, unsigned int y, sf::Texture const* texture)
+Object * Object::Tub(unsigned int x, unsigned int y, sf::Texture const* texture)
 {
     return new Object(0.0,10, 1,2, 3,1, x,y, texture);
 }
