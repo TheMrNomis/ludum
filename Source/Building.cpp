@@ -68,8 +68,8 @@ void Building::loadToTileSet(std::string const &path)
     m_floors.push_back(currentFloor);
 }
  
-std::vector<Floor * > Building::getFloors(){
-
+std::vector<Floor * > Building::getFloors()
+{
 	return m_floors;
 }
 
@@ -77,25 +77,19 @@ std::vector<Floor * > Building::getFloors(){
 
 void Building::update(){
 
-	for (unsigned int i = 0; i < m_floors.size(); ++i){
-		m_floors[i]->update();
-	}
+    for(auto it = m_floors.begin(); it != m_floors.end(); ++it)
+        (*it)->update();
 }
 
 
-bool Building::checkCollisionWall(unsigned int idFloor,sf::Sprite & sprite){
-	bool intercection= false;
-	for (unsigned int i = 0; i< m_floors[idFloor]->getAllSpriteFloorWall()->size(); ++i)
-	{
-		if (sprite.getGlobalBounds().intersects(m_floors[idFloor]->getAllSpriteFloorWall()->at(i)->getGlobalBounds()))
-			intercection = true;
-			
-	}
-
-	return intercection;
+bool Building::checkCollisionWall(unsigned int idFloor,sf::Sprite & sprite)
+{
+    //TODO
+	return false;
 }
 
 
-unsigned int Building::getCurrentFloor(){
+unsigned int Building::getCurrentFloor()
+{
 	return m_currentFloor;
 }

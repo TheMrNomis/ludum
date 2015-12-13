@@ -81,7 +81,7 @@ class Character : public INDrawable, public INUpdatable
 		*	if he moves
 		*
 		*/
-		sf::Vector2f newPositon();
+		sf::Vector2f nextFramePosition();
 	
 		/**
 		* @brief get if the character is in collision actually
