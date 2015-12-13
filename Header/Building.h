@@ -4,11 +4,11 @@
 #include <fstream>
 #include <iterator>   
 
-#include "createObject.h"
-
 #include "INDrawable.h"
 #include "INUpdatable.h"
 
+#include "FireDetector.h"
+#include "Object.h"
 #include "Character.h"
 #include "Floor.h"
 #include "Room.h"
