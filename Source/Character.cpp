@@ -4,9 +4,6 @@
 
 
 Character::Character(TextureLoader * textures) :
-    //m_spriteCharater(new sf::Sprite()),
-    //m_arrow(new sf::Sprite()),
-    //m_textures(textures),
     m_texture(textures->getCharacterTexture()),
 
     m_position(200, 200),
