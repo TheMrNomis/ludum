@@ -3,26 +3,22 @@
 #include "Character.h"
 
 
-Character::Character() :
+Character::Character(TextureLoader * textures):
     m_spriteCharater(new sf::Sprite()),
-    m_textureCharacter(new sf::Texture()),
+    m_textures(textures),
     m_velocity(10),
     m_moving(false),
     m_statusCollision(false),
     m_currentAnimation(StateAnimation::Right),
     m_angleShot(0)
 {
-    m_textureCharacter->loadFromFile("Ressources/sprites/spooky/sprite.png");
-    m_spriteCharater->setTexture(*m_textureCharacter);
-    m_spriteCharater->setTextureRect(sf::IntRect(0, 0, 32, 32));
-
+	m_spriteCharater->setTexture(*m_textures->getCharacterTexture());
     m_spriteCharater->setPosition(sf::Vector2f(200,200));
 }
 
 Character::~Character()
 {
     delete m_spriteCharater;
-    delete m_textureCharacter;
 }
 
 void Character::setAngle(int alpha)
@@ -101,8 +97,6 @@ void Character::draw(sf::RenderWindow *window) const
 
 void Character::update()
 {
-
-
     //Animations
     if(m_currentAnimation == StateAnimation::Left)
     {
@@ -121,12 +115,10 @@ void Character::update()
         m_spriteCharater->setTextureRect(sf::IntRect(32, 64, 32, 32));
         m_currentAnimation = StateAnimation::Left;
     }
+
     else
     {
         m_spriteCharater->setTextureRect(sf::IntRect(0, 0, 32, 32));
         m_currentAnimation = StateAnimation::Right;
     }
-
-
-
 }

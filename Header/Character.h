@@ -5,7 +5,7 @@
 
 #include "INDrawable.h"
 #include "INUpdatable.h"
-#include "Ray.h"
+#include "TextureLoader.h"
 
 
 
@@ -23,7 +23,7 @@ class Character : public INDrawable, public INUpdatable
 
 	private: 
 		sf::Sprite * m_spriteCharater;
-		sf::Texture * m_textureCharacter;
+		TextureLoader * m_textures;
 
 		const float m_velocity;
 		bool m_moving;
@@ -39,7 +39,7 @@ class Character : public INDrawable, public INUpdatable
 		* @brief constuctor for Character
 		*
 		*/
-		Character();
+		Character(TextureLoader * textures);
 
 		/**
 		* @brief destructor for Character
