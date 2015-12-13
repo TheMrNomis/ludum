@@ -52,8 +52,6 @@ void Character::setPosition(sf::Vector2f position)
 
 void Character::jump()
 {	
-    //???? à quoi sa sert Mr Alexis :p 
-    //m_position = m_spriteCharater->getPosition();
     m_moving = true;
 }
 
