@@ -3,17 +3,37 @@
 
 Floor::Floor(sf::Texture * textureBuilding):
     m_background(),
-	m_textureBuilding(textureBuilding)
+	m_textureBuilding(textureBuilding),
+	m_allSpriteFloorWall(new std::vector<sf::Sprite *>()),
+	m_allSpriteFloorBackground(new std::vector<sf::Sprite *>())
+
 {
 }
 
 Floor::~Floor()
 {
+	delete m_allSpriteFloorBackground;
+	delete m_allSpriteFloorWall;
 }
 
 void Floor::addLine(std::vector<unsigned char> line)
 {
     m_background.push_back(line);
+}
+
+std::vector<std::vector<unsigned char> > * Floor::getMap()
+{
+	return &m_background;
+}
+
+
+std::vector<sf::Sprite *> * Floor::getAllSpriteFloorWall(){
+	return m_allSpriteFloorWall;
+}
+
+
+std::vector<sf::Sprite *> * Floor::getAllSpriteFloorBackground(){
+	return m_allSpriteFloorBackground;
 }
 
 sf::Vector2u Floor::offset(unsigned int i, unsigned int j) const
@@ -127,27 +147,48 @@ sf::Vector2u Floor::offset(unsigned int i, unsigned int j) const
     return sf::Vector2u(offsetX, offsetY);
 }
 
+
+void Floor::update(){
+
+	for (unsigned int i = 0; i < m_background.size(); ++i)
+	{
+		for (unsigned int j = 0; j < m_background[i].size(); ++j)
+		{
+			sf::Sprite sprite;
+			sprite.setTexture(*m_textureBuilding);
+			int offsetX(0), offsetY(0);
+			if (m_background[i][j] == '1')
+			{
+				sf::Vector2u ofst = offset(i, j);
+				offsetX = ofst.x;
+				offsetY = ofst.y;
+			}
+			else if (m_background[i][j] == '6')
+			{
+				offsetX = 0;
+				offsetY = 4;
+			}
+			sprite.setTextureRect(sf::IntRect(32 * offsetX, 32 * offsetY, 32, 32));
+			sprite.setPosition(j * 32, i * 32);
+			
+			if (m_background[i][j] == '1')
+				m_allSpriteFloorWall->push_back(new sf::Sprite(sprite));
+			if (m_background[i][j] == '6')
+				m_allSpriteFloorBackground->push_back(new sf::Sprite(sprite));
+		}
+	}
+}
+
 void Floor::draw(sf::RenderWindow * window) const
 {
-    for(unsigned int i = 0; i < m_background.size(); ++i)
-        for(unsigned int j = 0; j < m_background[i].size(); ++j)
-        {
-            sf::Sprite sprite;
-            sprite.setTexture(*m_textureBuilding);
-            int offsetX(0), offsetY(0);
-            if(m_background[i][j] == '1')
-            {
-                sf::Vector2u ofst = offset(i,j);
-                offsetX = ofst.x;
-                offsetY = ofst.y;
-            }
-            else if(m_background[i][j] == '6')
-            {
-                offsetX = 0;
-                offsetY = 4;
-            }
-            sprite.setTextureRect(sf::IntRect(32*offsetX, 32*offsetY, 32, 32));
-            sprite.setPosition(j*32, i*32);
-            window->draw(sprite);
-        }
+	for (int i = 0; i < m_allSpriteFloorWall->size(); ++i){
+		window->draw(*(m_allSpriteFloorWall->at(i)));
+	}
+
+	for (int i = 0; i < m_allSpriteFloorBackground->size(); ++i){
+		window->draw(*(m_allSpriteFloorBackground->at(i)));
+	}
+
 }
+
+

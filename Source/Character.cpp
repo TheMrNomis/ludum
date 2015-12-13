@@ -16,7 +16,10 @@ Character::Character():
 }
 
 Character::~Character()
-{}
+{
+	delete m_spriteCharater;
+	delete m_textureCharacter;
+}
 
 void Character::setAngle(int alpha)
 {
@@ -41,6 +44,8 @@ sf::Vector2f Character::getPosition()
 void Character::setPosition(sf::Vector2f position)
 {
 	m_position = position;
+	m_spriteCharater->setPosition(m_position);
+	m_moving = false;
 }
 
 void Character::jump()
@@ -54,6 +59,13 @@ bool Character::isMoving()
 	return m_moving;
 }
 
+
+sf::Sprite * Character::getSprite() const
+{
+	return m_spriteCharater;
+}
+
+
 void Character::draw(sf::RenderWindow *window) const
 {
 	window->draw(*m_spriteCharater);
@@ -63,17 +75,19 @@ void Character::draw(sf::RenderWindow *window) const
 
 void Character::update()
 {
+
+
 	//Animations
 	if(m_currentAnimation == StateAnimation::Left)
 	{
-		m_spriteCharater->setTextureRect(sf::IntRect(32, 0, 32, 32));
+		m_spriteCharater->setTextureRect(sf::IntRect(0, 0, 32, 32));
 		m_currentAnimation = StateAnimation::Midle;
 	}
 
 	else if(m_currentAnimation == StateAnimation::Midle)
 	{
-		m_spriteCharater->setTextureRect(sf::IntRect(32, 32, 32, 32));
-		m_currentAnimation = StateAnimation::Midle;
+		m_spriteCharater->setTextureRect(sf::IntRect(32, 0, 32, 32));
+		m_currentAnimation = StateAnimation::Right;
 	}
 	
 	else if(m_currentAnimation == StateAnimation::Right)
@@ -81,4 +95,12 @@ void Character::update()
 		m_spriteCharater->setTextureRect(sf::IntRect(32, 64, 32, 32));
 		m_currentAnimation = StateAnimation::Left;
 	}
+	else
+	{
+		m_spriteCharater->setTextureRect(sf::IntRect(0, 0, 32, 32));
+		m_currentAnimation = StateAnimation::Right;
+	}
+
+
+
 }

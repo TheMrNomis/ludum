@@ -13,9 +13,9 @@ TextureLoader::TextureLoader(std::string const & url) :
 
 TextureLoader::~TextureLoader()
 {
-	delete(m_floorTexture);
-	delete(m_objectsTexture);
-	delete(m_characterTexture);
+	delete m_floorTexture;
+	delete m_objectsTexture;
+	delete m_characterTexture;
 }
 
 sf::Texture * TextureLoader::getFloorTexture() const 

@@ -1,25 +1,30 @@
 #pragma once
-#include "INDrawable.h"
 #include <SFML/Graphics.hpp>
+#include <fstream>
+#include <iterator>   
+#include "INDrawable.h"
+#include "INUpdatable.h"
+#include <iostream>
 #include "Character.h"
 #include "Floor.h"
-#include <fstream>
+#include "Wall.h"
 
-class Building : public INDrawable
+class Building : public INDrawable,public INUpdatable
 {
 	private:
 		
 		unsigned int m_largeur;
 		unsigned int m_longueur;
-
-		std::vector<Floor *> m_floors;
-		const unsigned int m_currentFloor;
-
-		const TextureLoader * m_textureLoader;
-		
 		const unsigned int m_maxBurnedDamage;
 		const unsigned int m_currentBurnedDamage;
 
+		const TextureLoader * m_textureLoader;
+
+		std::vector<Floor *> m_floors;
+		std::vector<Wall *> m_walls;
+		const unsigned int m_currentFloor;
+
+		
 		
 
 
@@ -39,14 +44,25 @@ class Building : public INDrawable
          	*/
 		virtual ~Building();
 
+
+		void initWalls(std::vector<std::vector<unsigned char> > map);
+		std::vector<Wall *> * getWalls();
+
+
+		std::vector<Floor * > getFloors();
+
+		unsigned int getCurrentFloor();
+
+		bool checkCollision(unsigned int idFloor, sf::Sprite & sprite);
+
+
+		virtual void update();
+
 		/**
 		*@brief show the building
 		*
 		*@param window: window whitch containt the building
 		*/	
-		void setLongueurBuilding(unsigned int longueur);
-		void setLargeurBuilding(unsigned int largeur);
-
 		virtual void draw(sf::RenderWindow *window) const ;
 
 		/**

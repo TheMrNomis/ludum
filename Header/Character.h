@@ -73,6 +73,11 @@ class Character : public INDrawable, public INUpdatable
 		sf::Vector2f getPosition();
 
 		/**
+		* @brief Get the srpite of the character
+		*
+		*/
+		sf::Sprite  * getSprite() const;
+		/**
 		* @brief Set the position of the character
 		*
 		* @param position:
