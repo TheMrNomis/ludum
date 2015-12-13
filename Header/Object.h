@@ -14,10 +14,9 @@ class Object : public INDrawable, public INUpdatable
         double m_currentFlameIntensity;
         unsigned int m_currentBurnedDamage;
 
-		sf::Sprite * m_sprite;
 			
 	sf::Texture const * m_texture;
-
+	sf::Clock m_clock;
 	sf::Time m_time;
 
     public:
@@ -26,10 +25,8 @@ class Object : public INDrawable, public INUpdatable
 		
 	virtual void update(sf::Clock const & clk);
 	virtual void draw(sf::RenderWindow * window) const;
-    virtual void ignite();
-    virtual void stopFire();
-
-	sf::Sprite * getSprite() const;
+   	virtual void ignite();
+   	virtual void stopFire();
 
 	int getWidth() const;
 	int getHeight() const;

@@ -7,6 +7,13 @@
 
 class Ray
 {
+    private:
+        sf::Vector2f m_origin;
+        sf::Vector2f m_direction;
+
+        bool m_intersectionFound;
+        float m_minT;
+
     public:
         /**
          * @brief constuctor for Ray
@@ -38,6 +45,7 @@ class Ray
          */
         sf::Vector2f intersection() const;
 
+		float distanceToIntersection() const;
         /**
          * @return the origin of the ray
          */
@@ -77,10 +85,4 @@ class Ray
          */
         bool intersectSquare(sf::Vector2f pointMin, sf::Vector2f pointMax, bool saveIntersection = true);
 
-    private:
-        sf::Vector2f m_origin;
-        sf::Vector2f m_direction;
-
-        bool m_intersectionFound;
-        float m_minT;
 };

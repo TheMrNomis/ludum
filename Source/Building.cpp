@@ -24,13 +24,12 @@ unsigned int Building::getCurrentFloor()
 	return m_currentFloor;
 }
 
-bool Building::checkCollisionWall(unsigned int idFloor,sf::Sprite & sprite)
+bool Building::checkCollisions(Ray & rayIntersection)
 {
-    //TODO
-	return false;
+	return m_floors[m_currentFloor]->wallCollision(rayIntersection);
 }
 
-//oublie pas la taillle de la ligne !!!!!!
+
 void Building::loadToTileSet(std::string const &path)
 {
     std::ifstream levelFile(path, std::ios_base::in);

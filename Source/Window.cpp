@@ -30,7 +30,6 @@ Window::~Window()
 
 int Window::run()
 {
-
 	//update state of the system
 	sf::Clock clk;
     while(m_currentStatus != GAME_STOPPED)
@@ -40,8 +39,9 @@ int Window::run()
         while(m_window->pollEvent(event))
             this->react(event);
 
-		if (clk.getElapsedTime().asMilliseconds() > 70){
-
+		if(clk.getElapsedTime().asMilliseconds() > 70)
+		{
+			this->update(clk);
 
         this->update(clk);
 
@@ -52,6 +52,7 @@ int Window::run()
 		clk.restart();
 		}
     }
+
     m_window->close();
 
     return EXIT_SUCCESS;

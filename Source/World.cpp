@@ -26,34 +26,45 @@ void World::draw(sf::RenderWindow *window) const
 }
 
 
-void World::managerDeplacement(Character * character)
+void World::moveCharacter(Character * character)
 {
-	sf::Sprite * tmp = new sf::Sprite(*character->getSprite());
-	sf::Vector2f nextFramePosition = m_character->nextFramePosition();
-	tmp->setPosition(nextFramePosition);
+	Ray intersectionRay(character->getPosition(),character->getDirection());
 
 	//Deplacement
-	if(character->isMoving() && !m_building.checkCollisionWall(m_building.getCurrentFloor(), *(tmp)))
+	if(character->isMoving())
 	{
-		//std::cout << "/!\\ Pas de Collisions /!\\" << std::endl;
-		m_character->setStatusCollision(false);
-		m_character->setPosition(nextFramePosition);
-	}
+		if(!m_building.checkCollisions(intersectionRay))
+		{
+			std::cout << "/!\\ Pas de Collisions /!\\" << std::endl;
+			m_character->setPosition(character->nextFramePosition());
+			m_character->setStatusCollision(false);
+		}
 
-	else
-	{
-		//std::cout << "/!\\ Collision /!\\" << std::endl;
-		m_character->setStatusCollision(true);
-		m_character->setMoving(false);
+		else
+		{
+			std::cout << "distance to intersection: " << intersectionRay.distanceToIntersection() << std::endl;
+
+			if(intersectionRay.distanceToIntersection() > character->getVelocity())
+			{
+				std::cout << "/!\\ Pas de Collisions /!\\" << std::endl;
+				m_character->setPosition(character->nextFramePosition());
+			}
+
+			else
+			{
+				std::cout << "/!\\ Collision /!\\" << std::endl;
+				m_character->setMoving(false);
+				m_character->setStatusCollision(true);
+			}
+		}
 	}
-		
-	delete tmp;
 }
 
 void World::update(sf::Clock const & clk)
 {
 	m_building.update(clk);
 	m_character->update(clk);
-	managerDeplacement(m_character);
+	moveCharacter(m_character);
 	
+
 }

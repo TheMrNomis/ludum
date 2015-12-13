@@ -14,6 +14,48 @@ void Floor::addLine(std::vector<unsigned char> line)
     m_background.push_back(line);
 }
 
+bool Floor::wallCollision(Ray & rayIntersection)
+{
+	for(unsigned int i=0; i<m_background.size(); ++i)
+		for(unsigned int j=0; j<m_background[i].size(); ++j)
+			rayIntersection.intersectSquare(sf::Vector2f(i*32,j*32),sf::Vector2f(i*32+31,j*32+31));
+
+	return rayIntersection.validIntersectionFound();
+}
+
+void Floor::update(sf::Clock const & clk)
+{}
+
+void Floor::draw(sf::RenderWindow * window) const
+{
+    //sf::Clock tic;
+	for (unsigned int i = 0; i < m_background.size(); ++i)
+	{
+		for (unsigned int j = 0; j < m_background[i].size(); ++j)
+		{
+			sf::Sprite sprite;
+			sprite.setTexture(*m_textureBuilding);
+			int offsetX(0), offsetY(0);
+			if (m_background[i][j] == '1')
+			{
+				sf::Vector2u ofst = offset(i, j);
+				offsetX = ofst.x;
+				offsetY = ofst.y;
+			}
+			else if (m_background[i][j] == '6')
+			{
+				offsetX = 0;
+				offsetY = 4;
+			}
+			sprite.setTextureRect(sf::IntRect(32 * offsetX, 32 * offsetY, 32, 32));
+			sprite.setPosition(j * 32, i * 32);
+
+			window->draw(sprite);
+		}
+	}
+    //std::cout << "time: " << tic.getElapsedTime().asMilliseconds() << "ms" << std::endl;
+}
+
 sf::Vector2u Floor::offset(unsigned int i, unsigned int j) const
 {
     unsigned char v = m_background[i][j];
@@ -124,38 +166,4 @@ sf::Vector2u Floor::offset(unsigned int i, unsigned int j) const
 
     return sf::Vector2u(offsetX, offsetY);
 }
-
-void Floor::update(sf::Clock const & clk)
-{}
-
-void Floor::draw(sf::RenderWindow * window) const
-{
-    sf::Clock tic;
-	for (unsigned int i = 0; i < m_background.size(); ++i)
-	{
-		for (unsigned int j = 0; j < m_background[i].size(); ++j)
-		{
-			sf::Sprite sprite;
-			sprite.setTexture(*m_textureBuilding);
-			int offsetX(0), offsetY(0);
-			if (m_background[i][j] == '1')
-			{
-				sf::Vector2u ofst = offset(i, j);
-				offsetX = ofst.x;
-				offsetY = ofst.y;
-			}
-			else if (m_background[i][j] == '6')
-			{
-				offsetX = 0;
-				offsetY = 4;
-			}
-			sprite.setTextureRect(sf::IntRect(32 * offsetX, 32 * offsetY, 32, 32));
-			sprite.setPosition(j * 32, i * 32);
-
-			window->draw(sprite);
-		}
-	}
-    std::cout << "time: " << tic.getElapsedTime().asMilliseconds() << "ms" << std::endl;
-}
-
 
