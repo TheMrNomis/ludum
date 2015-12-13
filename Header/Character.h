@@ -12,9 +12,6 @@
 class Character : public INDrawable, public INUpdatable
 {
 	enum StateAnimation{
-		EyeCloseLeft,
-		EyeCloseMidle,
-		EyeCloseRight,
 		Left,
 		Midle,
 		Right
@@ -22,15 +19,20 @@ class Character : public INDrawable, public INUpdatable
 
 
 	private: 
-		sf::Sprite * m_spriteCharater;
-		sf::Sprite * m_arrow;
-		const TextureLoader * m_textures;
+		//sf::Sprite * m_spriteCharater;
+		//sf::Sprite * m_arrow;
+		//const TextureLoader * m_textures;
+        const sf::Texture * m_texture;
+
+        sf::Vector2f m_position;
+		unsigned int m_currentAnimation;
+
+        sf::Time m_lastUpdateTime;
 
 		const float m_velocity;
 		bool m_jumping;
 		bool m_statusCollision;
 
-		StateAnimation m_currentAnimation;
 
 		double m_angleJump;
 		Ray	m_intersectionRay;

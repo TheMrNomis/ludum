@@ -16,7 +16,7 @@ Window::Window():
     m_timeRightButtonPressed(),
     m_bothButtonsEnabled(false)
 {
-    m_buttonDeadZoneDelay = sf::milliseconds(50);
+    m_buttonDeadZoneDelay = sf::milliseconds(20);
 
     sf::View view(sf::FloatRect(0, 0, m_window->getSize().x , m_window->getSize().y));
     m_window->setView(view);
@@ -177,6 +177,8 @@ void Window::react(sf::Event const& event)
                 m_rightButtonPushed = false;
                 m_bothButtonsEnabled = false;
             }
+            else
+                leftButton();
             m_leftButtonPushed = false;
         }
         else if(event.key.code == sf::Keyboard::Right)
@@ -186,6 +188,8 @@ void Window::react(sf::Event const& event)
                 m_leftButtonPushed = false;
                 m_bothButtonsEnabled = false;
             }
+            else
+                rightButton();
             m_rightButtonPushed = false;
         }
     }
@@ -230,10 +234,10 @@ void Window::leftButton() const
 
 
 	if(!m_currentWorld->getCharacter()->isJumping())
-		m_currentWorld->getCharacter()->setAngle(10);
+		m_currentWorld->getCharacter()->setAngle(-10);
 	//std::cout << "Angle: " << m_currentWorld->getCharacter()-> << std::endl;
 
-	m_currentWorld->getCharacter()->getArrowSprite()->setRotation(m_currentWorld->getCharacter()->getAngle()-45);
+	//m_currentWorld->getCharacter()->getArrowSprite()->setRotation(m_currentWorld->getCharacter()->getAngle()-45);
 
 }
 
@@ -246,10 +250,9 @@ void Window::rightButton() const
 	std::cout << "distance to intersection: " << intersectionRay.distanceToIntersection() << std::endl;
 
 
-	if(!m_currentWorld->getCharacter()->isJumping())
-		m_currentWorld->getCharacter()->setAngle(-10);
+    m_currentWorld->getCharacter()->setAngle(10);
 
-	m_currentWorld->getCharacter()->getArrowSprite()->setRotation(m_currentWorld->getCharacter()->getAngle()-45);
+	//m_currentWorld->getCharacter()->getArrowSprite()->setRotation(m_currentWorld->getCharacter()->getAngle()-45);
 }
 
 void Window::bothButtons() const

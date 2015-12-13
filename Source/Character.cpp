@@ -4,187 +4,179 @@
 
 
 Character::Character(TextureLoader * textures) :
-	m_spriteCharater(new sf::Sprite()),
-	m_arrow(new sf::Sprite()),
-	m_textures(textures),
+    //m_spriteCharater(new sf::Sprite()),
+    //m_arrow(new sf::Sprite()),
+    //m_textures(textures),
+    m_texture(textures->getCharacterTexture()),
 
-	m_velocity(20),
-	m_jumping(false),
-	m_statusCollision(false),
-	m_currentAnimation(StateAnimation::Right),
-	
-	m_angleJump(90),
-	m_intersectionRay(sf::Vector2f(0, 0), sf::Vector2f(0, 0))
+    m_position(200, 200),
+    m_currentAnimation(0),
+
+    m_velocity(20),
+    m_jumping(false),
+    m_statusCollision(false),
+
+    m_angleJump(90),
+    m_intersectionRay(sf::Vector2f(0, 0), sf::Vector2f(0, 0))
 {
-	m_spriteCharater->setTexture(*m_textures->getCharacterTexture());
-	m_spriteCharater->setPosition(sf::Vector2f(200, 200));
-
-	m_arrow->setTexture(*m_textures->getCharacterTexture());
-	m_arrow->setTextureRect(sf::IntRect(0 * TEXTURE_DIMENSION, 0 * TEXTURE_DIMENSION, TEXTURE_DIMENSION, TEXTURE_DIMENSION));
-	m_arrow->setPosition(getPosition() + sf::Vector2f(16, 16));
-	m_arrow->setRotation(m_angleJump - 45);
 }
 
 Character::~Character()
 {
-	delete m_spriteCharater;
-	delete m_arrow;
 }
 
 void Character::setAngle(int alpha)
 {
-	m_angleJump += alpha;
+    if(!m_jumping)
+    {
+        m_angleJump += alpha;
 
-	if (m_angleJump > 360)
-		m_angleJump = 0;
+        if (m_angleJump > 360)
+            m_angleJump = 0;
 
-	else if (m_angleJump < 0)
-		m_angleJump = 360;
-
+        else if (m_angleJump < 0)
+            m_angleJump = 360;
+    }
 
 }
 double Character::getAngle() const
 {
-	return m_angleJump;
+    return m_angleJump;
 }
-
-
-
 
 float Character::getVelocity()
 {
-	return m_velocity;
+    return m_velocity;
 }
 
 sf::Vector2f Character::getDirection()
 {
-	double cosT = cos(m_angleJump * M_PI / 180);
-	double sinT = sin(m_angleJump * M_PI / 180);
+    double cosT = cos(m_angleJump * M_PI / 180);
+    double sinT = sin(m_angleJump * M_PI / 180);
 
-	return sf::Vector2f(cosT, sinT);
+    return sf::Vector2f(cosT, sinT);
 }
 
 sf::Vector2f Character::getPosition()
 {
-	return m_spriteCharater->getPosition();
+    return m_position;
 }
 
 void Character::setPosition(sf::Vector2f position)
 {
-	m_spriteCharater->setPosition(position);
+    m_position = position;
 }
 
 void Character::jump()
 {
-	m_arrow->setTextureRect(sf::IntRect(0 * TEXTURE_DIMENSION, 1 * TEXTURE_DIMENSION, TEXTURE_DIMENSION, TEXTURE_DIMENSION));
-	m_jumping = true;
+    m_jumping = true;
 
-		m_intersectionRay = Ray(getPosition(), getDirection());
+    //m_intersectionRay = Ray(getPosition(), getDirection());
 
-	//world->getBuilding()->checkCollisions(m_intersectionRay);
-	{
-		std::cout << "/!\\ Pas de Collisions /!\\" << std::endl;
-		setPosition(nextFramePosition());
-		setStatusCollision(false);
-	}
+    //world->getBuilding()->checkCollisions(m_intersectionRay);
+    {
+        std::cout << "/!\\ Pas de Collisions /!\\" << std::endl;
+        setPosition(nextFramePosition());
+        setStatusCollision(false);
+    }
 }
 
-bool Character::getStatusCollision(){
-	return m_statusCollision;
+bool Character::getStatusCollision()
+{
+    return m_statusCollision;
 }
 
-void Character::setStatusCollision(bool isInCollision){
-	m_statusCollision = isInCollision;
+void Character::setStatusCollision(bool isInCollision)
+{
+    m_statusCollision = isInCollision;
 }
 
 bool Character::isJumping()
 {
-	return m_jumping;
+    return m_jumping;
 }
 
 void Character::setMoving(bool isMoving){
 
-	if (isMoving == false)
-	{
-		m_arrow->setPosition(getPosition() + sf::Vector2f(16, 16));
-		m_arrow->setTextureRect(sf::IntRect(0 * TEXTURE_DIMENSION, 0 * TEXTURE_DIMENSION, TEXTURE_DIMENSION, TEXTURE_DIMENSION));
-	}
-	m_jumping = isMoving;
-}
-
-
-sf::Sprite * Character::getSprite() const
-{
-	return m_spriteCharater;
+    if (isMoving == false)
+    {
+    }
+    m_jumping = isMoving;
 }
 
 sf::Vector2f Character::nextFramePosition()
 {
-	return getPosition() + getDirection()*getVelocity();
+    return getPosition() + getDirection()*getVelocity();
 }
-
-sf::Sprite  * Character::getArrowSprite() const{
-	return m_arrow;
-}
-
 
 void Character::draw(sf::RenderWindow *window) const
 {
-	window->draw(*m_spriteCharater);
+    sf::Sprite sprite;
+    sprite.setTexture(*m_texture);
+    sprite.setTextureRect(sf::IntRect(32*(m_currentAnimation+1), 0, 32, 32));
+    sprite.setPosition(m_position);
+    window->draw(sprite);
+    
 
-
-
-	//triangle.move(sf::Vector2f(10,0));
-	//m_arrow->rotate(m_angleJump);
-	window->draw(*m_arrow);
+    if(!m_jumping)
+    {
+        sf::Sprite spriteArrow;
+        spriteArrow.setTexture(*m_texture);
+        spriteArrow.setTextureRect(sf::IntRect(0,0,32,32));
+        spriteArrow.setPosition(m_position.x, m_position.y);
+        spriteArrow.move(16,16);
+        spriteArrow.setOrigin(-9,15);
+        spriteArrow.setRotation(m_angleJump);
+        window->draw(spriteArrow);
+    }
 }
 
 
 void Character::update(sf::Clock const & clk)
 {
-	//Deplacement
-	if(isJumping())
-	{
-		std::cout << "distance to intersection: " << m_intersectionRay.distanceToIntersection() << std::endl;
+    //Deplacement
+    if(isJumping())
+    {
+        std::cout << "distance to intersection: " << m_intersectionRay.distanceToIntersection() << std::endl;
 
-		if (m_intersectionRay.distanceToIntersection() <= 1)
-		{
-			std::cout << "/!\\ Collision /!\\" << std::endl;
-			setMoving(false);
-			setStatusCollision(true);
-		}
+        if (m_intersectionRay.distanceToIntersection() <= 1)
+        {
+            std::cout << "/!\\ Collision /!\\" << std::endl;
+            setMoving(false);
+            setStatusCollision(true);
+        }
 
-		else
-		{
-			std::cout << "/!\\ Pas de Collisions /!\\" << std::endl;
-			setPosition(nextFramePosition());
-		}
-	}
+        else
+        {
+            std::cout << "/!\\ Pas de Collisions /!\\" << std::endl;
+            setPosition(nextFramePosition());
+        }
+    }
 
-	//Animations
-	if (/*rand()%10 */ 0 == -1)
-	{
-		m_spriteCharater->setTextureRect(sf::IntRect(TEXTURE_DIMENSION * 3, TEXTURE_DIMENSION * 0, TEXTURE_DIMENSION, TEXTURE_DIMENSION));
-	}
+    //Animations
+    if (/*rand()%10 */ 0 == -1)
+    {
+        //m_spriteCharater->setTextureRect(sf::IntRect(TEXTURE_DIMENSION * 3, TEXTURE_DIMENSION * 0, TEXTURE_DIMENSION, TEXTURE_DIMENSION));
+    }
 
-	else
-	{
-		if (m_currentAnimation == StateAnimation::Left)
-		{
-			m_spriteCharater->setTextureRect(sf::IntRect(TEXTURE_DIMENSION, TEXTURE_DIMENSION, TEXTURE_DIMENSION, TEXTURE_DIMENSION));
-			m_currentAnimation = StateAnimation::Midle;
-		}
+    else
+    {
+        //if (m_currentAnimation == StateAnimation::Left)
+        //{
+        //    m_spriteCharater->setTextureRect(sf::IntRect(TEXTURE_DIMENSION, TEXTURE_DIMENSION, TEXTURE_DIMENSION, TEXTURE_DIMENSION));
+        //    m_currentAnimation = StateAnimation::Midle;
+        //}
 
-		else if (m_currentAnimation == StateAnimation::Midle)
-		{
-			m_spriteCharater->setTextureRect(sf::IntRect(TEXTURE_DIMENSION * 2, TEXTURE_DIMENSION, TEXTURE_DIMENSION, TEXTURE_DIMENSION));
-			m_currentAnimation = StateAnimation::Right;
-		}
+        //else if (m_currentAnimation == StateAnimation::Midle)
+        //{
+        //    m_spriteCharater->setTextureRect(sf::IntRect(TEXTURE_DIMENSION * 2, TEXTURE_DIMENSION, TEXTURE_DIMENSION, TEXTURE_DIMENSION));
+        //    m_currentAnimation = StateAnimation::Right;
+        //}
 
-		else if (m_currentAnimation == StateAnimation::Right)
-		{
-			m_spriteCharater->setTextureRect(sf::IntRect(TEXTURE_DIMENSION * 3, TEXTURE_DIMENSION, TEXTURE_DIMENSION, TEXTURE_DIMENSION));
-			m_currentAnimation = StateAnimation::Midle;
-		}
-	}
+        //else if (m_currentAnimation == StateAnimation::Right)
+        //{
+        //    m_spriteCharater->setTextureRect(sf::IntRect(TEXTURE_DIMENSION * 3, TEXTURE_DIMENSION, TEXTURE_DIMENSION, TEXTURE_DIMENSION));
+        //    m_currentAnimation = StateAnimation::Midle;
+        //}
+    }
 }
