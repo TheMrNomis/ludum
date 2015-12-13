@@ -7,6 +7,11 @@ FireDetector::FireDetector(double radius, Room * parentRoom):
 {
 }
 
+FireDetector::~FireDetector()
+{
+    //TODO
+}
+
 void FireDetector::draw(sf::RenderWindow * window) const
 {
     //TODO
