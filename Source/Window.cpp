@@ -190,7 +190,7 @@ void Window::update()
         }
     }
 
-    //TODO: update world and others
+    m_currentWorld->update();
 }
 
 void Window::leftButton() const
