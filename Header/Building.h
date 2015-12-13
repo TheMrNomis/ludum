@@ -43,7 +43,7 @@ class Building : public INDrawable, public INUpdatable
          	*/
 		virtual ~Building();
 
-		std::vector<Floor * > getFloors();
+		std::vector<Floor * > * getFloors();
 
 		unsigned int getCurrentFloor();
 
@@ -53,7 +53,13 @@ class Building : public INDrawable, public INUpdatable
 		*@param idFloor : the floor which we want to check if there are any collision
 		*@param sprite : the sprite which collide or not any wall in the floor
 		*/
-		bool checkCollisionWall(unsigned int idFloor, sf::Sprite & sprite);
+		bool checkCollisions(Ray & rayIntersection);
+		/**
+		*@brief charge the level from files
+		*
+		*@param window: window whitch containt the building
+		*/
+		void loadToTileSet(std::string const & path);
 
 		/**
 		*@brief show the building
@@ -61,13 +67,6 @@ class Building : public INDrawable, public INUpdatable
 		*@param window: window whitch containt the building
 		*/	
 		virtual void draw(sf::RenderWindow *window) const ;
-
-		/**
-		*@brief charge the level from files
-		*
-		*@param window: window whitch containt the building
-		*/
-		void loadToTileSet(std::string const & path);
 
         /**
          * @brief updates this

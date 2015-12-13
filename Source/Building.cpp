@@ -10,9 +10,7 @@ Building::Building(TextureLoader const * textureLoader, unsigned int maxBurnedDa
 	m_textureLoader(textureLoader),
 	m_floors(std::vector<Floor *>()),
 	m_currentFloor(0)
-{
-	
-}
+{}
 
 Building::~Building()
 {
@@ -20,9 +18,19 @@ Building::~Building()
         delete *it;
 }
 
-void Building::draw(sf::RenderWindow *window) const
+std::vector<Floor * > * Building::getFloors()
 {
-	m_floors[m_currentFloor]->draw(window);
+	return &m_floors;
+}
+
+unsigned int Building::getCurrentFloor()
+{
+	return m_currentFloor;
+}
+
+bool Building::checkCollisions(Ray & rayIntersection)
+{
+	return m_floors[m_currentFloor]->wallCollision(rayIntersection);
 }
 
 void Building::loadToTileSet(std::string const &path)
@@ -115,28 +123,13 @@ void Building::loadToTileSet(std::string const &path)
     m_floors.push_back(currentFloor);
 }
 
-std::vector<Floor * > Building::getFloors()
+void Building::draw(sf::RenderWindow *window) const
 {
-    return m_floors;
+	m_floors[m_currentFloor]->draw(window);
 }
-
-
 
 void Building::update()
 {
     for(auto it = m_floors.begin(); it != m_floors.end(); ++it)
         (*it)->update();
-}
-
-
-bool Building::checkCollisionWall(unsigned int idFloor,sf::Sprite & sprite)
-{
-    //TODO
-    return false;
-}
-
-
-unsigned int Building::getCurrentFloor()
-{
-    return m_currentFloor;
 }

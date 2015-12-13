@@ -1,6 +1,6 @@
 #include "Object.h"
 
-Object::Object(double flameVelocity = 0.0, unsigned int maxBurnedDamage = 0, unsigned int width = 0, unsigned int height = 0, sf::Texture const * texture = NULL):
+Object::Object(double flameVelocity = 0.0, unsigned int maxBurnedDamage = 0, unsigned int width = 0, unsigned int height = 0, sf::Texture const * texture = NULL) :
 	m_width(width),
 	m_height(height),
 	
@@ -8,31 +8,38 @@ Object::Object(double flameVelocity = 0.0, unsigned int maxBurnedDamage = 0, uns
 	m_maxBurnedDamage(maxBurnedDamage),
 	m_currentFlameIntensity(0),
 	m_currentBurnedDamage(0),
-
 	m_texture(texture),
-	m_sprite(new sf::Sprite())
-{
-	m_sprite->setTexture(*m_texture);
+	m_clock()
+	
+{	
+	m_time = sf::seconds(0.0f);
+	m_clock.restart();	
 }
 
-Object::~Object(){
-	delete m_sprite;
+Object::~Object()
+{
+}
+
+void Object::update()
+{
+	m_time = m_clock.getElapsedTime();
 }
 
 void Object::draw(sf::RenderWindow * window) const
 {
-	window->draw(*getSprite());
+	sf::Sprite sprite;
+        sprite.setTexture(*m_texture);
+	window->draw(sprite);
 }
 
 void Object::ignite()
 {
-	//1- gerer le changement d'image de pas en feu à objet en feu
-
-	//2- gerer combien de degat prend l'objet seon le temps passser entre deux appel de fonction update   
+	
 }
 
 void Object::stopFire()
 {
+	m_currentFlameIntensity = 0;
 }
 
 int Object::getWidth() const
@@ -43,17 +50,4 @@ int Object::getWidth() const
 int Object::getHeight() const
 {
 	return m_height;
-}
-
-sf::Sprite * Object::getSprite() const{
-	return m_sprite;
-}
-
-
-void Object::update()
-{
-	/*
-	if (m_flameVelocity > 0)
-		m_currentBurnedDamage *= m_currentFlameIntensity;
-	*/
 }

@@ -6,6 +6,7 @@
 #include "Building.h"
 #include "Floor.h"
 #include "Character.h"
+#include "Ray.h"
 
 class World : public INDrawable, public INUpdatable
 {
@@ -20,7 +21,7 @@ class World : public INDrawable, public INUpdatable
 
 		Character * getCharacter() const;
 
-		void managerDeplacement(Character * caracter);
+		void moveCharacter(Character * caracter);
 
 		virtual void draw(sf::RenderWindow *window) const;
 
