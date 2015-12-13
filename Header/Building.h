@@ -69,6 +69,6 @@ class Building : public INDrawable, public INUpdatable
         /**
          * @brief updates this
          */
-        virtual void update();
+        virtual void update(sf::Clock const & clk);
 };
 

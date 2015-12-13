@@ -142,7 +142,7 @@ class Character : public INDrawable, public INUpdatable
 		*
 		*
 		*/
-		virtual void update();
+		virtual void update(sf::Clock const & clk);
 
 
 };

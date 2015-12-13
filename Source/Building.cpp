@@ -82,10 +82,10 @@ void Building::draw(sf::RenderWindow *window) const
 	m_floors[m_currentFloor]->draw(window);
 }
 
-void Building::update()
+void Building::update(sf::Clock const & clk)
 {
     for(auto it = m_floors.begin(); it != m_floors.end(); ++it)
-        (*it)->update();
+        (*it)->update(clk);
 }
 
 

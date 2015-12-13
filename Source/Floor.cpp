@@ -125,7 +125,7 @@ sf::Vector2u Floor::offset(unsigned int i, unsigned int j) const
     return sf::Vector2u(offsetX, offsetY);
 }
 
-void Floor::update()
+void Floor::update(sf::Clock const & clk)
 {}
 
 void Floor::draw(sf::RenderWindow * window) const

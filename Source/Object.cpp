@@ -50,7 +50,7 @@ sf::Sprite * Object::getSprite() const{
 }
 
 
-void Object::update()
+void Object::update(sf::Clock const & clk)
 {
 	/*
 	if (m_flameVelocity > 0)

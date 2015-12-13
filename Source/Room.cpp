@@ -29,7 +29,7 @@ void Room::draw(sf::RenderWindow * window) const{
 }
 
 
-void Room::update(){
+void Room::update(sf::Clock const & clk){
 
 	//si le fireDetector détecte le character -> extinguishFire()
 

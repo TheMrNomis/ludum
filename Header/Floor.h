@@ -21,7 +21,7 @@ class Floor : public INDrawable, public INUpdatable
 		void addLine(std::vector<unsigned char> line);
 		std::vector<std::vector<unsigned char> > * getMap();
 
-		virtual void update();
+		virtual void update(sf::Clock const & clk);
 		virtual void draw(sf::RenderWindow *window) const;
 };
 
