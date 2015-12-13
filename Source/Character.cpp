@@ -47,12 +47,15 @@ void Character::draw(sf::RenderWindow *window) const
 void Character::update(){
 	if (m_currentAnimation == StateAnimation::Left){
 		m_spriteCharater->setTextureRect(sf::IntRect(32, 0, 32, 32));
-		m_currentAnimation
+		m_currentAnimation = StateAnimation::Midle;
 	}
 	else if (m_currentAnimation == StateAnimation::Midle){
 		m_spriteCharater->setTextureRect(sf::IntRect(32, 32, 32, 32));
+		m_currentAnimation = StateAnimation::Midle;
 	}
 	else if (m_currentAnimation == StateAnimation::Right){
 		m_spriteCharater->setTextureRect(sf::IntRect(32, 64, 32, 32));
+		m_currentAnimation = StateAnimation::Left;
+
 	}
 }
