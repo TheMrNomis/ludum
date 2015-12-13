@@ -31,18 +31,32 @@ void World::moveCharacter(Character * character)
 	Ray intersectionRay(character->getPosition(),character->getDirection());
 
 	//Deplacement
-	if(character->isMoving() && !m_building.checkCollisions(intersectionRay))
+	if(character->isMoving())
 	{
-		//std::cout << "/!\\ Pas de Collisions /!\\" << std::endl;
-		m_character->setStatusCollision(false);
-		m_character->setPosition(character->nextFramePosition());
-	}
+		if(!m_building.checkCollisions(intersectionRay))
+		{
+			std::cout << "/!\\ Pas de Collisions /!\\" << std::endl;
+			m_character->setPosition(character->nextFramePosition());
+			m_character->setStatusCollision(false);
+		}
 
-	else
-	{
-		//std::cout << "/!\\ Collision /!\\" << std::endl;
-		m_character->setStatusCollision(true);
-		m_character->setMoving(false);
+		else
+		{
+			std::cout << "distance to intersection: " << intersectionRay.distanceToIntersection() << std::endl;
+
+			if(intersectionRay.distanceToIntersection() > character->getVelocity())
+			{
+				std::cout << "/!\\ Pas de Collisions /!\\" << std::endl;
+				m_character->setPosition(character->nextFramePosition());
+			}
+
+			else
+			{
+				std::cout << "/!\\ Collision /!\\" << std::endl;
+				m_character->setMoving(false);
+				m_character->setStatusCollision(true);
+			}
+		}
 	}
 }
 

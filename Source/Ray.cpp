@@ -22,6 +22,11 @@ sf::Vector2f Ray::intersection() const
     return m_origin + m_direction*m_minT;
 }
 
+float Ray::distanceToIntersection() const
+{
+	return m_minT;
+}
+
 sf::Vector2f Ray::getOrigin() const
 {
     return m_origin;
@@ -34,12 +39,15 @@ sf::Vector2f Ray::getDirection() const
 
 void Ray::setIntersection(float t)
 {
-    if(!m_intersectionFound)
-        m_minT = t;
-    else
-        m_minT = min(m_minT, t);
+	if(t >= 0)
+	{
+		if(!m_intersectionFound)
+			m_minT = t;
+		else
+			m_minT = min(m_minT, t);
 
-    m_intersectionFound = true;
+		m_intersectionFound = true;
+	}
 }
 
 bool Ray::intersectCircle(sf::Vector2f circleCenter, float radius, bool saveIntersection)
