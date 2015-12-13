@@ -228,7 +228,7 @@ void Window::leftButton() const
 	//std::cout << "SetAngle:" << m_currentWorld->getCharacter()-> << std::endl;
 
 	Ray intersectionRay(m_currentWorld->getCharacter()->getPosition(), m_currentWorld->getCharacter()->getDirection());
-	m_currentWorld->getBuilding()->checkCollisions(intersectionRay);
+	m_currentWorld->getBuilding()->checkCollisions(&intersectionRay);
 	std::cout << "distance to intersection: " << intersectionRay.distanceToIntersection() << std::endl;
 
 
@@ -246,7 +246,7 @@ void Window::rightButton() const
 	//std::cout << "Jump" << std::endl;
 	
 	Ray intersectionRay(m_currentWorld->getCharacter()->getPosition(), m_currentWorld->getCharacter()->getDirection());
-	m_currentWorld->getBuilding()->checkCollisions(intersectionRay);
+	m_currentWorld->getBuilding()->checkCollisions(&intersectionRay);
 	std::cout << "distance to intersection: " << intersectionRay.distanceToIntersection() << std::endl;
 
 
@@ -258,6 +258,17 @@ void Window::rightButton() const
 void Window::bothButtons() const
 {
 	std::cout << "Jump" << std::endl;
-	m_currentWorld->getCharacter()->jump();
+	Ray * intersectionRay = m_currentWorld->getCharacter()->jump();
+
+	m_currentWorld->getBuilding()->checkCollisions(intersectionRay);
+
+	//Récupère distance
+	//	//world->getBuilding()->checkCollisions(m_intersectionRay);
+	//{
+	//	std::cout << "/!\\ Pas de Collisions /!\\" << std::endl;
+	//	setPosition(nextFramePosition());
+	//	setStatusCollision(false);
+	//}
+
 }
 

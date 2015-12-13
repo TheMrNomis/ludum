@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <iostream>
-#include"Ray.h"
+#include "Ray.h"
 #include "INDrawable.h"
 #include "INUpdatable.h"
 #include "TextureLoader.h"
@@ -125,7 +125,7 @@ class Character : public INDrawable, public INUpdatable
 		* @brief Return the direction which facing the character
 		*
 		*/
-		void jump();
+		Ray * jump();
 
 		/**
 		* @brief Check if the caracter is moving

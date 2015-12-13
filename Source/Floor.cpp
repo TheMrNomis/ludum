@@ -23,15 +23,15 @@ void Floor::addRoom(Room * room)
     m_rooms.push_back(room);
 }
 
-bool Floor::wallCollision(Ray & rayIntersection)
+bool Floor::wallCollision(Ray * rayIntersection)
 {
-	for(unsigned int i=0; i<m_background.size(); ++i)
-		for(unsigned int j=0; j<m_background[i].size(); ++j)
-			rayIntersection.intersectSquare(sf::Vector2f(i*32,j*32),sf::Vector2f(i*32+31,j*32+31));
+	for (unsigned int i = 0; i < m_background.size(); ++i)
+		for (unsigned int j = 0; j < m_background[i].size(); ++j)
+			if (m_background[i][j] == '1')
+				rayIntersection->intersectSquare(sf::Vector2f(i * 32, j * 32), sf::Vector2f(i * 32 + 31, j * 32 + 31));
 
-	return rayIntersection.validIntersectionFound();
+	return rayIntersection->validIntersectionFound();
 }
-
 
 void Floor::update(sf::Clock const & clk)
 {}
@@ -46,6 +46,7 @@ void Floor::draw(sf::RenderWindow * window) const
 			sf::Sprite sprite;
 			sprite.setTexture(*m_textureBuilding);
 			int offsetX(0), offsetY(0);
+
 			if (m_background[i][j] == '1')
 			{
 				sf::Vector2u ofst = offset(i, j);

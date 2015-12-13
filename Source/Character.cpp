@@ -67,18 +67,13 @@ void Character::setPosition(sf::Vector2f position)
     m_position = position;
 }
 
-void Character::jump()
+Ray * Character::jump()
 {
     m_jumping = true;
 
-    //m_intersectionRay = Ray(getPosition(), getDirection());
+	m_intersectionRay = Ray(getPosition(), getDirection());
 
-    //world->getBuilding()->checkCollisions(m_intersectionRay);
-    {
-        std::cout << "/!\\ Pas de Collisions /!\\" << std::endl;
-        setPosition(nextFramePosition());
-        setStatusCollision(false);
-    }
+	return &m_intersectionRay;
 }
 
 bool Character::getStatusCollision()
@@ -151,32 +146,5 @@ void Character::update(sf::Clock const & clk)
             std::cout << "/!\\ Pas de Collisions /!\\" << std::endl;
             setPosition(nextFramePosition());
         }
-    }
-
-    //Animations
-    if (/*rand()%10 */ 0 == -1)
-    {
-        //m_spriteCharater->setTextureRect(sf::IntRect(TEXTURE_DIMENSION * 3, TEXTURE_DIMENSION * 0, TEXTURE_DIMENSION, TEXTURE_DIMENSION));
-    }
-
-    else
-    {
-        //if (m_currentAnimation == StateAnimation::Left)
-        //{
-        //    m_spriteCharater->setTextureRect(sf::IntRect(TEXTURE_DIMENSION, TEXTURE_DIMENSION, TEXTURE_DIMENSION, TEXTURE_DIMENSION));
-        //    m_currentAnimation = StateAnimation::Midle;
-        //}
-
-        //else if (m_currentAnimation == StateAnimation::Midle)
-        //{
-        //    m_spriteCharater->setTextureRect(sf::IntRect(TEXTURE_DIMENSION * 2, TEXTURE_DIMENSION, TEXTURE_DIMENSION, TEXTURE_DIMENSION));
-        //    m_currentAnimation = StateAnimation::Right;
-        //}
-
-        //else if (m_currentAnimation == StateAnimation::Right)
-        //{
-        //    m_spriteCharater->setTextureRect(sf::IntRect(TEXTURE_DIMENSION * 3, TEXTURE_DIMENSION, TEXTURE_DIMENSION, TEXTURE_DIMENSION));
-        //    m_currentAnimation = StateAnimation::Midle;
-        //}
     }
 }

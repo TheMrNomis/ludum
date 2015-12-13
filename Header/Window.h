@@ -29,6 +29,14 @@ class Window : public INEventHandler, public INUpdatable
 		int m_mouseOldX;
 		int m_mouseOldY;
 
+		bool m_leftButtonPushed;
+		sf::Time m_timeLeftButtonPressed;
+		bool m_rightButtonPushed;
+		sf::Time m_timeRightButtonPressed;
+		bool m_bothButtonsEnabled;
+		sf::Time m_buttonDeadZoneDelay; ///time max spent waiting for the second button to be pressed before doing the actual action of the button
+
+
 	public:
 		Window();
 		virtual ~Window();
@@ -57,18 +65,8 @@ class Window : public INEventHandler, public INUpdatable
 		 */
 		virtual void update(sf::Clock const & clk);
 
-private:
-    void leftButton() const;
-    void rightButton() const;
-    void bothButtons() const;
-
-
-
-
-    bool m_leftButtonPushed;
-    sf::Time m_timeLeftButtonPressed;
-    bool m_rightButtonPushed;
-    sf::Time m_timeRightButtonPressed;
-    bool m_bothButtonsEnabled;
-    sf::Time m_buttonDeadZoneDelay; ///time max spent waiting for the second button to be pressed before doing the actual action of the button
+	private:
+		void leftButton() const;
+		void rightButton() const;
+		void bothButtons() const;
 };
