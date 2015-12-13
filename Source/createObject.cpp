@@ -1,6 +1,6 @@
 #include "createObject.h"
 
-Object * createObject(object_id id)
+Object * createObject(object_id id, int x, int y)
 {
     //TODO
     Object * ret = nullptr;

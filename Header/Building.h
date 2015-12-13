@@ -4,6 +4,8 @@
 #include <fstream>
 #include <iterator>   
 
+#include "createObject.h"
+
 #include "INDrawable.h"
 #include "INUpdatable.h"
 

@@ -11,4 +11,4 @@ typedef enum : unsigned char{
     OBJECT_FRIDGE = 'f'
 } object_id;
 
-Object * createObject(object_id id);
+Object * createObject(object_id id, int x, int y);
