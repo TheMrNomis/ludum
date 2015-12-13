@@ -3,15 +3,24 @@
 
 Floor::Floor(sf::Texture * textureBuilding):
     m_background(),
-	m_textureBuilding(textureBuilding)
+	m_textureBuilding(textureBuilding),
+    m_rooms()
 {}
 
 Floor::~Floor()
-{}
+{
+    for(auto it = m_rooms.begin(); it != m_rooms.end(); ++it)
+        delete *it;
+}
 
 void Floor::addLine(std::vector<unsigned char> line)
 {
     m_background.push_back(line);
+}
+
+void Floor::addRoom(Room * room)
+{
+    m_rooms.push_back(room);
 }
 
 bool Floor::wallCollision(Ray & rayIntersection)

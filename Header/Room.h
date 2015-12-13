@@ -11,7 +11,7 @@ class Room : public INDrawable, public INUpdatable
 {
     public:
         Room();
-        ~Room();
+        virtual ~Room();
 
         /**
          * @brief add an object to the room
@@ -30,27 +30,27 @@ class Room : public INDrawable, public INUpdatable
         virtual void addFireDetector(FireDetector * fd);
 
 
-		/**
-		* @brief draw the Room
-		*
-		* @param window:
-		*
-		*/
-		virtual void draw(sf::RenderWindow * window) const;
+        /**
+         * @brief draw the Room
+         *
+         * @param window:
+         *
+         */
+        virtual void draw(sf::RenderWindow * window) const;
 
 
-		/**
-		* @brief update the room
-		*
-		*
-		*/
-		virtual void update();
+        /**
+         * @brief update the room
+         *
+         *
+         */
+        virtual void update();
 
-		/**
-		* @brief Exteguish all the fire in the room
-		*		the damage is stoped
-		*
-		*/
+        /**
+         * @brief Exteguish all the fire in the room
+         *		the damage is stoped
+         *
+         */
         void extinguishFire();
 
 

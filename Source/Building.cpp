@@ -100,22 +100,31 @@ void Building::loadToTileSet(std::string const &path)
             {
                 //room
                 bool ids_fireDetector = false;
+
+                Room * room = new Room();
                 for(unsigned int i = 1; i < line.length(); ++i)
                 {
                     if(line[i] == ':')
                         ids_fireDetector = true;
                     else
                     {
+                        unsigned char id = line[i];
                         if(!ids_fireDetector)
                         {
-                            //TODO: ajouter l'objet
+                            //TODO: check if id exists
+                            room->addObject(objects[id]);
+                            objectsSentInRoom[id] = true;
                         }
                         else
                         {
-                            //TODO: ajouter le fireDetector
+                            //TODO: check if id exists
+                            room->addFireDetector(fireDetectors[id]);
+                            fireDetectorsSentInRoom[id] = true;
                         }
                     }
                 }
+
+                currentFloor->addRoom(room);
             }
             else
             {

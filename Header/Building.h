@@ -11,6 +11,7 @@
 
 #include "Character.h"
 #include "Floor.h"
+#include "Room.h"
 #include "Wall.h"
 
 class Building : public INDrawable, public INUpdatable

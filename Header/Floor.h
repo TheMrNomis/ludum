@@ -7,6 +7,7 @@
 #include "INUpdatable.h"
 
 #include "TextureLoader.h"
+#include "Room.h"
 #include "Object.h"
 #include "Ray.h"
 
@@ -14,6 +15,7 @@ class Floor : public INDrawable, public INUpdatable
 {
 	private:
 		std::vector<std::vector<unsigned char> > m_background;
+        std::vector<Room *> m_rooms;
 		sf::Texture * m_textureBuilding;
 
 	public:
@@ -21,6 +23,15 @@ class Floor : public INDrawable, public INUpdatable
 		virtual ~Floor();
 
 		void addLine(std::vector<unsigned char> line);
+
+        /**
+         * @brief adds a room to this floor
+         *
+         * @param room: the room to add (dynamically-created pointer)
+         * @note Floor takes ownership of the Room, and will destroy it when needed
+         */
+        void addRoom(Room * room);
+
 		bool wallCollision(Ray & rayIntersection);
 
 		virtual void update();
