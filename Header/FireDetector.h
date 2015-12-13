@@ -1,5 +1,6 @@
 #pragma once
 
+#include "INUpdatable.h"
 #include "INDrawable.h"
 #include "INCollisionable.h"
 
@@ -7,7 +8,7 @@
 
 class Room;
 
-class FireDetector : public INDrawable, public INCollisionable
+class FireDetector : public INUpdatable, public INDrawable, public INCollisionable
 {
     public:
         /**
@@ -16,7 +17,7 @@ class FireDetector : public INDrawable, public INCollisionable
          * @param radius: the range of the FIreDetector 
          * @param parentRoom: the room where the FIreDectector is inside
          */
-        FireDetector(double radius, Room * parentRoom);
+        FireDetector(unsigned int x, unsigned int y, double radius, sf::Texture const* texture);
 
         virtual ~FireDetector();
 
@@ -35,6 +36,11 @@ class FireDetector : public INDrawable, public INCollisionable
 
     private:
         Room * m_parentRoom;
+
+        sf::Texture const* m_texture;
+
+        unsigned int m_x;
+        unsigned int m_y;
         double const m_radius;
         bool m_isActivated;
 };
