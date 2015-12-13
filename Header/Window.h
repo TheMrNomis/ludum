@@ -6,6 +6,7 @@
 #include "INDrawable.h"
 #include "World.h"
 #include "Character.h"
+#include "Floor.h"
 
 typedef enum:int {
     GAME_PLAYING,
