@@ -4,7 +4,7 @@
 World::World():
 	m_textures(TextureLoader("Ressources/sprites/")),
 	m_building(Building(&m_textures, 1, 1)),
-	m_character(new Character())
+	m_character(new Character(&m_textures))
 {
 	m_building.loadToTileSet("Levels/0.lvl");
 }

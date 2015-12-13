@@ -4,21 +4,14 @@
 Floor::Floor(sf::Texture * textureBuilding):
     m_background(),
 	m_textureBuilding(textureBuilding)
-{
-}
+{}
 
 Floor::~Floor()
-{
-}
+{}
 
 void Floor::addLine(std::vector<unsigned char> line)
 {
     m_background.push_back(line);
-}
-
-std::vector<std::vector<unsigned char> > * Floor::getMap()
-{
-	return &m_background;
 }
 
 sf::Vector2u Floor::offset(unsigned int i, unsigned int j) const
@@ -133,8 +126,7 @@ sf::Vector2u Floor::offset(unsigned int i, unsigned int j) const
 }
 
 void Floor::update()
-{
-}
+{}
 
 void Floor::draw(sf::RenderWindow * window) const
 {
