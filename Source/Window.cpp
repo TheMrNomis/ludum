@@ -208,14 +208,15 @@ void Window::update()
 
 void Window::leftButton() const
 {
-	m_currentWorld->getCharacter()->setAngle(1);
-	std::cout << "Angle: " << m_currentWorld->getCharacter()->m_angleShot << std::endl;
+	m_currentWorld->getCharacter()->setAngle(100);
+	//std::cout << "Angle: " << m_currentWorld->getCharacter()-> << std::endl;
 }
 
 void Window::rightButton() const
 {
-	m_currentWorld->getCharacter()->setAngle(-1);
-	std::cout << "Angle: " << m_currentWorld->getCharacter()->m_angleShot << std::endl;
+
+	m_currentWorld->getCharacter()->setAngle(-100);
+	//std::cout << "Angle: " << m_currentWorld->getCharacter()->m_angleShot << std::endl;
 }
 
 void Window::bothButtons() const

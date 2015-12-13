@@ -20,6 +20,9 @@ class World : public INDrawable, public INUpdatable
 
 		Character * getCharacter() const;
 
+		void managerDeplacement(Character * caracter);
+
+
 		virtual void draw(sf::RenderWindow *window) const;
 
         virtual void update();

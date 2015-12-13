@@ -88,7 +88,7 @@ void Building::update(){
 }
 
 
-bool Building::checkCollision(unsigned int idFloor,sf::Sprite & sprite){
+bool Building::checkCollisionWall(unsigned int idFloor,sf::Sprite & sprite){
 	bool intercection= false;
 	for (unsigned int i = 0; i< m_floors[idFloor]->getAllSpriteFloorWall()->size(); ++i)
 	{

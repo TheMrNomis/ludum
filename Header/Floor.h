@@ -15,6 +15,7 @@ class Floor : public INDrawable, public INUpdatable
 		sf::Vector2u offset(unsigned int i, unsigned int j) const;
 		std::vector<sf::Sprite *> * m_allSpriteFloorWall;
 		std::vector<sf::Sprite *> * m_allSpriteFloorBackground;
+		std::vector<Object * > * m_objectInFloor;
 
 	public:
 		Floor(sf::Texture * textureBuilding);

@@ -25,30 +25,36 @@ void World::draw(sf::RenderWindow *window) const
 	m_character->draw(window);
 }
 
+
+void World::managerDeplacement(Character * character)
+{
+
+	//Deplacement
+	if (character->isMoving())
+	{
+		sf::Sprite * tmp = new sf::Sprite(*character->getSprite());
+		sf::Vector2f position = m_character->newPositon();
+		tmp->setPosition(position);
+
+		if (!m_building.checkCollision(m_building.getCurrentFloor(), *(tmp))){
+			m_character->setStatusCollision(false);
+			m_character->setPosition(position);
+
+		}
+		else
+		{
+			m_character->setMoving(false);
+			m_character->setStatusCollision(true);
+		}
+		
+		delete tmp;
+	}
+}
+
 void World::update()
 {
 	m_building.update();
 	m_character->update();
-
-	if (!m_building.checkCollision(m_building.getCurrentFloor(), *(m_character->getSprite())))
-
-	//Deplacement
-	while(m_character->isMoving())
-	{
-	sf::Vector2f position = m_character->getPosition() 
-							+ m_character->getDirection()*m_character->getVelocity();
-	//	Ray intersectionRay(m_character->getPosition(), m_character->getDirection()*m_character->getVelocity());
-		
-		//std::cout << m_building.getWalls()->size() << std::endl;
-
-		//Recherche de collisions
-	//	for(auto i = 0; i < m_building.getWalls()->size(); i++)
-		//{}
-
-		m_character->setPosition(position);
-
-
-		//
-		//m_character->move(m_character->getDirection()*m_character->getVelocity);
-	}
+	managerDeplacement(m_character);
+	
 }

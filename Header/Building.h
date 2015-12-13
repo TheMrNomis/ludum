@@ -53,7 +53,15 @@ class Building : public INDrawable,public INUpdatable
 
 		unsigned int getCurrentFloor();
 
-		bool checkCollision(unsigned int idFloor, sf::Sprite & sprite);
+
+
+		/**
+		*@brief check if the sprite is intersecting a wall in the floor number idFloor
+		*
+		*@param idFloor : the floor which we want to check if there are any collision
+		*@param sprite : the sprite which collide or not any wall in the floor
+		*/
+		bool checkCollisionWall(unsigned int idFloor, sf::Sprite & sprite);
 
 
 		virtual void update();

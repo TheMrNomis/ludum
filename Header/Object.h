@@ -13,12 +13,15 @@ class Object : public INDrawable, public INUpdatable
         const unsigned int m_maxBurnedDamage;
         double m_currentFlameIntensity;
         unsigned int m_currentBurnedDamage;
-	sf::Texture *m_texture;
+
+		sf::Sprite * m_sprite;
+			
+	sf::Texture const * m_texture;
 
 	sf::Time m_time;
 
     public:
-	Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int width, unsigned int height, sf::Texture *texture);
+	Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int width, unsigned int height, sf::Texture const * texture);
 	virtual ~Object();
 		
 	virtual void update();
