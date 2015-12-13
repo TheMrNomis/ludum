@@ -22,7 +22,7 @@ class FireDetector : public INDrawable, public INCollisionable
 	*@brief	draw the FIreDetector
 	*
 	*/
-        virtual void draw();
+        virtual void draw(sf::RenderWindow * window) const;
         
 	/**
 	*@brief send a ray to find a collision with a floor or objects
