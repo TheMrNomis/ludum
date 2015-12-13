@@ -190,17 +190,22 @@ void Window::update()
         }
     }
 
-    //TODO: update world and others
+    m_currentWorld->update();
 }
 
 void Window::leftButton() const
 {
+	m_currentWorld->getCharacter()->setAngle(1);
+	std::cout << "Angle: " << m_currentWorld->getCharacter()->m_angleShot << std::endl;
 }
 
 void Window::rightButton() const
 {
+	m_currentWorld->getCharacter()->setAngle(-1);
+	std::cout << "Angle: " << m_currentWorld->getCharacter()->m_angleShot << std::endl;
 }
 
 void Window::bothButtons() const
 {
+	m_currentWorld->getCharacter()->jump();
 }

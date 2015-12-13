@@ -5,8 +5,7 @@ Ray::Ray(sf::Vector2f const& origin, sf::Vector2f const& direction):
     m_direction(direction),
     m_intersectionFound(false),
     m_minT(0)
-{
-}
+{}
 
 void Ray::intersect(INCollisionable & object)
 {
@@ -50,9 +49,11 @@ bool Ray::intersectCircle(sf::Vector2f circleCenter, float radius, bool saveInte
     float dist = norm(point - circleCenter);
 
     bool intersection = dist <= radius;
+
     if(intersection && saveIntersection)
         setIntersection(t);
-    return intersection;
+    
+	return intersection;
 }
 
 bool Ray::intersectSquare(sf::Vector2f pointMin, sf::Vector2f pointMax, bool saveIntersection)
