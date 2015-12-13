@@ -1,11 +1,12 @@
 #pragma once
 #include "INDrawable.h"
+#include "INUpdatable.h"
 #include <SFML/Graphics.hpp>
 #include "Character.h"
 #include "Floor.h"
 #include <fstream>
 
-class Building : public INDrawable
+class Building : public INDrawable, public INUpdatable
 {
 	private:
 		
@@ -55,5 +56,10 @@ class Building : public INDrawable
 		*@param window: window whitch containt the building
 		*/
 		void loadToTileSet(std::string const & path);
+
+        /**
+         * @brief updates this
+         */
+        void update();
 };
 

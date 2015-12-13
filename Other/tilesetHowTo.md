@@ -1,16 +1,23 @@
-# background
+#background
+utilisation de unsigned char pour faire la carte du background
 
-0. vide
+#objets
+1. 'o' (lettre o)
+2. <unsigned char> identifiant de l'objet (unique dans le niveau)
+3. <unsigned char> id de l'objet
+4. <int> position X
+5. <int> position Y
 
-1. mur
-2. mur (different skin)
-3. mur (different skin)
+#detecteurs de feu
+1. 'f' (lettre f)
+2. <unsigned char> identifiant du detecteur (unique dans le niveau, peut être le même que celui d'un object)
 
-5. sol
-6. sol (different skin)
-7. sol (different skin)
-8. sol (different skin)
-9. sol (different skin)
+#piece
+1. 'r' (lettre r)
+2. liste d'<unsigned char> : identifiants des objets contenus dans la pièce
+3. ':'
+4. liste d'<unsigned char> : identifiants des détecteurs de feu contenus dans la pièce
 
-# objets
-//TODO
+#id d'objets
+'a' - lit
+'b' - 

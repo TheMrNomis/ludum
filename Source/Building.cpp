@@ -44,6 +44,21 @@ void Building::loadToTileSet(std::string const &path)
                 m_floors.push_back(currentFloor);
                 currentFloor = new Floor(m_textureLoader->getFloorTexture());
             }
+            else if(line[0] == 'o')
+            {
+                //object
+                //TODO
+            }
+            else if(line[0] == 'f')
+            {
+                //fire detector
+                //TODO
+            }
+            else if(line[0] == 'r')
+            {
+                //room
+                //TODO
+            }
             else
             {
                 std::vector<unsigned char> buffer;
@@ -57,3 +72,6 @@ void Building::loadToTileSet(std::string const &path)
     m_floors.push_back(currentFloor);
 }
  
+void Building::update()
+{
+}
