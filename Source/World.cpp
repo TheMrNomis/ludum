@@ -36,7 +36,7 @@ void World::managerDeplacement(Character * character)
 		sf::Vector2f position = m_character->newPositon();
 		tmp->setPosition(position);
 
-		if (!m_building.checkCollision(m_building.getCurrentFloor(), *(tmp))){
+		if (!m_building.checkCollisionWall(m_building.getCurrentFloor(), *(tmp))){
 			m_character->setStatusCollision(false);
 			m_character->setPosition(position);
 

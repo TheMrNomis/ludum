@@ -5,8 +5,8 @@ Floor::Floor(sf::Texture * textureBuilding):
     m_background(),
 	m_textureBuilding(textureBuilding),
 	m_allSpriteFloorWall(new std::vector<sf::Sprite *>()),
-	m_allSpriteFloorBackground(new std::vector<sf::Sprite *>())
-
+	m_allSpriteFloorBackground(new std::vector<sf::Sprite *>()),
+	m_objectInFloor(new std::vector<Object *>())
 {
 }
 
@@ -147,9 +147,7 @@ sf::Vector2u Floor::offset(unsigned int i, unsigned int j) const
     return sf::Vector2u(offsetX, offsetY);
 }
 
-
-void Floor::update(){
-
+void Floor::managerBackground(){
 	for (unsigned int i = 0; i < m_background.size(); ++i)
 	{
 		for (unsigned int j = 0; j < m_background[i].size(); ++j)
@@ -170,13 +168,23 @@ void Floor::update(){
 			}
 			sprite.setTextureRect(sf::IntRect(32 * offsetX, 32 * offsetY, 32, 32));
 			sprite.setPosition(j * 32, i * 32);
-			
+
 			if (m_background[i][j] == '1')
 				m_allSpriteFloorWall->push_back(new sf::Sprite(sprite));
 			if (m_background[i][j] == '6')
 				m_allSpriteFloorBackground->push_back(new sf::Sprite(sprite));
+			
+			/*if (m_background[i][j] == 'OBJECTID')
+				m_objectInFloor->push_back(new sf::Sprite(sprite));
+		*/
 		}
 	}
+
+}
+void Floor::update(){
+
+	managerBackground();
+
 }
 
 void Floor::draw(sf::RenderWindow * window) const
@@ -188,6 +196,10 @@ void Floor::draw(sf::RenderWindow * window) const
 	for (int i = 0; i < m_allSpriteFloorBackground->size(); ++i){
 		window->draw(*(m_allSpriteFloorBackground->at(i)));
 	}
+	for (int i = 0; i < m_objectInFloor->size(); ++i){
+		window->draw(*(m_objectInFloor->at(i)->getSprite()));
+	}
+
 
 }
 

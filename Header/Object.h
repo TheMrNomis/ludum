@@ -26,9 +26,11 @@ class Object : public INDrawable, public INUpdatable
 		
 	virtual void update();
 	virtual void draw(sf::RenderWindow * window) const;
-        virtual void ignite();
-        virtual void stopFire();
+    virtual void ignite();
+    virtual void stopFire();
 
-	int getWidth();
-	int getHeight();
+	sf::Sprite * getSprite() const;
+
+	int getWidth() const;
+	int getHeight() const;
 };
