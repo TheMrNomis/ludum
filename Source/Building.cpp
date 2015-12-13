@@ -128,10 +128,12 @@ void Building::loadToTileSet(std::string const &path)
         }
     }
 
+    //delete orphaned objects
     for(auto it = objects.begin(); it != objects.end(); ++it)
         if(!objectsSentInRoom.at(it->first))
             delete it->second;
 
+    //delete orphaned fireDetectors
     for(auto it = fireDetectors.begin(); it != fireDetectors.end(); ++it)
         if(!fireDetectorsSentInRoom.at(it->first))
             delete it->second;
