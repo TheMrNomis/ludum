@@ -28,6 +28,8 @@ class Floor : public INDrawable, public INUpdatable
 		std::vector<sf::Sprite *> * getAllSpriteFloorWall();
 		std::vector<sf::Sprite *> * getAllSpriteFloorBackground();
 
+		void managerBackground();
+
 		virtual void update();
 		virtual void draw(sf::RenderWindow *window) const;
 };

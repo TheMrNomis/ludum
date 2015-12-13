@@ -21,7 +21,7 @@ Object::~Object(){
 
 void Object::draw(sf::RenderWindow * window) const
 {
-	window->draw(*m_sprite);
+	window->draw(*getSprite());
 }
 
 void Object::ignite()
@@ -35,17 +35,25 @@ void Object::stopFire()
 {
 }
 
-int Object::getWidth()
+int Object::getWidth() const
 {
 	return m_width; 
 }
 
-int Object::getHeight()
+int Object::getHeight() const
 {
 	return m_height;
 }
 
+sf::Sprite * Object::getSprite() const{
+	return m_sprite;
+}
+
+
 void Object::update()
 {
-
+	/*
+	if (m_flameVelocity > 0)
+		m_currentBurnedDamage *= m_currentFlameIntensity;
+	*/
 }
