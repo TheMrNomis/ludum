@@ -6,7 +6,7 @@
 Character::Character(TextureLoader * textures):
     m_spriteCharater(new sf::Sprite()),
     m_textures(textures),
-    m_velocity(10),
+    m_velocity(20),
     m_moving(false),
     m_statusCollision(false),
     m_currentAnimation(StateAnimation::Right),
@@ -96,27 +96,30 @@ void Character::draw(sf::RenderWindow *window) const
 void Character::update()
 {
     //Animations
-    if(m_currentAnimation == StateAnimation::Left)
-    {
-        m_spriteCharater->setTextureRect(sf::IntRect(0, 0, 32, 32));
-        m_currentAnimation = StateAnimation::Midle;
-    }
+	if (rand()%10 == 0)
+	{
+		m_spriteCharater->setTextureRect(sf::IntRect(64,0, 32, 32));
+	}
+	else{
 
-    else if(m_currentAnimation == StateAnimation::Midle)
-    {
-        m_spriteCharater->setTextureRect(sf::IntRect(32, 0, 32, 32));
-        m_currentAnimation = StateAnimation::Right;
-    }
+		if (m_currentAnimation == StateAnimation::Left)
+		{
+			m_spriteCharater->setTextureRect(sf::IntRect(0, 32, 32, 32));
+			m_currentAnimation = StateAnimation::Midle;
+		}
 
-    else if(m_currentAnimation == StateAnimation::Right)
-    {
-        m_spriteCharater->setTextureRect(sf::IntRect(32, 64, 32, 32));
-        m_currentAnimation = StateAnimation::Left;
-    }
+		else if (m_currentAnimation == StateAnimation::Midle)
+		{
+			m_spriteCharater->setTextureRect(sf::IntRect(32, 32, 32, 32));
+			m_currentAnimation = StateAnimation::Right;
+		}
 
-    else
-    {
-        m_spriteCharater->setTextureRect(sf::IntRect(0, 0, 32, 32));
-        m_currentAnimation = StateAnimation::Right;
-    }
+		else if (m_currentAnimation == StateAnimation::Right)
+		{
+			m_spriteCharater->setTextureRect(sf::IntRect(64, 32, 32, 32));
+			m_currentAnimation = StateAnimation::Midle;
+		}
+	}
+
+
 }
