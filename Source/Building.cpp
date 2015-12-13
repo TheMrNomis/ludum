@@ -56,3 +56,4 @@ void Building::loadToTileSet(std::string const &path)
     }
     m_floors.push_back(currentFloor);
 }
+ 

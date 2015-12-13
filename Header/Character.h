@@ -2,25 +2,30 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include "INDrawable.h"
+#include "INUpdatable.h"
 
-enum StateAnimation{
-	EyeCloseLeft,
-	EyeCloseMidle,
-	EyeCloseRight,
-	Left,
-	Midle,
-	Right
-};
 
-class Character : public INDrawable
+
+class Character : public INDrawable, public INUpdatable
 {
+	enum StateAnimation{
+		EyeCloseLeft,
+		EyeCloseMidle,
+		EyeCloseRight,
+		Left,
+		Midle,
+		Right
+	};
 
 
 	private: 
 		sf::Sprite * m_spriteCharater;
 		sf::Texture * m_textureCharacter;
+
 		int m_angleShot = 90;
 		float m_velocity = 50;
+
+		sf::Vector2f m_position;
 
 		StateAnimation m_currentAnimation;
 
@@ -55,6 +60,7 @@ class Character : public INDrawable
 		*/
 		void jump();
 
+	
 		/**
 		* @brief draw the character
 		*
@@ -62,6 +68,13 @@ class Character : public INDrawable
 		*
 		*/
 		virtual void draw(sf::RenderWindow *window) const;
+
+		/**
+		* @brief update the character
+		*
+		*
+		*/
+		virtual void update();
 
 
 };

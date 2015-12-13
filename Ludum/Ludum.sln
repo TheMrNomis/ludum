@@ -19,6 +19,7 @@ Global
 		{68531C4A-B2FF-4B27-AEAC-5747ABEC3320}.Debug|x86.Build.0 = Debug|Win32
 		{68531C4A-B2FF-4B27-AEAC-5747ABEC3320}.Release|x64.ActiveCfg = Release|x64
 		{68531C4A-B2FF-4B27-AEAC-5747ABEC3320}.Release|x64.Build.0 = Release|x64
+		{68531C4A-B2FF-4B27-AEAC-5747ABEC3320}.Release|x64.Deploy.0 = Release|x64
 		{68531C4A-B2FF-4B27-AEAC-5747ABEC3320}.Release|x86.ActiveCfg = Release|Win32
 		{68531C4A-B2FF-4B27-AEAC-5747ABEC3320}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
