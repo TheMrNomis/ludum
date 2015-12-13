@@ -6,9 +6,13 @@
 
 #include "INDrawable.h"
 #include "INUpdatable.h"
+
+#include "FireDetector.h"
+#include "Object.h"
 #include "TextureLoader.h"
 #include "Character.h"
 #include "Floor.h"
+#include "Room.h"
 #include "Wall.h"
 
 class Building : public INDrawable, public INUpdatable

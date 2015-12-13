@@ -3,15 +3,24 @@
 
 Floor::Floor(sf::Texture * textureBuilding):
     m_background(),
+    m_rooms(),
 	m_textureBuilding(textureBuilding)
 {}
 
 Floor::~Floor()
-{}
+{
+    for(auto it = m_rooms.begin(); it != m_rooms.end(); ++it)
+        delete *it;
+}
 
 void Floor::addLine(std::vector<unsigned char> line)
 {
     m_background.push_back(line);
+}
+
+void Floor::addRoom(Room * room)
+{
+    m_rooms.push_back(room);
 }
 
 bool Floor::wallCollision(Ray & rayIntersection)
@@ -29,7 +38,7 @@ void Floor::update(sf::Clock const & clk)
 
 void Floor::draw(sf::RenderWindow * window) const
 {
-    //sf::Clock tic;
+    //background
 	for (unsigned int i = 0; i < m_background.size(); ++i)
 	{
 		for (unsigned int j = 0; j < m_background[i].size(); ++j)
@@ -54,7 +63,10 @@ void Floor::draw(sf::RenderWindow * window) const
 			window->draw(sprite);
 		}
 	}
-    //std::cout << "time: " << tic.getElapsedTime().asMilliseconds() << "ms" << std::endl;
+
+    //objects
+    for(auto it = m_rooms.cbegin(); it != m_rooms.cend(); ++it)
+        (*it)->draw(window);
 }
 
 sf::Vector2u Floor::offset(unsigned int i, unsigned int j) const
@@ -167,4 +179,3 @@ sf::Vector2u Floor::offset(unsigned int i, unsigned int j) const
 
     return sf::Vector2u(offsetX, offsetY);
 }
-

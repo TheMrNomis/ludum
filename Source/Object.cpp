@@ -1,19 +1,101 @@
 #include "Object.h"
 
-Object::Object(double flameVelocity = 0.0, unsigned int maxBurnedDamage = 0, unsigned int width = 0, unsigned int height = 0, sf::Texture const * texture = NULL) :
-	m_width(width),
-	m_height(height),
-	
-	m_flameVelocity(flameVelocity),
-	m_maxBurnedDamage(maxBurnedDamage),
-	m_currentFlameIntensity(0),
-	m_currentBurnedDamage(0),
-	m_texture(texture),
-	m_clock()
-	
+Object * Object::fromID(unsigned char objectID, unsigned int x, unsigned int y, sf::Texture const* texture)
+{
+    switch(objectID)
+    {
+        case 'a':
+            return Bed(x,y,texture);
+            break;
+        case 'b':
+            return Sofa(x,y,texture);
+            break;
+        case 'c':
+            return Toilet(x,y,texture);
+            break;
+        case 'd':
+            return Table(x,y,texture);
+            break;
+        case 'e':
+            return Oven(x,y,texture);
+            break;
+        case 'f':
+            return Fridge(x,y,texture);
+            break;
+        case 'g':
+            return KitchenTable(x,y,texture);
+            break;
+        case 'h':
+            return Tub(x,y,texture);
+            break;
+        default:
+            return new Object(0,0,0,0,0,0,x,y,texture);
+            break;
+    }
+
+}
+
+Object * Object::Bed(unsigned int x, unsigned int y, sf::Texture const* texture)
+{
+    return new Object(0.6,15, 2,3, 0,0, x,y, texture);
+}
+
+Object * Object::Sofa(unsigned int x, unsigned int y, sf::Texture const* texture)
+{
+    return new Object(0.5,25, 2,1, 0,3, x,y, texture);
+}
+
+Object * Object::Toilet(unsigned int x, unsigned int y, sf::Texture const* texture)
+{
+    return new Object(0.0,10, 1,1, 2,0, x,y, texture);
+}
+
+Object * Object::Table(unsigned int x, unsigned int y, sf::Texture const* texture)
+{
+    return new Object(1.0,20, 1,1, 2,1, x,y, texture);
+}
+
+Object * Object::Oven(unsigned int x, unsigned int y, sf::Texture const* texture)
+{
+    return new Object(0.5,50, 1,1, 2,2, x,y, texture);
+}
+
+Object * Object::Fridge(unsigned int x, unsigned int y, sf::Texture const* texture)
+{
+    return new Object(0.5,50, 1,1, 2,3, x,y, texture);
+}
+
+Object * Object::KitchenTable(unsigned int x, unsigned int y, sf::Texture const* texture)
+{
+    return new Object(0.5,50, 1,1, 3,0, x,y, texture);
+}
+
+Object * Object::Tub(unsigned int x, unsigned int y, sf::Texture const* texture)
+{
+    return new Object(0.0,10, 1,2, 3,1, x,y, texture);
+}
+
+
+Object::Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int width, unsigned int height, unsigned int offsetX, unsigned int offsetY, unsigned int x, unsigned int y, sf::Texture const * texture) :
+    m_width(width),
+    m_height(height),
+
+    m_x(x),
+    m_y(y),
+
+    m_offsetX(offsetX),
+    m_offsetY(offsetY),
+
+    m_flameVelocity(flameVelocity),
+    m_maxBurnedDamage(maxBurnedDamage),
+    m_currentFlameIntensity(0),
+    m_currentBurnedDamage(0),
+    m_texture(texture),
+    m_clock()
+
 {	
-	m_time = sf::seconds(0.0f);
-	m_clock.restart();	
+    m_time = sf::seconds(0.0f);
+    m_clock.restart();	
 }
 
 Object::~Object()
@@ -22,34 +104,36 @@ Object::~Object()
 
 void Object::update(sf::Clock const & clk)
 {
-	m_time = m_clock.getElapsedTime();
+    m_time = m_clock.getElapsedTime();
 }
 
 void Object::draw(sf::RenderWindow * window) const
 {
-	sf::Sprite sprite;
-        sprite.setTexture(*m_texture);
-	window->draw(sprite);
+    sf::Sprite sprite;
+    sprite.setTexture(*m_texture);
+    sprite.setTextureRect(sf::IntRect(32*m_offsetX, 32*m_offsetY, 32*m_width, 32*m_height));
+    sprite.setPosition(m_x * 32, m_y * 32);
+    window->draw(sprite);
 }
 
 void Object::ignite()
 {
-	
+
 }
 
 void Object::stopFire()
 {
-	m_currentFlameIntensity = 0;
+    m_currentFlameIntensity = 0;
 }
 
 int Object::getWidth() const
 {
-	return m_width; 
+    return m_width; 
 }
 
 int Object::getHeight() const
 {
-	return m_height;
+    return m_height;
 }
 
 
