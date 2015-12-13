@@ -75,4 +75,3 @@ class Building : public INDrawable, public INUpdatable
          */
 		virtual void update(sf::Clock const & clk);
 };
-

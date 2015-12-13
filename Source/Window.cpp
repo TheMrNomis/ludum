@@ -1,10 +1,14 @@
 #include "Window.h"
 
+#define DELAY_BEETWEEN_2_BUTTON 20
+
 Window::Window():
     m_clock(),
+
     m_window(new sf::RenderWindow(sf::VideoMode(800, 800), "IN in Game!!!")),
     m_currentWorld(new World()),
-    m_currentStatus(GAME_MAIN_MENU),
+    
+	m_currentStatus(GAME_MAIN_MENU),
     m_mouseButtonPressed(false),
     m_leftButtonPushed(false),
     m_timeLeftButtonPressed(),
@@ -39,7 +43,7 @@ int Window::run()
         while(m_window->pollEvent(event))
             this->react(event);
 
-		if(clk.getElapsedTime().asMilliseconds() > 70)
+		if (clk.getElapsedTime().asMilliseconds() > DELAY_BEETWEEN_2_BUTTON)
 		{
 			this->update(clk );
 
