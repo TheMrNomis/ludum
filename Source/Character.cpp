@@ -14,7 +14,7 @@ Character::Character() :
 {
     m_textureCharacter->loadFromFile("Ressources/sprites/spooky/sprite.png");
     m_spriteCharater->setTexture(*m_textureCharacter);
-    m_spriteCharater->setTextureRect(sf::IntRect(0, 0, 32, 32));
+    m_spriteCharater->setTextureRect(sf::IntRect(64, 64, 32, 32));
 
     m_spriteCharater->setPosition(sf::Vector2f(200,200));
 }
@@ -104,28 +104,31 @@ void Character::update()
 
 
     //Animations
-    if(m_currentAnimation == StateAnimation::Left)
-    {
-        m_spriteCharater->setTextureRect(sf::IntRect(0, 0, 32, 32));
-        m_currentAnimation = StateAnimation::Midle;
-    }
+	
+	if (rand()%10 == 0)
+	{
+		m_spriteCharater->setTextureRect(sf::IntRect(64,0, 32, 32));
+	}
+	else{
 
-    else if(m_currentAnimation == StateAnimation::Midle)
-    {
-        m_spriteCharater->setTextureRect(sf::IntRect(32, 0, 32, 32));
-        m_currentAnimation = StateAnimation::Right;
-    }
+		if (m_currentAnimation == StateAnimation::Left)
+		{
+			m_spriteCharater->setTextureRect(sf::IntRect(0, 32, 32, 32));
+			m_currentAnimation = StateAnimation::Midle;
+		}
 
-    else if(m_currentAnimation == StateAnimation::Right)
-    {
-        m_spriteCharater->setTextureRect(sf::IntRect(32, 64, 32, 32));
-        m_currentAnimation = StateAnimation::Left;
-    }
-    else
-    {
-        m_spriteCharater->setTextureRect(sf::IntRect(0, 0, 32, 32));
-        m_currentAnimation = StateAnimation::Right;
-    }
+		else if (m_currentAnimation == StateAnimation::Midle)
+		{
+			m_spriteCharater->setTextureRect(sf::IntRect(32, 32, 32, 32));
+			m_currentAnimation = StateAnimation::Right;
+		}
+
+		else if (m_currentAnimation == StateAnimation::Right)
+		{
+			m_spriteCharater->setTextureRect(sf::IntRect(64, 32, 32, 32));
+			m_currentAnimation = StateAnimation::Midle;
+		}
+	}
 
 
 
