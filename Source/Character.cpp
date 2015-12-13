@@ -74,19 +74,14 @@ void Character::setPosition(sf::Vector2f position)
 	m_spriteCharater->setPosition(position);
 }
 
-void Character::jump()
+Ray * Character::jump()
 {
 	m_arrow->setTextureRect(sf::IntRect(0 * TEXTURE_DIMENSION, 1 * TEXTURE_DIMENSION, TEXTURE_DIMENSION, TEXTURE_DIMENSION));
 	m_jumping = true;
 
-		m_intersectionRay = Ray(getPosition(), getDirection());
+	m_intersectionRay = Ray(getPosition(), getDirection());
 
-	//world->getBuilding()->checkCollisions(m_intersectionRay);
-	{
-		std::cout << "/!\\ Pas de Collisions /!\\" << std::endl;
-		setPosition(nextFramePosition());
-		setStatusCollision(false);
-	}
+	return &m_intersectionRay;
 }
 
 bool Character::getStatusCollision(){

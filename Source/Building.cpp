@@ -27,7 +27,7 @@ unsigned int Building::getCurrentFloor()
 	return m_currentFloor;
 }
 
-bool Building::checkCollisions(Ray & rayIntersection)
+bool Building::checkCollisions(Ray * rayIntersection)
 {
 	return m_floors[m_currentFloor]->wallCollision(rayIntersection);
 }
@@ -59,6 +59,7 @@ void Building::loadToTileSet(std::string const &path)
                 m_floors.push_back(currentFloor);
                 currentFloor = new Floor(m_textureLoader->getFloorTexture());
             }
+
             else if(line[0] == 'o')
             {
                 //object
@@ -70,6 +71,7 @@ void Building::loadToTileSet(std::string const &path)
                     std::string x_str;
                     std::string y_str;
                     bool first = true;
+
                     for(unsigned int i = 3; i < line.length(); ++i)
                     {
                         if(line[i] == ':')
@@ -77,6 +79,7 @@ void Building::loadToTileSet(std::string const &path)
                         else
                             (first? x_str : y_str).push_back(line[i]);
                     }
+
                     int x = atoi(x_str.c_str());
                     int y = atoi(y_str.c_str());
 
@@ -84,12 +87,14 @@ void Building::loadToTileSet(std::string const &path)
                     objects.insert(std::pair<unsigned char, Object*>(objectID, obj));
                     objectsSentInRoom.insert(std::pair<unsigned char, bool>(objectID, false));
                 }
+
                 else
                     error = true;
 
                 if(error)
                     std::cerr << "error while loading level '" << path << "' at line " << lineNumber << " : malformed object declaration" << std::endl;
             }
+
             else if(line[0] == 'f')
             {
                 //fire detector
@@ -100,6 +105,7 @@ void Building::loadToTileSet(std::string const &path)
                     std::string x_str;
                     std::string y_str;
                     bool first = true;
+
                     for(unsigned int i = 2; i < line.length(); ++i)
                     {
                         if(line[i] == ':')
@@ -107,6 +113,7 @@ void Building::loadToTileSet(std::string const &path)
                         else
                             (first? x_str : y_str).push_back(line[i]);
                     }
+
                     unsigned int x = atoi(x_str.c_str());
                     unsigned int y = atoi(y_str.c_str());
 
@@ -114,12 +121,14 @@ void Building::loadToTileSet(std::string const &path)
                     fireDetectors.insert(std::pair<unsigned char, FireDetector *>(fireID, fd));
                     fireDetectorsSentInRoom.insert(std::pair<unsigned char, bool>(fireID, false));
                 }
+
                 else
                     error = true;
 
                 if(error)
                     std::cerr << "error while loading level '" << path << "' at line " << lineNumber << " : malformed fire detector declaration" << std::endl;
             }
+
             else if(line[0] == 'r')
             {
                 //room
@@ -130,15 +139,18 @@ void Building::loadToTileSet(std::string const &path)
                 {
                     if(line[i] == ':')
                         ids_fireDetector = true;
+
                     else
                     {
                         unsigned char id = line[i];
+
                         if(!ids_fireDetector)
                         {
                             //TODO: check if id exists
                             room->addObject(objects[id]);
                             objectsSentInRoom[id] = true;
                         }
+
                         else
                         {
                             //TODO: check if id exists
@@ -150,6 +162,7 @@ void Building::loadToTileSet(std::string const &path)
 
                 currentFloor->addRoom(room);
             }
+
             else
             {
                 std::vector<unsigned char> buffer;

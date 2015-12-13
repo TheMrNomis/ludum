@@ -13,14 +13,10 @@
 #include "Character.h"
 #include "Floor.h"
 #include "Room.h"
-#include "Wall.h"
 
 class Building : public INDrawable, public INUpdatable
 {
 	private:
-		
-		unsigned int m_largeur;
-		unsigned int m_longueur;
 		const unsigned int m_maxBurnedDamage;
 		const unsigned int m_currentBurnedDamage;
 
@@ -55,7 +51,7 @@ class Building : public INDrawable, public INUpdatable
 		*@param idFloor : the floor which we want to check if there are any collision
 		*@param sprite : the sprite which collide or not any wall in the floor
 		*/
-		bool checkCollisions(Ray & rayIntersection);
+		bool checkCollisions(Ray * rayIntersection);
 		/**
 		*@brief charge the level from files
 		*
