@@ -23,7 +23,7 @@ class Character : public INDrawable, public INUpdatable
 
 	private: 
 		sf::Sprite * m_spriteCharater;
-		TextureLoader * m_textures;
+		const TextureLoader * m_textures;
 
 		const float m_velocity;
 		bool m_moving;

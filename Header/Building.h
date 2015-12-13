@@ -6,7 +6,7 @@
 
 #include "INDrawable.h"
 #include "INUpdatable.h"
-
+#include "TextureLoader.h"
 #include "Character.h"
 #include "Floor.h"
 #include "Wall.h"

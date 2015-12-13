@@ -5,8 +5,8 @@
 TextureLoader::TextureLoader(std::string const & url) :
 	m_objectsTexture(new sf::Texture()),
 	m_floorTexture(new sf::Texture()),
-	m_characterTexture(new sf::Texture()),
-	m_teleportertexture(new sf::Texture())
+	m_characterTexture(new sf::Texture())
+	//m_teleportertexture(new sf::Texture())
 {
 	loadTexture(url);
 }
@@ -17,7 +17,7 @@ TextureLoader::~TextureLoader()
 	delete m_floorTexture;
 	delete m_objectsTexture;
 	delete m_characterTexture;
-	delete m_teleportertexture;
+	//delete m_teleportertexture;
 
 }
 
@@ -36,11 +36,11 @@ sf::Texture * TextureLoader::getCharacterTexture() const
 	return m_characterTexture;
 }
 
-sf::Texture * TextureLoader::getTeleporterTexture() const
+/*sf::Texture * TextureLoader::getTeleporterTexture() const
 {
 	return m_teleportertexture;
 }
-
+*/
 
 //On passe l'url du dossier de Textures
 void TextureLoader::loadTexture(std::string const & url)
@@ -62,9 +62,5 @@ void TextureLoader::loadTexture(std::string const & url)
 		std::cerr << "Error when loading the texture of the character" << std::endl;
         throw std::exception();
     }
-	if (!m_characterTexture->loadFromFile((url + "spooky/sprite.png").c_str()))
-	{
-		std::cerr << "Error when loading the texture of the character" << std::endl;
-		throw std::exception();
-	}
+	
 }

@@ -2,7 +2,6 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "Teleporter.h"
 
 
 class TextureLoader
@@ -11,7 +10,7 @@ private:
 	sf::Texture * m_objectsTexture;
 	sf::Texture * m_floorTexture;
 	sf::Texture * m_characterTexture;
-	sf::Texture * m_teleportertexture;
+//	sf::Texture * m_teleportertexture;
 
 public:
 	TextureLoader(std::string const & url);
@@ -20,7 +19,7 @@ public:
 	sf::Texture * getFloorTexture() const;
 	sf::Texture * getObjectsTexture() const;
 	sf::Texture * getCharacterTexture() const;
-	sf::Texture * getTeleporterTexture() const;
+	//sf::Texture * getTeleporterTexture() const;
 	void loadTexture(std::string const & url);
 };
 
