@@ -62,6 +62,8 @@ private:
     int m_mouseOldX;
     int m_mouseOldY;
 
+
+
     bool m_leftButtonPushed;
     sf::Time m_timeLeftButtonPressed;
     bool m_rightButtonPushed;

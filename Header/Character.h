@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <iostream>
-
+#include"Ray.h"
 #include "INDrawable.h"
 #include "INUpdatable.h"
 #include "TextureLoader.h"
@@ -23,15 +23,18 @@ class Character : public INDrawable, public INUpdatable
 
 	private: 
 		sf::Sprite * m_spriteCharater;
+		sf::Sprite * m_arrow;
 		const TextureLoader * m_textures;
 
 		const float m_velocity;
-		bool m_moving;
+		bool m_jumping;
 		bool m_statusCollision;
 
 		StateAnimation m_currentAnimation;
 
-		int m_angleShot;
+		double m_angleJump;
+		Ray	m_intersectionRay;
+		
 
 
 	public:
@@ -56,7 +59,7 @@ class Character : public INDrawable, public INUpdatable
 		* @brief set the angle before jummping
 		*
 		*/
-		int  getAngle() const ;
+		double  getAngle() const ;
 
 		/**
 		* @brief Get the velocity of the character
@@ -103,6 +106,11 @@ class Character : public INDrawable, public INUpdatable
 		*
 		*/
 		sf::Sprite  * getSprite() const;
+
+		sf::Sprite  *getArrowSprite() const;
+
+
+
 		/**
 		* @brief Set the position of the character
 		*
@@ -121,7 +129,7 @@ class Character : public INDrawable, public INUpdatable
 		* @brief Check if the caracter is moving
 		*
 		*/
-		bool isMoving();
+		bool isJumping();
 
 		/**
 		* @brief set if the caracter is moving or not

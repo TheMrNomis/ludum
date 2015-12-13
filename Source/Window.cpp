@@ -225,9 +225,12 @@ void Window::leftButton() const
 
 
 
-	if(!m_currentWorld->getCharacter()->isMoving())
+	if(!m_currentWorld->getCharacter()->isJumping())
 		m_currentWorld->getCharacter()->setAngle(10);
 	//std::cout << "Angle: " << m_currentWorld->getCharacter()-> << std::endl;
+
+	m_currentWorld->getCharacter()->getArrowSprite()->setRotation(m_currentWorld->getCharacter()->getAngle()-45);
+
 }
 
 void Window::rightButton() const
@@ -238,9 +241,11 @@ void Window::rightButton() const
 	m_currentWorld->getBuilding()->checkCollisions(intersectionRay);
 	std::cout << "distance to intersection: " << intersectionRay.distanceToIntersection() << std::endl;
 
-	if(!m_currentWorld->getCharacter()->isMoving())
+
+	if(!m_currentWorld->getCharacter()->isJumping())
 		m_currentWorld->getCharacter()->setAngle(-10);
-	//std::cout << "Angle: " << m_currentWorld->getCharacter()->m_angleShot << std::endl;
+
+	m_currentWorld->getCharacter()->getArrowSprite()->setRotation(m_currentWorld->getCharacter()->getAngle()-45);
 }
 
 void Window::bothButtons() const
@@ -248,3 +253,4 @@ void Window::bothButtons() const
 	std::cout << "Jump" << std::endl;
 	m_currentWorld->getCharacter()->jump();
 }
+

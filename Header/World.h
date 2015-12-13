@@ -22,10 +22,7 @@ class World : public INDrawable, public INUpdatable
 		Character * getCharacter() const;
 		Building * getBuilding() const;
 
-		void moveCharacter(Character * character);
-
 		virtual void draw(sf::RenderWindow *window) const;
-
 		virtual void update(sf::Clock const & clk);
 };
 
