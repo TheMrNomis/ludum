@@ -28,27 +28,26 @@ void World::draw(sf::RenderWindow *window) const
 
 void World::managerDeplacement(Character * character)
 {
+	sf::Sprite * tmp = new sf::Sprite(*character->getSprite());
+	sf::Vector2f nextFramePosition = m_character->nextFramePosition();
+	tmp->setPosition(nextFramePosition);
 
 	//Deplacement
-	if (character->isMoving())
+	if(character->isMoving() && !m_building.checkCollisionWall(m_building.getCurrentFloor(), *(tmp)))
 	{
-		sf::Sprite * tmp = new sf::Sprite(*character->getSprite());
-		sf::Vector2f position = m_character->newPositon();
-		tmp->setPosition(position);
-
-		if (!m_building.checkCollisionWall(m_building.getCurrentFloor(), *(tmp))){
-			m_character->setStatusCollision(false);
-			m_character->setPosition(position);
-
-		}
-		else
-		{
-			m_character->setMoving(false);
-			m_character->setStatusCollision(true);
-		}
-		
-		delete tmp;
+		//std::cout << "/!\\ Pas de Collisions /!\\" << std::endl;
+		m_character->setStatusCollision(false);
+		m_character->setPosition(nextFramePosition);
 	}
+
+	else
+	{
+		//std::cout << "/!\\ Collision /!\\" << std::endl;
+		m_character->setStatusCollision(true);
+		m_character->setMoving(false);
+	}
+		
+	delete tmp;
 }
 
 void World::update()

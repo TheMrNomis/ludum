@@ -199,8 +199,6 @@ void Floor::draw(sf::RenderWindow * window) const
 	for (int i = 0; i < m_objectInFloor->size(); ++i){
 		window->draw(*(m_objectInFloor->at(i)->getSprite()));
 	}
-
-
 }
 
 

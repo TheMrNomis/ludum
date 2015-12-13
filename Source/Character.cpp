@@ -48,7 +48,6 @@ sf::Vector2f Character::getPosition()
 void Character::setPosition(sf::Vector2f position)
 {
 	m_spriteCharater->setPosition(position);
-	m_moving = false;
 }
 
 void Character::jump()
@@ -84,7 +83,7 @@ sf::Sprite * Character::getSprite() const
 	return m_spriteCharater;
 }
 
-sf::Vector2f Character::newPositon()
+sf::Vector2f Character::nextFramePosition()
 {
 return getPosition() + getDirection()*getVelocity();
 }
@@ -94,7 +93,6 @@ void Character::draw(sf::RenderWindow *window) const
 {
 	window->draw(*m_spriteCharater);
 }
-
 
 
 void Character::update()
