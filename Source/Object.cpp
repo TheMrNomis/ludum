@@ -20,7 +20,7 @@ Object::~Object()
 {
 }
 
-void Object::update()
+void Object::update(sf::Clock const & clk)
 {
 	m_time = m_clock.getElapsedTime();
 }
