@@ -56,7 +56,7 @@ class Character : public INDrawable, public INUpdatable
 		* @brief set the angle before jummping
 		*
 		*/
-		void setAngle(int alpha);
+		void setAngle(double alpha);
 		
 		/**
 		* @brief set the angle before jummping
@@ -130,6 +130,9 @@ class Character : public INDrawable, public INUpdatable
 		*
 		*/
 		Ray * jump();
+
+
+		Ray getRayIntersection();
 
 		/**
 		* @brief Check if the caracter is moving

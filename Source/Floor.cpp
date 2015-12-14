@@ -59,7 +59,7 @@ void Floor::draw(sf::RenderWindow * window) const
 				offsetY = 4;
 			}
 			sprite.setTextureRect(sf::IntRect(32 * offsetX, 32 * offsetY, 32, 32));
-			sprite.setPosition(j * 32, i * 32);
+			sprite.setPosition(i * 32, j * 32);
 
 			window->draw(sprite);
 		}

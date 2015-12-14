@@ -226,12 +226,22 @@ void Window::update(sf::Clock const & clk)
 
 void Window::leftButton() const
 {
-		m_currentWorld->getCharacter()->setAngle(-1);
+	m_currentWorld->getCharacter()->setAngle(-0.5);
+
+	Ray rayTest = m_currentWorld->getCharacter()->getRayIntersection();
+	m_currentWorld->getBuilding()->checkCollisions(&rayTest);
+
+	std::cout << "Distance to intersection: " << rayTest.distanceToIntersection() << std::endl;
 }
 
 void Window::rightButton() const
 {
-    m_currentWorld->getCharacter()->setAngle(1);
+    m_currentWorld->getCharacter()->setAngle(0.5);
+
+	Ray rayTest = m_currentWorld->getCharacter()->getRayIntersection();
+	m_currentWorld->getBuilding()->checkCollisions(&rayTest);
+
+	std::cout << "Distance to intersection: " << rayTest.distanceToIntersection() << std::endl;
 }
 
 void Window::bothButtons() const

@@ -23,7 +23,7 @@ Character::~Character()
 {
 }
 
-void Character::setAngle(int alpha)
+void Character::setAngle(double alpha)
 {
     if(!m_jumping)
     {
@@ -75,9 +75,14 @@ Ray * Character::jump()
 {
     m_jumping = true;
 
-	m_intersectionRay = Ray(getPosition() + sf::Vector2f(16,16), getDirection());
+	m_intersectionRay = getRayIntersection();
 
 	return &m_intersectionRay;
+}
+
+Ray Character::getRayIntersection()
+{
+	return Ray(getPosition() + sf::Vector2f(16, 16), getDirection());
 }
 
 bool Character::getStatusCollision()
@@ -137,8 +142,8 @@ void Character::update(sf::Clock const & clk)
     //Deplacement
     if(isJumping())
     {
-		m_distanceToCollision -= m_velocity;
 		std::cout << "Distance de collision : " << m_distanceToCollision << std::endl;
+		m_distanceToCollision -= m_velocity;
 
         if(m_distanceToCollision <= 1)
         {
@@ -154,9 +159,6 @@ void Character::update(sf::Clock const & clk)
             setPosition(nextFramePosition());
         }
     }
-<<<<<<< HEAD
-}
-=======
 
     if((elapsedTime - m_lastAnimationUpdate).asMilliseconds() >= 400)
     {
@@ -165,4 +167,3 @@ void Character::update(sf::Clock const & clk)
         m_lastAnimationUpdate = elapsedTime;
     }
 }
->>>>>>> 03bf4c406c8bd9fa1035ec3b0ba48217594d6d5c
