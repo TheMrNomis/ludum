@@ -33,9 +33,10 @@ class Floor : public INDrawable, public INUpdatable
          */
         void addRoom(Room * room);
 
-		bool wallCollision(Ray * rayIntersection);
-		void objectCollision(Ray * rayIntersection, Ray * wallIntersection);
-		void fireDetectorCollision(Ray * rayIntersection, Ray * wallIntersection);
+		bool wallCollision(Ray * rayCollision);
+		bool doorCollision(Ray * rayCollision);
+		void objectCollision(Ray * rayCollision, Ray * wallIntersection);
+		void fireDetectorCollision(Ray * rayCollision, Ray * wallIntersection);
 
 		virtual void update(sf::Clock const & clk);
 		virtual void draw(sf::RenderWindow *window) const;
