@@ -26,8 +26,8 @@ class Character : public INDrawable, public INUpdatable
         const sf::Texture * m_texture;
 
         sf::Vector2f m_position;
-		unsigned int m_currentAnimation;
 
+		unsigned int m_currentAnimation;
         sf::Time m_lastAnimationUpdate;
 
 		const float m_velocity;

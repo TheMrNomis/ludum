@@ -50,7 +50,6 @@ void Building::loadToTileSet(std::string const &path)
 	unsigned char roomId = 'A';
 
 	unsigned int floorId = 0;
-
     unsigned int lineNumber = 0;
     while(levelFile.good())
     {
@@ -232,7 +231,7 @@ void Building::loadToTileSet(std::string const &path)
 					unsigned int x = atoi(x_str.c_str());
 					unsigned int y = atoi(y_str.c_str());
 
-					Teleporter * teleporter = new Teleporter(x*32, y*32, m_textureLoader->getTeleporterTexture(),0,direction);
+					Teleporter * teleporter = new Teleporter(x*32, y*32, m_textureLoader->getTeleporterTexture(),direction);
 					currentFloor->addTeleporter(teleporter);
 				}
 			}
@@ -280,9 +279,10 @@ void Building::loadToTileSet(std::string const &path)
 void Building::loadNextFloor()
 {
 
-	for (auto it = m_floors[getCurrentFloor()]->getTeleporter().cbegin();
-	it != m_floors[getCurrentFloor()]->getTeleporter().cend(); ++it) {
+	unsigned int whichTeleport = m_currentFloor;
 
+	for (auto it = m_floors[whichTeleport]->getTeleporter().cbegin();
+		it != m_floors[whichTeleport]->getTeleporter().cend(); ++it){
 		if ((*it)->getStatusColision())
 		{
 			if ((*it)->getDirection() == 0) {
