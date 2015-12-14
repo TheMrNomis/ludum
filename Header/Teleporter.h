@@ -10,6 +10,7 @@ private:
 
 	const unsigned int m_targetFloor;
 	sf::Texture * m_texture;
+	sf::Vector2f m_directionIn;
 
 public:
 

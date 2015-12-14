@@ -1,10 +1,12 @@
 #include "Floor.h"
 
 
-Floor::Floor(sf::Texture * textureBuilding):
+Floor::Floor(TextureLoader const * textureLoaders):
     m_background(),
     m_rooms(),
-	m_textureBuilding(textureBuilding)
+	m_textureBuilding(textureLoaders->getFloorTexture()),
+	m_telep_Up(new Teleporter(textureLoaders->getTeleporterTexture(), 1)),
+	m_telep_Down(new Teleporter(textureLoaders->getTeleporterTexture(), 0))
 {
 	
 }
@@ -13,6 +15,9 @@ Floor::~Floor()
 {
     for(auto it = m_rooms.begin(); it != m_rooms.end(); ++it)
         delete *it;
+
+	delete m_telep_Up;
+	delete m_telep_Down;
 }
 
 void Floor::addLine(std::vector<unsigned char> line)
@@ -87,6 +92,24 @@ bool Floor::doorCollision(Ray * rayCollision)
 	return rayCollision->validIntersectionFound();
 }
 
+void Floor::teleporterDetectorCollision(Ray * rayCollision, Ray * wallIntersection)
+{
+	for (int i = 0; i < m_rooms.size(); ++i)
+		for (int j = 0; j < m_rooms[i]->getfireDetector().size(); ++j)
+		{
+			int tminX = m_rooms[i]->getfireDetector()[j]->getX();
+			int tminY = m_rooms[i]->getfireDetector()[j]->getY();
+			double radius = m_rooms[i]->getfireDetector()[j]->getRadius();
+
+			rayCollision->intersectCircle(sf::Vector2f(tminX * 32, tminY * 32), radius);
+
+			if (rayCollision->validIntersectionFound() && rayCollision->distanceToIntersection() <= wallIntersection->distanceToIntersection())
+				m_rooms[i]->getfireDetector()[j]->activate();
+
+			rayCollision->resetDistance();
+		}
+}
+
 void Floor::update(sf::Clock const & clk)
 {
 	for (auto it = m_rooms.begin(); it != m_rooms.end(); ++it)
@@ -120,6 +143,10 @@ void Floor::draw(sf::RenderWindow * window) const
 
 			window->draw(sprite);
 		}
+
+	//teleporter
+	m_telep_Up->draw(window);
+	m_telep_Down->draw(window);
 
 
 	}

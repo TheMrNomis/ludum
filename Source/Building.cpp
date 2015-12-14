@@ -44,7 +44,7 @@ void Building::loadToTileSet(std::string const &path)
 {
     std::ifstream levelFile(path, std::ios_base::in);
 
-    Floor * currentFloor = new Floor(m_textureLoader->getFloorTexture());
+	Floor * currentFloor = new Floor(m_textureLoader);
 
     std::unordered_map<unsigned char, Object*> objects;
     std::unordered_map<unsigned char, bool> objectsSentInRoom;
@@ -68,7 +68,7 @@ void Building::loadToTileSet(std::string const &path)
             {
                 //new floor
                 m_floors.push_back(currentFloor);
-                currentFloor = new Floor(m_textureLoader->getFloorTexture());
+                currentFloor = new Floor(m_textureLoader);
             }
 
             else if(line[0] == 'o')

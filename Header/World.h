@@ -17,8 +17,7 @@ class World : public INDrawable, public INUpdatable
 		Building  * m_building;
 		Character * m_character;
 		
-		//temp
-		Teleporter * m_telep;
+		
 
 	public:
 		World();
