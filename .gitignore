@@ -247,6 +247,9 @@ FakesAssemblies/
 
 # Visual Studio Projects
 *.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
 
 # Visual Studio LightSwitch build output
 **/*.HTMLClient/GeneratedArtifacts
