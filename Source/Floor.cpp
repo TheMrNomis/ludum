@@ -11,7 +11,7 @@ Floor::Floor(TextureLoader const * textureLoaders):
 	
 	m_textureBuilding(textureLoaders->getFloorTexture())
 {
-	//
+	
 }
 
 Floor::~Floor()
@@ -33,11 +33,10 @@ void Floor::addLineToRoomsMap(std::vector<unsigned char> line)
 	m_roomsMap.push_back(line);
 }
 
-void Floor::addRoom(unsigned char id, Room * room)
+void Floor::addRoom(Room * room)
 {
     m_rooms.push_back(room);
 }
-
 
 void Floor::addDoor(Door * door)
 {

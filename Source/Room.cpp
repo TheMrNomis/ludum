@@ -1,6 +1,7 @@
 #include "Room.h"
 
-Room::Room():
+Room::Room(unsigned int roomId):
+	m_roomId(roomId),
     m_objects(std::vector<Object *>()),
     m_fireDetectors(std::vector<FireDetector *>())
 {
@@ -41,15 +42,23 @@ void Room::extinguishFire()
         (*it)->stopFire();
 }
 
-void Room::draw(sf::RenderWindow * window) const{
+void Room::collision(Ray * ray)
+{
+    for(auto it = m_objects.begin(); it != m_objects.end(); ++it)
+        (*it)->collision(ray);
 
+    for(auto it = m_fireDetectors.begin(); it != m_fireDetectors.end(); ++it)
+        (*it)->collision(ray);
+}
+
+void Room::draw(sf::RenderWindow * window, std::vector<std::vector<unsigned char>> * floorMap) const
+{
 	for (auto it = m_objects.cbegin(); it != m_objects.cend(); ++it)
 		(*it)->draw(window);
 
 	for (auto it = m_fireDetectors.cbegin(); it != m_fireDetectors.cend(); ++it)
 		(*it)->draw(window);
 }
-
 
 void Room::update(sf::Clock const & clk)
 {
@@ -59,11 +68,3 @@ void Room::update(sf::Clock const & clk)
 	//si le fireDetector détecte le character -> extinguishFire()
 }
 
-void Room::collision(Ray * ray)
-{
-    for(auto it = m_objects.begin(); it != m_objects.end(); ++it)
-        (*it)->collision(ray);
-
-    for(auto it = m_fireDetectors.begin(); it != m_fireDetectors.end(); ++it)
-        (*it)->collision(ray);
-}
