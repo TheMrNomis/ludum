@@ -11,7 +11,7 @@ Floor::Floor(TextureLoader const * textureLoaders):
 	
 	m_textureBuilding(textureLoaders->getFloorTexture())
 {
-	
+	//
 }
 
 Floor::~Floor()
