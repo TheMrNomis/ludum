@@ -22,7 +22,7 @@ public:
 		unsigned int getX() const ;
 		unsigned int getY() const;
 		virtual void update(sf::Clock const & clk) ;
-		void Teleporter::draw(sf::RenderWindow * window) const;
+		void draw(sf::RenderWindow * window) const;
 };
 
 

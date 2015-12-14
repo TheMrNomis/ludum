@@ -3,10 +3,11 @@
 
 
 Teleporter::Teleporter(unsigned int positionX, unsigned int positionY,sf::Texture * texture, unsigned int targetFloor) :
-					   m_x(positionX),
-					   m_y(positionY),
-					   m_texture(texture),m_targetFloor(targetFloor),
-					   m_directionIn(sf::Vector2f())
+    m_targetFloor(targetFloor),
+    m_texture(texture),
+    m_directionIn(sf::Vector2f()),
+    m_x(positionX),
+    m_y(positionY)
 {
 
 }
