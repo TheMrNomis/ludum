@@ -47,7 +47,7 @@ void Building::loadToTileSet(std::string const &path)
     std::unordered_map<unsigned char, bool> fireDetectorsSentInRoom;
 
 	bool mapConstruction = false;
-	unsigned char roomId = '0';
+	unsigned char roomId = 'A';
 
 	unsigned int floorId = 0;
 
@@ -65,6 +65,10 @@ void Building::loadToTileSet(std::string const &path)
                 //new floor
                 m_floors.push_back(currentFloor);
                 currentFloor = new Floor(m_textureLoader);
+				floorId++;
+
+				//restart nb_rooms
+				roomId = 0;
             }
 
             else if(line[0] == 'o')
@@ -124,7 +128,7 @@ void Building::loadToTileSet(std::string const &path)
                     unsigned int x = atoi(x_str.c_str());
                     unsigned int y = atoi(y_str.c_str());
 
-                    FireDetector * fd = new FireDetector(x,y, 128, m_textureLoader->getFireDetectorTexture());
+                    FireDetector * fd = new FireDetector(x,y, 64, m_textureLoader->getFireDetectorTexture());
                     fireDetectors.insert(std::pair<unsigned char, FireDetector *>(fireID, fd));
                     fireDetectorsSentInRoom.insert(std::pair<unsigned char, bool>(fireID, false));
                 }
@@ -138,7 +142,7 @@ void Building::loadToTileSet(std::string const &path)
 
             else if(line[0] == 'r')
             {
-                //room
+                //room//
                 bool ids_fireDetector = false;
 
                 Room * room = new Room(roomId);
@@ -179,20 +183,28 @@ void Building::loadToTileSet(std::string const &path)
 					std::string x_str;
 					std::string y_str;
 
-					bool first = true;
+					std::vector<unsigned char> adjacentRooms;
+
+					bool posxDefinition = true;
+					bool adjacentRoomDefinition = false;
 
 					for (unsigned int i = 1; i < line.length(); ++i)
 					{
-						if (line[i] == ':')
-							first = false;
+						if(line[i] == ':')
+							posxDefinition = false;
+						if(line[i] == '>')
+							adjacentRoomDefinition = true;
+
+						if(adjacentRoomDefinition)
+							adjacentRooms.push_back(line[i]);
 						else
-							(first ? x_str : y_str).push_back(line[i]);
+							(posxDefinition ? x_str : y_str).push_back(line[i]);
 					}
 
 					unsigned int x = atoi(x_str.c_str());
 					unsigned int y = atoi(y_str.c_str());
 
-					Door * door = new Door(x,y,m_textureLoader->getObjectsTexture());
+					Door * door = new Door(x,y,std::pair<unsigned char, unsigned char>(adjacentRooms[0],adjacentRooms[1]),m_textureLoader->getObjectsTexture());
 					currentFloor->addDoor(door);
 				}
 			}
@@ -263,6 +275,29 @@ void Building::loadToTileSet(std::string const &path)
             delete it->second;
 
     m_floors.push_back(currentFloor);
+}
+
+void Building::loadNextFloor()
+{
+
+	for (auto it = m_floors[getCurrentFloor()]->getTeleporter().cbegin();
+	it != m_floors[getCurrentFloor()]->getTeleporter().cend(); ++it) {
+
+		if ((*it)->getStatusColision())
+		{
+			if ((*it)->getDirection() == 0) {
+				if (m_currentFloor > 0) {
+					m_currentFloor = 0;
+				}
+			}
+			else
+			{
+				m_currentFloor = 1;
+			}
+
+		}
+	}
+
 }
 
 void Building::draw(sf::RenderWindow *window) const

@@ -78,12 +78,12 @@ void Room::draw(sf::RenderWindow * window, std::vector<std::vector<unsigned char
 	for (auto it = m_fireDetectors.cbegin(); it != m_fireDetectors.cend(); ++it)
 		(*it)->draw(window);
 
-	for (unsigned int it = 0; it != floorMap->size(); ++it)
-	{	
-		for (unsigned int jt = 0; jt != floorMap[it].size(); ++jt)
-			if(floorMap->at(it).at(jt) == m_roomId);
-				//TODO GESTION DES RAY;
-	}
+	//for (unsigned int it = 0; it != floorMap->size(); ++it)
+	//{	
+	//	for (unsigned int jt = 0; jt != floorMap[it].size(); ++jt)
+	//		if(floorMap->at(it).at(jt) == m_roomId);
+	//			//TODO GESTION DES RAY;
+	//}
 }
 
 double Room::lifeStay() const

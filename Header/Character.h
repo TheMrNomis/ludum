@@ -34,6 +34,7 @@ class Character : public INDrawable, public INUpdatable
 		bool m_jumping;
 		bool m_statusCollision;
 
+		unsigned char m_currentRoom;
 
 		double m_angleJump;
 		Ray	m_collisionRay;
@@ -64,7 +65,6 @@ class Character : public INDrawable, public INUpdatable
 		*
 		*/
 		double  getAngle() const ;
-
 
 		void setDistanceToCollision(double distance);
 
@@ -100,13 +100,14 @@ class Character : public INDrawable, public INUpdatable
 		*/
 		bool getStatusCollision();
 		
+		void setCurrentRoom(std::pair<unsigned int, unsigned> adjacentRooms);
+		
 		/**
 		* @brief set if the character is in collision or not
 		*	
 		*
 		*/
 		void setStatusCollision(bool isInCollision);
-
 
 		/**
 		* @brief Get the srpite of the character
@@ -139,12 +140,6 @@ class Character : public INDrawable, public INUpdatable
 		*
 		*/
 		bool isJumping();
-
-		/**
-		* @brief set if the caracter is moving or not
-		*
-		*/
-		void setMoving(bool isMoving);
 
 		/**
 		* @brief draw the character

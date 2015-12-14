@@ -14,7 +14,6 @@
 #include "Room.h"
 #include "FireDetector.h"
 #include "Door.h"
-#include "Teleporter.h"
 
 class Building : public INDrawable, public INUpdatable
 {
@@ -46,6 +45,10 @@ class Building : public INDrawable, public INUpdatable
 		std::vector<Floor * > * getFloors();
 
 		unsigned int getCurrentFloor();
+
+
+		void loadNextFloor();
+
 
 		/**
 		*@brief check if the sprite is intersecting a wall in the floor number idFloor

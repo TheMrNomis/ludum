@@ -149,6 +149,11 @@ void Floor::collision(Ray * ray)
 
 }
 
+std::vector<Teleporter *> Floor::getTeleporter()
+{
+	return m_teleporters;
+}
+
 sf::Vector2u Floor::offset(unsigned int i, unsigned int j) const
 {
     unsigned char v = m_background[i][j];
