@@ -54,6 +54,9 @@ void Building::loadToTileSet(std::string const &path)
     std::unordered_map<unsigned char, FireDetector*> fireDetectors;
     std::unordered_map<unsigned char, bool> fireDetectorsSentInRoom;
 
+	bool mapConstruction = false;
+	unsigned int idRooms = 0;
+
     unsigned int lineNumber = 0;
     while(levelFile.good())
     {
@@ -170,7 +173,8 @@ void Building::loadToTileSet(std::string const &path)
                     }
                 }
 
-                currentFloor->addRoom(room);
+                currentFloor->addRoom(idRooms,room);
+				idRooms++;
             }
 
 			else if (line[0] == 'd')
@@ -227,6 +231,20 @@ void Building::loadToTileSet(std::string const &path)
 					Teleporter * teleporter = new Teleporter(x*32, y*32, m_textureLoader->getTeleporterTexture(),0,direction);
 					currentFloor->addTeleporter(teleporter);
 				}
+			}
+
+			else if(line[0] == '|')
+			{
+				mapConstruction = !mapConstruction;
+			}
+
+			else if(mapConstruction)
+			{
+				std::vector<unsigned char> buffer;
+				for (auto it = line.cbegin(); it != line.cend(); ++it)
+					buffer.push_back(*it);
+
+				currentFloor->addLineToRoomsMap(buffer);
 			}
 
             else
