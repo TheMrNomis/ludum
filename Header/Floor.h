@@ -40,8 +40,8 @@ class Floor : public INDrawable, public INUpdatable
 		bool doorCollision(Ray * rayCollision);
 		void objectCollision(Ray * rayCollision, Ray * wallIntersection);
 		void fireDetectorCollision(Ray * rayCollision, Ray * wallIntersection);
-		bool teleporterDetectorCollision(Ray * rayCollision, Teleporter const * teleporter );
 
+		bool teleporterDetectorCollision(Ray * rayCollision, Teleporter const * teleporter );
 
 		virtual void update(sf::Clock const & clk);
 		virtual void draw(sf::RenderWindow *window) const;

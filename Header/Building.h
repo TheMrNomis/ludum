@@ -14,6 +14,7 @@
 #include "Room.h"
 #include "FireDetector.h"
 #include "Door.h"
+#include "Teleporter.h"
 
 class Building : public INDrawable, public INUpdatable
 {
