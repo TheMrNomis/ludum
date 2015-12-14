@@ -41,18 +41,21 @@ void Floor::addTeleporter(Teleporter * teleporter)
     m_teleporters.push_back(teleporter);
 }
 
-bool Floor::wallCollision(Ray * rayCollision)
+bool Floor::wallCollision(Ray * collisionRay)
 {
 	for (unsigned int i = 0; i < m_background.size(); ++i)
 		for (unsigned int j = 0; j < m_background[i].size(); ++j)
 			if (m_background[i][j] == '1')
-				rayCollision->intersectSquare(sf::Vector2f(j * 32, i * 32), sf::Vector2f(j * 32 + 31, i * 32 + 31));
+				collisionRay->intersectSquare(sf::Vector2f(j * 32, i * 32), sf::Vector2f(j * 32 + 31, i * 32 + 31));
 
-	return rayCollision->validIntersectionFound();
+	return collisionRay->validIntersectionFound();
 }
 
-void Floor::objectCollision(Ray * rayCollision, Ray * wallIntersection)
+bool Floor::objectCollision(Ray * collisionRay)
 {
+	int x, y;
+	double minDepth = std::numeric_limits<double>::max();
+
 	for (unsigned int i = 0; i < m_rooms.size(); ++i)
 		for (unsigned int j = 0; j < m_rooms[i]->getObject().size(); ++j)
 			{
@@ -61,64 +64,70 @@ void Floor::objectCollision(Ray * rayCollision, Ray * wallIntersection)
 				int tmaxX = tminX + m_rooms[i]->getObject()[j]->getWidth();
 				int tmaxY = tminY + m_rooms[i]->getObject()[j]->getHeight();
 		
-				rayCollision->intersectSquare(sf::Vector2f(tminX * 32, tminY * 32), sf::Vector2f(tmaxX * 32, tmaxY * 32));
-		
-				if (rayCollision->validIntersectionFound())
-					if (rayCollision->distanceToIntersection() <= wallIntersection->distanceToIntersection())
-					{
-						
-						m_rooms[i]->getObject()[j]->ignite(0.001);
-						*wallIntersection = *rayCollision;
-					}
-				rayCollision->resetDistance();
-		}
+				collisionRay->intersectSquare(sf::Vector2f(tminX * 32, tminY * 32), sf::Vector2f(tmaxX * 32, tmaxY * 32));
+			
+				if(collisionRay->distanceToIntersection() < minDepth)
+				{
+					x = i;
+					y = j;
+					minDepth = collisionRay->distanceToIntersection();
+				}
+			}
+
+	m_rooms[x]->getObject()[y]->ignite(0.001);
+
+	return collisionRay->validIntersectionFound();
 }
 
 
-void Floor::fireDetectorCollision(Ray * rayCollision, Ray * wallIntersection)
+bool Floor::fireDetectorCollision(Ray * collisionRay)
 {
+	int x, y;
+	double minDepth = std::numeric_limits<double>::max();
+
 	for (unsigned int i = 0; i < m_rooms.size(); ++i)
-		for (unsigned int j = 0; j < m_rooms[i]->getObject().size(); ++j)
+		for (unsigned int j = 0; j < m_rooms[i]->getfireDetector().size(); ++j)
 			{
-				int tminX = m_rooms[i]->getObject()[j]->getX();
-				int tminY = m_rooms[i]->getObject()[j]->getY();
-				int tmaxX = tminX + m_rooms[i]->getObject()[j]->getWidth();
-				int tmaxY = tminY + m_rooms[i]->getObject()[j]->getHeight();
+				int tminX = m_rooms[i]->getfireDetector()[j]->getX();
+				int tminY = m_rooms[i]->getfireDetector()[j]->getY();
 		
-				rayCollision->intersectSquare(sf::Vector2f(tminX * 32, tminY * 32), sf::Vector2f(tmaxX * 32, tmaxY * 32));
-		
-				if (rayCollision->validIntersectionFound())
-					if (rayCollision->distanceToIntersection() <= wallIntersection->distanceToIntersection())
-					{
-						
-						m_rooms[i]->getObject()[j]->ignite(0.001);
-						*wallIntersection = *rayCollision;
-					}
-				rayCollision->resetDistance();
-		}
+				collisionRay->intersectCircle(sf::Vector2f(tminX * 32 + 16, tminY * 32 + 16),20);
+			
+				if (collisionRay->distanceToIntersection() < minDepth)
+				{
+					x = i;
+					y = j;
+					minDepth = collisionRay->distanceToIntersection();
+				}
+			}
+
+	m_rooms[x]->getfireDetector()[y]->activate();
+	return collisionRay->validIntersectionFound();
 }
 
-bool Floor::doorCollision(Ray * rayCollision)
+bool Floor::doorCollision(Ray * collisionRay)
 {
 	for (unsigned int i = 0; i < m_background.size(); ++i)
 		for (unsigned int j = 0; j < m_background[i].size(); ++j)
 			if (m_background[i][j] == '2')
-				rayCollision->intersectSquare(sf::Vector2f(j * 32, i * 32), sf::Vector2f(j * 32 + 31, i * 32 + 31));
+				collisionRay->intersectSquare(sf::Vector2f(j * 32, i * 32), sf::Vector2f(j * 32 + 31, i * 32 + 31));
 
-	return rayCollision->validIntersectionFound();
+	return collisionRay->validIntersectionFound();
 }
 
-bool Floor::teleporterDetectorCollision(Ray * rayCollision, Teleporter const * teleporter ) 
+bool Floor::teleporterCollision(Ray * collisionRay) 
 {
-	
-		int tminX = teleporter->getX();
-		int tminY = teleporter->getY();
+	for (unsigned int i = 0; i < m_rooms.size(); ++i)
+	{
+		int tminX = m_teleporters[i]->getX();
+		int tminY = m_teleporters[i]->getY();
 		int tmaxX = tminX + 32;
 		int tmaxY = tminY + 64;
 
-		rayCollision->intersectSquare(sf::Vector2f(tminX * 32, tminY * 32), sf::Vector2f(tmaxX * 32, tmaxY * 32));
-
-		return rayCollision->validIntersectionFound();
+		collisionRay->intersectSquare(sf::Vector2f(tminX * 32, tminY * 32), sf::Vector2f(tmaxX * 32, tmaxY * 32));
+	}
+		
+	return collisionRay->validIntersectionFound();
 }
 
 

@@ -27,17 +27,19 @@ unsigned int Building::getCurrentFloor()
 	return m_currentFloor;
 }
 
-bool Building::checkCollisions(Ray * rayCollision)
+bool Building::checkCollisions(Ray * collisionRay)
 {
-	Ray rayObject = *rayCollision;
+	bool collision;
 
-	bool wall = m_floors[m_currentFloor]->wallCollision(rayCollision);
-	m_floors[m_currentFloor]->objectCollision(&rayObject, rayCollision);
-	m_floors[m_currentFloor]->fireDetectorCollision(&rayObject, rayCollision);
+	collision = m_floors[m_currentFloor]->wallCollision(collisionRay);
+	collision = m_floors[m_currentFloor]->doorCollision(collisionRay);
 
-	// Replace character in the middle of object
+	collision = m_floors[m_currentFloor]->objectCollision(collisionRay);
+	//collision = m_floors[m_currentFloor]->teleporterCollision(collisionRay);
 
-	return wall;
+	collision = m_floors[m_currentFloor]->fireDetectorCollision(collisionRay);
+
+	return collision;
 }
 
 void Building::loadToTileSet(std::string const &path)
@@ -175,7 +177,7 @@ void Building::loadToTileSet(std::string const &path)
 			{
 				//doors
 				bool error = false;
-				if (line.length() >= 5)
+				if (line.length() >= 4)
 				{
 					std::string x_str;
 					std::string y_str;
@@ -195,8 +197,6 @@ void Building::loadToTileSet(std::string const &path)
 
 					Door * door = new Door(x,y,m_textureLoader->getObjectsTexture());
 					currentFloor->addDoor(door);
-				
-					std::cout << "test door" << std::endl;
 				}
 			}
 
@@ -224,7 +224,7 @@ void Building::loadToTileSet(std::string const &path)
 					unsigned int x = atoi(x_str.c_str());
 					unsigned int y = atoi(y_str.c_str());
 
-					Teleporter * teleporter = new Teleporter(x, y, m_textureLoader->getTeleporterTexture(),0,direction);
+					Teleporter * teleporter = new Teleporter(x*32, y*32, m_textureLoader->getTeleporterTexture(),0,direction);
 					currentFloor->addTeleporter(teleporter);
 				}
 			}

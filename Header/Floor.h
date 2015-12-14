@@ -42,12 +42,11 @@ class Floor : public INDrawable, public INUpdatable
 		
 		void addTeleporter(Teleporter * teleporter);
 
-		bool wallCollision(Ray * rayCollision);
-		bool doorCollision(Ray * rayCollision);
-		void objectCollision(Ray * rayCollision, Ray * wallIntersection);
-		void fireDetectorCollision(Ray * rayCollision, Ray * wallIntersection);
-
-		bool teleporterDetectorCollision(Ray * rayCollision, Teleporter const * teleporter );
+		bool wallCollision(Ray * collisionRay);
+		bool doorCollision(Ray * collisionRay);
+		bool objectCollision(Ray * collisionRay);
+		bool fireDetectorCollision(Ray * collisionRay);
+		bool teleporterCollision(Ray * collisionRay);
 
 		virtual void update(sf::Clock const & clk);
 		virtual void draw(sf::RenderWindow *window) const;

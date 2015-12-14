@@ -53,7 +53,7 @@ class Building : public INDrawable, public INUpdatable
 		*@param idFloor : the floor which we want to check if there are any collision
 		*@param sprite : the sprite which collide or not any wall in the floor
 		*/
-		bool checkCollisions(Ray * rayCollision);
+		bool checkCollisions(Ray * collisionRay);
 		/**
 		*@brief charge the level from files
 		*

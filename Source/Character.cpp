@@ -14,7 +14,7 @@ Character::Character(TextureLoader * textures) :
     m_statusCollision(false),
 
     m_angleJump(90),
-    m_intersectionRay(sf::Vector2f(0, 0), sf::Vector2f(0, 0))
+    m_collisionRay(sf::Vector2f(0, 0), sf::Vector2f(0, 0))
 {
     m_lastAnimationUpdate = sf::milliseconds(0);
 }
@@ -74,13 +74,11 @@ void Character::setPosition(sf::Vector2f position)
 Ray * Character::jump()
 {
     m_jumping = true;
-
-	m_intersectionRay = getrayCollision();
-
-	return &m_intersectionRay;
+	m_collisionRay = getCollisionRay();
+	return &m_collisionRay;
 }
 
-Ray Character::getrayCollision()
+Ray Character::getCollisionRay()
 {
 	return Ray(getPosition() + sf::Vector2f(16, 16), getDirection());
 }
