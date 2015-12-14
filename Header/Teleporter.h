@@ -11,11 +11,16 @@ private:
 	const unsigned int m_targetFloor;
 	sf::Texture * m_texture;
 	sf::Vector2f m_directionIn;
+	unsigned int m_x;
+	unsigned int m_y;
 
 public:
 
-		Teleporter(sf::Texture * texture, unsigned int targetFloor);
+	Teleporter(unsigned int positionX, unsigned int positionY,sf::Texture * texture, unsigned int targetFloor );
 		virtual ~Teleporter();
+
+		unsigned int getX() const ;
+		unsigned int getY() const;
 		virtual void update(sf::Clock const & clk) ;
 		void Teleporter::draw(sf::RenderWindow * window) const;
 };

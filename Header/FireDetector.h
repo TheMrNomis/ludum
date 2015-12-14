@@ -12,6 +12,16 @@ class Room;
 
 class FireDetector : public INUpdatable, public INDrawable, public INCollisionable
 {
+    private:
+        Room * m_parentRoom;
+
+        sf::Texture const* m_texture;
+
+        unsigned int m_x;
+        unsigned int m_y;
+        double const m_radius;
+        bool m_isActivated;
+
     public:
         /**
          * @brief constuctor for FireDetector
@@ -46,13 +56,4 @@ class FireDetector : public INUpdatable, public INDrawable, public INCollisionab
 
         virtual void update(sf::Clock const& clk);
 
-    private:
-        Room * m_parentRoom;
-
-        sf::Texture const* m_texture;
-
-        unsigned int m_x;
-        unsigned int m_y;
-        double const m_radius;
-        bool m_isActivated;
 };
