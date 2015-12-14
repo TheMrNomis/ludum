@@ -92,6 +92,11 @@ Object::Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int 
     m_maxBurnedDamage(maxBurnedDamage),
     m_currentFlameIntensity(0),
     m_currentBurnedDamage(0),
+
+    m_lastUpdatedTime(),
+    m_typeFire(-1),
+    m_animFrame(0),
+
     m_objectTexture(objectTexture),
     m_fireTexture(fireTexture),
     m_clock()
@@ -110,36 +115,67 @@ void Object::update(sf::Clock const & clk)
     m_time = m_clock.getElapsedTime();
 	if (m_burn)
 	{
-
 		m_currentBurnedDamage += m_currentFlameIntensity;
 		if (m_currentBurnedDamage > m_maxBurnedDamage)
 		{
-			m_burn = false;
+            this->stopFire();
 		}
 	}
+
+    sf::Time time = clk.getElapsedTime();
+    if((time - m_lastUpdatedTime).asMilliseconds() > 400)
+    {
+        m_animFrame++;
+        if(m_animFrame == 8)
+        {
+            if(m_typeFire == 0)
+                m_typeFire = 1;
+            else if(m_typeFire == 2)
+                m_typeFire = -1;
+
+            m_animFrame %= 8;
+        }
+    }
 }
 
 void Object::draw(sf::RenderWindow * window) const
 {
+    //TODO: set object to black
     sf::Sprite sprite;
     sprite.setTexture(*m_objectTexture);
     sprite.setTextureRect(sf::IntRect(32*m_offsetX, 32*m_offsetY, 32*m_width, 32*m_height));
     sprite.setPosition(m_x * 32, m_y * 32);
     window->draw(sprite);
+
+    //TODO: draw fire sprite
+    if(m_typeFire >= 0)
+    {
+        sf::Sprite fireSprite;
+        fireSprite.setTexture(*m_fireTexture);
+        fireSprite.setTextureRect(sf::IntRect(64*m_animFrame, 4*32*m_typeFire, 64, 4*32));
+        fireSprite.setOrigin(32, 3*32 + 16);
+        fireSprite.setPosition(m_x*32 + m_width * 16, m_y*32 + m_height*16);
+        window->draw(fireSprite);
+    }
 }
 
 void Object::ignite(double fire)
 {
+    std::cout << "ignite" << std::endl;
 	if (!m_burn)
 	{
 		m_burn = true;
 		m_currentFlameIntensity = fire;
+        m_typeFire = 0;
+        m_animFrame = 0;
 	}
 }
 
 void Object::stopFire()
 {
     m_currentFlameIntensity = 0;
+    m_typeFire = 2;
+    m_animFrame = 0;
 }
 
 

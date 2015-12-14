@@ -71,6 +71,9 @@ class Object : public INDrawable, public INUpdatable, public INCollisionable
         double m_currentFlameIntensity;
         double m_currentBurnedDamage;
 
+        sf::Time m_lastUpdatedTime;
+        int m_typeFire; //-1: none, 0: starting, 1: looping, 2: stopping
+        unsigned int m_animFrame; //between 0 and 7
 
         sf::Texture * m_objectTexture;
         sf::Texture * m_fireTexture;
