@@ -18,7 +18,9 @@ Room::~Room()
 
 void Room::addObject(Object * obj)
 {
+	std::cout << "nb o: " << m_objects.size() << std::endl;
     m_objects.push_back(obj);
+	std::cout << "nb o: " << m_objects.size() << std::endl;
 }
 
 std::vector<Object *> Room::getObject()
@@ -33,7 +35,9 @@ std::vector<FireDetector *> Room::getfireDetector()
 
 void Room::addFireDetector(FireDetector * fd)
 {
+	std::cout << "nb f: " << m_fireDetectors.size() << std::endl;
     m_fireDetectors.push_back(fd);
+	std::cout << "nb f: " << m_fireDetectors.size() << std::endl;
 }
 
 void Room::extinguishFire()
@@ -60,12 +64,12 @@ void Room::draw(sf::RenderWindow * window, std::vector<std::vector<unsigned char
 	for (auto it = m_fireDetectors.cbegin(); it != m_fireDetectors.cend(); ++it)
 		(*it)->draw(window);
 
-	for (auto it = 0; it != floorMap->size(); ++it)
-	{	
-		for (auto jt = 0; jt != floorMap[it].size(); ++jt)
-			if(floorMap->at(it).at(jt) == m_roomId);
-				//TODO GESTION DES RAY;
-	}
+	//for (auto it = 0; it != floorMap->size(); ++it)
+	//{	
+	//	for (auto jt = 0; jt != floorMap[it].size(); ++jt)
+	//		if(floorMap->at(it).at(jt) == m_roomId);
+	//			//TODO GESTION DES RAY;
+	//}
 }
 
 void Room::update(sf::Clock const & clk)

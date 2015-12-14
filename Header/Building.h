@@ -25,7 +25,7 @@ class Building : public INDrawable, public INUpdatable
 		const TextureLoader * m_textureLoader;
 
 		std::vector<Floor *> m_floors;
-		const unsigned int m_currentFloor;
+		unsigned int m_currentFloor;
 
 	public:
 		 /**
