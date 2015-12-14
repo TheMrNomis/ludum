@@ -7,6 +7,7 @@ m_building(new Building(&m_textures, 1, 1)),
 m_character(new Character(&m_textures))
 {
 	m_building->loadToTileSet("Levels/0.lvl");
+	Teleporter * telep = &Teleporter(m_textures.getObjectsTexture(), 1);
 }
 
 World::~World()
