@@ -36,9 +36,15 @@ void Character::setAngle(int alpha)
     }
 
 }
+
 double Character::getAngle() const
 {
     return m_angleJump;
+}
+
+void Character::setDistanceToCollision(double distance)
+{
+	m_distanceToCollision = distance;
 }
 
 float Character::getVelocity()
@@ -68,7 +74,7 @@ Ray * Character::jump()
 {
     m_jumping = true;
 
-	m_intersectionRay = Ray(getPosition(), getDirection());
+	m_intersectionRay = Ray(getPosition() + sf::Vector2f(16,16), getDirection());
 
 	return &m_intersectionRay;
 }
@@ -123,19 +129,20 @@ void Character::draw(sf::RenderWindow *window) const
     }
 }
 
-
 void Character::update(sf::Clock const & clk)
 {
     //Deplacement
     if(isJumping())
     {
-        std::cout << "distance to intersection: " << m_intersectionRay.distanceToIntersection() << std::endl;
+		m_distanceToCollision -= m_velocity;
+		std::cout << "Distance de collision : " << m_distanceToCollision << std::endl;
 
-        if (m_intersectionRay.distanceToIntersection() <= 1)
+        if(m_distanceToCollision <= 1)
         {
             std::cout << "/!\\ Collision /!\\" << std::endl;
             setMoving(false);
             setStatusCollision(true);
+			m_distanceToCollision = 0;
         }
 
         else

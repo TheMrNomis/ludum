@@ -37,6 +37,7 @@ class Character : public INDrawable, public INUpdatable
 		double m_angleJump;
 		Ray	m_intersectionRay;
 		
+		double m_distanceToCollision = 0;
 
 
 	public:
@@ -62,6 +63,9 @@ class Character : public INDrawable, public INUpdatable
 		*
 		*/
 		double  getAngle() const ;
+
+
+		void setDistanceToCollision(double distance);
 
 		/**
 		* @brief Get the velocity of the character

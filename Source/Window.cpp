@@ -225,34 +225,14 @@ void Window::update(sf::Clock const & clk)
 
 void Window::leftButton() const
 {
-	//std::cout << "SetAngle:" << m_currentWorld->getCharacter()-> << std::endl;
-
-	Ray intersectionRay(m_currentWorld->getCharacter()->getPosition(), m_currentWorld->getCharacter()->getDirection());
-	m_currentWorld->getBuilding()->checkCollisions(&intersectionRay);
-	std::cout << "distance to intersection: " << intersectionRay.distanceToIntersection() << std::endl;
-
-
-
 	if(!m_currentWorld->getCharacter()->isJumping())
 		m_currentWorld->getCharacter()->setAngle(-10);
-	//std::cout << "Angle: " << m_currentWorld->getCharacter()-> << std::endl;
-
-	//m_currentWorld->getCharacter()->getArrowSprite()->setRotation(m_currentWorld->getCharacter()->getAngle()-45);
-
 }
 
 void Window::rightButton() const
 {
-	//std::cout << "Jump" << std::endl;
-	
-	Ray intersectionRay(m_currentWorld->getCharacter()->getPosition(), m_currentWorld->getCharacter()->getDirection());
-	m_currentWorld->getBuilding()->checkCollisions(&intersectionRay);
-	std::cout << "distance to intersection: " << intersectionRay.distanceToIntersection() << std::endl;
-
-
-    m_currentWorld->getCharacter()->setAngle(10);
-
-	//m_currentWorld->getCharacter()->getArrowSprite()->setRotation(m_currentWorld->getCharacter()->getAngle()-45);
+	if (!m_currentWorld->getCharacter()->isJumping())
+		m_currentWorld->getCharacter()->setAngle(10);
 }
 
 void Window::bothButtons() const
@@ -261,6 +241,8 @@ void Window::bothButtons() const
 	Ray * intersectionRay = m_currentWorld->getCharacter()->jump();
 
 	m_currentWorld->getBuilding()->checkCollisions(intersectionRay);
+
+	m_currentWorld->getCharacter()->setDistanceToCollision(intersectionRay->distanceToIntersection());
 
 	// Yoooo la frite ?
 
