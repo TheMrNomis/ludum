@@ -7,12 +7,13 @@
 #include "INDrawable.h"
 #include "INUpdatable.h"
 
-#include "FireDetector.h"
 #include "Object.h"
 #include "TextureLoader.h"
 #include "Character.h"
 #include "Floor.h"
 #include "Room.h"
+#include "FireDetector.h"
+#include "Door.h"
 
 class Building : public INDrawable, public INUpdatable
 {
@@ -51,7 +52,7 @@ class Building : public INDrawable, public INUpdatable
 		*@param idFloor : the floor which we want to check if there are any collision
 		*@param sprite : the sprite which collide or not any wall in the floor
 		*/
-		bool checkCollisions(Ray * rayIntersection);
+		bool checkCollisions(Ray * rayCollision);
 		/**
 		*@brief charge the level from files
 		*
