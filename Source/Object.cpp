@@ -140,14 +140,14 @@ void Object::update(sf::Clock const & clk)
 
 void Object::draw(sf::RenderWindow * window) const
 {
-    //TODO: set object to black
     sf::Sprite sprite;
     sprite.setTexture(*m_objectTexture);
+    unsigned int ndg = 255 - ((float)m_currentBurnedDamage/m_maxBurnedDamage)*255;
+    sprite.setColor(sf::Color(ndg, ndg, ndg));
     sprite.setTextureRect(sf::IntRect(32*m_offsetX, 32*m_offsetY, 32*m_width, 32*m_height));
     sprite.setPosition(m_x * 32, m_y * 32);
     window->draw(sprite);
 
-    //TODO: draw fire sprite
     if(m_typeFire >= 0)
     {
         sf::Sprite fireSprite;
