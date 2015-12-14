@@ -18,11 +18,9 @@ class Floor : public INDrawable, public INUpdatable, public INCollisionable
 {
 	private:
 		std::vector<std::vector<unsigned char> > m_background;
-		std::vector<std::vector<unsigned char> >m_roomsMap;
-		
+		std::vector<std::vector<unsigned char> > m_floorMap;
 
 		std::vector<Room *> m_rooms;
-		//std::map<unsigned char, Room *> m_rooms;
 		std::vector<Door *> m_doors;
         std::vector<Teleporter *> m_teleporters;
 
@@ -41,11 +39,9 @@ class Floor : public INDrawable, public INUpdatable, public INCollisionable
          * @param room: the room to add (dynamically-created pointer)
          * @note Floor takes ownership of the Room, and will destroy it when needed
          */
-        void addRoom(unsigned char id, Room * room);
+        void addRoom(Room * room);
 		void addDoor(Door * door);
 		void addTeleporter(Teleporter * teleporter);
-
-		unsigned char getRoomId() const;
 
 		virtual void update(sf::Clock const & clk);
 		virtual void draw(sf::RenderWindow *window) const;

@@ -1,4 +1,5 @@
 #pragma once
+#include <SFML/Audio.hpp>
 
 #include <SFML/Graphics.hpp>
 #include "INEventHandler.h"
@@ -17,6 +18,8 @@ class Window : public INEventHandler, public INUpdatable
 {
 	private:
 		sf::Clock m_clock;
+
+		sf::Music * m_musicMenu;
 
 		sf::RenderWindow * m_window;
         sf::View m_view;

@@ -5,6 +5,7 @@
 
 Window::Window():
     m_clock(),
+	m_musicMenu(new sf::Music()),
 
     m_window(new sf::RenderWindow(sf::VideoMode(800, 600), "I & the sun")),
     m_textureLoader(new TextureLoader(PATH_RESSOURCE)),
@@ -25,7 +26,11 @@ Window::Window():
 {
     m_buttonDeadZoneDelay = sf::milliseconds(20);
 
-    sf::View view(sf::FloatRect(0, 0, m_window->getSize().x , m_window->getSize().y));
+    m_view = sf::View(sf::FloatRect(0, 0, m_window->getSize().x , m_window->getSize().y));
+	
+	m_musicMenu->openFromFile("Ressources/Music/Menu.wav");
+	m_musicMenu->setLoop(true);
+	m_musicMenu->play();
 }
 
 
@@ -36,12 +41,15 @@ Window::~Window()
 
     delete m_currentWorld;
     delete m_window;
+	delete m_musicMenu;
 }
 
 int Window::run()
 {
 	//update state of the system
 	sf::Clock clk;
+	m_musicMenu->stop();
+
     while(m_currentStatus != GAME_STOPPED)
     {
         //events

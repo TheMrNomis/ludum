@@ -6,12 +6,15 @@ FireDetector::FireDetector(unsigned int x, unsigned int y, double radius, sf::Te
     m_x(x),
     m_y(y),
     m_radius(radius),
-    m_isActivated(false)
+    m_isActivated(false),
+	m_musicFireDetector(new sf::Music())
 {
+	m_musicFireDetector->openFromFile("Ressources/Music/FireDetect.wav");
 }
 
 FireDetector::~FireDetector()
 {
+	delete m_musicFireDetector;
 }
 
 void FireDetector::draw(sf::RenderWindow * window) const
@@ -40,7 +43,7 @@ const double FireDetector::getRadius() const
 
 void FireDetector::activate()
 {
-	std::cout << "Fire Detector have detect fire" << std::endl;
+	m_musicFireDetector->play();
 	m_isActivated = true;
 }
 
