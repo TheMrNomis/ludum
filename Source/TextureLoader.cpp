@@ -42,7 +42,7 @@ sf::Texture * TextureLoader::getFireDetectorTexture() const
     return m_fireDetectorTexture;
 }
 
-sf::Texture * TextureLoader::getTeleporterTexture() const
+sf::Texture const* TextureLoader::getTeleporterTexture() const
 {
 	return m_teleporterTexture;
 }
