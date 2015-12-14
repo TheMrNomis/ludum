@@ -50,6 +50,7 @@ void Floor::objectCollision(Ray * rayIntersection, Ray * wallIntersection)
 				if (rayIntersection->validIntersectionFound())
 					if (rayIntersection->distanceToIntersection() <= wallIntersection->distanceToIntersection())
 					{
+						
 						m_rooms[i]->getObject()[j]->ignite(0.001);
 						*wallIntersection = *rayIntersection;
 					}
