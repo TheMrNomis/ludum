@@ -113,6 +113,44 @@ sf::Vector2f Character::nextFramePosition()
 
 void Character::draw(sf::RenderWindow *window) const
 {
+    if(m_jumping)
+    {
+        sf::Sprite sprite;
+        sprite.setTexture(*m_texture);
+        sprite.setTextureRect(sf::IntRect(TEXTURE_DIMENSION*(m_currentAnimation%8), 4*TEXTURE_DIMENSION, TEXTURE_DIMENSION, 2*TEXTURE_DIMENSION));
+        sprite.setOrigin(16,TEXTURE_DIMENSION+16);
+        sprite.setRotation(m_angleJump-90);
+        sprite.setPosition(m_position.x + 16, m_position.y + 16);
+        window->draw(sprite);
+    }
+    else
+    {
+        sf::Sprite sprite;
+        sprite.setTexture(*m_texture);
+        sprite.setTextureRect(sf::IntRect(TEXTURE_DIMENSION*(m_currentAnimation%12), 2*TEXTURE_DIMENSION, TEXTURE_DIMENSION, 2*TEXTURE_DIMENSION));
+        sprite.setOrigin(0,TEXTURE_DIMENSION);
+        sprite.setPosition(m_position);
+        window->draw(sprite);
+
+        sf::Sprite spriteArrow;
+        spriteArrow.setTexture(*m_texture);
+        spriteArrow.setTextureRect(sf::IntRect(8*TEXTURE_DIMENSION, 0, TEXTURE_DIMENSION, TEXTURE_DIMENSION));
+        spriteArrow.setOrigin(-9,15);
+        spriteArrow.setPosition(m_position.x+(TEXTURE_DIMENSION/2), m_position.y+(TEXTURE_DIMENSION/2));
+        spriteArrow.setRotation(m_angleJump);
+        window->draw(spriteArrow);
+        //TODO: eyes
+
+        sf::Sprite eyeSprite;
+        eyeSprite.setTexture(*m_texture);
+        unsigned int direction_regard = (unsigned int)floor(((float)m_angleJump+135.0)*8.0/360)%8; //between 0 and 7
+        eyeSprite.setTextureRect(sf::IntRect(TEXTURE_DIMENSION*direction_regard, 0, TEXTURE_DIMENSION, 2*TEXTURE_DIMENSION));
+        eyeSprite.setOrigin(0, TEXTURE_DIMENSION);
+        eyeSprite.setPosition(m_position);
+        eyeSprite.move(0,-3);
+        window->draw(eyeSprite);
+    }
+    /*
     sf::Sprite sprite;
     sprite.setTexture(*m_texture);
     sprite.setTextureRect(sf::IntRect(32*(m_currentAnimation+1), 0, 32, 32));
@@ -131,6 +169,7 @@ void Character::draw(sf::RenderWindow *window) const
         spriteArrow.setRotation(m_angleJump);
         window->draw(spriteArrow);
     }
+    */
 }
 
 void Character::update(sf::Clock const & clk)
@@ -152,9 +191,9 @@ void Character::update(sf::Clock const & clk)
         else setPosition(nextFramePosition());
     }
 
-    if((elapsedTime - m_lastAnimationUpdate).asMilliseconds() >= 400)
+    if((elapsedTime - m_lastAnimationUpdate).asMilliseconds() >= 200)
     {
-        m_currentAnimation = (m_currentAnimation+1)%3;
+        m_currentAnimation = (m_currentAnimation+1)%96;
 
         m_lastAnimationUpdate = elapsedTime;
     }
