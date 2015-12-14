@@ -239,7 +239,7 @@ void Building::loadToTileSet(std::string const &path)
 					unsigned int y = atoi(y_str.c_str());
 					unsigned int status = atoi(d_str.c_str());
 
-					Teleporter * teleporter = new Teleporter(x, y, m_textureLoader->getTeleporterTexture(),0);
+					Teleporter * teleporter = new Teleporter(x, y, m_textureLoader->getCharacterTexture(),0);
 					teleporters.insert(std::pair<unsigned char, Teleporter *>(teleporteurID, teleporter));
 					teleporteursSentInRoom.insert(std::pair<unsigned char, bool>(teleporteurID, false));
 					currentFloor->addTeleporter(teleporter, status);

@@ -12,6 +12,7 @@
 #include "Ray.h"
 #include "Teleporter.h"
 #include "Door.h"
+
 class Floor : public INDrawable, public INUpdatable
 {
 	private:
