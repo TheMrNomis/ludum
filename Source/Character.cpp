@@ -9,7 +9,7 @@ Character::Character(TextureLoader * textures) :
     m_position(200, 200),
     m_currentAnimation(0),
 
-    m_velocity(20),
+    m_velocity(1),
     m_jumping(false),
     m_statusCollision(false),
 
