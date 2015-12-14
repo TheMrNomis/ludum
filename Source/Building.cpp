@@ -29,17 +29,9 @@ unsigned int Building::getCurrentFloor()
 
 bool Building::checkCollisions(Ray * collisionRay)
 {
-	bool collision;
+    m_floors[m_currentFloor]->collision(collisionRay);
 
-	collision = m_floors[m_currentFloor]->wallCollision(collisionRay);
-	collision = m_floors[m_currentFloor]->doorCollision(collisionRay);
-
-	collision = m_floors[m_currentFloor]->objectCollision(collisionRay);
-	//collision = m_floors[m_currentFloor]->teleporterCollision(collisionRay);
-
-	collision = m_floors[m_currentFloor]->fireDetectorCollision(collisionRay);
-
-	return collision;
+    return collisionRay->validIntersectionFound();
 }
 
 void Building::loadToTileSet(std::string const &path)

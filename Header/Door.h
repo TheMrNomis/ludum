@@ -3,11 +3,13 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-#include "Ray.h"
 #include "INDrawable.h"
-#include "TextureLoader.h"
+#include "INCollisionable.h"
 
-class Door : public INDrawable
+#include "TextureLoader.h"
+#include "Ray.h"
+
+class Door : public INDrawable, public INCollisionable
 {
 	private:
 		unsigned int m_x;
@@ -26,4 +28,6 @@ class Door : public INDrawable
 		*
 		*/
 		virtual void draw(sf::RenderWindow *window) const;
+        
+        virtual void collision(Ray * ray);
 };

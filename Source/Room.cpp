@@ -58,3 +58,12 @@ void Room::update(sf::Clock const & clk)
 
 	//si le fireDetector détecte le character -> extinguishFire()
 }
+
+void Room::collision(Ray * ray)
+{
+    for(auto it = m_objects.begin(); it != m_objects.end(); ++it)
+        (*it)->collision(ray);
+
+    for(auto it = m_fireDetectors.begin(); it != m_fireDetectors.end(); ++it)
+        (*it)->collision(ray);
+}

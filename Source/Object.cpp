@@ -164,3 +164,8 @@ int Object::getY() const
 {
 	return m_y;
 }
+
+void Object::collision(Ray * ray)
+{
+    ray->intersectSquare(sf::Vector2f(m_x*32, m_y*32), sf::Vector2f((m_x+m_width)*32, (m_y+m_height)*32), true, this);
+}

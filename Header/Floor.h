@@ -5,6 +5,7 @@
 
 #include "INDrawable.h"
 #include "INUpdatable.h"
+#include "INCollisionable.h"
 
 #include "TextureLoader.h"
 #include "Room.h"
@@ -13,7 +14,7 @@
 #include "Teleporter.h"
 #include "Door.h"
 
-class Floor : public INDrawable, public INUpdatable
+class Floor : public INDrawable, public INUpdatable, public INCollisionable
 {
 	private:
 		std::vector<std::vector<unsigned char> > m_background;
@@ -42,16 +43,15 @@ class Floor : public INDrawable, public INUpdatable
 		
 		void addTeleporter(Teleporter * teleporter);
 
-		bool wallCollision(Ray * collisionRay);
-		bool doorCollision(Ray * collisionRay);
-		bool objectCollision(Ray * collisionRay);
-		bool fireDetectorCollision(Ray * collisionRay);
 		bool teleporterCollision(Ray * collisionRay);
 
 		virtual void update(sf::Clock const & clk);
 		virtual void draw(sf::RenderWindow *window) const;
 
+        virtual void collision(Ray * ray);
+
 	private:
+		bool wallCollision(Ray * collisionRay);
 		sf::Vector2u offset(unsigned int i, unsigned int j) const;
 };
 

@@ -45,3 +45,8 @@ void Teleporter::draw(sf::RenderWindow * window) const
 
     window->draw(sprite);
 }
+
+void Teleporter::collision(Ray * ray)
+{
+    ray->intersectSquare(sf::Vector2f(m_x * 32, m_y * 32), sf::Vector2f((m_x+1/*width*/) * 32, (m_y+1/*height*/) * 32));
+}
