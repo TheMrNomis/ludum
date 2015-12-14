@@ -9,7 +9,7 @@ TextureLoader::TextureLoader(std::string const & url) :
     m_fireDetectorTexture(new sf::Texture()),
 	m_teleporterTexture(new sf::Texture())
 {
-	loadTexture(url);
+	loadTexture(url+"sprites/");
 }
 
 

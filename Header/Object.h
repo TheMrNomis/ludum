@@ -26,11 +26,15 @@ class Object : public INDrawable, public INUpdatable, public INCollisionable
         virtual void ignite(double fire);
         virtual void stopFire();
 
+		double getMaxBurnedDamage() const;
+
         int getWidth() const;
         int getHeight() const;
 
 		int getX() const;
 		int getY() const;
+
+		double lifeLost() const;
 
         virtual void collision(Ray * ray);
 

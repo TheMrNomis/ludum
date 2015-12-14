@@ -174,7 +174,6 @@ void Building::loadToTileSet(std::string const &path)
 			else if (line[0] == 'd')
 			{
 				//doors
-				bool error = false;
 				if (line.length() >= 4)
 				{
 					std::string x_str;
@@ -201,7 +200,6 @@ void Building::loadToTileSet(std::string const &path)
 			else if (line[0] == 't')
 			{
 				//teleporter
-				bool error = false;
 				if (line.length() >= 5)
 				{
 					std::string x_str;
@@ -270,6 +268,7 @@ void Building::loadToTileSet(std::string const &path)
 void Building::draw(sf::RenderWindow *window) const
 {
 	m_floors[m_currentFloor]->draw(window);
+	//this->drawHUD();
 }
 
 void Building::update(sf::Clock const & clk)
