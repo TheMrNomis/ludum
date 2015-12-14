@@ -36,7 +36,6 @@ void Floor::addLineToRoomsMap(std::vector<unsigned char> line)
 void Floor::addRoom(Room * room)
 {
     m_rooms.push_back(room);
-	std::cout << "nb room: " << m_rooms.size() << std::endl;
 }
 
 void Floor::addDoor(Door * door)
@@ -67,6 +66,8 @@ void Floor::update(sf::Clock const & clk)
 
 void Floor::draw(sf::RenderWindow * window) const
 {
+	std::cout << "nb room: " << m_rooms.size() << std::endl;
+
     //background
 	for (unsigned int i = 0; i < m_background.size(); ++i)
 	{
