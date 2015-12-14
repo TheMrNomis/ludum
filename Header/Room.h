@@ -58,7 +58,7 @@ class Room : public INUpdatable, public INCollisionable
          * @param window:
          *
          */
-        virtual void draw(sf::RenderWindow * window, std::vector<std::vector<unsigned char> > * floorMap) const;
+        virtual void draw(sf::RenderWindow * window, std::vector<std::vector<unsigned char> > const * floorMap) const;
 
 
         /**

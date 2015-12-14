@@ -166,7 +166,7 @@ void Building::loadToTileSet(std::string const &path)
                 }
 
                 currentFloor->addRoom(room);
-				idRooms++;
+				roomId++;
             }
 
 			else if (line[0] == 'd')
