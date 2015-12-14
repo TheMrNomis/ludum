@@ -27,13 +27,13 @@ unsigned int Building::getCurrentFloor()
 	return m_currentFloor;
 }
 
-bool Building::checkCollisions(Ray * rayIntersection)
+bool Building::checkCollisions(Ray * rayCollision)
 {
-	Ray rayObject = *rayIntersection;
+	Ray rayObject = *rayCollision;
 
-	bool wall = m_floors[m_currentFloor]->wallCollision(rayIntersection);
-	m_floors[m_currentFloor]->objectCollision(&rayObject, rayIntersection);
-	m_floors[m_currentFloor]->fireDetectorCollision(&rayObject, rayIntersection);
+	bool wall = m_floors[m_currentFloor]->wallCollision(rayCollision);
+	m_floors[m_currentFloor]->objectCollision(&rayObject, rayCollision);
+	m_floors[m_currentFloor]->fireDetectorCollision(&rayObject, rayCollision);
 
 	// Replace character in the middle of object
 
@@ -44,13 +44,19 @@ void Building::loadToTileSet(std::string const &path)
 {
     std::ifstream levelFile(path, std::ios_base::in);
 
-    Floor * currentFloor = new Floor(m_textureLoader->getFloorTexture());
+	Floor * currentFloor = new Floor(m_textureLoader);
 
     std::unordered_map<unsigned char, Object*> objects;
     std::unordered_map<unsigned char, bool> objectsSentInRoom;
 
     std::unordered_map<unsigned char, FireDetector*> fireDetectors;
     std::unordered_map<unsigned char, bool> fireDetectorsSentInRoom;
+
+	std::unordered_map<unsigned char, Door*> doors;
+	std::unordered_map<unsigned char, bool> doorsSentInRoom;
+
+	std::unordered_map<unsigned char, Teleporter*> teleporters;
+	std::unordered_map<unsigned char, bool> teleporteursSentInRoom;
 
     unsigned int lineNumber = 0;
     while(levelFile.good())
@@ -65,7 +71,7 @@ void Building::loadToTileSet(std::string const &path)
             {
                 //new floor
                 m_floors.push_back(currentFloor);
-                currentFloor = new Floor(m_textureLoader->getFloorTexture());
+                currentFloor = new Floor(m_textureLoader);
             }
 
             else if(line[0] == 'o')
@@ -170,6 +176,76 @@ void Building::loadToTileSet(std::string const &path)
 
                 currentFloor->addRoom(room);
             }
+
+			else if (line[0] == 'd')
+			{
+				//doors
+				bool error = false;
+				if (line.length() >= 5)
+				{
+					unsigned char doorID = line[1];
+					std::string x_str;
+					std::string y_str;
+					bool first = true;
+
+					for (unsigned int i = 2; i < line.length(); ++i)
+					{
+						if (line[i] == ':')
+							first = false;
+						else
+							(first ? x_str : y_str).push_back(line[i]);
+					}
+
+					unsigned int x = atoi(x_str.c_str());
+					unsigned int y = atoi(y_str.c_str());
+
+					Door * door = new Door(x,y,m_textureLoader->getObjectsTexture());
+					doors.insert(std::pair<unsigned char, Door *>(doorID, door));
+					doorsSentInRoom.insert(std::pair<unsigned char, bool>(doorID, false));
+				
+					std::cout << "test door" << std::endl;
+				}
+			}
+
+			else if (line[0] == 't')
+			{
+				//doors
+				bool error = false;
+				if (line.length() >= 5)
+				{
+					unsigned char teleporteurID = line[1];
+					
+					std::string x_str;
+					std::string y_str;
+					std::string d_str;
+
+					bool first = true;
+					bool last = true;
+
+					for (unsigned int i = 2; i < line.length(); ++i)
+					{
+						if (line[i] == ':' && first)
+							first = false;
+						else if (line[i] == ':' && last)
+						{
+							last = false;
+							d_str.push_back(line[i]);
+						}
+						else
+							(first ? x_str : y_str).push_back(line[i]);
+					}
+
+					unsigned int x = atoi(x_str.c_str());
+					unsigned int y = atoi(y_str.c_str());
+					unsigned int status = atoi(d_str.c_str());
+
+					Teleporter * teleporter = new Teleporter(x, y, m_textureLoader->getTeleporterTexture(),0);
+					teleporters.insert(std::pair<unsigned char, Teleporter *>(teleporteurID, teleporter));
+					teleporteursSentInRoom.insert(std::pair<unsigned char, bool>(teleporteurID, false));
+					currentFloor->addTeleporter(teleporter, status);
+					std::cout << "test teleporteur" << std::endl;
+				}
+			}
 
             else
             {

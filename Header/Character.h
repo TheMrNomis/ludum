@@ -133,7 +133,7 @@ class Character : public INDrawable, public INUpdatable
 		Ray * jump();
 
 
-		Ray getRayIntersection();
+		Ray getrayCollision();
 
 		/**
 		* @brief Check if the caracter is moving

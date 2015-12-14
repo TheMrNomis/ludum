@@ -11,7 +11,7 @@ private:
 	sf::Texture * m_floorTexture;
 	sf::Texture * m_characterTexture;
     sf::Texture * m_fireDetectorTexture;
-//	sf::Texture * m_teleportertexture;
+	sf::Texture * m_teleporterTexture;
 
 public:
 	TextureLoader(std::string const & url);
@@ -21,7 +21,7 @@ public:
 	sf::Texture * getObjectsTexture() const;
 	sf::Texture * getCharacterTexture() const;
     sf::Texture * getFireDetectorTexture() const;
-	//sf::Texture * getTeleporterTexture() const;
+	sf::Texture * getTeleporterTexture() const;
 	void loadTexture(std::string const & url);
 };
 

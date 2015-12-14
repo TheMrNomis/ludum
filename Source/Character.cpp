@@ -75,12 +75,12 @@ Ray * Character::jump()
 {
     m_jumping = true;
 
-	m_intersectionRay = getRayIntersection();
+	m_intersectionRay = getrayCollision();
 
 	return &m_intersectionRay;
 }
 
-Ray Character::getRayIntersection()
+Ray Character::getrayCollision()
 {
 	return Ray(getPosition() + sf::Vector2f(16, 16), getDirection());
 }
