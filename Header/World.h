@@ -9,15 +9,12 @@
 #include "Ray.h"
 #include "Teleporter.h"
 
-
 class World : public INDrawable, public INUpdatable
 {
 	private:
 		TextureLoader m_textures;
 		Building  * m_building;
 		Character * m_character;
-		
-		
 
 	public:
 		World();

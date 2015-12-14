@@ -3,9 +3,12 @@
 
 Floor::Floor(TextureLoader const * textureLoaders):
     m_background(),
+	m_roomsMap(),
+
     m_rooms(),
 	m_doors(),
     m_teleporters(),
+	
 	m_textureBuilding(textureLoaders->getFloorTexture())
 {
 	
@@ -25,7 +28,12 @@ void Floor::addLine(std::vector<unsigned char> line)
     m_background.push_back(line);
 }
 
-void Floor::addRoom(Room * room)
+void Floor::addLineToRoomsMap(std::vector<unsigned char> line)
+{
+	m_roomsMap.push_back(line);
+}
+
+void Floor::addRoom(unsigned char id, Room * room)
 {
     m_rooms.push_back(room);
 }
