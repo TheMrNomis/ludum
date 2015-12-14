@@ -14,13 +14,13 @@
 class World : public INDrawable, public INUpdatable
 {
 	private:
-		TextureLoader m_textures;
+		TextureLoader * m_textures;
 		Building  * m_building;
 		Character * m_character;
 		sf::Music * m_music;
 
 	public:
-		World();
+		World(TextureLoader * textures);
 		virtual ~World();
 
 		Character * getCharacter() const;

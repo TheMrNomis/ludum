@@ -1,9 +1,9 @@
 #include "World.h"
 
-World::World():
-m_textures(TextureLoader(PATH_RESSOURCE)),
-m_building(new Building(&m_textures, 1, 1)),
-m_character(new Character(&m_textures)),
+World::World(TextureLoader * textures):
+m_textures(textures),
+m_building(new Building(m_textures, 1, 1)),
+m_character(new Character(m_textures)),
 m_music(new sf::Music())
 {
 	m_building->loadToTileSet("Levels/0.lvl");

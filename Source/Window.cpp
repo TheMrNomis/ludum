@@ -1,12 +1,16 @@
 #include "Window.h"
 
+#define PATH_RESSOURCE "Ressources/sprites/"
 #define DELAY_BEETWEEN_2_BUTTON 20
 
 Window::Window():
     m_clock(),
 
     m_window(new sf::RenderWindow(sf::VideoMode(800, 800), "IN in Game!!!")),
-    m_currentWorld(new World()),
+    m_textureLoader(new TextureLoader(PATH_RESSOURCE)),
+    
+    m_menu(new Menu(m_textureLoader)),
+    m_currentWorld(new World(m_textureLoader)),
     
 	m_currentStatus(GAME_MAIN_MENU),
     m_mouseButtonPressed(false),

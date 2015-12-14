@@ -4,6 +4,9 @@
 #include "INEventHandler.h"
 #include "INUpdatable.h"
 #include "INDrawable.h"
+
+#include "TextureLoader.h"
+#include "Menu.h"
 #include "World.h"
 #include "Character.h"
 #include "Floor.h"
@@ -21,6 +24,9 @@ class Window : public INEventHandler, public INUpdatable
 		sf::Clock m_clock;
 
 		sf::RenderWindow * m_window;
+        TextureLoader * m_textureLoader;
+
+        Menu * m_menu;
 		World * m_currentWorld;
 
 		game_status m_currentStatus;
