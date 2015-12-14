@@ -116,6 +116,9 @@ ipch/
 *.vspx
 *.sap
 
+#Visual Studio Project
+*.sln
+
 # TFS 2012 Local Workspace
 $tf/
 
@@ -244,6 +247,12 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+
+# Visual Studio Projects
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
 
 # Visual Studio LightSwitch build output
 **/*.HTMLClient/GeneratedArtifacts
