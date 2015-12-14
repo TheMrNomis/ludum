@@ -147,6 +147,9 @@ void Floor::collision(Ray * ray)
     for(auto it = m_doors.begin(); it != m_doors.end(); ++it)
         (*it)->collision(ray);
 
+    if(ray->intersectionIsObject())
+        ray->intersectionObject()->ignite(10);
+
 }
 
 std::vector<Teleporter *> Floor::getTeleporter()

@@ -18,6 +18,16 @@ bool Ray::validIntersectionFound() const
     return m_intersectionFound;
 }
 
+bool Ray::intersectionIsObject() const
+{
+    return m_obj != nullptr;
+}
+
+Object * Ray::intersectionObject() const
+{
+    return m_obj;
+}
+
 sf::Vector2f Ray::intersection() const
 {
     return m_origin + m_direction*m_minT;

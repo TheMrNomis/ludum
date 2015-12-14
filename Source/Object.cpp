@@ -94,16 +94,16 @@ Object::Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int 
     m_currentBurnedDamage(0),
 
     m_lastUpdatedTime(),
+    m_lastSpriteChangedTime(),
     m_typeFire(-1),
     m_animFrame(0),
 
     m_objectTexture(objectTexture),
-    m_fireTexture(fireTexture),
-    m_clock()
+    m_fireTexture(fireTexture)
 
 {	
-    m_time = sf::seconds(0.0f);
-    m_clock.restart();	
+    m_lastUpdatedTime = sf::seconds(0);
+    m_lastSpriteChangedTime = sf::seconds(0);
 }
 
 Object::~Object()
@@ -112,19 +112,20 @@ Object::~Object()
 
 void Object::update(sf::Clock const & clk)
 {
-    m_time = m_clock.getElapsedTime();
-	if (m_burn)
+    sf::Time elapsedTime = clk.getElapsedTime() - m_lastUpdatedTime;
+    m_lastUpdatedTime = clk.getElapsedTime();
+	if(m_burn)
 	{
-		m_currentBurnedDamage += m_currentFlameIntensity;
-		if (m_currentBurnedDamage > m_maxBurnedDamage)
+		m_currentBurnedDamage += m_currentFlameIntensity*elapsedTime.asSeconds();
+		if(m_currentBurnedDamage > m_maxBurnedDamage)
 		{
             this->stopFire();
 		}
 	}
 
-    sf::Time time = clk.getElapsedTime();
-    if((time - m_lastUpdatedTime).asMilliseconds() > 400)
+    if((clk.getElapsedTime() - m_lastSpriteChangedTime).asMilliseconds() > 100)
     {
+        m_lastSpriteChangedTime = clk.getElapsedTime();
         m_animFrame++;
         if(m_animFrame == 8)
         {
@@ -136,6 +137,7 @@ void Object::update(sf::Clock const & clk)
             m_animFrame %= 8;
         }
     }
+
 }
 
 void Object::draw(sf::RenderWindow * window) const
@@ -161,8 +163,7 @@ void Object::draw(sf::RenderWindow * window) const
 
 void Object::ignite(double fire)
 {
-    std::cout << "ignite" << std::endl;
-	if (!m_burn)
+	if (!m_burn && m_currentBurnedDamage < m_maxBurnedDamage)
 	{
 		m_burn = true;
 		m_currentFlameIntensity = fire;
@@ -173,9 +174,13 @@ void Object::ignite(double fire)
 
 void Object::stopFire()
 {
-    m_currentFlameIntensity = 0;
-    m_typeFire = 2;
-    m_animFrame = 0;
+    if(m_burn)
+    {
+        m_burn = false;
+        m_currentFlameIntensity = 0;
+        m_typeFire = 2;
+        m_animFrame = 0;
+    }
 }
 
 
