@@ -27,7 +27,7 @@ class Character : public INDrawable, public INUpdatable
         sf::Vector2f m_position;
 		unsigned int m_currentAnimation;
 
-        sf::Time m_lastUpdateTime;
+        sf::Time m_lastAnimationUpdate;
 
 		const float m_velocity;
 		bool m_jumping;

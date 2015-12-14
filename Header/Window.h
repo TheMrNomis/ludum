@@ -30,8 +30,10 @@ class Window : public INEventHandler, public INUpdatable
 		int m_mouseOldY;
 
 		bool m_leftButtonPushed;
+        bool m_leftButtonActivated; ///when the button has been pushed for enough time
 		sf::Time m_timeLeftButtonPressed;
 		bool m_rightButtonPushed;
+        bool m_rightButtonActivated;
 		sf::Time m_timeRightButtonPressed;
 		bool m_bothButtonsEnabled;
 		sf::Time m_buttonDeadZoneDelay; ///time max spent waiting for the second button to be pressed before doing the actual action of the button

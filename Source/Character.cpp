@@ -16,6 +16,7 @@ Character::Character(TextureLoader * textures) :
     m_angleJump(90),
     m_intersectionRay(sf::Vector2f(0, 0), sf::Vector2f(0, 0))
 {
+    m_lastAnimationUpdate = sf::milliseconds(0);
 }
 
 Character::~Character()
@@ -126,6 +127,8 @@ void Character::draw(sf::RenderWindow *window) const
 
 void Character::update(sf::Clock const & clk)
 {
+    sf::Time elapsedTime = clk.getElapsedTime();
+
     //Deplacement
     if(isJumping())
     {
@@ -143,5 +146,12 @@ void Character::update(sf::Clock const & clk)
             std::cout << "/!\\ Pas de Collisions /!\\" << std::endl;
             setPosition(nextFramePosition());
         }
+    }
+
+    if((elapsedTime - m_lastAnimationUpdate).asMilliseconds() >= 400)
+    {
+        m_currentAnimation = (m_currentAnimation+1)%3;
+
+        m_lastAnimationUpdate = elapsedTime;
     }
 }
