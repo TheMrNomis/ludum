@@ -1,6 +1,6 @@
 #include "Door.h"
 
-Door::Door(unsigned int x, unsigned int y, std::pair<unsigned int, unsigned> adjacentRooms, sf::Texture const* texture):
+Door::Door(unsigned int x, unsigned int y, std::pair<unsigned int, unsigned> adjacentRooms, sf::Texture const * texture):
 	m_x(x),
 	m_y(y),
 	m_adjacentRooms(adjacentRooms),
