@@ -132,6 +132,8 @@ void Object::ignite(double fire)
 	if (!m_burn)
 	{
 		std::cout << "Object " << m_x << " : " << m_y << " is burning !!!" << std::endl;
+		std::cout << "Size " << m_height << " : " << m_width << std::endl;
+
 		m_burn = true;
 		m_currentFlameIntensity = fire;
 	}

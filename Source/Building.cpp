@@ -30,10 +30,9 @@ unsigned int Building::getCurrentFloor()
 bool Building::checkCollisions(Ray * rayIntersection)
 {
 	Ray rayObject = *rayIntersection;
+
 	bool wall = m_floors[m_currentFloor]->wallCollision(rayIntersection);
-
 	m_floors[m_currentFloor]->objectCollision(&rayObject, rayIntersection);
-
 	m_floors[m_currentFloor]->fireDetectorCollision(&rayObject, rayIntersection);
 
 	return wall;
@@ -124,7 +123,7 @@ void Building::loadToTileSet(std::string const &path)
                     unsigned int x = atoi(x_str.c_str());
                     unsigned int y = atoi(y_str.c_str());
 
-                    FireDetector * fd = new FireDetector(x,y, 32, m_textureLoader->getFireDetectorTexture());
+                    FireDetector * fd = new FireDetector(x,y, 128, m_textureLoader->getFireDetectorTexture());
                     fireDetectors.insert(std::pair<unsigned char, FireDetector *>(fireID, fd));
                     fireDetectorsSentInRoom.insert(std::pair<unsigned char, bool>(fireID, false));
                 }
