@@ -52,12 +52,6 @@ void Building::loadToTileSet(std::string const &path)
     std::unordered_map<unsigned char, FireDetector*> fireDetectors;
     std::unordered_map<unsigned char, bool> fireDetectorsSentInRoom;
 
-	std::unordered_map<unsigned char, Door*> doors;
-	std::unordered_map<unsigned char, bool> doorsSentInRoom;
-
-	std::unordered_map<unsigned char, Teleporter*> teleporters;
-	std::unordered_map<unsigned char, bool> teleporteursSentInRoom;
-
     unsigned int lineNumber = 0;
     while(levelFile.good())
     {
@@ -183,12 +177,11 @@ void Building::loadToTileSet(std::string const &path)
 				bool error = false;
 				if (line.length() >= 5)
 				{
-					unsigned char doorID = line[1];
 					std::string x_str;
 					std::string y_str;
 					bool first = true;
 
-					for (unsigned int i = 2; i < line.length(); ++i)
+					for (unsigned int i = 1; i < line.length(); ++i)
 					{
 						if (line[i] == ':')
 							first = false;
@@ -200,8 +193,7 @@ void Building::loadToTileSet(std::string const &path)
 					unsigned int y = atoi(y_str.c_str());
 
 					Door * door = new Door(x,y,m_textureLoader->getObjectsTexture());
-					doors.insert(std::pair<unsigned char, Door *>(doorID, door));
-					doorsSentInRoom.insert(std::pair<unsigned char, bool>(doorID, false));
+                    delete door; //TODO
 				
 					std::cout << "test door" << std::endl;
 				}
@@ -209,27 +201,25 @@ void Building::loadToTileSet(std::string const &path)
 
 			else if (line[0] == 't')
 			{
-				//doors
+				//teleporter
 				bool error = false;
 				if (line.length() >= 5)
 				{
-					unsigned char teleporteurID = line[1];
-					
 					std::string x_str;
 					std::string y_str;
-					std::string s_str;
+					std::string d_str;
 
 					bool first = true;
 					bool last = true;
 
-					for (unsigned int i = 2; i < line.length(); ++i)
+					for (unsigned int i = 1; i < line.length(); ++i)
 					{
 						if (line[i] == ':' && first)
 							first = false;
 						else if (line[i] == ':' && last)
 						{
 							last = false;
-							s_str.push_back(line[i]);
+							d_str.push_back(line[i]);
 						}
 						else
 							(first ? x_str : y_str).push_back(line[i]);
@@ -237,13 +227,10 @@ void Building::loadToTileSet(std::string const &path)
 
 					unsigned int x = atoi(x_str.c_str());
 					unsigned int y = atoi(y_str.c_str());
-					unsigned int statut = atoi(s_str.c_str());
+					unsigned int status = atoi(d_str.c_str());
 
-					Teleporter * teleporter = new Teleporter(x, y, m_textureLoader->getTeleporterTexture(),statut);
-					teleporters.insert(std::pair<unsigned char, Teleporter *>(teleporteurID, teleporter));
-					teleporteursSentInRoom.insert(std::pair<unsigned char, bool>(teleporteurID, false));
-
-					std::cout << "test teleporteur" << std::endl;
+					Teleporter * teleporter = new Teleporter(x, y, m_textureLoader->getTeleporterTexture(),0);
+					currentFloor->addTeleporter(teleporter);
 				}
 			}
 

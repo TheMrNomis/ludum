@@ -4,9 +4,9 @@
 Floor::Floor(TextureLoader const * textureLoaders):
     m_background(),
     m_rooms(),
-	m_textureBuilding(textureLoaders->getFloorTexture()),
-	m_telep_Up(new Teleporter(450,100,textureLoaders->getTeleporterTexture(), 1)),
-	m_telep_Down(new Teleporter(500,100,textureLoaders->getTeleporterTexture(), 0))
+	m_doors(),
+    m_teleporters(),
+	m_textureBuilding(textureLoaders->getFloorTexture())
 {
 	
 }
@@ -16,8 +16,8 @@ Floor::~Floor()
     for(auto it = m_rooms.begin(); it != m_rooms.end(); ++it)
         delete *it;
 
-	delete m_telep_Up;
-	delete m_telep_Down;
+    for(auto it = m_teleporters.begin(); it != m_teleporters.end(); ++it)
+        delete *it;
 }
 
 void Floor::addLine(std::vector<unsigned char> line)
@@ -28,6 +28,17 @@ void Floor::addLine(std::vector<unsigned char> line)
 void Floor::addRoom(Room * room)
 {
     m_rooms.push_back(room);
+}
+
+
+void Floor::addDoors(Door * door)
+{
+	m_doors.push_back(door);
+}
+
+void Floor::addTeleporter(Teleporter * teleporter)
+{
+    m_teleporters.push_back(teleporter);
 }
 
 bool Floor::wallCollision(Ray * rayCollision)
@@ -42,8 +53,8 @@ bool Floor::wallCollision(Ray * rayCollision)
 
 void Floor::objectCollision(Ray * rayCollision, Ray * wallIntersection)
 {
-	for (int i = 0; i < m_rooms.size(); ++i)
-		for (int j = 0; j < m_rooms[i]->getObject().size(); ++j)
+	for (unsigned int i = 0; i < m_rooms.size(); ++i)
+		for (unsigned int j = 0; j < m_rooms[i]->getObject().size(); ++j)
 			{
 				int tminX = m_rooms[i]->getObject()[j]->getX();
 				int tminY = m_rooms[i]->getObject()[j]->getY();
@@ -66,8 +77,8 @@ void Floor::objectCollision(Ray * rayCollision, Ray * wallIntersection)
 
 void Floor::fireDetectorCollision(Ray * rayCollision, Ray * wallIntersection)
 {
-	for (int i = 0; i < m_rooms.size(); ++i)
-		for (int j = 0; j < m_rooms[i]->getObject().size(); ++j)
+	for (unsigned int i = 0; i < m_rooms.size(); ++i)
+		for (unsigned int j = 0; j < m_rooms[i]->getObject().size(); ++j)
 			{
 				int tminX = m_rooms[i]->getObject()[j]->getX();
 				int tminY = m_rooms[i]->getObject()[j]->getY();
@@ -145,16 +156,19 @@ void Floor::draw(sf::RenderWindow * window) const
 			window->draw(sprite);
 		}
 
-	//teleporter
-	m_telep_Up->draw(window);
-	m_telep_Down->draw(window);
-
-
 	}
+
+	//teleporter
+    for(auto it = m_teleporters.cbegin(); it != m_teleporters.cend(); ++it)
+        (*it)->draw(window);
 
     //objects
     for(auto it = m_rooms.cbegin(); it != m_rooms.cend(); ++it)
         (*it)->draw(window);
+
+	//doors
+	for (auto it = m_doors.cbegin(); it != m_doors.cend(); ++it)
+		(*it)->draw(window);
 }
 
 sf::Vector2u Floor::offset(unsigned int i, unsigned int j) const
