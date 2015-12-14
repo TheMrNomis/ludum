@@ -8,6 +8,7 @@
 #include "Character.h"
 #include "Ray.h"
 #include "Teleporter.h"
+#include <SFML\Audio.hpp>
 
 class World : public INDrawable, public INUpdatable
 {
@@ -15,6 +16,7 @@ class World : public INDrawable, public INUpdatable
 		TextureLoader m_textures;
 		Building  * m_building;
 		Character * m_character;
+		sf::Music * m_music;
 
 	public:
 		World();
