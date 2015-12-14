@@ -18,7 +18,7 @@ class Floor : public INDrawable, public INUpdatable, public INCollisionable
 {
 	private:
 		std::vector<std::vector<unsigned char> > m_background;
-		std::vector<std::vector<unsigned char> >m_roomsMap;
+		std::vector<std::vector<unsigned char> > m_floorMap;
 		
 
 		std::vector<Room *> m_rooms;
