@@ -1,15 +1,16 @@
 #include "Window.h"
 
-#define PATH_RESSOURCE "Ressources/sprites/"
+#define PATH_RESSOURCE "Ressources/"
 #define DELAY_BEETWEEN_2_BUTTON 20
 
 Window::Window():
     m_clock(),
 
-    m_window(new sf::RenderWindow(sf::VideoMode(800, 800), "IN in Game!!!")),
+    m_window(new sf::RenderWindow(sf::VideoMode(800, 600), "I & the sun")),
     m_textureLoader(new TextureLoader(PATH_RESSOURCE)),
+    m_fontLoader(new FontLoader(PATH_RESSOURCE)),
     
-    m_menu(new Menu(m_textureLoader)),
+    m_menu(new Menu(m_window->getSize(), m_textureLoader, m_fontLoader)),
     m_currentWorld(new World(m_textureLoader)),
     
 	m_currentStatus(GAME_MAIN_MENU),
@@ -25,7 +26,6 @@ Window::Window():
     m_buttonDeadZoneDelay = sf::milliseconds(20);
 
     sf::View view(sf::FloatRect(0, 0, m_window->getSize().x , m_window->getSize().y));
-    m_window->setView(view);
 }
 
 
@@ -51,10 +51,11 @@ int Window::run()
 
 		if (clk.getElapsedTime().asMilliseconds() > DELAY_BEETWEEN_2_BUTTON)
 		{
-			this->update(clk );
+			this->update(clk);
 
         //drawing
         m_window->clear();
+        m_window->setView(m_view);
         this->draw();
         m_window->display();
 		}
@@ -67,7 +68,13 @@ int Window::run()
 
 void Window::draw() const
 {
-	m_currentWorld->draw(m_window);
+    if(m_currentStatus == GAME_PLAYING)
+    {
+        m_window->setView(m_view);
+        m_currentWorld->draw(m_window);
+    }
+    else
+        m_menu->draw(m_window, m_currentStatus);
 }
 
 void Window::react(sf::Event const& event)
@@ -79,153 +86,157 @@ void Window::react(sf::Event const& event)
 
     else if(event.type == sf::Event::Resized)
     {
-        m_window->setView(sf::View(sf::FloatRect(0,0, event.size.width, event.size.height)));
+        m_view = sf::View(sf::FloatRect(0,0, event.size.width, event.size.height));
     }
 
-    else if(event.type == sf::Event::MouseWheelScrolled)
+    if(m_currentStatus == GAME_PLAYING)
     {
-        sf::View view = m_window->getView();
-        if(event.mouseWheelScroll.delta < 0)
-            view.zoom(1.2);
-        else
-            view.zoom(0.8);
-        m_window->setView(view);
-    }
-
-    else if(event.type == sf::Event::MouseButtonPressed)
-    {
-        if(event.mouseButton.button == sf::Mouse::Left)
-            m_mouseButtonPressed = true;
-    }
-
-    else if(event.type == sf::Event::MouseButtonReleased)
-    {
-        if(event.mouseButton.button == sf::Mouse::Left)
-            m_mouseButtonPressed = false;
-    }
-
-    else if(event.type == sf::Event::MouseMoved)
-    {
-        if(m_mouseButtonPressed)
+        if(event.type == sf::Event::MouseWheelScrolled)
         {
-            int deltaX = m_mouseOldX - event.mouseMove.x;
-            int deltaY = m_mouseOldY - event.mouseMove.y;
-
-            sf::View view = m_window->getView();
-            view.move(deltaX, deltaY);
-            m_window->setView(view);
+            if(event.mouseWheelScroll.delta < 0)
+                m_view.zoom(1.2);
+            else
+                m_view.zoom(0.8);
         }
 
-        m_mouseOldX = event.mouseMove.x;
-        m_mouseOldY = event.mouseMove.y;
-    }
-
-    else if(event.type == sf::Event::KeyPressed)
-    {
-        if(event.key.code == sf::Keyboard::Left)
+        else if(event.type == sf::Event::MouseButtonPressed)
         {
-            if(m_rightButtonPushed)
+            if(event.mouseButton.button == sf::Mouse::Left)
+                m_mouseButtonPressed = true;
+        }
+
+        else if(event.type == sf::Event::MouseButtonReleased)
+        {
+            if(event.mouseButton.button == sf::Mouse::Left)
+                m_mouseButtonPressed = false;
+        }
+
+        else if(event.type == sf::Event::MouseMoved)
+        {
+            if(m_mouseButtonPressed)
             {
-                if((m_clock.getElapsedTime() - m_timeRightButtonPressed) < m_buttonDeadZoneDelay)
+                int deltaX = m_mouseOldX - event.mouseMove.x;
+                int deltaY = m_mouseOldY - event.mouseMove.y;
+
+                m_view.move(deltaX, deltaY);
+            }
+
+            m_mouseOldX = event.mouseMove.x;
+            m_mouseOldY = event.mouseMove.y;
+        }
+
+        else if(event.type == sf::Event::KeyPressed)
+        {
+            if(event.key.code == sf::Keyboard::Left)
+            {
+                if(m_rightButtonPushed)
                 {
-                    m_bothButtonsEnabled = true;
-                    //one-time action for both buttons
-                    bothButtons();
+                    if((m_clock.getElapsedTime() - m_timeRightButtonPressed) < m_buttonDeadZoneDelay)
+                    {
+                        m_bothButtonsEnabled = true;
+                        //one-time action for both buttons
+                        bothButtons();
+                    }
+
+                    else
+                    {
+                        m_leftButtonPushed = false;
+                        m_rightButtonPushed = false;
+                    }
                 }
 
                 else
                 {
-                    m_leftButtonPushed = false;
-                    m_rightButtonPushed = false;
+                    m_leftButtonPushed = true;
+                    m_timeLeftButtonPressed = m_clock.getElapsedTime();
                 }
             }
 
-            else
+            else if(event.key.code == sf::Keyboard::Right)
             {
-                m_leftButtonPushed = true;
-                m_timeLeftButtonPressed = m_clock.getElapsedTime();
-            }
-        }
-
-        else if(event.key.code == sf::Keyboard::Right)
-        {
-            if(m_leftButtonPushed)
-            {
-                if((m_clock.getElapsedTime() - m_timeLeftButtonPressed) < m_buttonDeadZoneDelay)
+                if(m_leftButtonPushed)
                 {
-                    m_bothButtonsEnabled = true;
-                    //one-time action for both buttons
-                    bothButtons();
+                    if((m_clock.getElapsedTime() - m_timeLeftButtonPressed) < m_buttonDeadZoneDelay)
+                    {
+                        m_bothButtonsEnabled = true;
+                        //one-time action for both buttons
+                        bothButtons();
+                    }
+
+                    else
+                    {
+                        m_rightButtonPushed = false;
+                        m_leftButtonPushed = false;
+                    }
                 }
 
                 else
                 {
-                    m_rightButtonPushed = false;
-                    m_leftButtonPushed = false;
+                    m_rightButtonPushed = true;
+                    m_timeRightButtonPressed = m_clock.getElapsedTime();
                 }
             }
-
-            else
-            {
-                m_rightButtonPushed = true;
-                m_timeRightButtonPressed = m_clock.getElapsedTime();
-            }
         }
-    }
 
-    else if(event.type == sf::Event::KeyReleased)
-    {
-        if(event.key.code == sf::Keyboard::Left)
+        else if(event.type == sf::Event::KeyReleased)
         {
-            if(m_bothButtonsEnabled)
+            if(event.key.code == sf::Keyboard::Left)
             {
-                m_rightButtonPushed = false;
-                m_bothButtonsEnabled = false;
-            }
-            else
-                leftButton();
-            m_leftButtonPushed = false;
-            m_leftButtonActivated = false;
-        }
-        else if(event.key.code == sf::Keyboard::Right)
-        {
-            if(m_bothButtonsEnabled)
-            {
+                if(m_bothButtonsEnabled)
+                {
+                    m_rightButtonPushed = false;
+                    m_bothButtonsEnabled = false;
+                }
+                else
+                    leftButton();
                 m_leftButtonPushed = false;
-                m_bothButtonsEnabled = false;
+                m_leftButtonActivated = false;
             }
-            else
-                rightButton();
-            m_rightButtonPushed = false;
-            m_rightButtonActivated = false;
+            else if(event.key.code == sf::Keyboard::Right)
+            {
+                if(m_bothButtonsEnabled)
+                {
+                    m_leftButtonPushed = false;
+                    m_bothButtonsEnabled = false;
+                }
+                else
+                    rightButton();
+                m_rightButtonPushed = false;
+                m_rightButtonActivated = false;
+            }
         }
     }
+    else
+        m_menu->react(event, m_currentStatus);
 }
 
 void Window::update(sf::Clock const & clk)
 {
-    if(m_bothButtonsEnabled)
+    if(m_currentStatus == GAME_PLAYING)
     {
-        //repeated action for both buttons 
-    }
+        if(m_bothButtonsEnabled)
+        {
+            //repeated action for both buttons 
+        }
+        else if(m_leftButtonPushed)
+        {
+            if(m_leftButtonActivated)
+                leftButton();
+            else if((m_clock.getElapsedTime() - m_timeLeftButtonPressed) >= m_buttonDeadZoneDelay)
+                m_leftButtonActivated = true;
+        }
+        else if(m_rightButtonPushed)
+        {
+            if(m_rightButtonActivated)
+                rightButton();
+            else if((m_clock.getElapsedTime() - m_timeRightButtonPressed) >= m_buttonDeadZoneDelay)
+                m_rightButtonActivated = true;
+        }
 
-    else if(m_leftButtonPushed)
-    {
-        if(m_leftButtonActivated)
-            leftButton();
-        else if((m_clock.getElapsedTime() - m_timeLeftButtonPressed) >= m_buttonDeadZoneDelay)
-            m_leftButtonActivated = true;
+        m_currentWorld->update(clk );
     }
-
-    else if(m_rightButtonPushed)
-    {
-        if(m_rightButtonActivated)
-            rightButton();
-        else if((m_clock.getElapsedTime() - m_timeRightButtonPressed) >= m_buttonDeadZoneDelay)
-            m_rightButtonActivated = true;
-    }
-
-    m_currentWorld->update(clk );
+    else
+        m_menu->update(clk, m_currentStatus);
 }
 
 void Window::leftButton() const

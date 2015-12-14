@@ -4,19 +4,14 @@
 #include "INEventHandler.h"
 #include "INUpdatable.h"
 #include "INDrawable.h"
+#include "gameStatus.h"
 
 #include "TextureLoader.h"
+#include "FontLoader.h"
 #include "Menu.h"
 #include "World.h"
 #include "Character.h"
 #include "Floor.h"
-
-typedef enum:int {
-    GAME_PLAYING,
-    GAME_PAUSED,
-    GAME_MAIN_MENU,
-    GAME_STOPPED,
-} game_status;
 
 class Window : public INEventHandler, public INUpdatable
 {
@@ -24,7 +19,10 @@ class Window : public INEventHandler, public INUpdatable
 		sf::Clock m_clock;
 
 		sf::RenderWindow * m_window;
+        sf::View m_view;
+
         TextureLoader * m_textureLoader;
+        FontLoader * m_fontLoader;
 
         Menu * m_menu;
 		World * m_currentWorld;

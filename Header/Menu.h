@@ -1,18 +1,30 @@
 #pragma once
 
+#include "INEventHandler.h"
 #include "INUpdatable.h"
 #include "INDrawable.h"
+#include "gameStatus.h"
 
 #include "TextureLoader.h"
+#include "FontLoader.h"
 
-class Menu : public INDrawable, public INUpdatable
+#include "Button.h"
+
+class Menu
 {
     public:
-        Menu(TextureLoader * textures);
+        Menu(sf::Vector2u windowSize, TextureLoader * textures, FontLoader * fonts);
 
-        virtual void draw(sf::RenderWindow * window) const;
-        virtual void update(sf::Clock const& clk);
+        virtual void draw(sf::RenderWindow * window, game_status const& status) const;
+        virtual void update(sf::Clock const& clk, game_status & status);
+		virtual void react(sf::Event const& event, game_status & status);
 
     private:
         TextureLoader * m_textures;
+        FontLoader * m_fonts;
+
+        sf::Vector2u m_windowSize;
+
+        Button m_buttonStartGame;
+        Button m_buttonQuitGame;
 };
