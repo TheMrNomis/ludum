@@ -44,8 +44,6 @@ class Floor : public INDrawable, public INUpdatable, public INCollisionable
 		void addDoor(Door * door);
 		void addTeleporter(Teleporter * teleporter);
 
-		void initRoomMap();
-
 		virtual void update(sf::Clock const & clk);
 		virtual void draw(sf::RenderWindow *window) const;
 
