@@ -1,9 +1,11 @@
 #include "Room.h"
 
-Room::Room(unsigned char roomId):
+Room::Room(unsigned char roomId) :
 	m_roomId(roomId),
-    m_objects(std::vector<Object *>()),
-    m_fireDetectors(std::vector<FireDetector *>())
+	m_objects(std::vector<Object *>()),
+	m_fireDetectors(std::vector<FireDetector *>()),
+	m_maxLife(0),
+	m_currentLife(0);
 {
 }
 
@@ -19,6 +21,8 @@ Room::~Room()
 void Room::addObject(Object * obj)
 {
     m_objects.push_back(obj);
+	m_maxLife += obj->getMaxBurnedDamage();
+	m_currentLife += obj->getMaxBurnedDamage();
 }
 
 std::vector<Object *> Room::getObject()
@@ -29,6 +33,21 @@ std::vector<Object *> Room::getObject()
 std::vector<FireDetector *> Room::getfireDetector()
 {
 	return m_fireDetectors;
+}
+
+void Room::setLife(double lostLife)
+{
+	m_currentLife -= lostLife;
+}
+
+double Room::getLife() const
+{
+	return m_currentLife;
+}
+
+double Room::getMaxLife() const
+{
+	return m_maxLife;
 }
 
 void Room::addFireDetector(FireDetector * fd)
@@ -59,18 +78,25 @@ void Room::draw(sf::RenderWindow * window, std::vector<std::vector<unsigned char
 	for (auto it = m_fireDetectors.cbegin(); it != m_fireDetectors.cend(); ++it)
 		(*it)->draw(window);
 
-	//for (auto it = 0; it != floorMap->size(); ++it)
-	//{	
-	//	for (auto jt = 0; jt != floorMap[it].size(); ++jt)
-	//		if(floorMap->at(it).at(jt) == m_roomId);
-	//			//TODO GESTION DES RAY;
-	//}
+	for (auto it = 0; it != floorMap->size(); ++it)
+	{	
+		for (auto jt = 0; jt != floorMap[it].size(); ++jt)
+			if(floorMap->at(it).at(jt) == m_roomId);
+				//TODO GESTION DES RAY;
+	}
+}
+
+double Room::lifeStay() const
+{
+	return m_maxLife - m_currentLife;
 }
 
 void Room::update(sf::Clock const & clk)
 {
 	for (auto it = m_objects.begin(); it != m_objects.end(); ++it)
+	{
 		(*it)->update(clk);
-
+		m_currentLife -= (*it)->lifeLost();
+	}
 	//si le fireDetector détecte le character -> extinguishFire()
 }
