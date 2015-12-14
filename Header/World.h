@@ -7,6 +7,7 @@
 #include "Floor.h"
 #include "Character.h"
 #include "Ray.h"
+#include "Teleporter.h"
 
 
 

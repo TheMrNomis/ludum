@@ -128,6 +128,7 @@ sf::Vector2u Floor::offset(unsigned int i, unsigned int j) const
         offsetX = 1;
         offsetY = 0;
     }
+
     else
     {
         unsigned char N = m_background[i-1][j];

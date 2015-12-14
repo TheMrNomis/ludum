@@ -59,7 +59,7 @@
     <ClInclude Include="..\..\Header\Vector2fOperations.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Teleporter.h">
+    <ClInclude Include="Door.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
@@ -100,7 +100,7 @@
     <ClCompile Include="..\..\Source\Vector2fOperations.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Teleporter.cpp">
+    <ClCompile Include="Door.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
