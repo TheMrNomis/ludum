@@ -36,7 +36,7 @@ class Character : public INDrawable, public INUpdatable
 
 
 		double m_angleJump;
-		Ray	m_intersectionRay;
+		Ray	m_collisionRay;
 		
 		double m_distanceToCollision = 0;
 
@@ -133,7 +133,7 @@ class Character : public INDrawable, public INUpdatable
 		Ray * jump();
 
 
-		Ray getrayCollision();
+		Ray getCollisionRay();
 
 		/**
 		* @brief Check if the caracter is moving

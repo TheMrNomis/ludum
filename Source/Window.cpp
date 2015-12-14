@@ -236,19 +236,7 @@ void Window::rightButton() const
 
 void Window::bothButtons() const
 {
-	Ray * intersectionRay = m_currentWorld->getCharacter()->jump();
-
-	m_currentWorld->getBuilding()->checkCollisions(intersectionRay);
-
-	m_currentWorld->getCharacter()->setDistanceToCollision(intersectionRay->distanceToIntersection());
-
-	//Récupère distance
-	//	//world->getBuilding()->checkCollisions(m_intersectionRay);
-	//{
-	//	std::cout << "/!\\ Pas de Collisions /!\\" << std::endl;
-	//	setPosition(nextFramePosition());
-	//	setStatusCollision(false);
-	//}
-
+	Ray * collisionRay = m_currentWorld->getCharacter()->jump();
+	m_currentWorld->getBuilding()->checkCollisions(collisionRay);
+	m_currentWorld->getCharacter()->setDistanceToCollision(collisionRay->distanceToIntersection());
 }
-

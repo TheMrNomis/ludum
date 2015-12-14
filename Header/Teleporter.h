@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "INUpdatable.h"
 #include "INDrawable.h"
+#include"TextureLoader.h"
 
 class Teleporter : public INUpdatable, public INDrawable
 {
@@ -16,7 +17,9 @@ private:
 	unsigned int m_targetFloor;
 
 public:
-	Teleporter(unsigned int positionX, unsigned int positionY,sf::Texture const* texture,unsigned int targetFloor);
+
+	Teleporter(unsigned int positionX, unsigned int positionY,sf::Texture const* texture,unsigned int targetFloor, unsigned char type);
+
 	virtual ~Teleporter();
 
     void setDirection(unsigned int direction);

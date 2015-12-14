@@ -2,13 +2,13 @@
 #include <iostream>
 
 
-Teleporter::Teleporter(unsigned int positionX, unsigned int positionY,sf::Texture const* texture, unsigned int targetFloor) :
+Teleporter::Teleporter(unsigned int positionX, unsigned int positionY,sf::Texture const* texture, unsigned int targetFloor, unsigned char direction) :
     m_texture(texture),
     m_x(positionX),
     m_y(positionY),
-	m_direction(0),
     m_targetFloor(targetFloor)
 {
+	m_direction = (direction == 'd') ? 0 : 1;
 }
 
 Teleporter::~Teleporter()
@@ -45,4 +45,3 @@ void Teleporter::draw(sf::RenderWindow * window) const
 
     window->draw(sprite);
 }
-

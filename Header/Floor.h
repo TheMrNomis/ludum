@@ -38,17 +38,15 @@ class Floor : public INDrawable, public INUpdatable
          * @note Floor takes ownership of the Room, and will destroy it when needed
          */
         void addRoom(Room * room);
-
-		void addDoors(Door * door);
+		void addDoor(Door * door);
 		
 		void addTeleporter(Teleporter * teleporter);
 
-		bool wallCollision(Ray * rayCollision);
-		bool doorCollision(Ray * rayCollision);
-		void objectCollision(Ray * rayCollision, Ray * wallIntersection);
-		void fireDetectorCollision(Ray * rayCollision, Ray * wallIntersection);
-
-		bool teleporterDetectorCollision(Ray * rayCollision, Teleporter const * teleporter );
+		bool wallCollision(Ray * collisionRay);
+		bool doorCollision(Ray * collisionRay);
+		bool objectCollision(Ray * collisionRay);
+		bool fireDetectorCollision(Ray * collisionRay);
+		bool teleporterCollision(Ray * collisionRay);
 
 		virtual void update(sf::Clock const & clk);
 		virtual void draw(sf::RenderWindow *window) const;
