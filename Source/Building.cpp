@@ -49,6 +49,8 @@ void Building::loadToTileSet(std::string const &path)
 	bool mapConstruction = false;
 	unsigned char roomId = '0';
 
+	unsigned int floorId = 0;
+
     unsigned int lineNumber = 0;
     while(levelFile.good())
     {
@@ -248,6 +250,8 @@ void Building::loadToTileSet(std::string const &path)
                 currentFloor->addLine(buffer);
             }
         }
+
+		floorId++;
     }
 
     //delete orphaned objects

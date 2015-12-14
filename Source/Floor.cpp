@@ -93,6 +93,8 @@ void Floor::update(sf::Clock const & clk)
 
 void Floor::draw(sf::RenderWindow * window) const
 {
+	std::cout << "nb room: " << m_rooms.size() << std::endl;
+
     //background
 	for (unsigned int i = 0; i < m_background.size(); ++i)
 	{
