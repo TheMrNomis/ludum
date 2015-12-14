@@ -47,14 +47,12 @@ void Building::loadToTileSet(std::string const &path)
     std::unordered_map<unsigned char, bool> fireDetectorsSentInRoom;
 
 	bool mapConstruction = false;
-
+	unsigned char roomId = 'A';
 
 	unsigned int floorId = 0;
-	unsigned char roomId = 'A';
     unsigned int lineNumber = 0;
     while(levelFile.good())
     {
-	
         std::string line;
         getline(levelFile, line);
         ++lineNumber;
@@ -66,6 +64,10 @@ void Building::loadToTileSet(std::string const &path)
                 //new floor
                 m_floors.push_back(currentFloor);
                 currentFloor = new Floor(m_textureLoader);
+				floorId++;
+
+				//restart nb_rooms
+				roomId = 0;
             }
 
             else if(line[0] == 'o')
@@ -139,7 +141,7 @@ void Building::loadToTileSet(std::string const &path)
 
             else if(line[0] == 'r')
             {
-                //room
+                //room//
                 bool ids_fireDetector = false;
 
                 Room * room = new Room(roomId);
@@ -171,7 +173,6 @@ void Building::loadToTileSet(std::string const &path)
                 currentFloor->addRoom(room);
 				roomId++;
             }
-
 
 			else if (line[0] == 'd')
 			{
@@ -238,7 +239,6 @@ void Building::loadToTileSet(std::string const &path)
 			else if(line[0] == '|')
 			{
 				mapConstruction = !mapConstruction;
-				std::cout << "begin map" << std::endl;
 			}
 
 			else if(mapConstruction)
@@ -259,6 +259,7 @@ void Building::loadToTileSet(std::string const &path)
                 currentFloor->addLine(buffer);
             }
         }
+
 		floorId++;
     }
 
@@ -275,6 +276,30 @@ void Building::loadToTileSet(std::string const &path)
     m_floors.push_back(currentFloor);
 }
 
+void Building::loadNextFloor()
+{
+
+	unsigned int whichTeleport = m_currentFloor;
+
+	for (auto it = m_floors[whichTeleport]->getTeleporter().cbegin();
+		it != m_floors[whichTeleport]->getTeleporter().cend(); ++it){
+		if ((*it)->getStatusColision())
+		{
+			if ((*it)->getDirection() == 0) {
+				if (m_currentFloor > 0) {
+					m_currentFloor = 0;
+				}
+			}
+			else
+			{
+				m_currentFloor = 1;
+			}
+
+		}
+	}
+
+}
+
 void Building::draw(sf::RenderWindow *window) const
 {
 	m_floors[m_currentFloor]->draw(window);
@@ -285,32 +310,4 @@ void Building::update(sf::Clock const & clk)
 {
     for(auto it = m_floors.begin(); it != m_floors.end(); ++it)
         (*it)->update(clk);
-
-	loadNextFloor();
-}
-
-
-
-void Building::loadNextFloor()
-{
-	unsigned int whichTeleport = m_currentFloor;
-
-	for (auto it = m_floors[whichTeleport]->getTeleporter().cbegin();
-		it != m_floors[whichTeleport]->getTeleporter().cend(); ++it){
-
-		if ((*it)->getStatusColision())
-		{
-			if ((*it)->getDirection() == 0){
-				if (m_currentFloor > 0){
-					m_currentFloor =0 ;
-				}
-			}
-			else
-			{
-				m_currentFloor=1;
-			}
-
-		}
-	}
-	
 }
