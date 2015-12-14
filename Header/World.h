@@ -9,7 +9,7 @@
 #include "Ray.h"
 
 
-#define PATH_RESSOURCE "Ressources/sprites"
+#define PATH_RESSOURCE "Ressources/sprites/"
 
 
 class World : public INDrawable, public INUpdatable
