@@ -2,11 +2,11 @@
 #include <iostream>
 
 
-Teleporter::Teleporter(unsigned int positionX, unsigned int positionY,sf::Texture const* texture, unsigned int targetFloor, unsigned char direction) :
+Teleporter::Teleporter(unsigned int positionX, unsigned int positionY,sf::Texture const* texture, unsigned char direction) :
     m_texture(texture),
     m_x(positionX),
     m_y(positionY),
-    m_targetFloor(targetFloor),
+	m_inCollision(false),
 	m_directionIn(sf::Vector2f()),
 	m_positionIn(sf::Vector2f())
 {
@@ -38,10 +38,7 @@ unsigned int Teleporter::getY() const
 }
 
 
-void Teleporter::loadNextFloor(sf::Vector2f directionIn, sf::Vector2f positionIntersection)
-{
 
-}
 
 
 void Teleporter::draw(sf::RenderWindow * window) const
@@ -55,11 +52,23 @@ void Teleporter::draw(sf::RenderWindow * window) const
     window->draw(sprite);
 }
 
+bool Teleporter::getStatusColision()
+{
+	return m_inCollision;
+}
 void Teleporter::collision(Ray * ray)
 {
     bool collision = ray->intersectSquare(sf::Vector2f(m_x * 32, m_y * 32), sf::Vector2f((m_x+1/*width*/) * 32, (m_y+1/*height*/) * 32));
 	
-	if (collision)
-		loadNextFloor(ray->getDirection(), ray->intersection());
+	if (collision){
+		m_inCollision = true;
+		std::cout << "collision with : " << m_direction ;
+	}
+	else
+		m_inCollision = false;
+}
 
+unsigned int Teleporter::getDirection()
+{
+	return m_direction;
 }

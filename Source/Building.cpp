@@ -47,13 +47,14 @@ void Building::loadToTileSet(std::string const &path)
     std::unordered_map<unsigned char, bool> fireDetectorsSentInRoom;
 
 	bool mapConstruction = false;
-	unsigned char roomId = '0';
+
 
 	unsigned int floorId = 0;
 
     unsigned int lineNumber = 0;
     while(levelFile.good())
     {
+		unsigned char roomId = '0';
         std::string line;
         getline(levelFile, line);
         ++lineNumber;
@@ -171,6 +172,7 @@ void Building::loadToTileSet(std::string const &path)
 				roomId++;
             }
 
+
 			else if (line[0] == 'd')
 			{
 				//doors
@@ -220,7 +222,7 @@ void Building::loadToTileSet(std::string const &path)
 					unsigned int x = atoi(x_str.c_str());
 					unsigned int y = atoi(y_str.c_str());
 
-					Teleporter * teleporter = new Teleporter(x*32, y*32, m_textureLoader->getTeleporterTexture(),0,direction);
+					Teleporter * teleporter = new Teleporter(x*32, y*32, m_textureLoader->getTeleporterTexture(),direction);
 					currentFloor->addTeleporter(teleporter);
 				}
 			}
@@ -228,6 +230,7 @@ void Building::loadToTileSet(std::string const &path)
 			else if(line[0] == '|')
 			{
 				mapConstruction = !mapConstruction;
+				std::cout << "begin map" << std::endl;
 			}
 
 			else if(mapConstruction)
@@ -248,7 +251,6 @@ void Building::loadToTileSet(std::string const &path)
                 currentFloor->addLine(buffer);
             }
         }
-
 		floorId++;
     }
 
@@ -275,4 +277,31 @@ void Building::update(sf::Clock const & clk)
 {
     for(auto it = m_floors.begin(); it != m_floors.end(); ++it)
         (*it)->update(clk);
+
+	loadNextFloor();
+}
+
+
+
+void Building::loadNextFloor()
+{
+	
+	for (auto it = m_floors[getCurrentFloor()]->getTeleporter().cbegin();
+		it != m_floors[getCurrentFloor()]->getTeleporter().cend(); ++it){
+
+		if ((*it)->getStatusColision())
+		{
+			if ((*it)->getDirection() == 0){
+				if (m_currentFloor > 0){
+					m_currentFloor =0 ;
+				}
+			}
+			else
+			{
+				m_currentFloor=1;
+			}
+
+		}
+	}
+	
 }
