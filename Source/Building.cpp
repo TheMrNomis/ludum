@@ -293,9 +293,10 @@ void Building::update(sf::Clock const & clk)
 
 void Building::loadNextFloor()
 {
-	
-	for (auto it = m_floors[getCurrentFloor()]->getTeleporter().cbegin();
-		it != m_floors[getCurrentFloor()]->getTeleporter().cend(); ++it){
+	unsigned int whichTeleport = m_currentFloor;
+
+	for (auto it = m_floors[whichTeleport]->getTeleporter().cbegin();
+		it != m_floors[whichTeleport]->getTeleporter().cend(); ++it){
 
 		if ((*it)->getStatusColision())
 		{
