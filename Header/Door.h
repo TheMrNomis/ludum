@@ -7,27 +7,32 @@
 #include "INCollisionable.h"
 
 #include "TextureLoader.h"
+#include "Character.h"
 #include "Ray.h"
 
 class Door : public INDrawable, public INCollisionable
 {
-	private:
-		unsigned int m_x;
-		unsigned int m_y;
+private:
+	unsigned int m_x;
+	unsigned int m_y;
 
-		const sf::Texture * m_texture;
+	std::pair<unsigned int, unsigned> m_adjacentRooms;
 
-	public:
-		Door(unsigned int x, unsigned int y, sf::Texture * texture);
-		virtual ~Door();
+	const sf::Texture * m_texture;
 
-		/**
-		* @brief draw the door
-		*
-		* @param window:
-		*
-		*/
-		virtual void draw(sf::RenderWindow *window) const;
-        
-        virtual void collision(Ray * ray);
+public:
+	Door(unsigned int x, unsigned int y, std::pair<unsigned int, unsigned int> adjacentRooms, sf::Texture * texture);
+	virtual ~Door();
+
+	/**
+	* @brief draw the door
+	*
+	* @param window:
+	*
+	*/
+	virtual void draw(sf::RenderWindow *window) const;
+
+	virtual void collision(Ray * ray);
+
+	void collisionCharacter(Ray * ray, Character * character);
 };

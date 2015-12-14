@@ -14,8 +14,7 @@ Teleporter::Teleporter(unsigned int positionX, unsigned int positionY,sf::Textur
 }
 
 Teleporter::~Teleporter()
-{
-}
+{}
 
 void Teleporter::update(sf::Clock const & clk)
 {

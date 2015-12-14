@@ -125,7 +125,7 @@ void Building::loadToTileSet(std::string const &path)
                     unsigned int x = atoi(x_str.c_str());
                     unsigned int y = atoi(y_str.c_str());
 
-                    FireDetector * fd = new FireDetector(x,y, 128, m_textureLoader->getFireDetectorTexture());
+                    FireDetector * fd = new FireDetector(x,y, 64, m_textureLoader->getFireDetectorTexture());
                     fireDetectors.insert(std::pair<unsigned char, FireDetector *>(fireID, fd));
                     fireDetectorsSentInRoom.insert(std::pair<unsigned char, bool>(fireID, false));
                 }
@@ -181,20 +181,28 @@ void Building::loadToTileSet(std::string const &path)
 					std::string x_str;
 					std::string y_str;
 
-					bool first = true;
+					std::vector<unsigned char> adjacentRooms;
+
+					bool posxDefinition = true;
+					bool adjacentRoomDefinition = false;
 
 					for (unsigned int i = 1; i < line.length(); ++i)
 					{
-						if (line[i] == ':')
-							first = false;
+						if(line[i] == ':')
+							posxDefinition = false;
+						if(line[i] == '>')
+							adjacentRoomDefinition = true;
+
+						if(adjacentRoomDefinition)
+							adjacentRooms.push_back(line[i]);
 						else
-							(first ? x_str : y_str).push_back(line[i]);
+							(posxDefinition ? x_str : y_str).push_back(line[i]);
 					}
 
 					unsigned int x = atoi(x_str.c_str());
 					unsigned int y = atoi(y_str.c_str());
 
-					Door * door = new Door(x,y,m_textureLoader->getObjectsTexture());
+					Door * door = new Door(x,y,std::pair<unsigned char, unsigned char>(adjacentRooms[0],adjacentRooms[1]),m_textureLoader->getObjectsTexture());
 					currentFloor->addDoor(door);
 				}
 			}

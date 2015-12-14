@@ -19,11 +19,20 @@ FireDetector::~FireDetector()
 
 void FireDetector::draw(sf::RenderWindow * window) const
 {
-    sf::Sprite sprite;
-    sprite.setTexture(*m_texture);
-    sprite.setTextureRect(sf::IntRect((m_isActivated? 32:0),0, 32, 32));
-    sprite.setPosition(m_x * 32, m_y * 32);
-    window->draw(sprite);
+	sf::CircleShape shape(m_radius);
+	shape.setFillColor(sf::Color::Transparent);
+	shape.setOutlineThickness(5);
+	shape.setOutlineColor(sf::Color(255, 0, 0));
+	shape.setOrigin(m_radius, m_radius);
+	shape.setPosition((m_x*32),(m_y * 32));
+	window->draw(shape);
+
+    sf::Sprite fireDetectorSprite;
+	fireDetectorSprite.setTexture(*m_texture);
+	fireDetectorSprite.setTextureRect(sf::IntRect((m_isActivated? 32:0),0, 32, 32));
+	fireDetectorSprite.setOrigin(16, 16);
+	fireDetectorSprite.setPosition(m_x * 32, m_y * 32);
+    window->draw(fireDetectorSprite);
 }
 
 unsigned int FireDetector::getX() const
@@ -36,11 +45,6 @@ unsigned int FireDetector::getY() const
 	return m_y;
 }
 
-const double FireDetector::getRadius() const
-{
-	return m_radius;
-}
-
 void FireDetector::activate()
 {
 	m_musicFireDetector->play();
@@ -49,7 +53,7 @@ void FireDetector::activate()
 
 void FireDetector::collision(Ray * ray)
 {
-    if(ray->intersectCircle(sf::Vector2f(m_x*32+16,m_y*32+16), 20, false))
+    if(ray->intersectCircle(sf::Vector2f((m_x*32)+16,(m_y*32)+16), m_radius, false))
         activate();
 }
 

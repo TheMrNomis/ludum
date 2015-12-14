@@ -88,6 +88,14 @@ bool Character::getStatusCollision()
     return m_statusCollision;
 }
 
+void Character::setCurrentRoom(std::pair<unsigned int, unsigned> adjacentRooms)
+{
+	if (m_currentRoom == adjacentRooms.first)
+		m_currentRoom = adjacentRooms.second;
+	else
+		m_currentRoom = adjacentRooms.first;
+}
+
 void Character::setStatusCollision(bool isInCollision)
 {
     m_statusCollision = isInCollision;
@@ -96,14 +104,6 @@ void Character::setStatusCollision(bool isInCollision)
 bool Character::isJumping()
 {
     return m_jumping;
-}
-
-void Character::setMoving(bool isMoving){
-
-    if (isMoving == false)
-    {
-    }
-    m_jumping = isMoving;
 }
 
 sf::Vector2f Character::nextFramePosition()
@@ -144,7 +144,7 @@ void Character::update(sf::Clock const & clk)
 
         if(m_distanceToCollision <= 10)
         {
-            setMoving(false);
+            m_jumping = false;
             setStatusCollision(true);
 			m_distanceToCollision = 0;
         }

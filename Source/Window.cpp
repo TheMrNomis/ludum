@@ -9,7 +9,7 @@ Window::Window():
 
     m_window(new sf::RenderWindow(sf::VideoMode(800, 600), "I & the sun")),
     m_textureLoader(new TextureLoader(PATH_RESSOURCE)),
-    m_fontLoader(new FontLoader(PATH_RESSOURCE)),
+    m_fontLoader(new FontLoader("Ressources/")),
     
     m_menu(new Menu(m_window->getSize(), m_textureLoader, m_fontLoader)),
     m_currentWorld(new World(m_textureLoader)),
