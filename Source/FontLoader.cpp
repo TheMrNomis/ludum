@@ -2,7 +2,7 @@
 
 FontLoader::FontLoader(std::string const& dir)
 {
-    bool error;
+    bool error = false;
 
     std::string base_dir = dir + "fonts/";
 

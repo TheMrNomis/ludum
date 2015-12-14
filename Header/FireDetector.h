@@ -46,8 +46,6 @@ class FireDetector : public INUpdatable, public INDrawable, public INCollisionab
 
 		virtual unsigned int getY() const;
 
-		virtual const double getRadius() const;
-
 		virtual void activate();
 
         /**
