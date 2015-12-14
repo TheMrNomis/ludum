@@ -5,9 +5,8 @@ Floor::Floor(TextureLoader const * textureLoaders):
     m_background(),
     m_rooms(),
 	m_doors(),
-	m_textureBuilding(textureLoaders->getFloorTexture()),
-	m_telep_Up(),
-	m_telep_Down()
+    m_teleporters(),
+	m_textureBuilding(textureLoaders->getFloorTexture())
 {
 	
 }
@@ -17,8 +16,8 @@ Floor::~Floor()
     for(auto it = m_rooms.begin(); it != m_rooms.end(); ++it)
         delete *it;
 
-	delete m_telep_Up;
-	delete m_telep_Down;
+    for(auto it = m_teleporters.begin(); it != m_teleporters.end(); ++it)
+        delete *it;
 }
 
 void Floor::addLine(std::vector<unsigned char> line)
@@ -37,11 +36,9 @@ void Floor::addDoors(Door * door)
 	m_doors.push_back(door);
 }
 
-void Floor::addTeleporter(Teleporter * teleporter, unsigned int direction)
+void Floor::addTeleporter(Teleporter * teleporter)
 {
-	teleporter->setDirection(direction);
-
-	(direction == 0 ? m_telep_Down = teleporter : m_telep_Up = teleporter);
+    m_teleporters.push_back(teleporter);
 }
 
 bool Floor::wallCollision(Ray * rayCollision)
@@ -56,8 +53,8 @@ bool Floor::wallCollision(Ray * rayCollision)
 
 void Floor::objectCollision(Ray * rayCollision, Ray * wallIntersection)
 {
-	for (int i = 0; i < m_rooms.size(); ++i)
-		for (int j = 0; j < m_rooms[i]->getObject().size(); ++j)
+	for (unsigned int i = 0; i < m_rooms.size(); ++i)
+		for (unsigned int j = 0; j < m_rooms[i]->getObject().size(); ++j)
 			{
 				int tminX = m_rooms[i]->getObject()[j]->getX();
 				int tminY = m_rooms[i]->getObject()[j]->getY();
@@ -80,8 +77,8 @@ void Floor::objectCollision(Ray * rayCollision, Ray * wallIntersection)
 
 void Floor::fireDetectorCollision(Ray * rayCollision, Ray * wallIntersection)
 {
-	for (int i = 0; i < m_rooms.size(); ++i)
-		for (int j = 0; j < m_rooms[i]->getObject().size(); ++j)
+	for (unsigned int i = 0; i < m_rooms.size(); ++i)
+		for (unsigned int j = 0; j < m_rooms[i]->getObject().size(); ++j)
 			{
 				int tminX = m_rooms[i]->getObject()[j]->getX();
 				int tminY = m_rooms[i]->getObject()[j]->getY();
@@ -162,8 +159,8 @@ void Floor::draw(sf::RenderWindow * window) const
 	}
 
 	//teleporter
-	m_telep_Up->draw(window);
-	m_telep_Down->draw(window);
+    for(auto it = m_teleporters.cbegin(); it != m_teleporters.cend(); ++it)
+        (*it)->draw(window);
 
     //objects
     for(auto it = m_rooms.cbegin(); it != m_rooms.cend(); ++it)

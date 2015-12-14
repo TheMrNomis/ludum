@@ -21,7 +21,7 @@ public:
 	sf::Texture * getObjectsTexture() const;
 	sf::Texture * getCharacterTexture() const;
     sf::Texture * getFireDetectorTexture() const;
-	sf::Texture * getTeleporterTexture() const;
+	sf::Texture const* getTeleporterTexture() const;
 	void loadTexture(std::string const & url);
 };
 
