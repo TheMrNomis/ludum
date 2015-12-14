@@ -5,6 +5,10 @@
 #include "Vector2fOperations.h"
 #include "INCollisionable.h"
 
+#include "Object.h"
+
+class Object;
+
 class Ray
 {
     private:
@@ -13,6 +17,8 @@ class Ray
 
         bool m_intersectionFound;
         float m_minT;
+
+        Object * m_obj;
 
     public:
         /**
@@ -38,6 +44,20 @@ class Ray
         bool validIntersectionFound() const;
 
         /**
+         * @brief is the thing at the intersection an object ?
+         *
+         * @return true if the intersection has been with an object
+         */
+        bool intersectionIsObject() const;
+
+        /**
+         * @brief gets the object at the intersection
+         *
+         * @return a pointer to the intersected object
+         */
+        Object * intersectionObject() const;
+
+        /**
          * @brief gets the intersection
          *
          * @return the position of the intersection
@@ -59,12 +79,6 @@ class Ray
          */
         sf::Vector2f getDirection() const;
         
-        /**
-         * @brief adds a new intersection to the ray
-         *
-         * @param t: the value of the t param at the moment of the intersection [ (x,y) = origin() + t*direction() ]
-         */
-        void setIntersection(float t);
 
         /**
          * @brief computes the intersection between this ray and a circle
@@ -86,6 +100,14 @@ class Ray
          *
          * @return true if the ray intersects the rectangle
          */
-        bool intersectSquare(sf::Vector2f pointMin, sf::Vector2f pointMax, bool saveIntersection = true);
+        bool intersectSquare(sf::Vector2f pointMin, sf::Vector2f pointMax, bool saveIntersection = true, Object * obj = nullptr);
 
+    private:
+        /**
+         * @brief adds a new intersection to the ray
+         *
+         * @param t: the value of the t param at the moment of the intersection [ (x,y) = origin() + t*direction() ]
+         * @param obj: a pointer to the intersected object (if applicable)
+         */
+        void setIntersection(float t, Object * obj = nullptr);
 };

@@ -7,7 +7,7 @@
 #include "FireDetector.h"
 #include "INUpdatable.h"
 
-class Room : public INDrawable, public INUpdatable
+class Room : public INDrawable, public INUpdatable, public INCollisionable
 {
     public:
         Room();
@@ -57,6 +57,8 @@ class Room : public INDrawable, public INUpdatable
          *
          */
         void extinguishFire();
+
+        virtual void collision(Ray * ray);
 
 
     private:

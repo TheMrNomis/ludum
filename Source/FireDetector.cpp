@@ -40,13 +40,14 @@ const double FireDetector::getRadius() const
 
 void FireDetector::activate()
 {
-	std::cout << "Fire Detexcor have detect fire" << std::endl;
+	std::cout << "Fire Detector have detect fire" << std::endl;
 	m_isActivated = true;
 }
 
 void FireDetector::collision(Ray * ray)
 {
-    //TODO
+    if(ray->intersectCircle(sf::Vector2f(m_x*32+16,m_y*32+16), 20, false))
+        activate();
 }
 
 void FireDetector::update(sf::Clock const& clk)
