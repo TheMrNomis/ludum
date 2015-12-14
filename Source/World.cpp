@@ -4,19 +4,20 @@ World::World():
 m_textures(TextureLoader(PATH_RESSOURCE)),
 m_building(new Building(&m_textures, 1, 1)),
 m_character(new Character(&m_textures)),
-m_music(new sf::Music())
+m_musicGame(new sf::Music())
 {
 	m_building->loadToTileSet("Levels/0.lvl");
 
-	m_music->openFromFile("Ressources/Music/Ambiante.wav");
-	m_music->play();
+	m_musicGame->openFromFile("Ressources/Music/Game.wav");
+	m_musicGame->setLoop(true);
+	m_musicGame->play();
 }
 
 World::~World()
 {
 	delete m_building;
 	delete m_character;
-	delete m_music;
+	delete m_musicGame;
 }
 
 Character * World::getCharacter() const
