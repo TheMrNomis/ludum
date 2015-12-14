@@ -18,11 +18,11 @@ class Floor : public INDrawable, public INUpdatable
 		std::vector<std::vector<unsigned char> > m_background;
         std::vector<Room *> m_rooms;
 		
-		//temp
 		TextureLoader const * m_textures;
 		sf::Texture * m_textureBuilding;
 		Teleporter * m_telep_Up;
 		Teleporter * m_telep_Down;
+
 	public:
 		Floor(TextureLoader const * textureLoaders);
 		virtual ~Floor();

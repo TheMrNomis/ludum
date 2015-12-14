@@ -17,7 +17,6 @@ Floor::~Floor()
     for(auto it = m_rooms.begin(); it != m_rooms.end(); ++it)
         delete *it;
 	
-	//test
 	delete m_telep_Up;
 	delete m_telep_Down;
 
@@ -87,21 +86,23 @@ void Floor::fireDetectorCollision(Ray * rayIntersection, Ray * wallIntersection)
 
 void Floor::teleporterDetectorCollision(Ray * rayIntersection, Ray * wallIntersection)
 {
-	for (int i = 0; i < m_rooms.size(); ++i)
-		for (int j = 0; j < m_rooms[i]->getfireDetector().size(); ++j)
-		{
-		int tminX = m_rooms[i]->getfireDetector()[j]->getX();
-		int tminY = m_rooms[i]->getfireDetector()[j]->getY();
-		double radius = m_rooms[i]->getfireDetector()[j]->getRadius();
+	
+		int tminX = m_rooms[i]->getObject()[j]->getX();
+		int tminY = m_rooms[i]->getObject()[j]->getY();
+		int tmaxX = tminX + m_rooms[i]->getObject()[j]->getWidth();
+		int tmaxY = tminY + m_rooms[i]->getObject()[j]->getHeight();
 
-		rayIntersection->intersectCircle(sf::Vector2f(tminX * 32, tminY * 32), radius);
+		rayIntersection->intersectSquare(sf::Vector2f(tminX * 32, tminY * 32), sf::Vector2f(tmaxX * 32, tmaxY * 32));
 
-		if (rayIntersection->validIntersectionFound() && rayIntersection->distanceToIntersection() <= wallIntersection->distanceToIntersection())
-			m_rooms[i]->getfireDetector()[j]->activate();
+		if (rayIntersection->validIntersectionFound())
+			if (rayIntersection->distanceToIntersection() <= wallIntersection->distanceToIntersection())
+			{
 
+			m_rooms[i]->getObject()[j]->ignite(0.001);
+			*wallIntersection = *rayIntersection;
 		rayIntersection->resetDistance();
-		}
 }
+
 
 void Floor::update(sf::Clock const & clk)
 {
