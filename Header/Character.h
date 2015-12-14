@@ -132,7 +132,6 @@ class Character : public INDrawable, public INUpdatable
 		*/
 		Ray * jump();
 
-
 		Ray getCollisionRay();
 
 		/**

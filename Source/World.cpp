@@ -13,8 +13,6 @@ World::~World()
 {
 	delete m_building;
 	delete m_character;
-	
-
 }
 
 Character * World::getCharacter() const
