@@ -22,6 +22,7 @@
     <ClInclude Include="..\..\Header\Building.h" />
     <ClInclude Include="..\..\Header\Canape.h" />
     <ClInclude Include="..\..\Header\Character.h" />
+    <ClInclude Include="..\..\Header\Door.h" />
     <ClInclude Include="..\..\Header\FireDetector.h" />
     <ClInclude Include="..\..\Header\Floor.h" />
     <ClInclude Include="..\..\Header\INCollisionable.h" />
@@ -31,26 +32,27 @@
     <ClInclude Include="..\..\Header\Object.h" />
     <ClInclude Include="..\..\Header\Ray.h" />
     <ClInclude Include="..\..\Header\Room.h" />
+    <ClInclude Include="..\..\Header\Teleporter.h" />
     <ClInclude Include="..\..\Header\TextureLoader.h" />
     <ClInclude Include="..\..\Header\Vector2fOperations.h" />
     <ClInclude Include="..\..\Header\Window.h" />
     <ClInclude Include="..\..\Header\World.h" />
-    <ClInclude Include="Door.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Building.cpp" />
     <ClCompile Include="..\..\Source\Character.cpp" />
+    <ClCompile Include="..\..\Source\Door.cpp" />
     <ClCompile Include="..\..\Source\FireDetector.cpp" />
     <ClCompile Include="..\..\Source\Floor.cpp" />
     <ClCompile Include="..\..\Source\main.cpp" />
     <ClCompile Include="..\..\Source\Object.cpp" />
     <ClCompile Include="..\..\Source\Ray.cpp" />
     <ClCompile Include="..\..\Source\Room.cpp" />
+    <ClCompile Include="..\..\Source\Teleporter.cpp" />
     <ClCompile Include="..\..\Source\TextureLoader.cpp" />
     <ClCompile Include="..\..\Source\Vector2fOperations.cpp" />
     <ClCompile Include="..\..\Source\Window.cpp" />
     <ClCompile Include="..\..\Source\World.cpp" />
-    <ClCompile Include="Door.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{68531C4A-B2FF-4B27-AEAC-5747ABEC3320}</ProjectGuid>
