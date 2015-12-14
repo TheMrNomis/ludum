@@ -8,7 +8,11 @@ m_music(new sf::Music())
 {
 	m_building->loadToTileSet("Levels/0.lvl");
 
-	m_music->openFromFile("Ressources/Music/Ambiante.wav");
+	if (!m_music->openFromFile("Ressources/Music/Menu.mp3"))
+	{
+		std::cout << "error" << std::endl;
+
+	}
 	m_music->play();
 }
 
