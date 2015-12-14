@@ -8,7 +8,7 @@ Building::Building(TextureLoader const * textureLoader, unsigned int maxBurnedDa
 	m_currentBurnedDamage(currentBurnedDamage),
 	m_textureLoader(textureLoader),
 	m_floors(std::vector<Floor *>()),
-	m_currentFloor(0)
+	m_currentFloor(0),
 {}
 
 Building::~Building()
@@ -270,6 +270,7 @@ void Building::loadToTileSet(std::string const &path)
 void Building::draw(sf::RenderWindow *window) const
 {
 	m_floors[m_currentFloor]->draw(window);
+	this->drawHUD();
 }
 
 void Building::update(sf::Clock const & clk)

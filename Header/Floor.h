@@ -26,6 +26,9 @@ class Floor : public INDrawable, public INUpdatable, public INCollisionable
 
 		sf::Texture * m_textureBuilding;
 
+		double m_maxLife;
+		double m_currentLife;
+
 	public:
 		Floor(TextureLoader const * textureLoaders);
 		virtual ~Floor();
@@ -42,6 +45,12 @@ class Floor : public INDrawable, public INUpdatable, public INCollisionable
         void addRoom(Room * room);
 		void addDoor(Door * door);
 		void addTeleporter(Teleporter * teleporter);
+
+		virtual void setLife(double lostLife);
+		virtual double getLife() const;
+		virtual double getMaxLife() const;
+
+		virtual double lifeStay() const;
 
 		virtual void update(sf::Clock const & clk);
 		virtual void draw(sf::RenderWindow *window) const;

@@ -9,7 +9,9 @@ Floor::Floor(TextureLoader const * textureLoaders) :
 	m_doors(),
     m_teleporters(),
 	
-	m_textureBuilding(textureLoaders->getFloorTexture())
+	m_textureBuilding(textureLoaders->getFloorTexture()),
+
+	m_life(0)
 {
 	
 }
@@ -36,6 +38,8 @@ void Floor::addLineToRoomsMap(std::vector<unsigned char> line)
 void Floor::addRoom(Room * room)
 {
     m_rooms.push_back(room);
+	m_currentLife += room->getLife();
+	m_maxLife += room->getLife();
 }
 
 void Floor::addDoor(Door * door)
@@ -46,6 +50,26 @@ void Floor::addDoor(Door * door)
 void Floor::addTeleporter(Teleporter * teleporter)
 {
     m_teleporters.push_back(teleporter);
+}
+
+void Floor::setLife(double lostLife)
+{
+	m_currentLife -= lostLife;
+}
+
+double Floor::getLife() const
+{
+	return m_currentLife;
+}
+
+double Floor::getMaxLife() const
+{
+	return m_maxLife;
+}
+
+double Floor::lifeStay() const
+{
+	return m_maxLife - m_currentLife;
 }
 
 bool Floor::wallCollision(Ray * collisionRay)
@@ -61,7 +85,10 @@ bool Floor::wallCollision(Ray * collisionRay)
 void Floor::update(sf::Clock const & clk)
 {
 	for (auto it = m_rooms.begin(); it != m_rooms.end(); ++it)
+	{
 		(*it)->update(clk);
+		m_currentLife -= ((*it)->getMaxLife() - (*it)->lifeStay());
+	}
 }
 
 void Floor::draw(sf::RenderWindow * window) const
