@@ -50,11 +50,11 @@ void Building::loadToTileSet(std::string const &path)
 
 
 	unsigned int floorId = 0;
-
+	unsigned char roomId = 'A';
     unsigned int lineNumber = 0;
     while(levelFile.good())
     {
-		unsigned char roomId = '0';
+	
         std::string line;
         getline(levelFile, line);
         ++lineNumber;
