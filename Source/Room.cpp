@@ -1,6 +1,6 @@
 #include "Room.h"
 
-Room::Room(unsigned int roomId):
+Room::Room(unsigned char roomId):
 	m_roomId(roomId),
     m_objects(std::vector<Object *>()),
     m_fireDetectors(std::vector<FireDetector *>())
@@ -58,6 +58,13 @@ void Room::draw(sf::RenderWindow * window, std::vector<std::vector<unsigned char
 
 	for (auto it = m_fireDetectors.cbegin(); it != m_fireDetectors.cend(); ++it)
 		(*it)->draw(window);
+
+	for (auto it = 0; it != floorMap->size(); ++it)
+	{	
+		for (auto jt = 0; jt != floorMap[it].size(); ++jt)
+			if(floorMap->at(it).at(jt) == m_roomId);
+				//TODO GESTION DES RAY;
+	}
 }
 
 void Room::update(sf::Clock const & clk)
@@ -67,4 +74,3 @@ void Room::update(sf::Clock const & clk)
 
 	//si le fireDetector détecte le character -> extinguishFire()
 }
-
