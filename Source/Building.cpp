@@ -35,6 +35,8 @@ bool Building::checkCollisions(Ray * rayIntersection)
 	m_floors[m_currentFloor]->objectCollision(&rayObject, rayIntersection);
 	m_floors[m_currentFloor]->fireDetectorCollision(&rayObject, rayIntersection);
 
+	// Replace character in the middle of object
+
 	return wall;
 }
 
