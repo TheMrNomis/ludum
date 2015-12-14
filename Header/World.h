@@ -10,9 +10,6 @@
 #include "Teleporter.h"
 
 
-
-
-
 class World : public INDrawable, public INUpdatable
 {
 	private:
