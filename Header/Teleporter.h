@@ -15,9 +15,11 @@ private:
 
 	unsigned int m_x;
 	unsigned int m_y;
-
 	unsigned int m_direction;
 	unsigned int m_targetFloor;
+
+	sf::Vector2f m_directionIn;
+	sf::Vector2f m_positionIn;
 
 public:
 
@@ -30,7 +32,12 @@ public:
 	unsigned int getX() const;
 	unsigned int getY() const;
 
+	void loadNextFloor(sf::Vector2f directionIn, sf::Vector2f positionIntersection);
+
 	virtual void update(sf::Clock const & clk) ;
 	virtual void draw(sf::RenderWindow * window) const;
     virtual void collision(Ray * ray);
+
+
+
 };

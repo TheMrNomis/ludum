@@ -6,7 +6,9 @@ Teleporter::Teleporter(unsigned int positionX, unsigned int positionY,sf::Textur
     m_texture(texture),
     m_x(positionX),
     m_y(positionY),
-    m_targetFloor(targetFloor)
+    m_targetFloor(targetFloor),
+	m_directionIn(sf::Vector2f()),
+	m_positionIn(sf::Vector2f())
 {
 	m_direction = (direction == 'd') ? 0 : 1;
 }
@@ -35,6 +37,13 @@ unsigned int Teleporter::getY() const
 	return m_y;
 }
 
+
+void Teleporter::loadNextFloor(sf::Vector2f directionIn, sf::Vector2f positionIntersection)
+{
+
+}
+
+
 void Teleporter::draw(sf::RenderWindow * window) const
 {
     sf::Sprite sprite;
@@ -48,5 +57,9 @@ void Teleporter::draw(sf::RenderWindow * window) const
 
 void Teleporter::collision(Ray * ray)
 {
-    ray->intersectSquare(sf::Vector2f(m_x * 32, m_y * 32), sf::Vector2f((m_x+1/*width*/) * 32, (m_y+1/*height*/) * 32));
+    bool collision = ray->intersectSquare(sf::Vector2f(m_x * 32, m_y * 32), sf::Vector2f((m_x+1/*width*/) * 32, (m_y+1/*height*/) * 32));
+	
+	if (collision)
+		loadNextFloor(ray->getDirection(), ray->intersection());
+
 }
