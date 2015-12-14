@@ -47,7 +47,7 @@ void Building::loadToTileSet(std::string const &path)
     std::unordered_map<unsigned char, bool> fireDetectorsSentInRoom;
 
 	bool mapConstruction = false;
-	unsigned char roomId = '0';
+	unsigned char roomId = 'A';
 
 	unsigned int floorId = 0;
 
