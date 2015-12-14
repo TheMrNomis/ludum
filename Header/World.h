@@ -1,4 +1,6 @@
 #pragma once
+#include <SFML/Audio.hpp>
+
 #include "INDrawable.h"
 #include "INUpdatable.h"
 #include "Ray.h"
@@ -8,7 +10,6 @@
 #include "Character.h"
 #include "Ray.h"
 #include "Teleporter.h"
-#include <SFML\Audio.hpp>
 
 class World : public INDrawable, public INUpdatable
 {

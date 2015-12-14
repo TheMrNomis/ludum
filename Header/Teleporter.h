@@ -1,9 +1,12 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "INCollisionable.h"
 #include "INUpdatable.h"
 #include "INDrawable.h"
-#include"TextureLoader.h"
+
+#include "TextureLoader.h"
+#include "Ray.h"
 
 class Teleporter : public INUpdatable, public INDrawable
 {
@@ -29,4 +32,5 @@ public:
 
 	virtual void update(sf::Clock const & clk) ;
 	virtual void draw(sf::RenderWindow * window) const;
+    virtual void collision(Ray * ray);
 };

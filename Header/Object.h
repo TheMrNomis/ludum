@@ -1,9 +1,11 @@
 #pragma once
 
+#include "Ray.h"
 #include "INDrawable.h"
 #include "INUpdatable.h"
+#include "INCollisionable.h"
 
-class Object : public INDrawable, public INUpdatable
+class Object : public INDrawable, public INUpdatable, public INCollisionable
 {
     public:
         static Object * fromID(unsigned char objectID, unsigned int x, unsigned int y, sf::Texture * texture);
@@ -30,6 +32,8 @@ class Object : public INDrawable, public INUpdatable
 		int getX() const;
 		int getY() const;
 
+        virtual void collision(Ray * ray);
+
     private:
         /**
          * @brief creates an object
@@ -45,6 +49,7 @@ class Object : public INDrawable, public INUpdatable
          * @param texture: texture to use
          */
         Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int width, unsigned int height, unsigned int offsetX, unsigned int offsetY, unsigned int x, unsigned int y, sf::Texture * texture);
+
 
     private:
         unsigned int m_width;

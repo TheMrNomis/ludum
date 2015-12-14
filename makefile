@@ -1,5 +1,5 @@
 CC = g++
-LIBS = -lsfml-window -lsfml-system -lsfml-graphics
+LIBS = -lsfml-window -lsfml-system -lsfml-graphics -lsfml-audio
 FLAGS = -std=c++14 -Wall -pedantic
 INCLUDES = -I./Header
 PROJECT_NAME = ludum.out
