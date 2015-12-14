@@ -142,7 +142,7 @@ void Building::loadToTileSet(std::string const &path)
 
             else if(line[0] == 'r')
             {
-                //room
+                //room//
                 bool ids_fireDetector = false;
 
                 Room * room = new Room(roomId);
