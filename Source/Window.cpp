@@ -16,11 +16,16 @@ Window::Window():
     m_rightButtonPushed(false),
     m_rightButtonActivated(false),
     m_timeRightButtonPressed(),
-    m_bothButtonsEnabled(false)
+    m_bothButtonsEnabled(false),
+	m_musicMenu(new sf::Music())
 {
     m_buttonDeadZoneDelay = sf::milliseconds(20);
-
-    sf::View view(sf::FloatRect(0, 0, m_window->getSize().x , m_window->getSize().y));
+	
+	m_musicMenu->openFromFile("Ressources/Music/Menu.wav");
+	m_musicMenu->setLoop(true);
+	m_musicMenu->play();
+    
+	sf::View view(sf::FloatRect(0, 0, m_window->getSize().x , m_window->getSize().y));
     m_window->setView(view);
 }
 
@@ -32,12 +37,15 @@ Window::~Window()
 
     delete m_currentWorld;
     delete m_window;
+	delete m_musicMenu;
 }
 
 int Window::run()
 {
 	//update state of the system
 	sf::Clock clk;
+	m_musicMenu->stop();
+
     while(m_currentStatus != GAME_STOPPED)
     {
         //events
@@ -49,10 +57,10 @@ int Window::run()
 		{
 			this->update(clk );
 
-        //drawing
-        m_window->clear();
-        this->draw();
-        m_window->display();
+			//drawing
+			m_window->clear();
+			this->draw();
+			m_window->display();
 		}
     }
 

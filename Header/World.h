@@ -17,7 +17,7 @@ class World : public INDrawable, public INUpdatable
 		TextureLoader m_textures;
 		Building  * m_building;
 		Character * m_character;
-		//sf::Music * m_music;
+		sf::Music * m_musicGame;
 
 	public:
 		World();

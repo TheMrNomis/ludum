@@ -1,4 +1,5 @@
 #pragma once
+#include <SFML/Audio.hpp>
 
 #include <iostream>
 
@@ -21,6 +22,8 @@ class FireDetector : public INUpdatable, public INDrawable, public INCollisionab
         unsigned int m_y;
         double const m_radius;
         bool m_isActivated;
+		
+		sf::Music * m_musicFireDetector;
 
     public:
         /**
