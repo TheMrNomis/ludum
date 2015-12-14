@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 #include "INUpdatable.h"
 #include "INDrawable.h"
 #include "INCollisionable.h"

@@ -40,14 +40,17 @@ void Floor::objectCollision(Ray * rayIntersection, Ray * wallIntersection)
 			{
 				int tminX = m_rooms[i]->getObject()[j]->getX();
 				int tminY = m_rooms[i]->getObject()[j]->getY();
-				int tmaxX = tminX + m_rooms[i]->getObject()[j]->getHeight();
-				int tmaxY = tminY + m_rooms[i]->getObject()[j]->getWidth();
+				int tmaxX = tminX + m_rooms[i]->getObject()[j]->getWidth();
+				int tmaxY = tminY + m_rooms[i]->getObject()[j]->getHeight();
 		
-				rayIntersection->intersectSquare(sf::Vector2f(tminX * 32, tminY * 32), sf::Vector2f(tmaxX * 32 + 31, tmaxY * 32 + 31));
+				rayIntersection->intersectSquare(sf::Vector2f(tminX * 32, tminY * 32), sf::Vector2f(tmaxX * 32, tmaxY * 32));
 		
-				if (rayIntersection->validIntersectionFound() && rayIntersection->distanceToIntersection() <= wallIntersection->distanceToIntersection())
-					m_rooms[i]->getObject()[j]->ignite(0.001);
-
+				if (rayIntersection->validIntersectionFound())
+					if (rayIntersection->distanceToIntersection() <= wallIntersection->distanceToIntersection())
+					{
+						m_rooms[i]->getObject()[j]->ignite(0.001);
+						*wallIntersection = *rayIntersection;
+					}
 				rayIntersection->resetDistance();
 		}
 }

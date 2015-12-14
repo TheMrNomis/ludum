@@ -40,6 +40,7 @@ const double FireDetector::getRadius() const
 
 void FireDetector::activate()
 {
+	std::cout << "Fire Detexcor have detect fire" << std::endl;
 	m_isActivated = true;
 }
 
