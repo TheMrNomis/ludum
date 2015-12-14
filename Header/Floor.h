@@ -10,7 +10,7 @@
 #include "Room.h"
 #include "Object.h"
 #include "Ray.h"
-#include "Teleporter.h"
+//#include "Teleporter.h"
 
 class Floor : public INDrawable, public INUpdatable
 {
