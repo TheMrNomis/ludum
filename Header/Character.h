@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <iostream>
+
 #include "Ray.h"
 #include "INDrawable.h"
 #include "INUpdatable.h"
