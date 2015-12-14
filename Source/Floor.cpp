@@ -107,6 +107,9 @@ void Floor::draw(sf::RenderWindow * window) const
 
 			window->draw(sprite);
 		}
+
+		TextureLoader * textureLoader
+
 	}
 
     //objects

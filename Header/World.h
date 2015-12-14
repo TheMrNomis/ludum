@@ -8,6 +8,10 @@
 #include "Character.h"
 #include "Ray.h"
 
+
+#define PATH_RESSOURCE "Ressources/sprites"
+
+
 class World : public INDrawable, public INUpdatable
 {
 	private:
