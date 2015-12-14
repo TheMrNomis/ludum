@@ -1,9 +1,9 @@
 #include "Floor.h"
 
 
-Floor::Floor(TextureLoader const * textureLoaders):
-    m_background(),
-	m_roomsMap(),
+Floor::Floor(TextureLoader const * textureLoaders) :
+	m_background(),
+	m_floorMap(),
 
     m_rooms(),
 	m_doors(),
@@ -11,7 +11,7 @@ Floor::Floor(TextureLoader const * textureLoaders):
 	
 	m_textureBuilding(textureLoaders->getFloorTexture())
 {
-	//
+	
 }
 
 Floor::~Floor()
@@ -30,14 +30,13 @@ void Floor::addLine(std::vector<unsigned char> line)
 
 void Floor::addLineToRoomsMap(std::vector<unsigned char> line)
 {
-	m_roomsMap.push_back(line);
+	m_floorMap.push_back(line);
 }
 
-void Floor::addRoom(unsigned char id, Room * room)
+void Floor::addRoom(Room * room)
 {
     m_rooms.push_back(room);
 }
-
 
 void Floor::addDoor(Door * door)
 {
@@ -101,7 +100,7 @@ void Floor::draw(sf::RenderWindow * window) const
 
     //objects
     for(auto it = m_rooms.cbegin(); it != m_rooms.cend(); ++it)
-        (*it)->draw(window);
+        (*it)->draw(window,&m_floorMap);
 
 	//doors
 	for (auto it = m_doors.cbegin(); it != m_doors.cend(); ++it)

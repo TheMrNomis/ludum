@@ -7,10 +7,15 @@
 #include "FireDetector.h"
 #include "INUpdatable.h"
 
-class Room : public INDrawable, public INUpdatable, public INCollisionable
+class Room : public INUpdatable, public INCollisionable
 {
+    private:
+		const unsigned int m_roomId;
+        std::vector<Object *> m_objects;
+        std::vector<FireDetector *> m_fireDetectors;
+
     public:
-        Room();
+        Room(unsigned int roomId);
         virtual ~Room();
 
         /**
@@ -25,7 +30,6 @@ class Room : public INDrawable, public INUpdatable, public INCollisionable
 		
 		virtual std::vector<FireDetector *> getfireDetector();
 		
-		
 		/**
          * @brief adds a fire detector to the room
          *
@@ -34,14 +38,27 @@ class Room : public INDrawable, public INUpdatable, public INCollisionable
          */
         virtual void addFireDetector(FireDetector * fd);
 
-
         /**
+         * @brief Exteguish all the fire in the room
+         *		the damage is stoped
+         *
+         */
+        void extinguishFire();
+
+		/**
+		* @brief Collisions test on all objects
+		*		
+		*
+		*/
+        virtual void collision(Ray * ray);
+
+		/**
          * @brief draw the Room
          *
          * @param window:
          *
          */
-        virtual void draw(sf::RenderWindow * window) const;
+        virtual void draw(sf::RenderWindow * window, std::vector<std::vector<unsigned char> > const * floorMap) const;
 
 
         /**
@@ -50,18 +67,4 @@ class Room : public INDrawable, public INUpdatable, public INCollisionable
          *
          */
         virtual void update(sf::Clock const& clk);
-
-        /**
-         * @brief Exteguish all the fire in the room
-         *		the damage is stoped
-         *
-         */
-        void extinguishFire();
-
-        virtual void collision(Ray * ray);
-
-
-    private:
-        std::vector<Object *> m_objects;
-        std::vector<FireDetector *> m_fireDetectors;
 };

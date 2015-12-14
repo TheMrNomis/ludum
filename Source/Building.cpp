@@ -47,7 +47,7 @@ void Building::loadToTileSet(std::string const &path)
     std::unordered_map<unsigned char, bool> fireDetectorsSentInRoom;
 
 	bool mapConstruction = false;
-	unsigned int idRooms = 0;
+	unsigned int roomId = 0;
 
     unsigned int lineNumber = 0;
     while(levelFile.good())
@@ -139,7 +139,7 @@ void Building::loadToTileSet(std::string const &path)
                 //room
                 bool ids_fireDetector = false;
 
-                Room * room = new Room();
+                Room * room = new Room(roomId);
                 for(unsigned int i = 1; i < line.length(); ++i)
                 {
                     if(line[i] == ':')
@@ -165,8 +165,8 @@ void Building::loadToTileSet(std::string const &path)
                     }
                 }
 
-                currentFloor->addRoom(idRooms,room);
-				idRooms++;
+                currentFloor->addRoom(room);
+				roomId++;
             }
 
 			else if (line[0] == 'd')
