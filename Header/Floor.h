@@ -17,10 +17,14 @@ class Floor : public INDrawable, public INUpdatable
 	private:
 		std::vector<std::vector<unsigned char> > m_background;
         std::vector<Room *> m_rooms;
+		
+		//temp
+		TextureLoader const * m_textures;
 		sf::Texture * m_textureBuilding;
-
+		Teleporter * m_telep_Up;
+		Teleporter * m_telep_Down;
 	public:
-		Floor(sf::Texture * textureBuilding);
+		Floor(TextureLoader const * textureLoaders);
 		virtual ~Floor();
 
 		void addLine(std::vector<unsigned char> line);
@@ -36,7 +40,7 @@ class Floor : public INDrawable, public INUpdatable
 		bool wallCollision(Ray * rayIntersection);
 		void objectCollision(Ray * rayIntersection, Ray * wallIntersection);
 		void fireDetectorCollision(Ray * rayIntersection, Ray * wallIntersection);
-
+		void teleporterDetectorCollision(Ray * rayIntersection, Ray * wallIntersection);
 		virtual void update(sf::Clock const & clk);
 		virtual void draw(sf::RenderWindow *window) const;
 
