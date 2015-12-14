@@ -15,7 +15,7 @@ class Room : public INUpdatable, public INCollisionable
         std::vector<FireDetector *> m_fireDetectors;
 
     public:
-        Room(unsigned int roomId);
+        Room(unsigned char roomId);
         virtual ~Room();
 
         /**
