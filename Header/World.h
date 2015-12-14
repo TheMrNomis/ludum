@@ -8,6 +8,7 @@
 #include "Character.h"
 #include "Ray.h"
 #include "Teleporter.h"
+#include "MP3Player.h"
 
 
 class World : public INDrawable, public INUpdatable
@@ -16,7 +17,7 @@ class World : public INDrawable, public INUpdatable
 		TextureLoader m_textures;
 		Building  * m_building;
 		Character * m_character;
-		
+		MP3Player * player;
 		
 
 	public:
