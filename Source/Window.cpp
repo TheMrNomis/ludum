@@ -11,8 +11,10 @@ Window::Window():
 	m_currentStatus(GAME_MAIN_MENU),
     m_mouseButtonPressed(false),
     m_leftButtonPushed(false),
+    m_leftButtonActivated(false),
     m_timeLeftButtonPressed(),
     m_rightButtonPushed(false),
+    m_rightButtonActivated(false),
     m_timeRightButtonPressed(),
     m_bothButtonsEnabled(false)
 {
@@ -51,7 +53,6 @@ int Window::run()
         m_window->clear();
         this->draw();
         m_window->display();
-		clk.restart();
 		}
     }
 
@@ -180,6 +181,7 @@ void Window::react(sf::Event const& event)
             else
                 leftButton();
             m_leftButtonPushed = false;
+            m_leftButtonActivated = false;
         }
         else if(event.key.code == sf::Keyboard::Right)
         {
@@ -191,6 +193,7 @@ void Window::react(sf::Event const& event)
             else
                 rightButton();
             m_rightButtonPushed = false;
+            m_rightButtonActivated = false;
         }
     }
 }
@@ -204,20 +207,18 @@ void Window::update(sf::Clock const & clk)
 
     else if(m_leftButtonPushed)
     {
-        if((m_clock.getElapsedTime() - m_timeLeftButtonPressed) >= m_buttonDeadZoneDelay)
-        {
-            //repeated action for left button
+        if(m_leftButtonActivated)
             leftButton();
-        }
+        else if((m_clock.getElapsedTime() - m_timeLeftButtonPressed) >= m_buttonDeadZoneDelay)
+            m_leftButtonActivated = true;
     }
 
     else if(m_rightButtonPushed)
     {
-        if((m_clock.getElapsedTime() - m_timeRightButtonPressed) >= m_buttonDeadZoneDelay)
-        {
-            //repeated action for right button
+        if(m_rightButtonActivated)
             rightButton();
-        }
+        else if((m_clock.getElapsedTime() - m_timeRightButtonPressed) >= m_buttonDeadZoneDelay)
+            m_rightButtonActivated = true;
     }
 
     m_currentWorld->update(clk );
@@ -225,14 +226,12 @@ void Window::update(sf::Clock const & clk)
 
 void Window::leftButton() const
 {
-	if(!m_currentWorld->getCharacter()->isJumping())
-		m_currentWorld->getCharacter()->setAngle(-10);
+		m_currentWorld->getCharacter()->setAngle(-1);
 }
 
 void Window::rightButton() const
 {
-	if (!m_currentWorld->getCharacter()->isJumping())
-		m_currentWorld->getCharacter()->setAngle(10);
+    m_currentWorld->getCharacter()->setAngle(1);
 }
 
 void Window::bothButtons() const
