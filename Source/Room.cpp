@@ -18,9 +18,7 @@ Room::~Room()
 
 void Room::addObject(Object * obj)
 {
-	std::cout << "nb o: " << m_objects.size() << std::endl;
     m_objects.push_back(obj);
-	std::cout << "nb o: " << m_objects.size() << std::endl;
 }
 
 std::vector<Object *> Room::getObject()
@@ -35,9 +33,7 @@ std::vector<FireDetector *> Room::getfireDetector()
 
 void Room::addFireDetector(FireDetector * fd)
 {
-	std::cout << "nb f: " << m_fireDetectors.size() << std::endl;
     m_fireDetectors.push_back(fd);
-	std::cout << "nb f: " << m_fireDetectors.size() << std::endl;
 }
 
 void Room::extinguishFire()
@@ -57,7 +53,6 @@ void Room::collision(Ray * ray)
 
 void Room::draw(sf::RenderWindow * window, std::vector<std::vector<unsigned char>> const * floorMap) const
 {
-	std::cout << "nb objets: " << m_objects.size() << std::endl;
 	for (auto it = m_objects.cbegin(); it != m_objects.cend(); ++it)
 		(*it)->draw(window);
 
