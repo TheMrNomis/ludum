@@ -22,7 +22,9 @@ Window::Window():
     m_rightButtonPushed(false),
     m_rightButtonActivated(false),
     m_timeRightButtonPressed(),
-    m_bothButtonsEnabled(false)
+    m_bothButtonsEnabled(false),
+
+	lifeBar(new sf::RectangleShape())
 {
     m_buttonDeadZoneDelay = sf::milliseconds(20);
 
@@ -80,6 +82,7 @@ void Window::draw() const
     {
         m_window->setView(m_view);
         m_currentWorld->draw(m_window);
+        this->drawHUD();
     }
     else
         m_menu->draw(m_window, m_currentStatus);
@@ -262,4 +265,10 @@ void Window::bothButtons() const
 	Ray * collisionRay = m_currentWorld->getCharacter()->jump();
 	m_currentWorld->getBuilding()->checkCollisions(collisionRay);
 	m_currentWorld->getCharacter()->setDistanceToCollision(collisionRay->distanceToIntersection());
+}
+
+void Window::drawHUD() const
+{
+	sf::RectangleShape rectangle(sf::Vector2f(30, 10));
+	m_window->draw(rectangle);
 }

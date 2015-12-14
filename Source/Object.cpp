@@ -109,10 +109,10 @@ void Object::update(sf::Clock const & clk)
     m_time = m_clock.getElapsedTime();
 	if (m_burn)
 	{
+
 		m_currentBurnedDamage += m_currentFlameIntensity;
 		if (m_currentBurnedDamage > m_maxBurnedDamage)
 		{
-			std::cout << "Object " << m_x << " : " << m_y << " destroy." << std::endl;
 			m_burn = false;
 		}
 	}
@@ -131,9 +131,6 @@ void Object::ignite(double fire)
 {
 	if (!m_burn)
 	{
-		std::cout << "Object " << m_x << " : " << m_y << " is burning !!!" << std::endl;
-		std::cout << "Size " << m_height << " : " << m_width << std::endl;
-
 		m_burn = true;
 		m_currentFlameIntensity = fire;
 	}
@@ -141,8 +138,13 @@ void Object::ignite(double fire)
 
 void Object::stopFire()
 {
-	std::cout << "Object " << m_x << " : " << m_y << " fire stop !!!" << std::endl;
     m_currentFlameIntensity = 0;
+}
+
+
+double Object::getMaxBurnedDamage() const
+{
+	return m_maxBurnedDamage;
 }
 
 int Object::getWidth() const
@@ -163,6 +165,11 @@ int Object::getX() const
 int Object::getY() const
 {
 	return m_y;
+}
+
+double Object::lifeLost() const
+{
+	return m_currentFlameIntensity;
 }
 
 void Object::collision(Ray * ray)

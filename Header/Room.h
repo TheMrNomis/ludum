@@ -14,6 +14,9 @@ class Room : public INUpdatable, public INCollisionable
         std::vector<Object *> m_objects;
         std::vector<FireDetector *> m_fireDetectors;
 
+		double m_maxLife;
+		double m_currentLife;
+
     public:
         Room(unsigned char roomId);
         virtual ~Room();
@@ -30,6 +33,12 @@ class Room : public INUpdatable, public INCollisionable
 		
 		virtual std::vector<FireDetector *> getfireDetector();
 		
+		virtual void setLife(double lostLife);
+		virtual double getLife() const;
+		virtual double getMaxLife() const;
+
+		virtual double lifeStay() const;
+
 		/**
          * @brief adds a fire detector to the room
          *

@@ -21,6 +21,8 @@ class Window : public INEventHandler, public INUpdatable
 
 		sf::Music * m_musicMenu;
 
+		sf::RectangleShape * lifeBar;
+
 		sf::RenderWindow * m_window;
         sf::View m_view;
 
@@ -78,4 +80,6 @@ class Window : public INEventHandler, public INUpdatable
 		void leftButton() const;
 		void rightButton() const;
 		void bothButtons() const;
+
+		void drawHUD() const;
 };
