@@ -14,5 +14,5 @@ class Door : public INDrawable
 	Door();
 	virtual ~Door();
 
-
+	//
 };
