@@ -7,9 +7,7 @@
 #include "Floor.h"
 #include "Character.h"
 #include "Ray.h"
-
-
-
+#include "Teleporter.h"
 
 
 class World : public INDrawable, public INUpdatable
@@ -18,6 +16,9 @@ class World : public INDrawable, public INUpdatable
 		TextureLoader m_textures;
 		Building  * m_building;
 		Character * m_character;
+		
+		//temp
+		Teleporter * m_telep;
 
 	public:
 		World();
