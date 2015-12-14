@@ -2,11 +2,14 @@
 #include <iostream>
 
 
-Teleporter::Teleporter(unsigned int positionX, unsigned int positionY,sf::Texture * texture, unsigned int targetFloor) :
-					   m_x(positionX),
-					   m_y(positionY),
-					   m_texture(texture),m_targetFloor(targetFloor),
-					   m_directionIn(sf::Vector2f())
+Teleporter::Teleporter(unsigned int positionX, unsigned int positionY, sf::Texture * texture, unsigned int targetFloor):
+	m_texture(texture),
+
+	m_x(positionX),
+	m_y(positionY),
+					   
+	m_direction(42),
+	m_targetFloor(targetFloor)
 {
 
 }
@@ -18,6 +21,11 @@ Teleporter::~Teleporter()
 void Teleporter::update(sf::Clock const & clk)
 {
  
+}
+
+void Teleporter::setDirection(unsigned int direction)
+{
+	m_direction = direction;
 }
 
 unsigned int Teleporter::getX() const
@@ -32,16 +40,12 @@ unsigned int Teleporter::getY() const
 
 void Teleporter::draw(sf::RenderWindow * window) const
 {
-    sf::Sprite sprite;
+	sf::Sprite sprite;
     sprite.setTexture(*m_texture);
-	if (m_targetFloor == 0){
-		sprite.setTextureRect(sf::IntRect(0, 0, 32, 64));
-		sprite.setPosition(getX(),getY());
-	}
-	else{
-		sprite.setTextureRect(sf::IntRect(32, 0, 32, 64));
-		sprite.setPosition(getX(),getY());
-	}
+
+	sprite.setTextureRect(sf::IntRect(m_direction * 32, 0, 32, 64));
+	sprite.setPosition(m_x,m_y);
+
     window->draw(sprite);
 }
 

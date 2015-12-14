@@ -11,22 +11,28 @@
 #include "Object.h"
 #include "Ray.h"
 #include "Teleporter.h"
-
+#include "Door.h"
 class Floor : public INDrawable, public INUpdatable
 {
 	private:
 		std::vector<std::vector<unsigned char> > m_background;
         std::vector<Room *> m_rooms;
+		std::vector<Door *> m_doors;
 
 		sf::Texture * m_textureBuilding;
 		Teleporter * m_telep_Up;
 		Teleporter * m_telep_Down;
+
+
+
 
 	public:
 		Floor(TextureLoader const * textureLoaders);
 		virtual ~Floor();
 
 		void addLine(std::vector<unsigned char> line);
+
+
 
         /**
          * @brief adds a room to this floor
@@ -35,6 +41,11 @@ class Floor : public INDrawable, public INUpdatable
          * @note Floor takes ownership of the Room, and will destroy it when needed
          */
         void addRoom(Room * room);
+
+
+		void addDoors(Door * door);
+		
+		void addTeleporter(Teleporter * teleporter, unsigned int direction);
 
 		bool wallCollision(Ray * rayCollision);
 		bool doorCollision(Ray * rayCollision);

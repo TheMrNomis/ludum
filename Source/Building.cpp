@@ -217,7 +217,7 @@ void Building::loadToTileSet(std::string const &path)
 					
 					std::string x_str;
 					std::string y_str;
-					std::string s_str;
+					std::string d_str;
 
 					bool first = true;
 					bool last = true;
@@ -229,7 +229,7 @@ void Building::loadToTileSet(std::string const &path)
 						else if (line[i] == ':' && last)
 						{
 							last = false;
-							s_str.push_back(line[i]);
+							d_str.push_back(line[i]);
 						}
 						else
 							(first ? x_str : y_str).push_back(line[i]);
@@ -237,12 +237,12 @@ void Building::loadToTileSet(std::string const &path)
 
 					unsigned int x = atoi(x_str.c_str());
 					unsigned int y = atoi(y_str.c_str());
-					unsigned int statut = atoi(s_str.c_str());
+					unsigned int status = atoi(d_str.c_str());
 
-					Teleporter * teleporter = new Teleporter(x, y, m_textureLoader->getTeleporterTexture(),statut);
+					Teleporter * teleporter = new Teleporter(x, y, m_textureLoader->getTeleporterTexture(),0);
 					teleporters.insert(std::pair<unsigned char, Teleporter *>(teleporteurID, teleporter));
 					teleporteursSentInRoom.insert(std::pair<unsigned char, bool>(teleporteurID, false));
-
+					currentFloor->addTeleporter(teleporter, status);
 					std::cout << "test teleporteur" << std::endl;
 				}
 			}

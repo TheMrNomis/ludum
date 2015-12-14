@@ -74,7 +74,7 @@ void TextureLoader::loadTexture(std::string const & url)
         std::cerr << "Error when loading the texture of the fire detector" << std::endl;
         throw std::exception();
     }
-	if (!m_teleporterTexture->loadFromFile((url + "mobilier/stair.png").c_str()))
+	if(!m_teleporterTexture->loadFromFile((url + "mobilier/stair.png").c_str()))
 	{
 		std::cerr << "Error when loading the texture of the fire detector" << std::endl;
 		throw std::exception();
