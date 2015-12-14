@@ -40,12 +40,12 @@ unsigned int Teleporter::getY() const
 
 void Teleporter::draw(sf::RenderWindow * window) const
 {
-	sf::Sprite sprite;
+	/*sf::Sprite sprite;
     sprite.setTexture(*m_texture);
 
 	sprite.setTextureRect(sf::IntRect(m_direction * 32, 0, 32, 64));
 	sprite.setPosition(m_x,m_y);
 
-    window->draw(sprite);
+    window->draw(sprite);*/
 }
 
