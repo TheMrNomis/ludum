@@ -53,6 +53,7 @@ void Room::collision(Ray * ray)
 
 void Room::draw(sf::RenderWindow * window, std::vector<std::vector<unsigned char>> const * floorMap) const
 {
+	std::cout << ""
 	for (auto it = m_objects.cbegin(); it != m_objects.cend(); ++it)
 		(*it)->draw(window);
 
