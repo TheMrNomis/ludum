@@ -9,7 +9,7 @@ FireDetector::FireDetector(unsigned int x, unsigned int y, double radius, sf::Te
     m_isActivated(false),
 	m_musicFireDetector(new sf::Music())
 {
-	m_musicFireDetector->openFromFile("Ressources/Music/FireDetector.wav");
+	m_musicFireDetector->openFromFile("Ressources/Music/FireDetect.wav");
 }
 
 FireDetector::~FireDetector()
