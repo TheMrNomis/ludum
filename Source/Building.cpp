@@ -273,6 +273,29 @@ void Building::loadToTileSet(std::string const &path)
     m_floors.push_back(currentFloor);
 }
 
+void Building::loadNextFloor()
+{
+
+	for (auto it = m_floors[getCurrentFloor()]->getTeleporter().cbegin();
+	it != m_floors[getCurrentFloor()]->getTeleporter().cend(); ++it) {
+
+		if ((*it)->getStatusColision())
+		{
+			if ((*it)->getDirection() == 0) {
+				if (m_currentFloor > 0) {
+					m_currentFloor = 0;
+				}
+			}
+			else
+			{
+				m_currentFloor = 1;
+			}
+
+		}
+	}
+
+}
+
 void Building::draw(sf::RenderWindow *window) const
 {
 	m_floors[m_currentFloor]->draw(window);

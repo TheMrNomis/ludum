@@ -46,6 +46,10 @@ class Floor : public INDrawable, public INUpdatable, public INCollisionable
 		void addDoor(Door * door);
 		void addTeleporter(Teleporter * teleporter);
 
+		std::vector<Teleporter *> getTeleporter();
+
+		
+		
 		virtual void setLife(double lostLife);
 		virtual double getLife() const;
 		virtual double getMaxLife() const;
