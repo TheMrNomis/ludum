@@ -65,6 +65,10 @@ void Building::loadToTileSet(std::string const &path)
                 //new floor
                 m_floors.push_back(currentFloor);
                 currentFloor = new Floor(m_textureLoader);
+				floorId++;
+
+				//restart nb_rooms
+				roomId = 0;
             }
 
             else if(line[0] == 'o')
