@@ -5,7 +5,9 @@ Floor::Floor(sf::Texture * textureBuilding):
     m_background(),
     m_rooms(),
 	m_textureBuilding(textureBuilding)
-{}
+{
+	
+}
 
 Floor::~Floor()
 {
@@ -108,7 +110,6 @@ void Floor::draw(sf::RenderWindow * window) const
 			window->draw(sprite);
 		}
 
-		//TextureLoader * textureLoader
 
 	}
 
