@@ -226,34 +226,21 @@ void Window::update(sf::Clock const & clk)
 
 void Window::leftButton() const
 {
-	m_currentWorld->getCharacter()->setAngle(-0.5);
-
-	Ray rayTest = m_currentWorld->getCharacter()->getRayIntersection();
-	m_currentWorld->getBuilding()->checkCollisions(&rayTest);
-
-	std::cout << "Distance to intersection: " << rayTest.distanceToIntersection() << std::endl;
+	m_currentWorld->getCharacter()->setAngle(-0.4);
 }
 
 void Window::rightButton() const
 {
-    m_currentWorld->getCharacter()->setAngle(0.5);
-
-	Ray rayTest = m_currentWorld->getCharacter()->getRayIntersection();
-	m_currentWorld->getBuilding()->checkCollisions(&rayTest);
-
-	std::cout << "Distance to intersection: " << rayTest.distanceToIntersection() << std::endl;
+    m_currentWorld->getCharacter()->setAngle(0.4);
 }
 
 void Window::bothButtons() const
 {
-	std::cout << "Jump" << std::endl;
 	Ray * intersectionRay = m_currentWorld->getCharacter()->jump();
 
 	m_currentWorld->getBuilding()->checkCollisions(intersectionRay);
 
 	m_currentWorld->getCharacter()->setDistanceToCollision(intersectionRay->distanceToIntersection());
-
-	// Yoooo la frite ?
 
 	//Récupère distance
 	//	//world->getBuilding()->checkCollisions(m_intersectionRay);

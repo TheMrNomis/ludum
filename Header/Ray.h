@@ -46,6 +46,9 @@ class Ray
         sf::Vector2f intersection() const;
 
 		float distanceToIntersection() const;
+
+		void resetDistance();
+
         /**
          * @return the origin of the ray
          */

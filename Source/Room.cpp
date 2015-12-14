@@ -20,6 +20,16 @@ void Room::addObject(Object * obj)
     m_objects.push_back(obj);
 }
 
+std::vector<Object *> Room::getObject()
+{
+	return m_objects;
+}
+
+std::vector<FireDetector *> Room::getfireDetector()
+{
+	return m_fireDetectors;
+}
+
 void Room::addFireDetector(FireDetector * fd)
 {
     m_fireDetectors.push_back(fd);
@@ -43,5 +53,8 @@ void Room::draw(sf::RenderWindow * window) const{
 
 void Room::update(sf::Clock const & clk)
 {
+	for (auto it = m_objects.begin(); it != m_objects.end(); ++it)
+		(*it)->update(clk);
+
 	//si le fireDetector détecte le character -> extinguishFire()
 }

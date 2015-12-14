@@ -29,7 +29,14 @@ unsigned int Building::getCurrentFloor()
 
 bool Building::checkCollisions(Ray * rayIntersection)
 {
-	return m_floors[m_currentFloor]->wallCollision(rayIntersection);
+	Ray rayObject = *rayIntersection;
+	bool wall = m_floors[m_currentFloor]->wallCollision(rayIntersection);
+
+	m_floors[m_currentFloor]->objectCollision(&rayObject, rayIntersection);
+
+	m_floors[m_currentFloor]->fireDetectorCollision(&rayObject, rayIntersection);
+
+	return wall;
 }
 
 void Building::loadToTileSet(std::string const &path)

@@ -27,6 +27,14 @@ class FireDetector : public INUpdatable, public INDrawable, public INCollisionab
          */
         virtual void draw(sf::RenderWindow * window) const;
 
+		virtual unsigned int getX() const;
+
+		virtual unsigned int getY() const;
+
+		virtual const double getRadius() const;
+
+		virtual void activate();
+
         /**
          *@brief send a ray to find a collision with a floor or objects
          *

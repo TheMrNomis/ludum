@@ -9,7 +9,7 @@ Character::Character(TextureLoader * textures) :
     m_position(200, 200),
     m_currentAnimation(0),
 
-    m_velocity(1),
+    m_velocity(1.4),
     m_jumping(false),
     m_statusCollision(false),
 
@@ -142,22 +142,16 @@ void Character::update(sf::Clock const & clk)
     //Deplacement
     if(isJumping())
     {
-		std::cout << "Distance de collision : " << m_distanceToCollision << std::endl;
 		m_distanceToCollision -= m_velocity;
 
-        if(m_distanceToCollision <= 1)
+        if(m_distanceToCollision <= 10)
         {
-            std::cout << "/!\\ Collision /!\\" << std::endl;
             setMoving(false);
             setStatusCollision(true);
 			m_distanceToCollision = 0;
         }
 
-        else
-        {
-            std::cout << "/!\\ Pas de Collisions /!\\" << std::endl;
-            setPosition(nextFramePosition());
-        }
+        else setPosition(nextFramePosition());
     }
 
     if((elapsedTime - m_lastAnimationUpdate).asMilliseconds() >= 400)

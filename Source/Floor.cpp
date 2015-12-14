@@ -28,13 +28,54 @@ bool Floor::wallCollision(Ray * rayIntersection)
 	for (unsigned int i = 0; i < m_background.size(); ++i)
 		for (unsigned int j = 0; j < m_background[i].size(); ++j)
 			if (m_background[i][j] == '1')
-				rayIntersection->intersectSquare(sf::Vector2f(i * 32, j * 32), sf::Vector2f(i * 32 + 31, j * 32 + 31));
+				rayIntersection->intersectSquare(sf::Vector2f(j * 32, i * 32), sf::Vector2f(j * 32 + 31, i * 32 + 31));
 
 	return rayIntersection->validIntersectionFound();
 }
 
+void Floor::objectCollision(Ray * rayIntersection, Ray * wallIntersection)
+{
+	for (int i = 0; i < m_rooms.size(); ++i)
+		for (int j = 0; j < m_rooms[i]->getObject().size(); ++j)
+			{
+				int tminX = m_rooms[i]->getObject()[j]->getX();
+				int tminY = m_rooms[i]->getObject()[j]->getY();
+				int tmaxX = tminX + m_rooms[i]->getObject()[j]->getHeight();
+				int tmaxY = tminY + m_rooms[i]->getObject()[j]->getWidth();
+		
+				rayIntersection->intersectSquare(sf::Vector2f(tminX * 32, tminY * 32), sf::Vector2f(tmaxX * 32 + 31, tmaxY * 32 + 31));
+		
+				if (rayIntersection->validIntersectionFound() && rayIntersection->distanceToIntersection() <= wallIntersection->distanceToIntersection())
+					m_rooms[i]->getObject()[j]->ignite(0.001);
+
+				rayIntersection->resetDistance();
+		}
+}
+
+
+void Floor::fireDetectorCollision(Ray * rayIntersection, Ray * wallIntersection)
+{
+	for (int i = 0; i < m_rooms.size(); ++i)
+		for (int j = 0; j < m_rooms[i]->getfireDetector().size(); ++j)
+		{
+		int tminX = m_rooms[i]->getfireDetector()[j]->getX();
+		int tminY = m_rooms[i]->getfireDetector()[j]->getY();
+		double radius = m_rooms[i]->getfireDetector()[j]->getRadius();
+
+		rayIntersection->intersectCircle(sf::Vector2f(tminX * 32, tminY * 32), radius);
+		
+		if (rayIntersection->validIntersectionFound() && rayIntersection->distanceToIntersection() <= wallIntersection->distanceToIntersection())
+			m_rooms[i]->getfireDetector()[j]->activate();
+
+		rayIntersection->resetDistance();
+		}
+}
+
 void Floor::update(sf::Clock const & clk)
-{}
+{
+	for (auto it = m_rooms.begin(); it != m_rooms.end(); ++it)
+		(*it)->update(clk);
+}
 
 void Floor::draw(sf::RenderWindow * window) const
 {
@@ -59,7 +100,7 @@ void Floor::draw(sf::RenderWindow * window) const
 				offsetY = 4;
 			}
 			sprite.setTextureRect(sf::IntRect(32 * offsetX, 32 * offsetY, 32, 32));
-			sprite.setPosition(i * 32, j * 32);
+			sprite.setPosition(j * 32, i * 32);
 
 			window->draw(sprite);
 		}

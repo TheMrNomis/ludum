@@ -21,7 +21,12 @@ class Room : public INDrawable, public INUpdatable
          */
         virtual void addObject(Object * obj);
 
-        /**
+		virtual std::vector<Object *> getObject();
+		
+		virtual std::vector<FireDetector *> getfireDetector();
+		
+		
+		/**
          * @brief adds a fire detector to the room
          *
          * @param fd: the fireDetector to add (dynamically-created pointer)

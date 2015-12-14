@@ -6,26 +6,29 @@
 class Object : public INDrawable, public INUpdatable
 {
     public:
-        static Object * fromID(unsigned char objectID, unsigned int x, unsigned int y, sf::Texture const* texture);
+        static Object * fromID(unsigned char objectID, unsigned int x, unsigned int y, sf::Texture * texture);
 
-        static Object * Bed(unsigned int x, unsigned int y, sf::Texture const* texture);
-        static Object * Sofa(unsigned int x, unsigned int y, sf::Texture const* texture);
-        static Object * Toilet(unsigned int x, unsigned int y, sf::Texture const* texture);
-        static Object * Table(unsigned int x, unsigned int y, sf::Texture const* texture);
-        static Object * Oven(unsigned int x, unsigned int y, sf::Texture const* texture);
-        static Object * Fridge(unsigned int x, unsigned int y, sf::Texture const* texture);
-        static Object * KitchenTable(unsigned int x, unsigned int y, sf::Texture const* texture);
-        static Object * Tub(unsigned int x, unsigned int y, sf::Texture const* texture);
+        static Object * Bed(unsigned int x, unsigned int y, sf::Texture * texture);
+        static Object * Sofa(unsigned int x, unsigned int y, sf::Texture * texture);
+        static Object * Toilet(unsigned int x, unsigned int y, sf::Texture * texture);
+        static Object * Table(unsigned int x, unsigned int y, sf::Texture * texture);
+        static Object * Oven(unsigned int x, unsigned int y, sf::Texture * texture);
+        static Object * Fridge(unsigned int x, unsigned int y, sf::Texture * texture);
+        static Object * KitchenTable(unsigned int x, unsigned int y, sf::Texture * texture);
+        static Object * Tub(unsigned int x, unsigned int y, sf::Texture * texture);
 
         virtual ~Object();
 
         virtual void update(sf::Clock const& clk);
         virtual void draw(sf::RenderWindow * window) const;
-        virtual void ignite();
+        virtual void ignite(double fire);
         virtual void stopFire();
 
         int getWidth() const;
         int getHeight() const;
+
+		int getX() const;
+		int getY() const;
 
     private:
         /**
@@ -41,7 +44,7 @@ class Object : public INDrawable, public INUpdatable
          * @param y: position y of the tile where to put this object
          * @param texture: texture to use
          */
-        Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int width, unsigned int height, unsigned int offsetX, unsigned int offsetY, unsigned int x, unsigned int y, sf::Texture const * texture);
+        Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int width, unsigned int height, unsigned int offsetX, unsigned int offsetY, unsigned int x, unsigned int y, sf::Texture * texture);
 
     private:
         unsigned int m_width;
@@ -53,13 +56,14 @@ class Object : public INDrawable, public INUpdatable
         unsigned int m_offsetX;
         unsigned int m_offsetY;
 
+		bool m_burn;
         const double m_flameVelocity;
-        const unsigned int m_maxBurnedDamage;
+        const double m_maxBurnedDamage;
         double m_currentFlameIntensity;
-        unsigned int m_currentBurnedDamage;
+        double m_currentBurnedDamage;
 
 
-        sf::Texture const * m_texture;
+        sf::Texture * m_texture;
         sf::Clock m_clock;
         sf::Time m_time;
 };

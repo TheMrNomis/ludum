@@ -27,6 +27,12 @@ float Ray::distanceToIntersection() const
 	return m_minT;
 }
 
+void Ray::resetDistance()
+{
+	m_minT = 0;
+	m_intersectionFound = false;
+}
+
 sf::Vector2f Ray::getOrigin() const
 {
     return m_origin;

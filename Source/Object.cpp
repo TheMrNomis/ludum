@@ -1,6 +1,7 @@
 #include "Object.h"
+#include <iostream>
 
-Object * Object::fromID(unsigned char objectID, unsigned int x, unsigned int y, sf::Texture const* texture)
+Object * Object::fromID(unsigned char objectID, unsigned int x, unsigned int y, sf::Texture * texture)
 {
     switch(objectID)
     {
@@ -35,48 +36,48 @@ Object * Object::fromID(unsigned char objectID, unsigned int x, unsigned int y, 
 
 }
 
-Object * Object::Bed(unsigned int x, unsigned int y, sf::Texture const* texture)
+Object * Object::Bed(unsigned int x, unsigned int y, sf::Texture * texture)
 {
     return new Object(0.6,15, 2,3, 0,0, x,y, texture);
 }
 
-Object * Object::Sofa(unsigned int x, unsigned int y, sf::Texture const* texture)
+Object * Object::Sofa(unsigned int x, unsigned int y, sf::Texture * texture)
 {
     return new Object(0.5,25, 2,1, 0,3, x,y, texture);
 }
 
-Object * Object::Toilet(unsigned int x, unsigned int y, sf::Texture const* texture)
+Object * Object::Toilet(unsigned int x, unsigned int y, sf::Texture * texture)
 {
     return new Object(0.0,10, 1,1, 2,0, x,y, texture);
 }
 
-Object * Object::Table(unsigned int x, unsigned int y, sf::Texture const* texture)
+Object * Object::Table(unsigned int x, unsigned int y, sf::Texture * texture)
 {
     return new Object(1.0,20, 1,1, 2,1, x,y, texture);
 }
 
-Object * Object::Oven(unsigned int x, unsigned int y, sf::Texture const* texture)
+Object * Object::Oven(unsigned int x, unsigned int y, sf::Texture * texture)
 {
     return new Object(0.5,50, 1,1, 2,2, x,y, texture);
 }
 
-Object * Object::Fridge(unsigned int x, unsigned int y, sf::Texture const* texture)
+Object * Object::Fridge(unsigned int x, unsigned int y, sf::Texture * texture)
 {
     return new Object(0.5,50, 1,1, 2,3, x,y, texture);
 }
 
-Object * Object::KitchenTable(unsigned int x, unsigned int y, sf::Texture const* texture)
+Object * Object::KitchenTable(unsigned int x, unsigned int y, sf::Texture * texture)
 {
     return new Object(0.5,50, 1,1, 3,0, x,y, texture);
 }
 
-Object * Object::Tub(unsigned int x, unsigned int y, sf::Texture const* texture)
+Object * Object::Tub(unsigned int x, unsigned int y, sf::Texture * texture)
 {
     return new Object(0.0,10, 1,2, 3,1, x,y, texture);
 }
 
 
-Object::Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int width, unsigned int height, unsigned int offsetX, unsigned int offsetY, unsigned int x, unsigned int y, sf::Texture const * texture) :
+Object::Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int width, unsigned int height, unsigned int offsetX, unsigned int offsetY, unsigned int x, unsigned int y, sf::Texture * texture) :
     m_width(width),
     m_height(height),
 
@@ -86,6 +87,7 @@ Object::Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int 
     m_offsetX(offsetX),
     m_offsetY(offsetY),
 
+	m_burn(false),
     m_flameVelocity(flameVelocity),
     m_maxBurnedDamage(maxBurnedDamage),
     m_currentFlameIntensity(0),
@@ -105,6 +107,15 @@ Object::~Object()
 void Object::update(sf::Clock const & clk)
 {
     m_time = m_clock.getElapsedTime();
+	if (m_burn)
+	{
+		m_currentBurnedDamage += m_currentFlameIntensity;
+		if (m_currentBurnedDamage > m_maxBurnedDamage)
+		{
+			std::cout << "Object " << m_x << " : " << m_y << " destroy." << std::endl;
+			m_burn = false;
+		}
+	}
 }
 
 void Object::draw(sf::RenderWindow * window) const
@@ -116,13 +127,19 @@ void Object::draw(sf::RenderWindow * window) const
     window->draw(sprite);
 }
 
-void Object::ignite()
+void Object::ignite(double fire)
 {
-
+	if (!m_burn)
+	{
+		std::cout << "Object " << m_x << " : " << m_y << " is burning !!!" << std::endl;
+		m_burn = true;
+		m_currentFlameIntensity = fire;
+	}
 }
 
 void Object::stopFire()
 {
+	std::cout << "Object " << m_x << " : " << m_y << " fire stop !!!" << std::endl;
     m_currentFlameIntensity = 0;
 }
 
@@ -136,6 +153,12 @@ int Object::getHeight() const
     return m_height;
 }
 
+int Object::getX() const
+{
+	return m_x;
+}
 
-
-
+int Object::getY() const
+{
+	return m_y;
+}

@@ -23,6 +23,26 @@ void FireDetector::draw(sf::RenderWindow * window) const
     window->draw(sprite);
 }
 
+unsigned int FireDetector::getX() const
+{
+	return m_x;
+}
+
+unsigned int FireDetector::getY() const
+{
+	return m_y;
+}
+
+const double FireDetector::getRadius() const
+{
+	return m_radius;
+}
+
+void FireDetector::activate()
+{
+	m_isActivated = true;
+}
+
 void FireDetector::collision(Ray * ray)
 {
     //TODO
