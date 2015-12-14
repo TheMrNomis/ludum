@@ -21,7 +21,7 @@ private:
 	const sf::Texture * m_texture;
 
 public:
-	Door(unsigned int x, unsigned int y, std::pair<unsigned int, unsigned int> adjacentRooms, sf::Texture * texture);
+	Door(unsigned int x, unsigned int y, std::pair<unsigned int, unsigned int> adjacentRooms, sf::Texture const * texture);
 	virtual ~Door();
 
 	/**
