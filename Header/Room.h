@@ -76,4 +76,7 @@ class Room : public INUpdatable, public INCollisionable
          *
          */
         virtual void update(sf::Clock const& clk);
+
+        double getMaxDamage() const;
+        double getCurrentDamage() const;
 };

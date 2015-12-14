@@ -61,6 +61,9 @@ class Floor : public INDrawable, public INUpdatable, public INCollisionable
 
         virtual void collision(Ray * ray);
 
+        double getMaxDamage() const;
+        double getCurrentDamage() const;
+
 	private:
 		bool wallCollision(Ray * collisionRay);
 		sf::Vector2u offset(unsigned int i, unsigned int j) const;

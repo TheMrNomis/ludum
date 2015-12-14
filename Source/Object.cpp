@@ -183,6 +183,10 @@ void Object::stopFire()
     }
 }
 
+double Object::getCurrentBurnedDamage() const
+{
+    return m_currentBurnedDamage;
+}
 
 double Object::getMaxBurnedDamage() const
 {

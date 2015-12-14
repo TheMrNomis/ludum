@@ -26,6 +26,7 @@ class Object : public INDrawable, public INUpdatable, public INCollisionable
         virtual void ignite(double fire);
         virtual void stopFire();
 
+        double getCurrentBurnedDamage() const;
 		double getMaxBurnedDamage() const;
 
         int getWidth() const;

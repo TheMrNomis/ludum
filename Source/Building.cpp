@@ -311,3 +311,21 @@ void Building::update(sf::Clock const & clk)
     for(auto it = m_floors.begin(); it != m_floors.end(); ++it)
         (*it)->update(clk);
 }
+
+double Building::getMaxDamage() const
+{
+    double dmg = 0;
+    for(auto it = m_floors.begin(); it != m_floors.end(); ++it)
+        dmg += (*it)->getMaxDamage();
+
+    return dmg;
+}
+
+double Building::getCurrentDamage() const
+{
+    double dmg = 0;
+    for(auto it = m_floors.begin(); it != m_floors.end(); ++it)
+        dmg += (*it)->getCurrentDamage();
+
+    return dmg;
+}

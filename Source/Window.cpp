@@ -13,6 +13,7 @@ Window::Window():
     
     m_menu(new Menu(m_window->getSize(), m_textureLoader, m_fontLoader)),
     m_currentWorld(new World(m_textureLoader)),
+    m_hud(new Hud(m_textureLoader, m_currentWorld)),
     
 	m_currentStatus(GAME_MAIN_MENU),
     m_mouseButtonPressed(false),
@@ -82,7 +83,7 @@ void Window::draw() const
     {
         m_window->setView(m_view);
         m_currentWorld->draw(m_window);
-        this->drawHUD();
+        m_hud->draw(m_window);
     }
     else
         m_menu->draw(m_window, m_currentStatus);
@@ -244,7 +245,8 @@ void Window::update(sf::Clock const & clk)
                 m_rightButtonActivated = true;
         }
 
-        m_currentWorld->update(clk );
+        m_currentWorld->update(clk);
+        m_hud->update(clk);
     }
     else
         m_menu->update(clk, m_currentStatus);
