@@ -9,9 +9,6 @@
 #include "Ray.h"
 
 
-
-
-
 class World : public INDrawable, public INUpdatable
 {
 	private:
