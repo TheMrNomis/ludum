@@ -93,7 +93,7 @@ void Building::loadToTileSet(std::string const &path)
                     int x = atoi(x_str.c_str());
                     int y = atoi(y_str.c_str());
 
-                    Object * obj = Object::fromID(objectType, x, y, m_textureLoader->getObjectsTexture());
+                    Object * obj = Object::fromID(objectType, x, y, m_textureLoader->getObjectsTexture(), m_textureLoader->getFireTexture());
                     objects.insert(std::pair<unsigned char, Object*>(objectID, obj));
                     objectsSentInRoom.insert(std::pair<unsigned char, bool>(objectID, false));
                 }

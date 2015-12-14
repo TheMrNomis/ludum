@@ -8,16 +8,16 @@
 class Object : public INDrawable, public INUpdatable, public INCollisionable
 {
     public:
-        static Object * fromID(unsigned char objectID, unsigned int x, unsigned int y, sf::Texture * texture);
+        static Object * fromID(unsigned char objectID, unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture);
 
-        static Object * Bed(unsigned int x, unsigned int y, sf::Texture * texture);
-        static Object * Sofa(unsigned int x, unsigned int y, sf::Texture * texture);
-        static Object * Toilet(unsigned int x, unsigned int y, sf::Texture * texture);
-        static Object * Table(unsigned int x, unsigned int y, sf::Texture * texture);
-        static Object * Oven(unsigned int x, unsigned int y, sf::Texture * texture);
-        static Object * Fridge(unsigned int x, unsigned int y, sf::Texture * texture);
-        static Object * KitchenTable(unsigned int x, unsigned int y, sf::Texture * texture);
-        static Object * Tub(unsigned int x, unsigned int y, sf::Texture * texture);
+        static Object * Bed(unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture);
+        static Object * Sofa(unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture);
+        static Object * Toilet(unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture);
+        static Object * Table(unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture);
+        static Object * Oven(unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture);
+        static Object * Fridge(unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture);
+        static Object * KitchenTable(unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture);
+        static Object * Tub(unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture);
 
         virtual ~Object();
 
@@ -52,7 +52,7 @@ class Object : public INDrawable, public INUpdatable, public INCollisionable
          * @param y: position y of the tile where to put this object
          * @param texture: texture to use
          */
-        Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int width, unsigned int height, unsigned int offsetX, unsigned int offsetY, unsigned int x, unsigned int y, sf::Texture * texture);
+        Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int width, unsigned int height, unsigned int offsetX, unsigned int offsetY, unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture);
 
 
     private:
@@ -72,7 +72,8 @@ class Object : public INDrawable, public INUpdatable, public INCollisionable
         double m_currentBurnedDamage;
 
 
-        sf::Texture * m_texture;
+        sf::Texture * m_objectTexture;
+        sf::Texture * m_fireTexture;
         sf::Clock m_clock;
         sf::Time m_time;
 };

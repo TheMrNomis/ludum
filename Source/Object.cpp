@@ -1,83 +1,83 @@
 #include "Object.h"
 #include <iostream>
 
-Object * Object::fromID(unsigned char objectID, unsigned int x, unsigned int y, sf::Texture * texture)
+Object * Object::fromID(unsigned char objectID, unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture)
 {
     switch(objectID)
     {
         case 'a':
-            return Bed(x,y,texture);
+            return Bed(x,y,objectTexture, fireTexture);
             break;
         case 'b':
-            return Sofa(x,y,texture);
+            return Sofa(x,y,objectTexture, fireTexture);
             break;
         case 'c':
-            return Toilet(x,y,texture);
+            return Toilet(x,y,objectTexture, fireTexture);
             break;
         case 'd':
-            return Table(x,y,texture);
+            return Table(x,y,objectTexture, fireTexture);
             break;
         case 'e':
-            return Oven(x,y,texture);
+            return Oven(x,y,objectTexture, fireTexture);
             break;
         case 'f':
-            return Fridge(x,y,texture);
+            return Fridge(x,y,objectTexture, fireTexture);
             break;
         case 'g':
-            return KitchenTable(x,y,texture);
+            return KitchenTable(x,y,objectTexture, fireTexture);
             break;
         case 'h':
-            return Tub(x,y,texture);
+            return Tub(x,y,objectTexture, fireTexture);
             break;
         default:
-            return new Object(0,0,0,0,0,0,x,y,texture);
+            return new Object(0,0,0,0,0,0,x,y,objectTexture, fireTexture);
             break;
     }
 
 }
 
-Object * Object::Bed(unsigned int x, unsigned int y, sf::Texture * texture)
+Object * Object::Bed(unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture)
 {
-    return new Object(0.6,15, 2,3, 0,0, x,y, texture);
+    return new Object(0.6,15, 2,3, 0,0, x,y, objectTexture, fireTexture);
 }
 
-Object * Object::Sofa(unsigned int x, unsigned int y, sf::Texture * texture)
+Object * Object::Sofa(unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture)
 {
-    return new Object(0.5,25, 2,1, 0,3, x,y, texture);
+    return new Object(0.5,25, 2,1, 0,3, x,y, objectTexture, fireTexture);
 }
 
-Object * Object::Toilet(unsigned int x, unsigned int y, sf::Texture * texture)
+Object * Object::Toilet(unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture)
 {
-    return new Object(0.0,10, 1,1, 2,0, x,y, texture);
+    return new Object(0.0,10, 1,1, 2,0, x,y, objectTexture, fireTexture);
 }
 
-Object * Object::Table(unsigned int x, unsigned int y, sf::Texture * texture)
+Object * Object::Table(unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture)
 {
-    return new Object(1.0,20, 1,1, 2,1, x,y, texture);
+    return new Object(1.0,20, 1,1, 2,1, x,y, objectTexture, fireTexture);
 }
 
-Object * Object::Oven(unsigned int x, unsigned int y, sf::Texture * texture)
+Object * Object::Oven(unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture)
 {
-    return new Object(0.5,50, 1,1, 2,2, x,y, texture);
+    return new Object(0.5,50, 1,1, 2,2, x,y, objectTexture, fireTexture);
 }
 
-Object * Object::Fridge(unsigned int x, unsigned int y, sf::Texture * texture)
+Object * Object::Fridge(unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture)
 {
-    return new Object(0.5,50, 1,1, 2,3, x,y, texture);
+    return new Object(0.5,50, 1,1, 2,3, x,y, objectTexture, fireTexture);
 }
 
-Object * Object::KitchenTable(unsigned int x, unsigned int y, sf::Texture * texture)
+Object * Object::KitchenTable(unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture)
 {
-    return new Object(0.5,50, 1,1, 3,0, x,y, texture);
+    return new Object(0.5,50, 1,1, 3,0, x,y, objectTexture, fireTexture);
 }
 
-Object * Object::Tub(unsigned int x, unsigned int y, sf::Texture * texture)
+Object * Object::Tub(unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture)
 {
-    return new Object(0.0,10, 1,2, 3,1, x,y, texture);
+    return new Object(0.0,10, 1,2, 3,1, x,y, objectTexture, fireTexture);
 }
 
 
-Object::Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int width, unsigned int height, unsigned int offsetX, unsigned int offsetY, unsigned int x, unsigned int y, sf::Texture * texture) :
+Object::Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int width, unsigned int height, unsigned int offsetX, unsigned int offsetY, unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture) :
     m_width(width),
     m_height(height),
 
@@ -92,7 +92,8 @@ Object::Object(double flameVelocity, unsigned int maxBurnedDamage, unsigned int 
     m_maxBurnedDamage(maxBurnedDamage),
     m_currentFlameIntensity(0),
     m_currentBurnedDamage(0),
-    m_texture(texture),
+    m_objectTexture(objectTexture),
+    m_fireTexture(fireTexture),
     m_clock()
 
 {	
@@ -121,7 +122,7 @@ void Object::update(sf::Clock const & clk)
 void Object::draw(sf::RenderWindow * window) const
 {
     sf::Sprite sprite;
-    sprite.setTexture(*m_texture);
+    sprite.setTexture(*m_objectTexture);
     sprite.setTextureRect(sf::IntRect(32*m_offsetX, 32*m_offsetY, 32*m_width, 32*m_height));
     sprite.setPosition(m_x * 32, m_y * 32);
     window->draw(sprite);
