@@ -17,6 +17,8 @@ class Room : public INUpdatable, public INCollisionable
 		double m_maxLife;
 		double m_currentLife;
 
+		bool m_hitFlame;
+
     public:
         Room(unsigned char roomId);
         virtual ~Room();
@@ -59,7 +61,7 @@ class Room : public INUpdatable, public INCollisionable
 		*		
 		*
 		*/
-        virtual void collision(Ray * ray);
+         virtual void collision(Ray * ray);
 
 		/**
          * @brief draw the Room
@@ -76,4 +78,6 @@ class Room : public INUpdatable, public INCollisionable
          *
          */
         virtual void update(sf::Clock const& clk);
+
+		virtual bool hitFlame() const;
 };

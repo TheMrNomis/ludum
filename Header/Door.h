@@ -16,23 +16,16 @@ private:
 	unsigned int m_x;
 	unsigned int m_y;
 
-	std::pair<unsigned int, unsigned> m_adjacentRooms;
+	std::pair<unsigned char, unsigned char> m_adjacentRooms;
 
 	const sf::Texture * m_texture;
 
 public:
-	Door(unsigned int x, unsigned int y, std::pair<unsigned int, unsigned int> adjacentRooms, sf::Texture const * texture);
+	Door(unsigned int x, unsigned int y, std::pair<unsigned char, unsigned char> adjacentRooms, sf::Texture const * texture);
 	virtual ~Door();
 
-	/**
-	* @brief draw the door
-	*
-	* @param window:
-	*
-	*/
-	virtual void draw(sf::RenderWindow *window) const;
+	std::pair<unsigned char, unsigned char> const * getAdjacentRooms();
 
 	virtual void collision(Ray * ray);
-
-	void collisionCharacter(Ray * ray, Character * character);
+	virtual void draw(sf::RenderWindow *window) const;
 };

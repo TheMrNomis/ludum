@@ -79,7 +79,9 @@ class Window : public INEventHandler, public INUpdatable
 	private:
 		void leftButton() const;
 		void rightButton() const;
-		void bothButtons() const;
+		void bothButtons();
+
+		void intersectionCharacterDoor(Ray * collisionRay);
 
 		void drawHUD() const;
 };

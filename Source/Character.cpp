@@ -3,15 +3,17 @@
 #include "Character.h"
 
 
-Character::Character(TextureLoader * textures) :
-    m_texture(textures->getCharacterTexture()),
+Character::Character(unsigned char currentRoom, TextureLoader * textures) :
+	m_texture(textures->getCharacterTexture()),
 
-    m_position(200, 200),
-    m_currentAnimation(0),
+	m_position(200, 200),
+	m_currentAnimation(0),
 
-    m_velocity(1.4),
-    m_jumping(false),
-    m_statusCollision(false),
+	m_velocity(1.4),
+	m_jumping(false),
+	m_statusCollision(false),
+
+	m_currentRoom(currentRoom),
 
     m_angleJump(90),
     m_collisionRay(sf::Vector2f(0, 0), sf::Vector2f(0, 0))
@@ -88,9 +90,14 @@ bool Character::getStatusCollision()
     return m_statusCollision;
 }
 
-void Character::setCurrentRoom(std::pair<unsigned int, unsigned> adjacentRooms)
+void Character::setCurrentRoom(unsigned int idRoom)
 {
-	if (m_currentRoom == adjacentRooms.first)
+	m_currentRoom = idRoom;
+}
+
+void Character::setCurrentRoom(const std::pair<unsigned char, unsigned char> adjacentRooms)
+{
+	if(m_currentRoom == adjacentRooms.first)
 		m_currentRoom = adjacentRooms.second;
 	else
 		m_currentRoom = adjacentRooms.first;
@@ -104,6 +111,11 @@ void Character::setStatusCollision(bool isInCollision)
 bool Character::isJumping()
 {
     return m_jumping;
+}
+
+void Character::die()
+{
+	std::cout << "You've been heaten !\n";
 }
 
 sf::Vector2f Character::nextFramePosition()

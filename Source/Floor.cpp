@@ -25,7 +25,7 @@ Floor::~Floor()
         delete *it;
 }
 
-void Floor::addLine(std::vector<unsigned char> line)
+void Floor::addLineToBackground(std::vector<unsigned char> line)
 {
     m_background.push_back(line);
 }
@@ -82,6 +82,29 @@ bool Floor::wallCollision(Ray * collisionRay)
 	return collisionRay->validIntersectionFound();
 }
 
+bool Floor::isItHit() const
+{
+	for (auto it = m_rooms.begin(); it != m_rooms.end(); ++it)
+		if ((*it)->hitFlame())
+			return true;
+
+	return false;
+}
+
+void Floor::collision(Ray * ray)
+{
+    wallCollision(ray);
+
+    for(auto it = m_rooms.begin(); it != m_rooms.end(); ++it)
+        (*it)->collision(ray);
+
+    for(auto it = m_teleporters.begin(); it != m_teleporters.end(); ++it)
+        (*it)->collision(ray);
+}
+
+
+
+
 void Floor::update(sf::Clock const & clk)
 {
 	for (auto it = m_rooms.begin(); it != m_rooms.end(); ++it)
@@ -134,24 +157,20 @@ void Floor::draw(sf::RenderWindow * window) const
 		(*it)->draw(window);
 }
 
-void Floor::collision(Ray * ray)
+
+std::vector<Teleporter *> * Floor::getTeleporters()
 {
-    wallCollision(ray);
-
-    for(auto it = m_rooms.begin(); it != m_rooms.end(); ++it)
-        (*it)->collision(ray);
-
-    for(auto it = m_teleporters.begin(); it != m_teleporters.end(); ++it)
-        (*it)->collision(ray);
-
-    for(auto it = m_doors.begin(); it != m_doors.end(); ++it)
-        (*it)->collision(ray);
-
+	return &m_teleporters;
 }
 
-std::vector<Teleporter *> Floor::getTeleporter()
+std::vector<Door *> * Floor::getDoors()
 {
-	return m_teleporters;
+	return &m_doors;
+}
+
+std::vector<Room*>* Floor::getRooms()
+{
+	return &m_rooms;
 }
 
 sf::Vector2u Floor::offset(unsigned int i, unsigned int j) const

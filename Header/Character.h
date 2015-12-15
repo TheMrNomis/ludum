@@ -47,7 +47,7 @@ class Character : public INDrawable, public INUpdatable
 		* @brief constuctor for Character
 		*
 		*/
-		Character(TextureLoader * textures);
+		Character(unsigned char currentRoom, TextureLoader * textures);
 
 		/**
 		* @brief destructor for Character
@@ -100,7 +100,9 @@ class Character : public INDrawable, public INUpdatable
 		*/
 		bool getStatusCollision();
 		
-		void setCurrentRoom(std::pair<unsigned int, unsigned> adjacentRooms);
+		void setCurrentRoom(unsigned int idRoom);
+
+		void setCurrentRoom(const std::pair<unsigned char, unsigned char> adjacentRooms);
 		
 		/**
 		* @brief set if the character is in collision or not
@@ -140,6 +142,8 @@ class Character : public INDrawable, public INUpdatable
 		*
 		*/
 		bool isJumping();
+
+		void die();
 
 		/**
 		* @brief draw the character

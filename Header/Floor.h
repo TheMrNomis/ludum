@@ -33,21 +33,19 @@ class Floor : public INDrawable, public INUpdatable, public INCollisionable
 		Floor(TextureLoader const * textureLoaders);
 		virtual ~Floor();
 
-		void addLine(std::vector<unsigned char> line);
+		void addLineToBackground(std::vector<unsigned char> line);
 		void addLineToRoomsMap(std::vector<unsigned char> line);
 
-		/**
-         * @brief adds a room to this floor
-         *
-         * @param room: the room to add (dynamically-created pointer)
-         * @note Floor takes ownership of the Room, and will destroy it when needed
-         */
+		//Init the floor after creation
         void addRoom(Room * room);
 		void addDoor(Door * door);
 		void addTeleporter(Teleporter * teleporter);
 
-		std::vector<Teleporter *> getTeleporter();
 
+		//Get the elements of a floor
+		std::vector<Teleporter *> * getTeleporters();
+		std::vector<Door *>  * getDoors();
+		std::vector<Room *> * getRooms();
 		
 		
 		virtual void setLife(double lostLife);
@@ -56,10 +54,12 @@ class Floor : public INDrawable, public INUpdatable, public INCollisionable
 
 		virtual double lifeStay() const;
 
+		//Méthodes héritées
 		virtual void update(sf::Clock const & clk);
 		virtual void draw(sf::RenderWindow *window) const;
+		 virtual void collision(Ray * ray);
 
-        virtual void collision(Ray * ray);
+		 virtual bool isItHit() const;
 
 	private:
 		bool wallCollision(Ray * collisionRay);

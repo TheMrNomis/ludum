@@ -22,9 +22,9 @@ std::vector<Floor * > * Building::getFloors()
 	return &m_floors;
 }
 
-unsigned int Building::getCurrentFloor()
+Floor * Building::getCurrentFloor()
 {
-	return m_currentFloor;
+	return m_floors[m_currentFloor];
 }
 
 bool Building::checkCollisions(Ray * collisionRay)
@@ -189,13 +189,14 @@ void Building::loadToTileSet(std::string const &path)
 
 					for (unsigned int i = 1; i < line.length(); ++i)
 					{
-						if(line[i] == ':')
-							posxDefinition = false;
-						if(line[i] == '>')
-							adjacentRoomDefinition = true;
-
 						if(adjacentRoomDefinition)
 							adjacentRooms.push_back(line[i]);
+						
+						if(line[i] == '>')
+							adjacentRoomDefinition = true;
+						
+						if (line[i] == ':')
+							posxDefinition = false;
 						else
 							(posxDefinition ? x_str : y_str).push_back(line[i]);
 					}
@@ -256,7 +257,7 @@ void Building::loadToTileSet(std::string const &path)
                 for(auto it = line.cbegin(); it != line.cend(); ++it)
                     buffer.push_back(*it);
 
-                currentFloor->addLine(buffer);
+                currentFloor->addLineToBackground(buffer);
             }
         }
 
@@ -278,11 +279,10 @@ void Building::loadToTileSet(std::string const &path)
 
 void Building::loadNextFloor()
 {
-
 	unsigned int whichTeleport = m_currentFloor;
 
-	for (auto it = m_floors[whichTeleport]->getTeleporter().cbegin();
-		it != m_floors[whichTeleport]->getTeleporter().cend(); ++it){
+	for (auto it = m_floors[whichTeleport]->getTeleporters()->cbegin();
+		it != m_floors[whichTeleport]->getTeleporters()->cend(); ++it){
 		if ((*it)->getStatusColision())
 		{
 			if ((*it)->getDirection() == 0) {

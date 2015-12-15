@@ -15,13 +15,16 @@ class FireDetector : public INUpdatable, public INDrawable, public INCollisionab
 {
     private:
         Room * m_parentRoom;
-
+		
         sf::Texture const* m_texture;
 
         unsigned int m_x;
         unsigned int m_y;
         double const m_radius;
-        bool m_isActivated;
+
+		bool m_isActivated;
+		bool m_timerActivatedOK;
+		sf::Time m_activationTime;
 		
 		sf::Music * m_musicFireDetector;
 
@@ -48,13 +51,14 @@ class FireDetector : public INUpdatable, public INDrawable, public INCollisionab
 
 		virtual void activate();
 
+		virtual bool isActivate() const;
+
         /**
          *@brief send a ray to find a collision with a floor or objects
          *
          *@param ray: the ray who will intersect somethings or not
          */
-        virtual void collision(Ray * ray);
+         virtual void collision(Ray * ray);
 
-        virtual void update(sf::Clock const& clk);
-
+         virtual void update(sf::Clock const& clk);
 };

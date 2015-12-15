@@ -5,7 +5,8 @@ Room::Room(unsigned char roomId) :
 	m_objects(std::vector<Object *>()),
 	m_fireDetectors(std::vector<FireDetector *>()),
 	m_maxLife(0),
-	m_currentLife(0)
+	m_currentLife(0),
+	m_hitFlame(false)
 {
 }
 
@@ -66,8 +67,17 @@ void Room::collision(Ray * ray)
     for(auto it = m_objects.begin(); it != m_objects.end(); ++it)
         (*it)->collision(ray);
 
-    for(auto it = m_fireDetectors.begin(); it != m_fireDetectors.end(); ++it)
-        (*it)->collision(ray);
+	for (auto it = m_fireDetectors.begin(); it != m_fireDetectors.end(); ++it)
+	{
+		(*it)->collision(ray);
+		if ((*it)->isActivate())
+			m_hitFlame = true;
+	}
+}
+
+bool Room::hitFlame() const
+{
+	return m_hitFlame;
 }
 
 void Room::draw(sf::RenderWindow * window, std::vector<std::vector<unsigned char>> const * floorMap) const
@@ -98,5 +108,10 @@ void Room::update(sf::Clock const & clk)
 		(*it)->update(clk);
 		m_currentLife -= (*it)->lifeLost();
 	}
-	//si le fireDetector détecte le character -> extinguishFire()
+
+	for (auto it = m_fireDetectors.begin(); it != m_fireDetectors.end(); ++it)
+		(*it)->update(clk);
+
+	if (m_hitFlame)
+		m_hitFlame = !m_hitFlame;
 }

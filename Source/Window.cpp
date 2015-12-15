@@ -5,7 +5,6 @@
 
 Window::Window():
     m_clock(),
-	m_musicMenu(new sf::Music()),
 
     m_window(new sf::RenderWindow(sf::VideoMode(800, 600), "I & the sun")),
     m_textureLoader(new TextureLoader(PATH_RESSOURCE)),
@@ -29,10 +28,6 @@ Window::Window():
     m_buttonDeadZoneDelay = sf::milliseconds(20);
 
     m_view = sf::View(sf::FloatRect(0, 0, m_window->getSize().x , m_window->getSize().y));
-	
-	m_musicMenu->openFromFile("Ressources/Music/Menu.wav");
-	m_musicMenu->setLoop(true);
-	m_musicMenu->play();
 }
 
 
@@ -43,14 +38,12 @@ Window::~Window()
 
     delete m_currentWorld;
     delete m_window;
-	delete m_musicMenu;
 }
 
 int Window::run()
 {
 	//update state of the system
 	sf::Clock clk;
-	m_musicMenu->stop();
 
     while(m_currentStatus != GAME_STOPPED)
     {
@@ -260,11 +253,35 @@ void Window::rightButton() const
     m_currentWorld->getCharacter()->setAngle(0.4);
 }
 
-void Window::bothButtons() const
+void Window::bothButtons()
 {
 	Ray * collisionRay = m_currentWorld->getCharacter()->jump();
+
 	m_currentWorld->getBuilding()->checkCollisions(collisionRay);
 	m_currentWorld->getCharacter()->setDistanceToCollision(collisionRay->distanceToIntersection());
+
+	intersectionCharacterDoor(collisionRay);
+}
+
+void Window::intersectionCharacterDoor(Ray * collisionRay)
+{
+	std::vector<Door *> * doors = m_currentWorld->getBuilding()->getCurrentFloor()->getDoors();
+
+	double minDepth = collisionRay->distanceToIntersection();
+	int index = -1;
+
+	for (int i = 0; i < doors->size(); ++i)
+	{
+		(*doors)[i]->collision(collisionRay);
+		if (collisionRay->distanceToIntersection() < minDepth)
+		{
+			index = i;
+			minDepth = collisionRay->distanceToIntersection();
+		}
+	}
+
+	if(index >= 0)
+		m_currentWorld->getCharacter()->setCurrentRoom(*(*doors)[index]->getAdjacentRooms());
 }
 
 void Window::drawHUD() const

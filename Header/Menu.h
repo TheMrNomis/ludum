@@ -5,6 +5,8 @@
 #include "INDrawable.h"
 #include "gameStatus.h"
 
+#include "SFML\Audio.hpp"
+
 #include "TextureLoader.h"
 #include "FontLoader.h"
 
@@ -14,7 +16,7 @@ class Menu
 {
     public:
         Menu(sf::Vector2u windowSize, TextureLoader * textures, FontLoader * fonts);
-
+		~Menu();
         virtual void draw(sf::RenderWindow * window, game_status const& status) const;
         virtual void update(sf::Clock const& clk, game_status & status);
 		virtual void react(sf::Event const& event, game_status & status);
@@ -27,4 +29,6 @@ class Menu
 
         Button m_buttonStartGame;
         Button m_buttonQuitGame;
+
+		sf::Music *m_musicMenu;
 };

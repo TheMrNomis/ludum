@@ -1,6 +1,6 @@
 #include "Door.h"
 
-Door::Door(unsigned int x, unsigned int y, std::pair<unsigned int, unsigned> adjacentRooms, sf::Texture const * texture):
+Door::Door(unsigned int x, unsigned int y, std::pair<unsigned char, unsigned char> adjacentRooms, sf::Texture const * texture):
 	m_x(x),
 	m_y(y),
 	m_adjacentRooms(adjacentRooms),
@@ -10,17 +10,14 @@ Door::Door(unsigned int x, unsigned int y, std::pair<unsigned int, unsigned> adj
 Door::~Door()
 {}
 
-void Door::collision(Ray * ray)
+std::pair<unsigned char, unsigned char> const * Door::getAdjacentRooms()
 {
-	
+	return &m_adjacentRooms;
 }
 
-void Door::collisionCharacter(Ray * ray, Character * character)
+void Door::collision(Ray * ray)
 {
-	if (ray->intersectSquare(sf::Vector2f(m_x * 32, m_y * 32), sf::Vector2f(m_x * 32 + 31, m_y * 32 + 31), false))
-	{
-		character->setCurrentRoom(m_adjacentRooms);
-	}
+	(ray->intersectSquare(sf::Vector2f(m_x * 32, m_y * 32), sf::Vector2f(m_x * 32 + 31, m_y * 32 + 31)));
 }
 
 void Door::draw(sf::RenderWindow *window) const

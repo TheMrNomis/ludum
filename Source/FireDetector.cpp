@@ -3,10 +3,15 @@
 FireDetector::FireDetector(unsigned int x, unsigned int y, double radius, sf::Texture const* texture):
     m_parentRoom(nullptr),
     m_texture(texture),
-    m_x(x),
+    
+	m_x(x),
     m_y(y),
     m_radius(radius),
+
     m_isActivated(false),
+	m_timerActivatedOK(false),
+	m_activationTime(),
+	
 	m_musicFireDetector(new sf::Music())
 {
 	m_musicFireDetector->openFromFile("Ressources/Music/FireDetect.wav");
@@ -51,13 +56,32 @@ void FireDetector::activate()
 	m_isActivated = true;
 }
 
+bool FireDetector::isActivate() const
+{
+	return m_isActivated;
+}
+
 void FireDetector::collision(Ray * ray)
 {
-    if(ray->intersectCircle(sf::Vector2f((m_x*32)+16,(m_y*32)+16), m_radius, false))
-        activate();
+	if(!m_isActivated)
+	{
+		if (ray->intersectCircle(sf::Vector2f((m_x * 32) + 16, (m_y * 32) + 16), m_radius, false))
+			activate();
+	}
+
 }
 
 void FireDetector::update(sf::Clock const& clk)
 {
-    //TODO
+	if (!m_timerActivatedOK)
+	{
+		m_timerActivatedOK = true;
+		m_activationTime = clk.getElapsedTime();
+	}
+
+	if ((clk.getElapsedTime() - m_activationTime).asSeconds() >= 20)
+	{
+		m_timerActivatedOK = false;
+		m_isActivated = false;
+	}
 }
