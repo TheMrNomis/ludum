@@ -22,7 +22,7 @@ std::vector<Floor * > * Building::getFloors()
 	return &m_floors;
 }
 
-unsigned int Building::getCurrentFloor()
+const unsigned int Building::getCurrentFloor() const
 {
 	return m_currentFloor;
 }
@@ -30,6 +30,18 @@ unsigned int Building::getCurrentFloor()
 bool Building::checkCollisions(Ray * collisionRay)
 {
     m_floors[m_currentFloor]->collision(collisionRay);
+
+	std::vector<Teleporter *> teleporters = m_floors[m_currentFloor]->getTeleporter();
+
+	for (int i = 0; i < teleporters.size(); i++)
+	{
+		teleporters[i]->collision(collisionRay);
+		if (teleporters[i]->getStatusColision())
+			(teleporters[i]->getDirection() == 'd') ? m_currentFloor-- : m_currentFloor++;
+
+		if (m_currentFloor < 0)
+			m_currentFloor = 0;
+	}
 
     return collisionRay->validIntersectionFound();
 }
@@ -58,14 +70,16 @@ void Building::loadToTileSet(std::string const &path)
         ++lineNumber;
 
         if(line.length() > 0)
-        {
-            if(line[0] == '=')
+		{
+
+         if(line[0] == '=')
             {
                 //new floor
                 m_floors.push_back(currentFloor);
                 currentFloor = new Floor(m_textureLoader);
 				floorId++;
-
+				std::cout << "size floor : "<< m_floors.size() << std::endl;
+				
 				//restart nb_rooms
 				roomId = 0;
             }
@@ -230,6 +244,8 @@ void Building::loadToTileSet(std::string const &path)
 
 					unsigned int x = atoi(x_str.c_str());
 					unsigned int y = atoi(y_str.c_str());
+					
+					std::cout << "Direction Tp: " << direction << std::endl;
 
 					Teleporter * teleporter = new Teleporter(x*32, y*32, m_textureLoader->getTeleporterTexture(),direction);
 					currentFloor->addTeleporter(teleporter);
@@ -276,38 +292,15 @@ void Building::loadToTileSet(std::string const &path)
     m_floors.push_back(currentFloor);
 }
 
-void Building::loadNextFloor()
-{
-
-	unsigned int whichTeleport = m_currentFloor;
-
-	for (auto it = m_floors[whichTeleport]->getTeleporter().cbegin();
-		it != m_floors[whichTeleport]->getTeleporter().cend(); ++it){
-		if ((*it)->getStatusColision())
-		{
-			if ((*it)->getDirection() == 0) {
-				if (m_currentFloor > 0) {
-					m_currentFloor = 0;
-				}
-			}
-			else
-			{
-				m_currentFloor = 1;
-			}
-
-		}
-	}
-
-}
-
 void Building::draw(sf::RenderWindow *window) const
 {
+
 	m_floors[m_currentFloor]->draw(window);
 	//this->drawHUD();
 }
 
 void Building::update(sf::Clock const & clk)
 {
-    for(auto it = m_floors.begin(); it != m_floors.end(); ++it)
-        (*it)->update(clk);
+	for (auto it = m_floors.begin(); it != m_floors.end(); ++it)
+        (*it)->update(clk);			
 }

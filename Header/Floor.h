@@ -26,6 +26,8 @@ class Floor : public INDrawable, public INUpdatable, public INCollisionable
 
 		sf::Texture * m_textureBuilding;
 
+		bool teleport = false;
+
 		double m_maxLife;
 		double m_currentLife;
 
@@ -47,8 +49,9 @@ class Floor : public INDrawable, public INUpdatable, public INCollisionable
 		void addTeleporter(Teleporter * teleporter);
 
 		std::vector<Teleporter *> getTeleporter();
-
+		void loadNextFloor();
 		
+
 		
 		virtual void setLife(double lostLife);
 		virtual double getLife() const;

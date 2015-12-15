@@ -121,6 +121,8 @@ void Floor::draw(sf::RenderWindow * window) const
 
 	}
 
+	std::cout << "Nb teleporters: " << m_teleporters.size() << std::endl;
+
 	//teleporter
     for(auto it = m_teleporters.cbegin(); it != m_teleporters.cend(); ++it)
         (*it)->draw(window);
@@ -139,9 +141,6 @@ void Floor::collision(Ray * ray)
     wallCollision(ray);
 
     for(auto it = m_rooms.begin(); it != m_rooms.end(); ++it)
-        (*it)->collision(ray);
-
-    for(auto it = m_teleporters.begin(); it != m_teleporters.end(); ++it)
         (*it)->collision(ray);
 
     for(auto it = m_doors.begin(); it != m_doors.end(); ++it)

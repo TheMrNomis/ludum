@@ -8,8 +8,6 @@ m_musicGame(new sf::Music())
 {
 	m_building->loadToTileSet("Levels/0.lvl");
 
-
-
 	if (m_musicGame->openFromFile("Ressources/Music/Game.wav")){
 
 		m_musicGame->setLoop(true);

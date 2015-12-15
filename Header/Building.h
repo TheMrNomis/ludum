@@ -44,10 +44,9 @@ class Building : public INDrawable, public INUpdatable
 
 		std::vector<Floor * > * getFloors();
 
-		unsigned int getCurrentFloor();
+		const unsigned int getCurrentFloor() const;
 
 
-		void loadNextFloor();
 
 
 		/**
