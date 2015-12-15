@@ -35,6 +35,14 @@ void Menu::draw(sf::RenderWindow * window, game_status const& status) const
         title.rotate(-10);
         window->draw(title);
 
+        sf::Text help;
+        help.setFont(m_fonts->upheavtt());
+        help.setString("Left and Right arrows to turn, both to move");
+        help.setCharacterSize(30);
+        help.setColor(sf::Color::White);
+        help.setPosition(10, window->getSize().y - 40);
+        window->draw(help);
+
         m_buttonStartGame.draw(window);
         m_buttonQuitGame.draw(window);
     }
