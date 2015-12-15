@@ -1,5 +1,7 @@
 #include "Ray.h"
 
+#include <iostream>
+
 Ray::Ray(sf::Vector2f const& origin, sf::Vector2f const& direction):
     m_origin(origin),
     m_direction(direction),
@@ -16,6 +18,16 @@ void Ray::intersect(INCollisionable & object)
 bool Ray::validIntersectionFound() const
 {
     return m_intersectionFound;
+}
+
+bool Ray::intersectionIsObject() const
+{
+    return m_obj != nullptr;
+}
+
+Object * Ray::intersectionObject() const
+{
+    return m_obj;
 }
 
 sf::Vector2f Ray::intersection() const
@@ -48,13 +60,13 @@ void Ray::setIntersection(float t, Object * obj)
 {
 	if(t >= 0)
 	{
-		if(!m_intersectionFound)
+		if(!m_intersectionFound || t < m_minT)
+        {
 			m_minT = t;
-		else
-			m_minT = min(m_minT, t);
+            m_obj = obj;
+        }
 
 		m_intersectionFound = true;
-        m_obj = obj;
 	}
 }
 

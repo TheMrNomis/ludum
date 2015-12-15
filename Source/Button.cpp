@@ -33,7 +33,7 @@ Button::Button(std::string const& title, float x, float y, sf::Vector2u windowSi
 
 void Button::draw(sf::RenderWindow * window) const
 {
-    window->draw(m_background);
+    //window->draw(m_background);
     window->draw(m_title);
 }
 

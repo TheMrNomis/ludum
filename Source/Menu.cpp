@@ -18,6 +18,13 @@ void Menu::draw(sf::RenderWindow * window, game_status const& status) const
     else if(status == GAME_MAIN_MENU)
     {
         //TODO
+        sf::Sprite background;
+        sf::Texture * bgTexture = m_textures->getBackgroundTexture();
+        background.setTexture(*bgTexture);
+        sf::FloatRect bgbox = background.getLocalBounds();
+        background.setScale((float)bgbox.width / window->getSize().x, (float)bgbox.height / window->getSize().y);
+        window->draw(background);
+
         sf::Text title;
         title.setFont(m_fonts->FuegoFatuo());
         title.setString("I & the sun");
@@ -30,6 +37,17 @@ void Menu::draw(sf::RenderWindow * window, game_status const& status) const
 
         m_buttonStartGame.draw(window);
         m_buttonQuitGame.draw(window);
+    }
+    else if(status == GAME_WON)
+    {
+        sf::Text title;
+        title.setFont(m_fonts->upheavtt());
+        title.setString("You have won !");
+        title.setColor(sf::Color::White);
+        title.setPosition(window->getSize().x/2, window->getSize().y/2);
+        sf::FloatRect boundingBox = title.getGlobalBounds();
+        title.setOrigin(boundingBox.width/2, boundingBox.height/2);
+        window->draw(title);
     }
 }
 

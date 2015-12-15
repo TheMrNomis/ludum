@@ -13,6 +13,7 @@
 #include "World.h"
 #include "Character.h"
 #include "Floor.h"
+#include "Hud.h"
 
 class Window : public INEventHandler, public INUpdatable
 {
@@ -31,6 +32,7 @@ class Window : public INEventHandler, public INUpdatable
 
         Menu * m_menu;
 		World * m_currentWorld;
+        Hud * m_hud;
 
 		game_status m_currentStatus;
 
@@ -81,5 +83,4 @@ class Window : public INEventHandler, public INUpdatable
 		void rightButton() const;
 		void bothButtons() const;
 
-		void drawHUD() const;
 };

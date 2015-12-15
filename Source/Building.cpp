@@ -107,7 +107,7 @@ void Building::loadToTileSet(std::string const &path)
                     int x = atoi(x_str.c_str());
                     int y = atoi(y_str.c_str());
 
-                    Object * obj = Object::fromID(objectType, x, y, m_textureLoader->getObjectsTexture());
+                    Object * obj = Object::fromID(objectType, x, y, m_textureLoader->getObjectsTexture(), m_textureLoader->getFireTexture());
                     objects.insert(std::pair<unsigned char, Object*>(objectID, obj));
                     objectsSentInRoom.insert(std::pair<unsigned char, bool>(objectID, false));
                 }
@@ -303,4 +303,22 @@ void Building::update(sf::Clock const & clk)
 {
 	for (auto it = m_floors.begin(); it != m_floors.end(); ++it)
         (*it)->update(clk);			
+}
+
+double Building::getMaxDamage() const
+{
+    double dmg = 0;
+    for(auto it = m_floors.begin(); it != m_floors.end(); ++it)
+        dmg += (*it)->getMaxDamage();
+
+    return dmg;
+}
+
+double Building::getCurrentDamage() const
+{
+    double dmg = 0;
+    for(auto it = m_floors.begin(); it != m_floors.end(); ++it)
+        dmg += (*it)->getCurrentDamage();
+
+    return dmg;
 }
