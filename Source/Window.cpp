@@ -226,6 +226,11 @@ void Window::update(sf::Clock const & clk)
 {
     if(m_currentStatus == GAME_PLAYING)
     {
+        if(m_currentWorld->getBuilding()->getCurrentDamage() >= m_currentWorld->getBuilding()->getMaxDamage())
+        {
+            m_currentStatus = GAME_WON;
+        }
+
         if(m_bothButtonsEnabled)
         {
             //repeated action for both buttons 

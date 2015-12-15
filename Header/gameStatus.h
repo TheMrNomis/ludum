@@ -5,4 +5,5 @@ typedef enum:int {
     GAME_PAUSED,
     GAME_MAIN_MENU,
     GAME_STOPPED,
+    GAME_WON
 } game_status;
