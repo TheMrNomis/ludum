@@ -235,12 +235,12 @@ void Window::update(sf::Clock const & clk)
 
 void Window::leftButton() const
 {
-	m_currentWorld->getCharacter()->setAngle(-0.4);
+	m_currentWorld->getCharacter()->setAngle(-0.8);
 }
 
 void Window::rightButton() const
 {
-    m_currentWorld->getCharacter()->setAngle(0.4);
+    m_currentWorld->getCharacter()->setAngle(0.8);
 }
 
 void Window::bothButtons() const

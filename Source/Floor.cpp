@@ -148,7 +148,7 @@ void Floor::collision(Ray * ray)
         (*it)->collision(ray);
 
     if(ray->intersectionIsObject())
-        ray->intersectionObject()->ignite(10);
+        ray->intersectionObject()->ignite(1);
 
 }
 
