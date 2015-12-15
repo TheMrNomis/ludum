@@ -111,32 +111,6 @@ void Window::react(sf::Event const& event)
                 m_view.zoom(0.8);
         }
 
-        else if(event.type == sf::Event::MouseButtonPressed)
-        {
-            if(event.mouseButton.button == sf::Mouse::Left)
-                m_mouseButtonPressed = true;
-        }
-
-        else if(event.type == sf::Event::MouseButtonReleased)
-        {
-            if(event.mouseButton.button == sf::Mouse::Left)
-                m_mouseButtonPressed = false;
-        }
-
-        else if(event.type == sf::Event::MouseMoved)
-        {
-            if(m_mouseButtonPressed)
-            {
-                int deltaX = m_mouseOldX - event.mouseMove.x;
-                int deltaY = m_mouseOldY - event.mouseMove.y;
-
-                m_view.move(deltaX, deltaY);
-            }
-
-            m_mouseOldX = event.mouseMove.x;
-            m_mouseOldY = event.mouseMove.y;
-        }
-
         else if(event.type == sf::Event::KeyPressed)
         {
             if(event.key.code == sf::Keyboard::Left)
@@ -226,6 +200,8 @@ void Window::update(sf::Clock const & clk)
 {
     if(m_currentStatus == GAME_PLAYING)
     {
+        m_view.setCenter(m_currentWorld->getCharacter()->getPosition());
+
         if(m_currentWorld->getBuilding()->getCurrentDamage() >= m_currentWorld->getBuilding()->getMaxDamage())
         {
             m_currentStatus = GAME_WON;
