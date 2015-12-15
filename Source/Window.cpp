@@ -202,7 +202,7 @@ void Window::update(sf::Clock const & clk)
     {
         m_view.setCenter(m_currentWorld->getCharacter()->getPosition());
 
-        if(m_currentWorld->getBuilding()->getCurrentDamage() >= m_currentWorld->getBuilding()->getMaxDamage())
+        if(m_currentWorld->getBuilding()->getCurrentDamage() >= 0.8*m_currentWorld->getBuilding()->getMaxDamage())
         {
             m_currentStatus = GAME_WON;
         }

@@ -48,7 +48,7 @@ Object * Object::Sofa(unsigned int x, unsigned int y, sf::Texture * objectTextur
 
 Object * Object::Toilet(unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture)
 {
-    return new Object(0.0,10, 1,1, 2,0, x,y, objectTexture, fireTexture);
+    return new Object(0.0,0, 1,1, 2,0, x,y, objectTexture, fireTexture);
 }
 
 Object * Object::Table(unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture)
@@ -73,7 +73,7 @@ Object * Object::KitchenTable(unsigned int x, unsigned int y, sf::Texture * obje
 
 Object * Object::Tub(unsigned int x, unsigned int y, sf::Texture * objectTexture, sf::Texture * fireTexture)
 {
-    return new Object(0.0,10, 1,2, 3,1, x,y, objectTexture, fireTexture);
+    return new Object(0.0,0, 1,2, 3,1, x,y, objectTexture, fireTexture);
 }
 
 
