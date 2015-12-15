@@ -103,15 +103,15 @@ void Window::react(sf::Event const& event)
 
     if(m_currentStatus == GAME_PLAYING)
     {
-        if(event.type == sf::Event::MouseWheelScrolled)
+        /*if(event.type == sf::Event::MouseWheelScrolled)
         {
             if(event.mouseWheelScroll.delta < 0)
                 m_view.zoom(1.2);
             else
                 m_view.zoom(0.8);
-        }
+        }*/
 
-        else if(event.type == sf::Event::KeyPressed)
+        /*else*/ if(event.type == sf::Event::KeyPressed)
         {
             if(event.key.code == sf::Keyboard::Left)
             {

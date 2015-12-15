@@ -26,7 +26,7 @@ void FireDetector::draw(sf::RenderWindow * window) const
 {
 	sf::CircleShape shape(m_radius);
 	shape.setFillColor(sf::Color::Transparent);
-	shape.setOutlineThickness(5);
+	shape.setOutlineThickness(1);
 	shape.setOutlineColor(sf::Color(255, 0, 0));
 	shape.setOrigin(m_radius, m_radius);
 	shape.setPosition((m_x*32),(m_y * 32));
