@@ -31,6 +31,19 @@ bool Building::checkCollisions(Ray * collisionRay)
 {
     m_floors[m_currentFloor]->collision(collisionRay);
 
+	std::vector<Teleporter *> teleporters = m_floors[m_currentFloor]->getTeleporters();
+
+	for (int i = 0; i < teleporters.size(); i++)
+	{
+		teleporters[i]->collision(collisionRay);
+		if (teleporters[i]->getStatusColision())
+			(teleporters[i]->getDirection() == 'd') ? m_currentFloor-- : m_currentFloor++;
+
+		if (m_currentFloor < 0)
+			m_currentFloor = 0;
+	}
+
+
     return collisionRay->validIntersectionFound();
 }
 
@@ -306,8 +319,27 @@ void Building::draw(sf::RenderWindow *window) const
 	//this->drawHUD();
 }
 
+
 void Building::update(sf::Clock const & clk)
 {
-    for(auto it = m_floors.begin(); it != m_floors.end(); ++it)
-        (*it)->update(clk);
+	for (auto it = m_floors.begin(); it != m_floors.end(); ++it)
+		(*it)->update(clk);
+}
+
+double Building::getMaxDamage() const
+{
+	double dmg = 0;
+	for (auto it = m_floors.begin(); it != m_floors.end(); ++it)
+		dmg += (*it)->getMaxDamage();
+
+	return dmg;
+}
+
+double Building::getCurrentDamage() const
+{
+	double dmg = 0;
+	for (auto it = m_floors.begin(); it != m_floors.end(); ++it)
+		dmg += (*it)->getCurrentDamage();
+
+	return dmg;
 }

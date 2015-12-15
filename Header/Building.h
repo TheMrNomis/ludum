@@ -17,6 +17,7 @@
 
 class Building : public INDrawable, public INUpdatable
 {
+
 	private:
 		const unsigned int m_maxBurnedDamage;
 		const unsigned int m_currentBurnedDamage;
@@ -44,10 +45,9 @@ class Building : public INDrawable, public INUpdatable
 
 		std::vector<Floor * > * getFloors();
 
-		Floor * getCurrentFloor();
+		const unsigned int getCurrentFloor() const;
 
 
-		void loadNextFloor();
 
 
 		/**
@@ -71,8 +71,12 @@ class Building : public INDrawable, public INUpdatable
 		*/	
 		virtual void draw(sf::RenderWindow *window) const ;
 
+
         /**
          * @brief updates this
          */
-		virtual void update(sf::Clock const & clk);
+        virtual void update(sf::Clock const & clk);
+
+        double getMaxDamage() const;
+        double getCurrentDamage() const;
 };

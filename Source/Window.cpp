@@ -5,6 +5,7 @@
 
 Window::Window():
     m_clock(),
+	m_musicMenu(new sf::Music()),
 
     m_window(new sf::RenderWindow(sf::VideoMode(800, 600), "I & the sun")),
     m_textureLoader(new TextureLoader(PATH_RESSOURCE)),
@@ -12,6 +13,7 @@ Window::Window():
     
     m_menu(new Menu(m_window->getSize(), m_textureLoader, m_fontLoader)),
     m_currentWorld(new World(m_textureLoader)),
+    m_hud(new Hud(m_textureLoader, m_currentWorld)),
     
 	m_currentStatus(GAME_MAIN_MENU),
     m_mouseButtonPressed(false),
@@ -28,6 +30,10 @@ Window::Window():
     m_buttonDeadZoneDelay = sf::milliseconds(20);
 
     m_view = sf::View(sf::FloatRect(0, 0, m_window->getSize().x , m_window->getSize().y));
+	
+	m_musicMenu->openFromFile("Ressources/Music/Menu.wav");
+	m_musicMenu->setLoop(true);
+	m_musicMenu->play();
 }
 
 
@@ -38,12 +44,14 @@ Window::~Window()
 
     delete m_currentWorld;
     delete m_window;
+	delete m_musicMenu;
 }
 
 int Window::run()
 {
 	//update state of the system
 	sf::Clock clk;
+	m_musicMenu->stop();
 
     while(m_currentStatus != GAME_STOPPED)
     {
@@ -75,7 +83,7 @@ void Window::draw() const
     {
         m_window->setView(m_view);
         m_currentWorld->draw(m_window);
-        this->drawHUD();
+        m_hud->draw(m_window);
     }
     else
         m_menu->draw(m_window, m_currentStatus);
@@ -101,32 +109,6 @@ void Window::react(sf::Event const& event)
                 m_view.zoom(1.2);
             else
                 m_view.zoom(0.8);
-        }
-
-        else if(event.type == sf::Event::MouseButtonPressed)
-        {
-            if(event.mouseButton.button == sf::Mouse::Left)
-                m_mouseButtonPressed = true;
-        }
-
-        else if(event.type == sf::Event::MouseButtonReleased)
-        {
-            if(event.mouseButton.button == sf::Mouse::Left)
-                m_mouseButtonPressed = false;
-        }
-
-        else if(event.type == sf::Event::MouseMoved)
-        {
-            if(m_mouseButtonPressed)
-            {
-                int deltaX = m_mouseOldX - event.mouseMove.x;
-                int deltaY = m_mouseOldY - event.mouseMove.y;
-
-                m_view.move(deltaX, deltaY);
-            }
-
-            m_mouseOldX = event.mouseMove.x;
-            m_mouseOldY = event.mouseMove.y;
         }
 
         else if(event.type == sf::Event::KeyPressed)
@@ -218,6 +200,13 @@ void Window::update(sf::Clock const & clk)
 {
     if(m_currentStatus == GAME_PLAYING)
     {
+        m_view.setCenter(m_currentWorld->getCharacter()->getPosition());
+
+        if(m_currentWorld->getBuilding()->getCurrentDamage() >= 0.8*m_currentWorld->getBuilding()->getMaxDamage())
+        {
+            m_currentStatus = GAME_WON;
+        }
+
         if(m_bothButtonsEnabled)
         {
             //repeated action for both buttons 
@@ -237,7 +226,8 @@ void Window::update(sf::Clock const & clk)
                 m_rightButtonActivated = true;
         }
 
-        m_currentWorld->update(clk );
+        m_currentWorld->update(clk);
+        m_hud->update(clk);
     }
     else
         m_menu->update(clk, m_currentStatus);
@@ -245,47 +235,18 @@ void Window::update(sf::Clock const & clk)
 
 void Window::leftButton() const
 {
-	m_currentWorld->getCharacter()->setAngle(-0.4);
+	m_currentWorld->getCharacter()->setAngle(-0.8);
 }
 
 void Window::rightButton() const
 {
-    m_currentWorld->getCharacter()->setAngle(0.4);
+    m_currentWorld->getCharacter()->setAngle(0.8);
 }
 
-void Window::bothButtons()
+void Window::bothButtons() const
 {
 	Ray * collisionRay = m_currentWorld->getCharacter()->jump();
-
 	m_currentWorld->getBuilding()->checkCollisions(collisionRay);
 	m_currentWorld->getCharacter()->setDistanceToCollision(collisionRay->distanceToIntersection());
-
-	intersectionCharacterDoor(collisionRay);
 }
 
-void Window::intersectionCharacterDoor(Ray * collisionRay)
-{
-	std::vector<Door *> * doors = m_currentWorld->getBuilding()->getCurrentFloor()->getDoors();
-
-	double minDepth = collisionRay->distanceToIntersection();
-	int index = -1;
-
-	for (int i = 0; i < doors->size(); ++i)
-	{
-		(*doors)[i]->collision(collisionRay);
-		if (collisionRay->distanceToIntersection() < minDepth)
-		{
-			index = i;
-			minDepth = collisionRay->distanceToIntersection();
-		}
-	}
-
-	if(index >= 0)
-		m_currentWorld->getCharacter()->setCurrentRoom(*(*doors)[index]->getAdjacentRooms());
-}
-
-void Window::drawHUD() const
-{
-	sf::RectangleShape rectangle(sf::Vector2f(30, 10));
-	m_window->draw(rectangle);
-}

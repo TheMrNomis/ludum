@@ -115,3 +115,21 @@ void Room::update(sf::Clock const & clk)
 	if (m_hitFlame)
 		m_hitFlame = !m_hitFlame;
 }
+
+double Room::getMaxDamage() const
+{
+    double maxDmg = 0;
+    for(auto it = m_objects.cbegin(); it != m_objects.cend(); ++it)
+        maxDmg += (*it)->getMaxBurnedDamage();
+
+    return maxDmg;
+}
+
+double Room::getCurrentDamage() const
+{
+    double dmg = 0;
+    for(auto it = m_objects.cbegin(); it != m_objects.cend(); ++it)
+        dmg += (*it)->getCurrentBurnedDamage();
+
+    return dmg;
+}

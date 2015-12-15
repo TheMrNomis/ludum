@@ -284,3 +284,21 @@ sf::Vector2u Floor::offset(unsigned int i, unsigned int j) const
 
     return sf::Vector2u(offsetX, offsetY);
 }
+
+double Floor::getMaxDamage() const
+{
+	double dmg = 0;
+	for (auto it = m_rooms.cbegin(); it != m_rooms.cend(); ++it)
+		dmg += (*it)->getMaxDamage();
+
+	return dmg;
+}
+
+double Floor::getCurrentDamage() const
+{
+	double dmg = 0;
+	for (auto it = m_rooms.cbegin(); it != m_rooms.cend(); ++it)
+		dmg += (*it)->getCurrentDamage();
+
+	return dmg;
+}

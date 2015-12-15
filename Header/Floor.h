@@ -47,6 +47,7 @@ class Floor : public INDrawable, public INUpdatable, public INCollisionable
 		std::vector<Door *>  * getDoors();
 		std::vector<Room *> * getRooms();
 		
+		void loadNextFloor();
 		
 		virtual void setLife(double lostLife);
 		virtual double getLife() const;
@@ -57,9 +58,10 @@ class Floor : public INDrawable, public INUpdatable, public INCollisionable
 		//Méthodes héritées
 		virtual void update(sf::Clock const & clk);
 		virtual void draw(sf::RenderWindow *window) const;
-		 virtual void collision(Ray * ray);
+		virtual void collision(Ray * ray);
 
-		 virtual bool isItHit() const;
+		double getMaxDamage() const;
+		double getCurrentDamage() const;
 
 	private:
 		bool wallCollision(Ray * collisionRay);
