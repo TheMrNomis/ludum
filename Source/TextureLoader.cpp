@@ -8,7 +8,8 @@ TextureLoader::TextureLoader(std::string const & url) :
 	m_characterTexture(new sf::Texture()),
     m_fireDetectorTexture(new sf::Texture()),
 	m_teleporterTexture(new sf::Texture()),
-    m_fireTexture(new sf::Texture())
+    m_fireTexture(new sf::Texture()),
+    m_backgroundTexture(new sf::Texture())
 {
 	loadTexture(url+"sprites/");
 }
@@ -22,6 +23,7 @@ TextureLoader::~TextureLoader()
     delete m_fireDetectorTexture;
 	delete m_teleporterTexture;
     delete m_fireTexture;
+    delete m_backgroundTexture;
 }
 
 sf::Texture * TextureLoader::getFloorTexture() const 
@@ -52,6 +54,11 @@ sf::Texture const* TextureLoader::getTeleporterTexture() const
 sf::Texture * TextureLoader::getFireTexture() const
 {
     return m_fireTexture;
+}
+
+sf::Texture * TextureLoader::getBackgroundTexture() const
+{
+    return m_backgroundTexture;
 }
 
 //On passe l'url du dossier de Textures
@@ -90,6 +97,12 @@ void TextureLoader::loadTexture(std::string const & url)
     if(!m_fireTexture->loadFromFile((url + "fire/tileset.png").c_str()))
     {
         std::cerr << "Error when loading the fire texture" << std::endl;
+        throw std::exception();
+    }
+
+    if(!m_backgroundTexture->loadFromFile((url + "background/background.png").c_str()))
+    {
+        std::cerr << "Error when loading the background texture" << std::endl;
         throw std::exception();
     }
 }

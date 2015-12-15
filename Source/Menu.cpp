@@ -18,6 +18,13 @@ void Menu::draw(sf::RenderWindow * window, game_status const& status) const
     else if(status == GAME_MAIN_MENU)
     {
         //TODO
+        sf::Sprite background;
+        sf::Texture * bgTexture = m_textures->getBackgroundTexture();
+        background.setTexture(*bgTexture);
+        sf::FloatRect bgbox = background.getLocalBounds();
+        background.setScale((float)bgbox.width / window->getSize().x, (float)bgbox.height / window->getSize().y);
+        window->draw(background);
+
         sf::Text title;
         title.setFont(m_fonts->FuegoFatuo());
         title.setString("I & the sun");
